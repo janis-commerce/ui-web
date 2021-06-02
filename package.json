@@ -1,0 +1,53 @@
+{
+  "name": "@janiscommerce/ui",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.umd.js",
+  "private": true,
+  "scripts": {
+    "build": "rollup -c",
+    "start": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/janis-commerce/ui.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/janis-commerce/ui/issues"
+  },
+  "homepage": "https://github.com/janis-commerce/ui#readme",
+  "devDependencies": {
+    "@babel/core": "^7.14.3",
+    "@babel/eslint-parser": "^7.14.3",
+    "@babel/eslint-plugin": "^7.13.16",
+    "@babel/preset-react": "^7.13.13",
+    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-commonjs": "^19.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-replace": "^2.4.2",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.23.2",
+    "prettier": "^2.3.0",
+    "rollup": "^2.48.0",
+    "rollup-plugin-includepaths": "^0.2.4",
+    "rollup-plugin-livereload": "^2.0.0",
+    "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-serve": "^1.1.0"
+  },
+  "peerDependencies": {
+    "react": "17.x",
+    "react-dom": "17.x"
+  },
+  "babel": {
+    "presets": [
+      "@babel/preset-react"
+    ]
+  },
+  "files": [
+    "dist"
+  ]
+}
