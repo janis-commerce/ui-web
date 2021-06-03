@@ -1,6 +1,5 @@
 import React from 'react';
-import { primary } from 'theme/pallete';
 
-const Chip = () => <div>Chip Example {primary.main}</div>;
+const Chip = () => <div>Chip Example</div>;
 
 export default Chip;
