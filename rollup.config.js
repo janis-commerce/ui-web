@@ -16,7 +16,8 @@ const commonPlugins = [
 		'process.env.NODE_ENV': JSON.stringify('production')
 	}),
 	babel({
-		presets: ['@babel/preset-react']
+		presets: ['@babel/preset-react'],
+		plugins: ['babel-plugin-styled-components']
 	}),
 	commonjs()
 ];
