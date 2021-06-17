@@ -31,6 +31,7 @@ const Chip = ({
 		<styled.Children>{children}</styled.Children>
 	</styled.Chip>
 );
+
 Chip.propTypes = {
 	backgroundColor: PropTypes.shape({
 		type: PropTypes.string,
@@ -41,11 +42,11 @@ Chip.propTypes = {
 		color: PropTypes.string
 	}),
 	children: PropTypes.node,
-	/** Si es true deshabilita el chip */
+	// Si es true deshabilita el chip
 	disabled: PropTypes.bool,
 	onClick: PropTypes.func,
 	onDelete: PropTypes.func,
-	/** Si es true mantiene el chip seleccionado */
+	// Si es true mantiene el chip seleccionado
 	selected: PropTypes.bool,
 	styles: PropTypes.oneOfType([
 		PropTypes.string,

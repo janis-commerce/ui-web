@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
-import palette from '../../../theme/palette';
-import { getColor } from '../../../theme/utils';
+import palette from 'theme/palette';
+import { getColor } from 'theme/utils';
 
 export default {
 	Chip: styled.button`
