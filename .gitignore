@@ -45,6 +45,7 @@ yarn-error.log*
 
 # misc
 /dist
+/dev
 
 .DS_Store
 .env.local
