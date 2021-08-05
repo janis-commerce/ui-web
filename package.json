@@ -7,7 +7,8 @@
   "scripts": {
     "build": "rollup -c rollup/rollup.config.prod.js",
     "start": "rollup -c rollup/rollup.config.dev.js -w",
-    "storybook": "start-storybook -p 6006 -s public"
+    "storybook": "start-storybook -p 6006 -s public",
+    "postinstall": "install-peers"
   },
   "repository": {
     "type": "git",
@@ -39,6 +40,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.23.2",
+    "install-peers-cli": "^2.2.0",
     "prettier": "^2.3.0",
     "rollup": "^2.48.0",
     "rollup-plugin-livereload": "^2.0.0",
