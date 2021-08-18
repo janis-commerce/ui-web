@@ -1,4 +1,4 @@
-const mainPallet = {
+export const mainPallet = {
 	primary: {
 		main: '#2979FF',
 		hover: '#5393FF',
@@ -52,7 +52,7 @@ const mainPallet = {
 
 const { alert, base, black, error, grey, primary, success, warning, white } = mainPallet;
 
-const viewsPallet = {
+export const viewsPallet = {
 	black: black.main,
 	blackHover: black.hover,
 	blackPressed: black.pressed,

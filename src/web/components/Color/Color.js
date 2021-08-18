@@ -1,5 +1,5 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { getColor } from 'theme/utils';
 import styled from './styles';
 
@@ -16,9 +16,9 @@ const Color = ({ color, showLabel }) => {
 	);
 };
 
-// Color.propTypes = {
-// 	color: PropTypes.string,
-// 	showLabel: PropTypes.bool
-// };
+Color.propTypes = {
+	color: PropTypes.string,
+	showLabel: PropTypes.bool
+};
 
 export default Color;
