@@ -2,7 +2,6 @@ import React from 'react';
 import Color from './index';
 import { create } from 'react-test-renderer';
 import 'jest-styled-components';
-// import { findColorInTheme } from 'theme';
 
 describe('Color component', () => {
 	test('must receive a color name/code', () => {
@@ -12,6 +11,17 @@ describe('Color component', () => {
 	test("should render nothing if a color wasn't provided", () => {
 		const wrapper = create(<Color />);
 		expect(wrapper.toJSON()).toBeNull();
+	});
+	test('should render the proper hex code label if showLabel is truthy', () => {
+		const color = 'statusRed';
+
+		const wrapper = create(<Color color={color} showLabel />);
+
+		const childrens = wrapper.toJSON().children;
+
+		const hexaLabel = childrens[1].children[0];
+
+		expect(hexaLabel).toBe('#FF4343');
 	});
 	/* test('should contain a div to represent a color sample', () => {
 		const wrapper = mount(<Color color="#ffbb00" />);

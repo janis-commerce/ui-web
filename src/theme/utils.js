@@ -1,11 +1,11 @@
 import palette from './palette';
-import { get } from 'lodash';
+import { get, isObject } from 'lodash';
 
 /**
  * @name getColor
  * @private
  * @module palette/utils
- * @description return color from palette/palette
+ * @description return color from palette
  * @param {string} type
  * @param {string} color
  * @returns {string} color
@@ -19,7 +19,7 @@ const getColor = (type = 'primary', color) => {
 
 	let selectedColor = get(palette, currentColor);
 
-	selectedColor = selectedColor || get(palette, `${currentType}.main`);
+	selectedColor = isObject(selectedColor) ? get(palette, `${currentType}.main`) : selectedColor;
 
 	return selectedColor || currentColor;
 };
