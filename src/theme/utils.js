@@ -1,27 +1,27 @@
 import palette from './palette';
-
-const validateString = (str) => !!(typeof str === 'string');
+import { get, isObject } from 'lodash';
 
 /**
  * @name getColor
  * @private
  * @module palette/utils
- * @description return color from palette/palette
+ * @description return color from palette
  * @param {string} type
  * @param {string} color
  * @returns {string} color
  * @example getColor('primary', 'main') // #2979FF
  */
-const getColor = (type, color) => {
-	if (!validateString(type) || !validateString(color)) return '';
 
-	const colorType = palette[type.toLowerCase()];
-	if (!colorType) return '';
+const getColor = (type = 'primary', color) => {
+	const currentColor = color ? `${type}.${color}` : type;
 
-	const selectedColor = colorType[color.toLowerCase()];
-	if (!selectedColor) return '';
+	const currentType = color ? type : currentColor.split('.')[0];
 
-	return selectedColor;
+	let selectedColor = get(palette, currentColor);
+
+	selectedColor = isObject(selectedColor) ? get(palette, `${currentType}.main`) : selectedColor;
+
+	return selectedColor || currentColor;
 };
 
 export { getColor };
