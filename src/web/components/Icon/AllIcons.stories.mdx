@@ -1,0 +1,26 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { docz as styled } from './styles';
+import Icon ,{names} from './index';
+
+<Meta title="Theme/allIcons" />
+
+# Todos los iconos
+
+
+
+<br />
+
+<Preview>
+	<Story name="allIcons">
+	<styled.Grid>
+		{names.map(name => (
+			<styled.Item key={name}>
+				<div>{name}</div>
+				<Icon name={name} />
+			</styled.Item>
+		))}
+	</styled.Grid>
+	</Story>
+</Preview>
+
+<Props of={Icon} />
