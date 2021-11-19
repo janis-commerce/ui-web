@@ -1,6 +1,7 @@
 import serve from 'rollup-plugin-serve';
 import livereload from 'rollup-plugin-livereload';
 import plugins from './plugins';
+import json from '@rollup/plugin-json';
 
 const ENV = 'development';
 
@@ -32,7 +33,8 @@ export default [
 				host: 'localhost',
 				port: 3000
 			}),
-			livereload({ watch: 'dev' })
+			livereload({ watch: 'dev' }),
+			json()
 		]
 	}
 ];

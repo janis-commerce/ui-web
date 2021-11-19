@@ -4,7 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import { nodeResolve } from '@rollup/plugin-node-resolve';
 
 export default (env) => [
-	replace({ 'process.env.NODE_ENV': JSON.stringify(env) }),
+	replace({ 'process.env.NODE_ENV': JSON.stringify(env), preventAssignment: true }),
 	babel({
 		exclude: 'node_modules/**',
 		presets: ['@babel/preset-react'],
