@@ -1,5 +1,5 @@
 import React from 'react';
-import Icon from 'web/components/Icon';
+import Icon from 'components/Icon';
 import { create } from 'react-test-renderer';
 
 describe('Icon component', () => {

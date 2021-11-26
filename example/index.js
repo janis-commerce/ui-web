@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Chip } from '../src/web/components';
-import Color from '../src/web/components/Color';
-import Icon from '../src/web/components/Icon';
+import { Chip } from '../src/components';
+import Color from '../src/components/Color';
+import Icon from '../src/components/Icon';
 
 const Component = () => (
 	<div style={{ display: 'flex', justifyContent: 'space-evenly' }}>

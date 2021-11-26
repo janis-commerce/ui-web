@@ -5,7 +5,7 @@ const ENV = 'production';
 
 export default [
 	{
-		input: 'src/web/components/index.js',
+		input: 'src/components/index.js',
 		output: {
 			name: 'main',
 			file: 'dist/index.umd.js',

@@ -7,7 +7,7 @@ const ENV = 'development';
 
 export default [
 	{
-		input: 'src/web/components/index.js',
+		input: 'src/components/index.js',
 		output: {
 			name: 'main',
 			file: 'dev/index.umd.js',
