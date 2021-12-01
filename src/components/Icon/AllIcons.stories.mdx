@@ -1,6 +1,7 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { copyToClipboard } from '../../utils';
 import { docz as styled } from './styles';
-import Icon ,{names} from './index';
+import Icon, { names } from './index';
 
 <Meta title="Theme/Icons" />
 
@@ -12,7 +13,7 @@ import Icon ,{names} from './index';
 	<Story name="Icons">
 	<styled.Grid>
 		{names.map(name => (
-			<styled.Item key={name}>
+			<styled.Item key={name} onClick={() => copyToClipboard(name)}>
 				<div>{name}</div>
 				<Icon name={name} />
 			</styled.Item>
