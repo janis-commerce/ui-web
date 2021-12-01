@@ -1,10 +1,10 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import { viewsPallet, mainPallet } from 'theme/palette';
 import { getColor } from 'theme/utils';
-import { copyToClipboard } from 'web/utils';
+import { copyToClipboard } from 'utils';
 import { storybook as styled } from './styles';
 
-<Meta title="Theme/Find Color" />
+<Meta title="Theme/Colors" />
 
 # Color :
 
@@ -38,7 +38,7 @@ const errorDark = getColor('error', 'dark');
 ## Main Pallet
 
 <Preview>
-	<Story name="newPalette">
+	<Story name="New Palette">
 		<styled.Grid>
 			{Object.keys(mainPallet).map((themeKey) => (
 				<div key={themeKey}>
@@ -67,7 +67,7 @@ const errorDark = getColor('error', 'dark');
 ## Views Palette
 
 <Preview>
-	<Story name="viewsColors">
+	<Story name="Views Colors">
 		<styled.Grid>
 			{Object.keys(viewsPallet).map((key) => (
 				<styled.Item key={key}>
