@@ -1,0 +1,121 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { List } from 'docs/Components';
+
+import Button from './Button';
+
+<Meta title="Components/Button" />
+
+# Button
+
+[Diseño en invision](https://projects.invisionapp.com/d/main#/console/14477440/305946894/preview)
+
+<br />
+
+<Preview>
+	<Story name="Button">
+		<List>
+			<div
+				style={{
+					height: '200px',
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					marginLeft: '50px'
+				}}
+			>
+				<Button variant="contained">BUTTON</Button>
+				<Button icon="star_light" variant="contained" color="fizzGreen">
+					Export
+				</Button>
+				<Button icon="options" variant="outlined" />
+				<Button icon="trash" rounded />
+			</div>
+			<div
+				style={{
+					height: '200px',
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					marginLeft: '50px'
+				}}
+			>
+				<Button variant="contained">NORMAL</Button>
+				<Button variant="contained" icon="plus_circle">
+					NORMAL + icon
+				</Button>
+				<Button variant="contained" disabled>
+					DISABLED
+				</Button>
+			</div>
+			<div
+				style={{
+					height: '200px',
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					marginLeft: '50px'
+				}}
+			>
+				<Button variant="outlined">NORMAL</Button>
+				<Button variant="outlined" icon="plus_circle">
+					NORMAL + icon
+				</Button>
+				<Button variant="outlined" disabled>
+					DISABLED
+				</Button>
+			</div>
+			<div
+				style={{
+					height: '200px',
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					marginLeft: '50px'
+				}}
+			>
+				<Button>NORMAL</Button>
+				<Button icon="plus_circle">NORMAL + icon</Button>
+				<Button disabled>DISABLED</Button>
+			</div>
+		</List>
+	</Story>
+</Preview>
+
+<br />
+
+## Colores disponibles
+
+Estos son los unicos colores base disponibles, para poder aplicar correctamente los efectos segun su estado de interaccion.
+
+<List>
+	<div style={{ display: 'flex', flexWrap: 'wrap', width: '420px' }}>
+		{validColors.map(color => (
+			<div
+				key={color}
+				style={{
+					display: 'flex',
+					padding: '6px'
+				}}
+			>
+				<span
+					style={{
+						display: 'inline-block',
+						width: '15px',
+						height: '15px',
+						marginRight: '5px',
+						backgroundColor: colors[color],
+						borderRadius: '50px',
+						border: `1px solid ${colors.black}`
+					}}
+				/>
+				<span style={{ fontSize: '14px' }}>{color}</span>
+			</div>
+		))}
+	</div>
+</List>
+
+<br />
+
+## Props
+
+<Props of={Button} />
