@@ -7,8 +7,11 @@ import Button from 'components/Button';
 
 const Component = () => (
 	<div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
-		<Button variant="cleaned">BUTTON</Button>
-		<Button variant="outlined">BUTTON</Button>
+		<Chip selected variant="outlined">
+			Criterio Tienda
+		</Chip>
+		<Color color="primary.main"> </Color>
+		<Icon name="trash" color="red" />
 		<Button variant="contained">BUTTON</Button>
 	</div>
 );
