@@ -1,15 +1,25 @@
-export const validColors = [
+export const mainPaletteColors = [
 	'black',
+	'primary',
+	'success',
+	'grey',
+	'warning',
+	'error',
+	'white',
+	'alert'
+];
+
+export const validColors = [
 	'blue',
 	'darkGrey',
+	'grey.dark',
 	'fizzGreen',
 	'green',
-	'grey',
 	'lightBlue',
 	'lightGrey',
 	'orange',
 	'red',
 	'statusRed',
-	'white',
-	'yellow'
+	'yellow',
+	...mainPaletteColors
 ];

@@ -3,13 +3,32 @@ import { StyledIcon } from 'components/Icon';
 import { getColor as findColorInTheme, timingFunctions } from 'theme/utils';
 import mixins from 'theme/mixins';
 import colors from 'theme/palette';
-import { validColors } from './utils';
+import { validColors, mainPaletteColors } from './utils';
+
+const findColor = (color, state) => {
+	const isMainColor = mainPaletteColors.includes(color);
+
+	const getColorState = () => {
+		switch (state) {
+			case 'hover':
+				return isMainColor ? '.hover' : 'Hover';
+			case 'pressed':
+				return isMainColor ? '.pressed' : 'Pressed';
+			default:
+				return '';
+		}
+	};
+
+	return findColorInTheme(`${color}${getColorState()}`);
+};
 
 const isValidColor = (color) => validColors.includes(color);
-const getColor = (color) => (isValidColor(color) ? findColorInTheme(color) : colors.blue);
-const getHoverColor = (color) => (isValidColor(color) ? colors[`${color}Hover`] : colors.blueHover);
+
+const getColor = (color) => (isValidColor(color) ? findColor(color) : colors.blue);
+const getHoverColor = (color) =>
+	isValidColor(color) ? findColor(color, 'hover') : colors.blueHover;
 const getPressedColor = (color) =>
-	isValidColor(color) ? colors[`${color}Pressed`] : colors.bluePressed;
+	isValidColor(color) ? findColor(color, 'pressed') : colors.bluePressed;
 
 export default styled.button`
 	display: flex;

@@ -1,6 +1,8 @@
 import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
 import { List } from 'docs/Components';
-
+import palette from 'theme/palette';
+import { getColor } from 'theme/utils';
+import { validColors } from './utils';
 import Button from './Button';
 
 <Meta title="Components/Button" />
@@ -103,9 +105,9 @@ Estos son los unicos colores base disponibles, para poder aplicar correctamente 
 						width: '15px',
 						height: '15px',
 						marginRight: '5px',
-						backgroundColor: colors[color],
+						backgroundColor: getColor(color),
 						borderRadius: '50px',
-						border: `1px solid ${colors.black}`
+						border: `1px solid ${palette.black}`
 					}}
 				/>
 				<span style={{ fontSize: '14px' }}>{color}</span>

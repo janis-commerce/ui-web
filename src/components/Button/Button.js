@@ -40,6 +40,7 @@ Button.propTypes = {
 	children: PropTypes.node,
 	/** Color del boton */
 	color: PropTypes.oneOf(validColors),
+	/** Mostrar o no el texto */
 	hideLabel: PropTypes.bool,
 	/** Nombre del icono */
 	icon: iconNamePropType,
@@ -52,6 +53,7 @@ Button.propTypes = {
 	/** Si es true, el boton tiene los bordes redondeados */
 	rounded: PropTypes.bool,
 	styles: stylesPropType,
+	/** Variante de boton */
 	variant: PropTypes.oneOf(['cleaned', 'contained', 'outlined'])
 };
 
