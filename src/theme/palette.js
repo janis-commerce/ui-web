@@ -8,13 +8,14 @@ export const mainPallet = {
 	alert: {
 		main: '#FFCE17',
 		hover: '#FFD745',
+		pressed: '#FFBA0C',
 		dark: '#FFBA0C'
 	},
 	black: {
 		main: '#2F2F2F',
-		dark: '#050505',
 		hover: '#585858',
-		pressed: '#16232D'
+		pressed: '#16232D',
+		dark: '#050505'
 	},
 	base: {
 		white: '#fff',
@@ -22,31 +23,35 @@ export const mainPallet = {
 	},
 	error: {
 		main: '#FF4343',
-		dark: '#FF2A2A',
-		hover: '#FF6868'
+		hover: '#FF6868',
+		pressed: '#FF2A2A',
+		dark: '#FF2A2A'
 	},
 	grey: {
 		main: '#D5D7DB',
 		hover: '#DDDFE2',
 		pressed: '#C4C6CC',
-		darkHover: '#A8AAAC',
 		dark: '#939598',
+		darkHover: '#A8AAAC',
 		darkPressed: '#747679'
 	},
 	success: {
 		main: '#1DB779',
-		dark: '#109D59',
-		hover: '#4AC593'
+		hover: '#4AC593',
+		pressed: '#109D59',
+		dark: '#109D59'
 	},
 	warning: {
 		main: '#FF8D10',
-		dark: '#FF6E08',
-		hover: '#FFA33F'
+		hover: '#FFA33F',
+		pressed: '#FF6E08',
+		dark: '#FF6E08'
 	},
 	white: {
 		main: '#E8EAF6',
-		dark: '#D0D3E3',
-		hover: '#F4F5FB'
+		hover: '#F4F5FB',
+		pressed: '#D0D3E3',
+		dark: '#D0D3E3'
 	}
 };
 
@@ -65,7 +70,7 @@ export const viewsPallet = {
 	darkGreyPressed: grey.darkPressed,
 	fizzGreen: success.main,
 	fizzGreenHover: success.hover,
-	fizzGreenPressed: success.dark,
+	fizzGreenPressed: success.pressed,
 	green: '#74C655',
 	greenHover: '#8FD177',
 	greenPressed: '#54B039',
@@ -77,20 +82,20 @@ export const viewsPallet = {
 	lightBluePressed: '#04ADAD',
 	lightGrey: white.main,
 	lightGreyHover: white.hover,
-	lightGreyPressed: white.dark,
+	lightGreyPressed: white.pressed,
 	orange: warning.main,
 	orangeHover: warning.hover,
-	orangePressed: warning.dark,
+	orangePressed: warning.pressed,
 	red: '#F13B70',
 	redHover: '#F3628C',
 	redPressed: '#EB2450',
 	statusRed: error.main,
 	statusRedHover: error.hover,
-	statusRedPressed: error.dark,
+	statusRedPressed: error.pressed,
 	white: base.white,
 	yellow: alert.main,
 	yellowHover: alert.hover,
-	yellowPressed: alert.dark,
+	yellowPressed: alert.pressed,
 	transparentWhite: 'rgba(256, 256, 256, 0.5)'
 };
 

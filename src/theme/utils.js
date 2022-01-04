@@ -24,4 +24,10 @@ const getColor = (type = 'primary', color) => {
 	return selectedColor || currentColor;
 };
 
-export { getColor };
+const timingFunctions = {
+	standard: 'cubic-bezier(0.4, 0, 0.2, 1)',
+	decelerate: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
+	accelerate: 'cubic-bezier(0.4, 0.0, 1, 1)'
+};
+
+export { getColor, timingFunctions };
