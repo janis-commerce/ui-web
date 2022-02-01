@@ -1,0 +1,27 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import Checkbox from './Checkbox'
+import { List } from 'docs/Components';
+
+<Meta title="Components/Checkbox" component={Checkbox} />
+
+# Checkbox
+Recibe una propiedad checked boolean, de su valor depende el check del componente.
+El componente no tiene ninguna logica ni accion para marcar el check.
+Si recibe la propiedad rounded, el Checkbox sera redondo.
+
+[Diseño en invision](https://projects.invisionapp.com/d/main#/console/14477440/307343593/preview)
+
+<br />
+
+<Preview>
+  <Story name="Checkbox">
+    <List>
+      <Checkbox checked/>
+      <Checkbox />
+      <Checkbox rounded checked/>
+    </List>
+  </Story>
+</Preview>
+
+## Props
+<Props of={Checkbox} />
