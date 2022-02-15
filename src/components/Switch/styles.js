@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components';
 import colors from 'theme/palette';
 import { timingFunctions } from 'theme/utils';
+import { mediaBreaks } from 'devices';
+
+const { onlyDesktop, onlyPrint } = mediaBreaks;
 
 export const statusColor = (props) => {
 	const { checked, disabled } = props;
@@ -49,12 +52,12 @@ export default {
 		align-self: center;
 		position: relative;
 
-		&:hover ${Ball} {
+		${onlyDesktop` 	&:hover ${Ball} {
 			box-shadow: 0px 0px 0px 10px ${colors.lightGreyHover};
 			${/* sc-selector */ iconCheckStyles} svg {
 				fill: ${colors.lightGreyHover};
 			}
-		}
+		}`}
 
 		&:active ${Ball} {
 			box-shadow: 0px 0px 0px 10px ${colors.lightGrey}73;
@@ -80,6 +83,9 @@ export default {
 		background-color: ${(props) => statusColor(props)};
 		border-radius: 50px;
 		position: relative;
+		${onlyPrint`
+		border: 1px solid ${colors.darkGrey};
+	`}
 	`,
 	iconCheckStyles
 };
