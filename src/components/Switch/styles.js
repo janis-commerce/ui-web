@@ -46,19 +46,16 @@ export default {
 	OuterContainer: styled.div`
 		display: flex;
 		width: 44px;
-		height: 100%;
 		align-items: center;
 		pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
 		align-self: center;
 		position: relative;
-
 		${onlyDesktop` 	&:hover ${Ball} {
 			box-shadow: 0px 0px 0px 10px ${colors.lightGreyHover};
-			${/* sc-selector */ iconCheckStyles} svg {
-				fill: ${colors.lightGreyHover};
-			}
 		}`}
-
+		${/* sc-selector */ iconCheckStyles} svg {
+			fill: ${colors.lightGreyHover};
+		}
 		&:active ${Ball} {
 			box-shadow: 0px 0px 0px 10px ${colors.lightGrey}73;
 			${/* sc-selector */ iconCheckStyles} svg {
