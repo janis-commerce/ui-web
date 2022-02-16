@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import palette from 'theme/palette';
 import { getColor } from 'theme/utils';
+import { mediaBreaks } from 'devices';
 
 export default {
 	Chip: styled.button`
@@ -99,6 +100,10 @@ export default {
 			`background-color: ${getColor(props.backgroundColor.type, props.backgroundColor.color)};`}
 
 		${(props) => props.textColor && `color: ${getColor(props.textColor.type, props.textColor.color)};`}
+
+		${mediaBreaks.onlyPrint`
+			border: 1px solid ${palette.darkGrey};
+		`}
 	`,
 	Children: styled.div`
 		text-overflow: ellipsis;

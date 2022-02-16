@@ -1,0 +1,32 @@
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import Switch from './Switch';
+import { List } from 'docs/Components';
+
+# Switch
+
+<Meta title="Components/Switch" component={Switch} />
+
+
+El componente Switch se utiliza para intercambiar valores entre un dato que es obligatorio. Simula un interruptor de "encendido/apagado".
+
+<br />
+
+
+<Preview>
+	<Story name="Switch">
+		<List>
+			<p>Normal:</p>
+			<Switch />
+			<p>Disabled:</p>
+			<Switch disabled />
+			<p>Disabled and pre-checked:</p>
+			<Switch disabled defaultChecked />
+		</List>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={Switch} />
+
+
