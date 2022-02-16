@@ -2,10 +2,16 @@ import styled from 'styled-components';
 import colors from 'theme/palette';
 import { getColor } from 'theme/utils';
 import mixins from 'theme/mixins';
+import { mediaBreaks } from 'devices';
 
 const styles = {
 	Svg: styled.svg`
 		fill: ${(props) => getColor(props.color)};
+
+		${mediaBreaks.onlyPrint`
+			fill: ${colors.darkGrey};
+		`}
+
 		${(props) => props.styles};
 	`,
 	Path: styled.path`

@@ -24,7 +24,7 @@ export default {
 	`,
 	iconCheckStyles: css`
 		transform: translateY(-5%);
-		fill: ${getColor('white')};
+		fill: ${getColor('base.white')};
 		${(props) =>
 			!!props.rounded &&
 			`
