@@ -29,7 +29,7 @@ export default {
 			!!props.rounded &&
 			`
 			flex-shrink: 0;
-			padding-right: 1px
+			padding-right: 1px;
 		`}
 	`
 };

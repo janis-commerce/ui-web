@@ -32,14 +32,17 @@ const Ball = styled.div`
 	${(props) =>
 		props.checked &&
 		`
-		left: 100%;
-		margin-left: -20px;
-	`}
+			left: 100%;
+			margin-left: -20px;
+		`}
 `;
 
 const iconCheckStyles = css`
 	position: absolute;
 	fill: ${(props) => statusColor(props)};
+	${onlyPrint`
+		fill: ${(props) => (props.checked ? colors.black : colors.darkGrey)} !important;
+	`}
 `;
 
 export default {
@@ -50,12 +53,12 @@ export default {
 		pointer-events: ${(props) => (props.disabled ? 'none' : 'auto')};
 		align-self: center;
 		position: relative;
-		${onlyDesktop` 	&:hover ${Ball} {
-			box-shadow: 0px 0px 0px 10px ${colors.lightGreyHover};
-		}`}
-		${/* sc-selector */ iconCheckStyles} svg {
-			fill: ${colors.lightGreyHover};
-		}
+		${onlyDesktop`
+			&:hover ${Ball} {
+				box-shadow: 0px 0px 0px 10px ${colors.lightGreyHover};
+			}
+		`}
+
 		&:active ${Ball} {
 			box-shadow: 0px 0px 0px 10px ${colors.lightGrey};
 			${/* sc-selector */ iconCheckStyles} svg {
@@ -81,8 +84,8 @@ export default {
 		border-radius: 50px;
 		position: relative;
 		${onlyPrint`
-		border: 1px solid ${colors.darkGrey};
-	`}
+			border: 1px solid ${colors.darkGrey};
+		`}
 	`,
 	iconCheckStyles
 };
