@@ -3,7 +3,7 @@ import { timingFunctions, getColor } from 'theme/utils';
 
 export default {
 	Container: styled.label`
-		background: ${(props) => (props.checked ? getColor('blue') : getColor('white'))};
+		background: ${(props) => (props.checked ? getColor('blue') : getColor('base.white'))};
 		border: 1px solid ${(props) => (props.checked ? getColor('blue') : getColor('black'))};
 		border-radius: ${(props) => (props.rounded ? '50' : '3')}px;
 		width: 16px;
@@ -28,8 +28,8 @@ export default {
 		${(props) =>
 			!!props.rounded &&
 			`
-		flex-shrink: 0;
-		padding-right: 1px
+			flex-shrink: 0;
+			padding-right: 1px
 		`}
 	`
 };

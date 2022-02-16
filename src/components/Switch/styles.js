@@ -23,7 +23,7 @@ const Ball = styled.div`
 	position: absolute;
 	top: 4px;
 	left: 4px;
-	background-color: ${colors.white};
+	background-color: ${colors.base.white};
 	transition: all ${timingFunctions.standard} 0.2s;
 
 	${(props) =>
@@ -57,7 +57,7 @@ export default {
 		}
 
 		&:active ${Ball} {
-			box-shadow: 0px 0px 0px 10px ${colors.lightGrey}73;
+			box-shadow: 0px 0px 0px 10px ${colors.lightGrey};
 			${/* sc-selector */ iconCheckStyles} svg {
 				fill: ${(props) => (props.checked ? colors.blue : colors.darkGrey)};
 			}

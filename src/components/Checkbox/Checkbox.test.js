@@ -59,5 +59,4 @@ describe('Checkbox component', () => {
 			});
 		});
 	});
-	'utils', () => {};
 });
