@@ -46,6 +46,7 @@ yarn-error.log*
 # misc
 /dist
 /dev
+/stories
 
 .DS_Store
 .env.local
