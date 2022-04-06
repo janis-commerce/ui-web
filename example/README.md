@@ -1,16 +1,16 @@
-## instalación
+## instaInstallationlación
 
-Para correr la aplicación en modo de desarrollo se deben seguir los siguientes pasos
+To run the application in development mode, follow these steps:
 
-### Instalar yarn de manera global
+### Install yarn globally
 
 `npm install --global yarn`
 
-### Clonar el repo dentro de `var/www`
+### Clone repository in to `/var/www/`
 
 - 'git clone https://github.com/janis-commerce/ui'
 
-### correr los comandos
+### Run the commands
 
 - `yarn`
 - `yarn start`
