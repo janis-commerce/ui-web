@@ -20,12 +20,11 @@ const MyComponent = () => {
 
 	return (
 		<div>
-			<Button onClick={handleClick} variant="contained" />
-			<Icon name="box" color="primary">
+			<Button onClick={handleClick} variant="contained" />Click</Button>
+			<Icon name="box" color="primary" />
 		</div>
 	);
 };
 
 export default MyComponent;
-
 ```
