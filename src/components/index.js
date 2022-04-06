@@ -5,4 +5,4 @@ import Color from './Color';
 import Icon from './Icon';
 import Switch from './Switch';
 
-export default { Button, Checkbox, Chip, Color, Icon, Switch };
+export { Button, Checkbox, Chip, Color, Icon, Switch };

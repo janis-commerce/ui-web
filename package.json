@@ -10,8 +10,9 @@
     "lint": "eslint src/",
     "build:icons": "node scripts/build-icons",
     "test": "jest",
-    "test-coverage": "jest --coverage --silent",
+    "coverage": "jest --coverage --silent",
     "storybook": "start-storybook -p 6006 -s public",
+    "build:storybook": "build-storybook -c .storybook -o ./build/docs",
     "postinstall": "install-peers"
   },
   "repository": {

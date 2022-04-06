@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import components from '../src/components';
+import { Button, Checkbox, Chip, Color, Icon, Switch } from '../src/components';
 
 const Component = () => {
-	const { Button, Checkbox, Chip, Color, Icon, Switch } = components;
 	return (
 		<div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
 			<Switch />

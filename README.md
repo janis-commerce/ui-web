@@ -2,10 +2,30 @@
 
 A package for use generic components from Janis
 
-## instalación
+## Installation
 
 `npm install @janis-commerce/ui-web`
 
-### Instalar yarn de manera global
 
-`npm install --global yarn`
+### Usage
+
+```js
+import React from 'react';
+const { Button, Icon } = '@janiscommerce/ui-web';
+
+const MyComponent = () => {
+	const handleClick = () => {
+		console.log('some action');
+	};
+
+	return (
+		<div>
+			<Button onClick={handleClick} variant="contained" />
+			<Icon name="box" color="primary">
+		</div>
+	);
+};
+
+export default MyComponent;
+
+```
