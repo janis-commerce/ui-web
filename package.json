@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.umd.js",
-  "private": true,
+  "private": false,
   "scripts": {
-    "build": "rollup -c rollup/rollup.config.prod.js",
     "start": "rollup -c rollup/rollup.config.dev.js -w",
+    "build": "rollup -c rollup/rollup.config.prod.js",
     "lint": "eslint src/",
-    "build:icons": "node scripts/build-icons",
     "test": "jest",
     "coverage": "jest --coverage --silent",
     "storybook": "start-storybook -p 6006 -s public",
     "build:storybook": "build-storybook -c .storybook -o ./stories",
+    "build:icons": "node scripts/build-icons",
     "postinstall": "install-peers"
   },
   "repository": {
