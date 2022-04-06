@@ -9,6 +9,7 @@
     "build": "rollup -c rollup/rollup.config.prod.js",
     "lint": "eslint src/",
     "test": "jest",
+    "test-ci": "JEST_JUNIT_OUTPUT_DIR=test-reports jest --coverage --silent --ci --reporters=jest-junit",
     "coverage": "jest --coverage --silent",
     "storybook": "start-storybook -p 6006 -s public",
     "build:storybook": "build-storybook -c .storybook -o ./stories",
@@ -19,7 +20,7 @@
     "type": "git",
     "url": "git+https://github.com/janis-commerce/ui.git"
   },
-  "author": "",
+  "author": "Janis",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/janis-commerce/ui/issues"
@@ -52,6 +53,7 @@
     "eslint-plugin-react": "^7.23.2",
     "install-peers-cli": "^2.2.0",
     "jest": "^27.0.6",
+    "jest-junit": "^13.1.0",
     "jest-styled-components": "^7.0.5",
     "prettier": "^2.3.0",
     "react-test-renderer": "^17.0.2",
