@@ -7,6 +7,7 @@
   "scripts": {
     "build": "rollup -c rollup/rollup.config.prod.js",
     "start": "rollup -c rollup/rollup.config.dev.js -w",
+    "lint": "eslint src/",
     "build:icons": "node scripts/build-icons",
     "test": "jest",
     "test-coverage": "jest --coverage --silent",
@@ -43,6 +44,7 @@
     "babel-plugin-styled-components": "^2.0.6",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "chalk": "^5.0.0",
+    "enzyme": "^3.11.0",
     "eslint": "^8.12.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",

@@ -16,6 +16,9 @@ module.exports = {
 		'react/react-in-jsx-scope': 'off'
 	},
 	settings: {
+		react: {
+			version: '17.x'
+		},
 		'import/resolver': {
 			node: {
 				extensions: ['.js', '.jsx', '.json'],
