@@ -1,5 +1,5 @@
 {
-  "name": "@janiscommerce/ui",
+  "name": "@janiscommerce/ui-web",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.umd.js",
@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/janis-commerce/ui.git"
+    "url": "git+https://github.com/janis-commerce/ui-web.git"
   },
   "author": "Janis",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/janis-commerce/ui/issues"
+    "url": "https://github.com/janis-commerce/ui-web/issues"
   },
-  "homepage": "https://github.com/janis-commerce/ui#readme",
+  "homepage": "https://github.com/janis-commerce/ui-web#readme",
   "devDependencies": {
     "@babel/core": "^7.15.0",
     "@babel/eslint-parser": "^7.14.3",

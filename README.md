@@ -1,4 +1,4 @@
-# JANIS UI WEB
+# @janis-commerce/ui-web
 
 A package for use generic components from Janis
 

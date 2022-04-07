@@ -1,4 +1,4 @@
-## instaInstallationlación
+## Installation
 
 To run the application in development mode, follow these steps:
 
@@ -8,7 +8,7 @@ To run the application in development mode, follow these steps:
 
 ### Clone repository in to `/var/www/`
 
-- 'git clone https://github.com/janis-commerce/ui'
+- 'git clone https://github.com/janis-commerce/ui-web'
 
 ### Run the commands
 
