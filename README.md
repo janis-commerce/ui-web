@@ -28,3 +28,7 @@ const MyComponent = () => {
 
 export default MyComponent;
 ```
+
+### Important
+
+All the components that can be used and other documentation can be found at ***[https://janis-commerce.github.io/ui-web](https://janis-commerce.github.io/ui-web)***
