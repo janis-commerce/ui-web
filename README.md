@@ -20,7 +20,7 @@ const MyComponent = () => {
 
 	return (
 		<div>
-			<Button onClick={handleClick} variant="contained" />Click</Button>
+			<Button onClick={handleClick} variant="contained">Click</Button>
 			<Icon name="box" color="primary" />
 		</div>
 	);
