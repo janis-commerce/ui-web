@@ -14,8 +14,6 @@ jobs:
           node-version: 14.x
       - run: yarn
       - run: yarn test
-      - run: yarn build:storybook
-      - run: yarn deploy-storybook
       - run: yarn build
 
   publish-npm:
