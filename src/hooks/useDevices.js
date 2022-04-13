@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { debounce } from 'utils';
-import { breakpoints } from 'devices';
+import { breakpoints } from 'utils/devices';
 
 /** Checks the current view width against different device size settings.
  * Import it when needed, and get the most appropiate condition.

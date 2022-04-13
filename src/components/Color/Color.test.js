@@ -1,5 +1,5 @@
 import React from 'react';
-import Color from './index';
+import Color from 'components/Color';
 import { create } from 'react-test-renderer';
 import 'jest-styled-components';
 

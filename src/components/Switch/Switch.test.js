@@ -11,23 +11,51 @@ describe('Switch component', () => {
 			const wrapper = create(<Switch />);
 			expect(wrapper.toJSON()).toBeTruthy();
 		});
+
+		test('Should mount and change correctly', () => {
+			const wrapper = mount(<Switch />);
+			wrapper.find('input').simulate('change');
+			expect(wrapper.exists()).toBeTruthy();
+		});
+
 		test('Should contains checkbox input', () => {
 			const wrapper = create(<Switch />);
 
 			expect(wrapper.toJSON()).toBeTruthy();
 			expect(wrapper.root.findByType('input')).toBeTruthy();
 		});
+
 		test('Should contains a Icon', () => {
 			const wrapper = create(<Switch />);
 
 			expect(wrapper.toJSON()).toBeTruthy();
 			expect(wrapper.root.findByType(Icon)).toBeTruthy();
 		});
+
 		test('Should default not checked', () => {
 			const wrapper = create(<Switch />);
 
 			const { props } = wrapper.toJSON();
 			expect(props.checked).toBeFalsy();
+		});
+
+		test('Should set prop autocomplete off', () => {
+			const wrapper = create(<Switch />);
+			const input = wrapper.root.findByType('input');
+			expect(input.props.autoComplete).toBe('off');
+		});
+
+		test('Should set prop autocomplete on', () => {
+			const wrapper = create(<Switch autoComplete />);
+			const input = wrapper.root.findByType('input');
+			expect(input.props.autoComplete).toBe('on');
+		});
+
+		test('should call onChange prop when triggered change event', () => {
+			const onChangeFn = jest.fn();
+			const wrapper = mount(<Switch name="test" onChange={onChangeFn} />);
+			wrapper.find('input').simulate('change');
+			expect(onChangeFn).toHaveBeenCalledTimes(1);
 		});
 
 		describe('controlled', () => {
@@ -46,6 +74,7 @@ describe('Switch component', () => {
 				const { props } = wrapper.toJSON();
 				expect(props.checked).toBeFalsy();
 			});
+
 			test('Should be checked  when defaultChecked is true', () => {
 				const wrapper = create(<Switch defaultChecked />);
 

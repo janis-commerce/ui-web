@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import colors from 'theme/palette';
 import { timingFunctions } from 'theme/utils';
-import { mediaBreaks } from 'devices';
+import { mediaBreaks } from 'utils/devices';
 
 const { onlyDesktop, onlyPrint } = mediaBreaks;
 

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import colors from 'theme/palette';
 import { getColor } from 'theme/utils';
 import mixins from 'theme/mixins';
-import { mediaBreaks } from 'devices';
+import { mediaBreaks } from 'utils/devices';
 
 const styles = {
 	Svg: styled.svg`

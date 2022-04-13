@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import palette from 'theme/palette';
 import { getColor } from 'theme/utils';
-import { mediaBreaks } from 'devices';
+import { mediaBreaks } from 'utils/devices';
 
 export default {
 	Chip: styled.button`

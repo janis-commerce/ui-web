@@ -15,6 +15,12 @@ module.exports = {
 		'import/prefer-default-export': 'off',
 		'react/react-in-jsx-scope': 'off'
 	},
+	globals: {
+		Enzyme: false,
+		mount: false,
+		render: false,
+		shallow: false
+	},
 	settings: {
 		react: {
 			version: '17.x'
