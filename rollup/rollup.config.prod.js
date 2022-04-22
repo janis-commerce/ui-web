@@ -1,4 +1,5 @@
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import generatePackageJson from 'rollup-plugin-generate-package-json';
 import plugins from './plugins';
 
 const ENV = 'production';
@@ -12,6 +13,18 @@ export default [
 			format: 'umd',
 			sourcemap: true
 		},
-		plugins: [peerDepsExternal(), ...plugins(ENV)]
+		plugins: [
+			peerDepsExternal(),
+			...plugins(ENV),
+			generatePackageJson({
+				outputFolder: 'dist',
+				baseContents: (pkg) => ({
+					name: pkg.name,
+					main: 'index.umd.js',
+					version: pkg.version,
+					dependencies: pkg.dependencies
+				})
+			})
+		]
 	}
 ];
