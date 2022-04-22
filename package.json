@@ -108,8 +108,7 @@
     ]
   },
   "files": [
-    "dist/*.js",
-    "dist/*.json"
+    "dist"
   ],
   "dependencies": {
     "prop-types": "^15.7.2",
