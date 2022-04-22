@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.0.14] - 2022-06-11
+- Fix publish package to npm bugs. From 0.0.3 to 0.0.14
+
 ## [0.0.2] - 2022-06-11
 ### Fixed
 - Fix github action error with storybook
