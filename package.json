@@ -72,7 +72,8 @@
       "enzyme-to-json/serializer"
     ],
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx,mjs}"
+      "<rootDir>/src/**/*.{js,jsx,mjs}",
+      "!<rootDir>/src/**/index.{js,jsx,mjs}"
     ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/src/docs"
