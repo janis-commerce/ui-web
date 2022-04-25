@@ -8,7 +8,7 @@ const List = styled.div`
 	display: grid;
 	grid-auto-flow: ${(props) => !props.minWidth && 'column'};
 	justify-content: left;
-	align-items: center;
+	align-items: flex-start;
 	grid-gap: ${(props) => (props.gap ? `${props.gap}px` : '10px')};
 	grid-template-columns: ${(props) =>
 		props.minWidth && `repeat(auto-fit, minmax(${props.minWidth}px, 1fr))`};

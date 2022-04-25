@@ -1,13 +1,13 @@
 import { css } from 'styled-components';
 import theme from './palette';
 
-const timingFunctions = {
+export const timingFunctions = {
 	standard: 'cubic-bezier(0.4, 0, 0.2, 1)',
 	decelerate: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
 	accelerate: 'cubic-bezier(0.4, 0.0, 1, 1)'
 };
 
-const mixins = {
+export const mixins = {
 	flexCenter: css`
 		display: flex;
 		align-items: center;
