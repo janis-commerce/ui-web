@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import palette from 'theme/palette';
-import { timingFunctions, mixins } from 'theme/mixins';
 import typography from 'theme/typography';
+import { timingFunctions, mixins } from 'theme/mixins';
 import { mediaBreaks } from 'utils/devices';
 import Icon from 'components/Icon';
 

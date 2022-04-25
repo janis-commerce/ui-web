@@ -56,12 +56,14 @@ class Input extends PureComponent {
 			icon,
 			error,
 			disabled,
-			errorMessage,
 			placeholder,
+			errorMessage,
 			autoComplete,
 			hasFloatingLabel,
 			value = stateValue,
 			isTranslateActive,
+			// eslint-disable-next-line no-unused-vars
+			defaultValue,
 			...props
 		} = this.props;
 
