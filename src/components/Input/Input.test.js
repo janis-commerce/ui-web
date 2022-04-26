@@ -16,6 +16,11 @@ describe('Input component', () => {
 		expect(wrapper.find(inputSelector)).toHaveLength(1);
 	});
 
+	test('should contain one input fullWidth', () => {
+		const wrapper = mount(<Input fullWidth />);
+		expect(wrapper.find(inputSelector)).toHaveLength(1);
+	});
+
 	test('should contains one text input and icon', () => {
 		const wrapper = mount(<Input icon="box" />);
 		expect(wrapper.find(inputSelector)).toHaveLength(1);
