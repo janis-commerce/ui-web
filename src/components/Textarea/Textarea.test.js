@@ -14,6 +14,27 @@ describe('Textarea component', () => {
 		expect(wrapper.find('textarea')).toHaveLength(1);
 	});
 
+	test('should contain one textarea fullWidth', () => {
+		const wrapper = mount(<Textarea fullWidth />);
+		expect(wrapper.find('textarea')).toHaveLength(1);
+	});
+
+	test('should contains one textarea and error text', () => {
+		const wrapper = mount(<Textarea errorMessage="errorMessage" error />);
+		expect(wrapper.find('textarea')).toHaveLength(1);
+		expect(wrapper.find('span[data-test="errorMessage"]')).toHaveLength(1);
+	});
+
+	test('should be textarea with autocomplete off', () => {
+		const wrapper = mount(<Textarea />);
+		expect(getDOMInput(wrapper).autocomplete).toBe('off');
+	});
+
+	test('should be textarea with autocomplete on', () => {
+		const wrapper = mount(<Textarea autoComplete />);
+		expect(getDOMInput(wrapper).autocomplete).toBe('on');
+	});
+
 	test('should be disabled', () => {
 		const wrapper = mount(<Textarea disabled />);
 		expect(getDOMInput(wrapper).disabled).toBeTruthy();
@@ -24,9 +45,22 @@ describe('Textarea component', () => {
 		expect(getDOMInput(wrapper).disabled).toBeFalsy();
 	});
 
+	test('should contain label using hasFloatingLabel', () => {
+		const wrapper = mount(<Textarea label="labelText" hasFloatingLabel />);
+		expect(wrapper.find('div[data-test="floatingLabel"]').text()).toBe('labelText');
+	});
+
 	test('should have name passed', () => {
 		const wrapper = mount(<Textarea name="nameTest" />);
 		expect(getDOMInput(wrapper).name).toBe('nameTest');
+	});
+
+	test('should call default events props without errors', () => {
+		const wrapper = mount(<Textarea />);
+		const textArea = wrapper.find('textarea');
+		textArea.simulate('focus');
+		textArea.simulate('change');
+		textArea.simulate('blur');
 	});
 
 	test('should call onChange prop when triggered change event', () => {
@@ -43,11 +77,34 @@ describe('Textarea component', () => {
 		expect(onFocusFn).toHaveBeenCalledTimes(1);
 	});
 
+	test('should call onFocus prop when triggered focus event (with FloatingLabel)', () => {
+		const onFocusFn = jest.fn();
+		const wrapper = mount(
+			<Textarea name="nameTest" label="label" hasFloatingLabel onFocus={onFocusFn} />
+		);
+		wrapper.find('textarea').simulate('focus');
+		expect(onFocusFn).toHaveBeenCalledTimes(1);
+	});
+
 	test('should call onBlur prop when triggered blur event', () => {
 		const onBlurFn = jest.fn();
 		const wrapper = mount(<Textarea name="nameTest" onBlur={onBlurFn} />);
 		wrapper.find('textarea').simulate('blur');
 		expect(onBlurFn).toHaveBeenCalledTimes(1);
+	});
+
+	test('should call onBlur prop when triggered blur event (with FloatingLabel)', () => {
+		const onBlurFn = jest.fn();
+		const wrapper = mount(
+			<Textarea name="nameTest" label="label" hasFloatingLabel onBlur={onBlurFn} />
+		);
+		wrapper.find('textarea').simulate('blur');
+		expect(onBlurFn).toHaveBeenCalledTimes(1);
+	});
+
+	test('should call onInput', () => {
+		const wrapper = mount(<Textarea name="nameTest" />);
+		wrapper.find('textarea').simulate('input');
 	});
 
 	describe('controlled', () => {
@@ -58,6 +115,14 @@ describe('Textarea component', () => {
 
 		test('should update the value', () => {
 			const wrapper = mount(<Textarea value="valueTest" onChange={() => null} />);
+			wrapper.setProps({ value: 'otherValue' });
+			expect(getDOMInput(wrapper).value).toBe('otherValue');
+		});
+
+		test('should update the value (with floatingLabel)', () => {
+			const wrapper = mount(
+				<Textarea value="valueTest" label="label" hasFloatingLabel onChange={() => null} />
+			);
 			wrapper.setProps({ value: 'otherValue' });
 			expect(getDOMInput(wrapper).value).toBe('otherValue');
 		});

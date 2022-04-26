@@ -76,6 +76,7 @@ class Textarea extends PureComponent {
 				{hasFloatingLabel && (
 					<styled.FloatingLabel
 						{...props}
+						data-test="floatingLabel"
 						error={error}
 						onClick={this.handleLabelClick}
 						disabled={disabled}
@@ -99,7 +100,9 @@ class Textarea extends PureComponent {
 					autoComplete={autoComplete ? 'on' : 'off'}
 					disabled={disabled}
 				/>
-				{error && <styled.ErrorMessage>{errorMessage}</styled.ErrorMessage>}
+				{error && (
+					<styled.ErrorMessage data-test="errorMessage">{errorMessage}</styled.ErrorMessage>
+				)}
 			</styled.Container>
 		);
 	}
@@ -132,7 +135,9 @@ Textarea.propTypes = {
 	onChange: PropTypes.func,
 	/** Callback disparado cuando el value del textarea es cambiado,  */
 	onFocus: PropTypes.func,
+	/**	 Textarea placeholder */
 	placeholder: PropTypes.string,
+	/** Si es true la label flotante permite eventos */
 	isTranslateActive: PropTypes.bool,
 	/** Valor del elemento textarea, requerido para un controlled component */
 	value: PropTypes.string
