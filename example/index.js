@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Button, Checkbox, Chip, Color, Icon, Switch, Input } from '../src/components';
+import { Button, Checkbox, Chip, Color, Icon, Switch, Input, Textarea } from '../src/components';
 
 const Component = () => {
 	return (
@@ -13,7 +13,8 @@ const Component = () => {
 			<Color color="primary.main"> </Color>
 			<Icon name="trash" color="red" />
 			<Button variant="contained">BUTTON</Button>
-			<Input />
+			<Input label="el label" />
+			<Textarea label="label" hasFloatingLabel />
 		</div>
 	);
 };
