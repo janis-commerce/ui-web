@@ -47,6 +47,18 @@ La propiedad `selected` debe ser controlada por un `state` de un componente padr
 	</Story>
 </Preview>
 
+
+## Status Chip
+
+<br />
+
+<Preview>
+	<Story name="Status Chip">
+		<Chip variant="status">Criterio Tienda</Chip>
+		<Chip variant="status" backgroundColor="warning" textColor="base.white">Criterio Tienda</Chip>
+	</Story>
+</Preview>
+
 ## Chip con background, border y textColor
 
 <br />
@@ -54,17 +66,17 @@ La propiedad `selected` debe ser controlada por un `state` de un componente padr
 <Preview>
 	<Story name="Custom Chip">
 		<Chip
-			backgroundColor={{ type: 'success', color: 'main' }}
-			textColor={{ type: 'error', color: 'main' }}
+			backgroundColor="success"
+			textColor="error"
 			icon="box"
 			iconColor="white"
 		>
 			Custom Chip 1
 		</Chip>
 		<Chip
-			backgroundColor={{ type: 'warning', color: 'main' }}
-			borderColor={{ type: 'error', color: 'main' }}
-			textColor={{ type: 'white', color: 'main' }}
+			backgroundColor="warning"
+			borderColor="error"
+			textColor="white"
 			iconColor="white"
 			icon="filter"
 		>
