@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Added
 - Add Input and Textarea components
 - Add Image component
+- Add QRCode component
 ### Changed
 - Changes in Chip component properties
 ### Fixed
