@@ -31,6 +31,7 @@ export default {
 		border: none;
 		border-bottom: 1px solid ${palette.grey.main};
 		border-radius: 0;
+		height: 23px;
 		max-height: 350px;
 		padding: 0 9px 4px 0;
 		resize: none;
