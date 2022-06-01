@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import palette from 'theme/palette';
 import { getColor } from 'theme/utils';
+import mixins from 'theme/mixins';
 import { mediaBreaks } from 'utils/devices';
 
 export default {
@@ -18,6 +19,11 @@ export default {
 		align-items: center;
 		pointer-events: ${(props) => (props.clickable ? 'auto' : 'none')};
 		white-space: nowrap;
+
+		.chip-icon {
+			margin-right: ${(props) => props.hasText && '8px'};
+		}
+
 		${(props) => {
 			switch (props.variant) {
 				case 'outlined':
@@ -45,28 +51,28 @@ export default {
 				case 'contained':
 					return css`
 						background-color: ${props.selected ? palette.primary.main : palette.white.hover};
-						color: ${props.selected ? palette.base.withe : palette.black.main};
+						color: ${props.selected ? palette.base.white : palette.black.main};
 
 						.chip-icon {
-							fill: ${props.selected ? palette.base.withe : palette.black.main};
+							fill: ${props.selected ? palette.base.white : palette.black.main};
 						}
 						.delete-button {
-							fill: ${props.selected ? palette.base.withe : palette.grey.dark};
+							fill: ${props.selected ? palette.base.white : palette.grey.dark};
 						}
 
 						&:hover {
 							background-color: ${props.selected ? palette.primary.mainHover : palette.white.main};
 						}
 						&:hover .delete-button {
-							fill: ${props.selected ? palette.base.withe : palette.black.main};
+							fill: ${props.selected ? palette.base.white : palette.black.main};
 						}
 						&:active {
 							background-color: ${palette.primary.main};
-							color: ${palette.base.withe};
+							color: ${palette.base.white};
 						}
 						&:active .chip-icon,
 						&:active .delete-button {
-							fill: ${palette.base.withe};
+							fill: ${palette.base.white};
 						}
 
 						&:disabled {
@@ -76,8 +82,8 @@ export default {
 					`;
 				case 'status':
 					return css`
-						background-color: ${getColor(props.color.type || 'grey', props.color.color || 'main')};
-						color: ${getColor(props.sizeColor.type || 'white', props.sizeColor.color || 'main')};
+						background-color: ${getColor(props.color || 'grey')};
+						color: ${getColor(props.sizeColor || 'base.white')};
 						font-weight: 700;
 						border: none;
 						height: 24px;
@@ -91,19 +97,26 @@ export default {
 		}}
 		${(props) => props.styles};
 
-		${(props) =>
-			props.borderColor &&
-			`border: solid 1px ${getColor(props.borderColor.type, props.borderColor.color)};`}
+		${(props) => props.borderColor && `border: solid 1px ${getColor(props.borderColor)};`}
 
-		${(props) =>
-			props.backgroundColor &&
-			`background-color: ${getColor(props.backgroundColor.type, props.backgroundColor.color)};`}
+		${(props) => props.backgroundColor && `background-color: ${getColor(props.backgroundColor)};`}
 
-		${(props) => props.textColor && `color: ${getColor(props.textColor.type, props.textColor.color)};`}
+		${(props) => props.textColor && `color: ${getColor(props.textColor)};`}
 
 		${mediaBreaks.onlyPrint`
-			border: 1px solid ${palette.darkGrey};
+			border: 1px solid ${palette.grey.dark};
 		`}
+	`,
+	iconPathStyles: css`
+		${mixins.transition('fill')};
+	`,
+	DeleteButton: styled.button`
+		width: 16px;
+		height: 16px;
+		margin-left: 12px;
+	`,
+	deleteButtonPathStyles: css`
+		${mixins.transition('fill')};
 	`,
 	Children: styled.div`
 		text-overflow: ellipsis;
