@@ -6,5 +6,6 @@ import Icon from './Icon';
 import Switch from './Switch';
 import Input from './Input';
 import Textarea from './Textarea';
+import Image from './Image';
 
-export { Button, Checkbox, Chip, Color, Icon, Switch, Input, Textarea };
+export { Button, Checkbox, Chip, Color, Icon, Switch, Input, Textarea, Image };
