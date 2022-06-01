@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Add Input and Textarea components
 ### Changed
 - Changes in Chip component properties
+### Fixed
+- Fix textarea error height
 
 ## [0.0.14] - 2022-06-11
 - Fix publish package to npm bugs. From 0.0.3 to 0.0.14
