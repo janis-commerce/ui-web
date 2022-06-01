@@ -7,5 +7,6 @@ import Switch from './Switch';
 import Input from './Input';
 import Textarea from './Textarea';
 import Image from './Image';
+import QRCode from './QRCode';
 
-export { Button, Checkbox, Chip, Color, Icon, Switch, Input, Textarea, Image };
+export { Button, Checkbox, Chip, Color, Icon, Switch, Input, Textarea, Image, QRCode };

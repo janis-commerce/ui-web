@@ -1,0 +1,36 @@
+
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { List } from 'docs/Components';
+import QRCode from './QRCode';
+
+<Meta title="components/QRCode" component={QRCode} />
+
+# QRCode
+
+El componente QRCode permite mostrar un codigo QR a partir de un valor que se le pase al componente de un tamaño que se le indique.
+
+<Preview>
+	<Story name="QRCode">
+		<List minWidth={170} gap={40}>
+			<div>
+				<p>Default QRCode</p>
+				<br />
+				<QRCode value="some value one" />
+			</div>
+			<div>
+				<p>QRCode with custom size one</p>
+				<br />
+				<QRCode value="some value two" size={50} />
+			</div>
+			<div>
+				<p>QRCode with custom size two</p>
+				<br />
+				<QRCode value="some value three" size={200} />
+			</div>
+		</List>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={QRCode} />

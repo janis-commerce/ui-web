@@ -9,7 +9,8 @@ import {
 	Switch,
 	Input,
 	Textarea,
-	Image
+	Image,
+	QRCode
 } from '../src/components';
 
 // eslint-disable-next-line react/prop-types
@@ -46,6 +47,7 @@ const Component = () => {
 					width={150}
 					roundBorders
 				/>
+				<QRCode value="someValue" />
 			</Container>
 		</div>
 	);
