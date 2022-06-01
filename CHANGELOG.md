@@ -7,6 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 ### Added
 - Add Input and Textarea components
+- Add Image component
 ### Changed
 - Changes in Chip component properties
 ### Fixed
