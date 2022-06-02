@@ -8,5 +8,6 @@ import Input from './Input';
 import Textarea from './Textarea';
 import Image from './Image';
 import QRCode from './QRCode';
+import ColorPicker from './ColorPicker';
 
-export { Button, Checkbox, Chip, Color, Icon, Switch, Input, Textarea, Image, QRCode };
+export { Button, Checkbox, Chip, Color, Icon, Switch, Input, Textarea, Image, QRCode, ColorPicker };

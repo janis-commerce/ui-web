@@ -10,7 +10,8 @@ import {
 	Input,
 	Textarea,
 	Image,
-	QRCode
+	QRCode,
+	ColorPicker
 } from '../src/components';
 
 // eslint-disable-next-line react/prop-types
@@ -48,6 +49,10 @@ const Component = () => {
 					roundBorders
 				/>
 				<QRCode value="someValue" />
+			</Container>
+			<Container>
+				<ColorPicker />
+				<ColorPicker isCollapsable />
 			</Container>
 		</div>
 	);
