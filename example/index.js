@@ -11,7 +11,8 @@ import {
 	Textarea,
 	Image,
 	QRCode,
-	ColorPicker
+	ColorPicker,
+	HTML
 } from '../src/components';
 
 // eslint-disable-next-line react/prop-types
@@ -22,6 +23,17 @@ const Container = ({ children }) => (
 		{children}
 	</div>
 );
+
+const htmlCode = `
+	<!DOCTYPE html>
+	<html>
+		<body>
+			<h1>Bienvenido a Janis</h1>
+			<br>
+			<h2>Mediante el siguiente <a href="{{activactionUrl}}"><strong>link</strong></a> vas a poder ingresar a Janis.</h2>
+		</body>
+	</html>
+`;
 
 const Component = () => {
 	return (
@@ -53,6 +65,10 @@ const Component = () => {
 			<Container>
 				<ColorPicker />
 				<ColorPicker isCollapsable />
+			</Container>
+			<Container>
+				<HTML sourceURL="https://fizzmod.com" />
+				<HTML code={'45asd564asd546asd54'} />
 			</Container>
 		</div>
 	);

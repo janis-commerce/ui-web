@@ -9,5 +9,21 @@ import Textarea from './Textarea';
 import Image from './Image';
 import QRCode from './QRCode';
 import ColorPicker from './ColorPicker';
+import HTML from './HTML';
+import ErrorBoundary from './ErrorBoundary';
 
-export { Button, Checkbox, Chip, Color, Icon, Switch, Input, Textarea, Image, QRCode, ColorPicker };
+export {
+	ErrorBoundary,
+	Button,
+	Checkbox,
+	Chip,
+	Color,
+	Icon,
+	Switch,
+	Input,
+	Textarea,
+	Image,
+	QRCode,
+	ColorPicker,
+	HTML
+};
