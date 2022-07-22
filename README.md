@@ -4,8 +4,7 @@ A package for use generic components from Janis
 
 ## Installation
 
-`npm install @janis-commerce/ui-web`
-
+`npm install @janiscommerce/ui-web`
 
 ### Usage
 
