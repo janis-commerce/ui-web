@@ -4,11 +4,11 @@ import DefaultError from './DefaultError';
 
 export default class ErrorBoundary extends React.Component {
 	static propTypes = {
-		/** El contenido que se pretende mostrar */
+		/** The content to be displayed */
 		children: oneOfType([element, arrayOf(element)]),
-		/** Contenido custom a mostrar en caso de que haya un error */
+		/** Custom content to show in case there is an error */
 		errorContent: element,
-		/** Texto o key de traducción para mostrar en un mensaje de error sencillo */
+		/** Text to display in a simple error message */
 		message: string
 	};
 

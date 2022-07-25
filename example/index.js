@@ -68,7 +68,7 @@ const Component = () => {
 			</Container>
 			<Container>
 				<HTML sourceURL="https://fizzmod.com" />
-				<HTML code={'45asd564asd546asd54'} />
+				<HTML code={htmlCode} />
 			</Container>
 		</div>
 	);

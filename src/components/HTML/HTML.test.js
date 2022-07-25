@@ -1,6 +1,37 @@
+import React from 'react';
 import { getHeight } from './utils';
+import HTML from 'components/HTML';
 
-describe('Test utils HTML.js', () => {
+describe('HTML component', () => {
+	test('Should return null if not pass code or sourceUrl', () => {
+		const wrapper = shallow(<HTML />);
+		expect(wrapper.isEmptyRender()).toBeTruthy();
+	});
+
+	test('Should render iframe if pass a sourceUrl', () => {
+		const wrapper = mount(<HTML sourceURL="https://github.com/" />);
+
+		expect(wrapper.find('iframe').props().src).toBe('https://github.com/');
+		expect(wrapper.exists('iframe')).toBeTruthy();
+	});
+
+	test('Should render iframe if pass a sourceUrl', () => {
+		const wrapper = mount(<HTML sourceURL="https://github.com/" />);
+
+		expect(wrapper.find('iframe').props().src).toBe('https://github.com/');
+		expect(wrapper.exists('iframe')).toBeTruthy();
+	});
+
+	test('Should render iframe if pass a code', () => {
+		const code = '<p>Some Text<p/>';
+		const wrapper = mount(<HTML code={code} />);
+
+		expect(wrapper.find('iframe').props().srcDoc).toBe(code);
+		expect(wrapper.exists('iframe')).toBeTruthy();
+	});
+});
+
+describe('Test utils', () => {
 	describe('Test for getHeight fn', () => {
 		test('Should return measure depending on the string value provided', () => {
 			global.window.innerHeight = 950;

@@ -4,7 +4,7 @@ import Frame from 'react-frame-component';
 import ErrorBoundary from 'components/ErrorBoundary';
 import { getHeight } from './utils';
 
-const HTML = ({ code, height, name, sourceURL, width }) => {
+const HTML = ({ code, height, name, sourceURL, width, errorMessage }) => {
 	if (!sourceURL && !code) return null;
 
 	const formattedWidth = `${width}%`;
@@ -13,8 +13,8 @@ const HTML = ({ code, height, name, sourceURL, width }) => {
 	return sourceURL ? (
 		<iframe title={name} src={sourceURL} width={formattedWidth} height={formattedHeight} />
 	) : (
-		<ErrorBoundary>
-			<Frame initialContent={code} width={formattedWidth} height={formattedHeight} er />
+		<ErrorBoundary message={errorMessage}>
+			<Frame initialContent={code} width={formattedWidth} height={formattedHeight} />
 		</ErrorBoundary>
 	);
 };
@@ -34,7 +34,9 @@ HTML.propTypes = {
 	/** URL a mostrar */
 	sourceURL: PropTypes.string,
 	/** Ancho del frame */
-	width: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+	width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+	/**	Message for show on error when pass invalid raw code */
+	errorMessage: PropTypes.string
 };
 
 export default HTML;
