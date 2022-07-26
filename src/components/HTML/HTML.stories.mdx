@@ -1,0 +1,43 @@
+
+import { Meta, Story, Preview, Props } from '@storybook/addon-docs/blocks';
+import { List } from 'docs/Components';
+import HTML from './HTML';
+
+<Meta title="components/HTML" component={HTML} />
+
+# HTML
+
+Permite renderizar HTML, ya sea un link externo o un bloque de código.
+
+<br />
+
+<Preview>
+	<Story name="HTML">
+		<div>
+			<div>
+			<h3>External link</h3>
+			<HTML
+				sourceURL="http://fizzmod.com"
+			/>
+			</div>
+			<br /><br /><br />
+			<div>
+			<h3>Source Code</h3>
+			<HTML
+				code={`<!DOCTYPE html>
+					<html>
+						<body>
+								<h1>Bienvenido a Janis</h1>
+								<br><br><br>
+								<h2>Mediante el siguiente <a href="{{activactionUrl}}"><strong>link</strong></a> vas a poder ingresar a Janis.</h2>
+						</body>
+					</html>`}
+			/>
+			</div>
+		</div>
+	</Story>
+</Preview>
+
+## Props
+
+<Props of={HTML} />
