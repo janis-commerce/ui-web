@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/Icon';
 import styled from './styles';
+import Link from 'components/Link';
 
 const Chip = ({
 	backgroundColor,
@@ -16,46 +17,55 @@ const Chip = ({
 	styles,
 	textColor,
 	variant,
+	linkField,
+	data,
 	...props
-}) => (
-	<styled.Chip
-		as={props.onClick ? 'button' : 'div'}
-		backgroundColor={backgroundColor}
-		borderColor={borderColor}
-		hasText={!!children || children === 0}
-		hasIcon={!!icon}
-		disabled={disabled}
-		clickable={(onClick || onDelete) && !disabled}
-		onClick={disabled ? undefined : onClick}
-		selected={selected}
-		styles={styles}
-		textColor={textColor}
-		variant={variant}
-		iconColor={iconColor}
-		{...props}
-	>
-		{icon && (
-			<Icon
-				className="chip-icon"
-				name={icon}
-				color={iconColor}
-				pathStyles={styled.iconPathStyles}
-			/>
-		)}
-		<styled.Children>{children}</styled.Children>
-		{onDelete && (
-			<styled.DeleteButton type="button" onClick={onDelete}>
+}) => {
+	const linkForHref = linkField && data[linkField];
+
+	return (
+		<styled.Chip
+			as={props.onClick ? 'button' : 'div'}
+			backgroundColor={backgroundColor}
+			borderColor={borderColor}
+			hasText={!!children || children === 0}
+			hasIcon={!!icon}
+			disabled={disabled}
+			clickable={(onClick || onDelete) && !disabled}
+			onClick={disabled ? undefined : onClick}
+			selected={selected}
+			styles={styles}
+			textColor={textColor}
+			variant={variant}
+			iconColor={iconColor}
+			linkForHref={linkForHref}
+			{...props}
+		>
+			{icon && (
 				<Icon
-					color="black"
-					pathStyles={styled.deleteButtonPathStyles}
-					className="delete-button"
-					name="cross_circle_flat"
-					size={16}
+					className="chip-icon"
+					name={icon}
+					color={iconColor}
+					pathStyles={styled.iconPathStyles}
 				/>
-			</styled.DeleteButton>
-		)}
-	</styled.Chip>
-);
+			)}
+			<styled.Children>
+				{linkForHref ? <Link href={linkForHref}>{children}</Link> : children}
+			</styled.Children>
+			{onDelete && (
+				<styled.DeleteButton type="button" onClick={onDelete}>
+					<Icon
+						color="black"
+						pathStyles={styled.deleteButtonPathStyles}
+						className="delete-button"
+						name="cross_circle_flat"
+						size={16}
+					/>
+				</styled.DeleteButton>
+			)}
+		</styled.Chip>
+	);
+};
 
 Chip.propTypes = {
 	backgroundColor: PropTypes.string,
@@ -74,7 +84,11 @@ Chip.propTypes = {
 		PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func]))
 	]),
 	textColor: PropTypes.string,
-	variant: PropTypes.oneOf(['contained', 'outlined', 'status'])
+	variant: PropTypes.oneOf(['contained', 'outlined', 'status']),
+	// Field a buscar en la data
+	linkField: PropTypes.string,
+	// Data para obtener la url y agregar link
+	data: PropTypes.shape({})
 };
 
 Chip.defaultProps = {
@@ -84,7 +98,9 @@ Chip.defaultProps = {
 	iconColor: 'grey',
 	selected: false,
 	textColor: '',
-	variant: 'outlined'
+	variant: 'outlined',
+	linkField: '',
+	data: {}
 };
 
 export default Chip;

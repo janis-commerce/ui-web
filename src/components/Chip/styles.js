@@ -17,7 +17,7 @@ export default {
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		pointer-events: ${(props) => (props.clickable ? 'auto' : 'none')};
+		pointer-events: ${(props) => (props.clickable || props.linkForHref ? 'auto' : 'none')};
 		white-space: nowrap;
 
 		.chip-icon {
