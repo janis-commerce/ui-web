@@ -1,0 +1,24 @@
+import { Meta, Preview, Props } from '@storybook/addon-docs/blocks';
+import { List } from 'docs-janis';
+import { Link as LinkTo } from 'docs-janis/components';
+import Link from './Link';
+
+<Meta title="JANIS/Front/components/Link" component={Link} />
+
+# Link
+
+El componente Link es el que usamos en JANIS Views en lugar del tag `a` ya que, según el destino que tenga, identifica si debe ser efectivamente un `a` (para links externos) o si debe ser un link de `react-router-dom` (interno de JANIS Views).
+
+Hay que tener en cuenta que este componente recibe directamente un `href` (absoluto o relativo) listo para ser accedido.
+
+En caso de tener que generar el `href`, se debe usar el componente <LinkTo kind="janis-front-components-smartlink--page">SmartLink</LinkTo>, que se encarga de parsear `endpointParameters` y procesar una `label` si es necesario.
+
+<Preview>
+	<List>
+		<Link href="https://janis.im" target="_blank" style={{fontSize: '14px', fontFamily: 'sans-serif'}}>Janis</Link>
+	</List>
+</Preview>
+
+## Props
+
+<Props of={Link} />
