@@ -1,122 +1,123 @@
 {
-  "name": "@janiscommerce/ui-web",
-  "version": "0.1.0",
-  "description": "",
-  "main": "dist/index.umd.js",
-  "private": false,
-  "scripts": {
-    "start": "rollup -c rollup/rollup.config.dev.js -w",
-    "build": "rollup -c rollup/rollup.config.prod.js",
-    "lint": "eslint src/",
-    "test": "jest",
-    "test-ci": "JEST_JUNIT_OUTPUT_DIR=test-reports jest --coverage --silent --ci --reporters=jest-junit",
-    "coverage": "jest --coverage --silent",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build:storybook": "build-storybook -c .storybook -o ./stories",
-    "deploy-storybook": "gh-pages -d stories",
-    "build:icons": "node scripts/build-icons",
-    "postinstall": "install-peers"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/janis-commerce/ui-web.git"
-  },
-  "author": "Janis",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/janis-commerce/ui-web/issues"
-  },
-  "homepage": "https://github.com/janis-commerce/ui-web#readme",
-  "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/eslint-parser": "^7.14.3",
-    "@babel/eslint-plugin": "^7.13.16",
-    "@babel/preset-env": "^7.15.0",
-    "@babel/preset-react": "^7.13.13",
-    "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^21.0.3",
-    "@rollup/plugin-json": "^4.1.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
-    "@rollup/plugin-replace": "^4.0.0",
-    "@storybook/addon-actions": "^6.2.9",
-    "@storybook/addon-essentials": "^6.2.9",
-    "@storybook/addon-links": "^6.2.9",
-    "@storybook/node-logger": "^6.2.9",
-    "@storybook/react": "^6.2.9",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
-    "babel-jest": "^27.0.6",
-    "babel-plugin-styled-components": "^2.0.6",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "chalk": "^5.0.0",
-    "enzyme": "^3.11.0",
-    "enzyme-to-json": "^3.6.2",
-    "eslint": "^8.12.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.23.2",
-    "gh-pages": "^3.2.3",
-    "install-peers-cli": "^2.2.0",
-    "jest": "^27.0.6",
-    "jest-junit": "^13.1.0",
-    "jest-styled-components": "^7.0.5",
-    "prettier": "^2.3.0",
-    "react-test-renderer": "^17.0.2",
-    "rollup": "^2.48.0",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-generate-package-json": "^3.2.0",
-    "rollup-plugin-livereload": "^2.0.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
-    "rollup-plugin-serve": "^1.1.0",
-    "storybook-dark-mode": "^1.0.8"
-  },
-  "jest": {
-    "snapshotSerializers": [
-      "enzyme-to-json/serializer"
-    ],
-    "collectCoverageFrom": [
-      "<rootDir>/src/**/*.{js,jsx,mjs}",
-      "!<rootDir>/src/**/index.{js,jsx,mjs}",
-      "<rootDir>/src/utils/index.js"
-    ],
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/src/docs"
-    ],
-    "modulePaths": [
-      "<rootDir>/src"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/*.test.js"
-    ],
-    "transform": {
-      "^.+\\.(js|jsx|mjs|cjs)$": "<rootDir>/node_modules/babel-jest",
-      "^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
-    ],
-    "setupFiles": [
-      "<rootDir>/config/jest/setup.js"
-    ],
-    "testEnvironment": "jsdom"
-  },
-  "peerDependencies": {
-    "react": "17.x",
-    "react-dom": "17.x"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
-  },
-  "files": [
-    "dist"
-  ],
-  "dependencies": {
-    "prop-types": "^15.7.2",
-    "qrcode.react": "^3.0.2",
-    "react-colorful": "^5.5.1",
-    "react-frame-component": "^5.2.3",
-    "styled-components": "^5.3.0"
-  }
+	"name": "@janiscommerce/ui-web",
+	"version": "0.1.0",
+	"description": "",
+	"main": "dist/index.umd.js",
+	"private": false,
+	"scripts": {
+		"start": "rollup -c rollup/rollup.config.dev.js -w",
+		"build": "rollup -c rollup/rollup.config.prod.js",
+		"lint": "eslint src/",
+		"test": "jest",
+		"test-ci": "JEST_JUNIT_OUTPUT_DIR=test-reports jest --coverage --silent --ci --reporters=jest-junit",
+		"coverage": "jest --coverage --silent",
+		"storybook": "start-storybook -p 6006 -s public",
+		"build:storybook": "build-storybook -c .storybook -o ./stories",
+		"deploy-storybook": "gh-pages -d stories",
+		"build:icons": "node scripts/build-icons",
+		"postinstall": "install-peers"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/janis-commerce/ui-web.git"
+	},
+	"author": "Janis",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/janis-commerce/ui-web/issues"
+	},
+	"homepage": "https://github.com/janis-commerce/ui-web#readme",
+	"devDependencies": {
+		"@babel/core": "^7.15.0",
+		"@babel/eslint-parser": "^7.14.3",
+		"@babel/eslint-plugin": "^7.13.16",
+		"@babel/preset-env": "^7.15.0",
+		"@babel/preset-react": "^7.13.13",
+		"@rollup/plugin-babel": "^5.3.0",
+		"@rollup/plugin-commonjs": "^21.0.3",
+		"@rollup/plugin-json": "^4.1.0",
+		"@rollup/plugin-node-resolve": "^13.0.0",
+		"@rollup/plugin-replace": "^4.0.0",
+		"@storybook/addon-actions": "^6.2.9",
+		"@storybook/addon-essentials": "^6.2.9",
+		"@storybook/addon-links": "^6.2.9",
+		"@storybook/node-logger": "^6.2.9",
+		"@storybook/react": "^6.2.9",
+		"@wojtekmaj/enzyme-adapter-react-17": "^0.6.7",
+		"babel-jest": "^27.0.6",
+		"babel-plugin-styled-components": "^2.0.6",
+		"babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+		"chalk": "^5.0.0",
+		"enzyme": "^3.11.0",
+		"enzyme-to-json": "^3.6.2",
+		"eslint": "^8.12.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-prettier": "^4.0.0",
+		"eslint-plugin-react": "^7.23.2",
+		"gh-pages": "^3.2.3",
+		"install-peers-cli": "^2.2.0",
+		"jest": "^27.0.6",
+		"jest-junit": "^13.1.0",
+		"jest-styled-components": "^7.0.5",
+		"prettier": "^2.3.0",
+		"react-test-renderer": "^17.0.2",
+		"rollup": "^2.48.0",
+		"rollup-plugin-copy": "^3.4.0",
+		"rollup-plugin-generate-package-json": "^3.2.0",
+		"rollup-plugin-livereload": "^2.0.0",
+		"rollup-plugin-peer-deps-external": "^2.2.4",
+		"rollup-plugin-serve": "^1.1.0",
+		"storybook-dark-mode": "^1.0.8"
+	},
+	"jest": {
+		"snapshotSerializers": [
+			"enzyme-to-json/serializer"
+		],
+		"collectCoverageFrom": [
+			"<rootDir>/src/**/*.{js,jsx,mjs}",
+			"!<rootDir>/src/**/index.{js,jsx,mjs}",
+			"<rootDir>/src/utils/index.js"
+		],
+		"coveragePathIgnorePatterns": [
+			"<rootDir>/src/docs"
+		],
+		"modulePaths": [
+			"<rootDir>/src"
+		],
+		"testMatch": [
+			"<rootDir>/src/**/*.test.js"
+		],
+		"transform": {
+			"^.+\\.(js|jsx|mjs|cjs)$": "<rootDir>/node_modules/babel-jest",
+			"^(?!.*\\.(js|jsx|mjs|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+		},
+		"transformIgnorePatterns": [
+			"[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$"
+		],
+		"setupFiles": [
+			"<rootDir>/config/jest/setup.js"
+		],
+		"testEnvironment": "jsdom"
+	},
+	"peerDependencies": {
+		"react": "17.x",
+		"react-dom": "17.x",
+		"react-router-dom": "^5.x"
+	},
+	"babel": {
+		"presets": [
+			"@babel/preset-env",
+			"@babel/preset-react"
+		]
+	},
+	"files": [
+		"dist"
+	],
+	"dependencies": {
+		"prop-types": "^15.7.2",
+		"qrcode.react": "^3.0.2",
+		"react-colorful": "^5.5.1",
+		"react-frame-component": "^5.2.3",
+		"styled-components": "^5.3.0"
+	}
 }
