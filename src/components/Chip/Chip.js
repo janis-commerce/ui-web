@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/Icon';
 import styled from './styles';
-import Link from 'components/Link';
 
 const Chip = ({
 	backgroundColor,
@@ -17,12 +16,9 @@ const Chip = ({
 	styles,
 	textColor,
 	variant,
-	linkField,
-	data,
+	hasLink,
 	...props
 }) => {
-	const linkForHref = linkField && data[linkField];
-
 	return (
 		<styled.Chip
 			as={props.onClick ? 'button' : 'div'}
@@ -38,7 +34,7 @@ const Chip = ({
 			textColor={textColor}
 			variant={variant}
 			iconColor={iconColor}
-			linkForHref={linkForHref}
+			hasLink={hasLink}
 			{...props}
 		>
 			{icon && (
@@ -49,9 +45,7 @@ const Chip = ({
 					pathStyles={styled.iconPathStyles}
 				/>
 			)}
-			<styled.Children>
-				{linkForHref ? <Link href={linkForHref}>{children}</Link> : children}
-			</styled.Children>
+			<styled.Children>{children}</styled.Children>
 			{onDelete && (
 				<styled.DeleteButton type="button" onClick={onDelete}>
 					<Icon
@@ -85,10 +79,7 @@ Chip.propTypes = {
 	]),
 	textColor: PropTypes.string,
 	variant: PropTypes.oneOf(['contained', 'outlined', 'status']),
-	// Field a buscar en la data
-	linkField: PropTypes.string,
-	// Data para obtener la url y agregar link
-	data: PropTypes.shape({})
+	hasLink: PropTypes.bool
 };
 
 Chip.defaultProps = {
@@ -99,8 +90,7 @@ Chip.defaultProps = {
 	selected: false,
 	textColor: '',
 	variant: 'outlined',
-	linkField: '',
-	data: {}
+	hasLink: false
 };
 
 export default Chip;

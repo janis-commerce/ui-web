@@ -1,38 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link as ReactLink } from 'react-router-dom';
 import styled from './styles';
 
 const Link = ({ href, children, target, icon, ...props }) => {
-	const { origin } = window.location;
-
-	const internalLink = !href.startsWith('http');
+	if (href.startsWith('/')) return;
 
 	const renderIcon = () => (icon ? <styled.StyledIcon name={icon} /> : null);
 
-	if ((internalLink || href.includes(`${origin}`)) && target === '_self') {
-		let path;
+	const validHref = href.startsWith('http') ? href : `https://${href}`;
 
-		if (internalLink) {
-			path = href.startsWith('/') ? href : `/${href}`;
-		} else {
-			path = href.replace(`${origin}`, '');
-		}
-
-		return (
-			<styled.LinkWrapper {...props}>
-				{renderIcon()}
-				<ReactLink to={path} data-test="react-router-link">
-					{children || href}
-				</ReactLink>
-			</styled.LinkWrapper>
-		);
-	}
 	return (
 		<styled.LinkWrapper {...props}>
 			{renderIcon()}
-			<a href={href} target={target}>
-				{children || href}
+			<a href={validHref} target={target}>
+				{children || validHref}
 			</a>
 		</styled.LinkWrapper>
 	);
