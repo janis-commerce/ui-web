@@ -1,3 +1,4 @@
+import Link from 'components/Link';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {
@@ -43,6 +44,9 @@ const Component = () => {
 				<Checkbox />
 			</Container>
 			<Container>
+				<Link icon="eye" href="www.google.com">
+					Link
+				</Link>
 				<Chip selected variant="outlined">
 					Criterio Tienda
 				</Chip>

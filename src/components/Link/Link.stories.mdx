@@ -7,12 +7,8 @@ import Link from './Link';
 
 # Link
 
-El componente Link es el que usamos en JANIS Views en lugar del tag `a` ya que, según el destino que tenga, identifica si debe ser efectivamente un `a` (para links externos) o si debe ser un link de `react-router-dom` (interno de JANIS Views).
-
-Hay que tener en cuenta que este componente recibe directamente un `href` (absoluto o relativo) listo para ser accedido.
-
-En caso de tener que generar el `href`, se debe usar el componente <LinkTo kind="janis-front-components-smartlink--page">SmartLink</LinkTo>, que se encarga de parsear `endpointParameters` y procesar una `label` si es necesario.
-
+El componente Link es el que usamos en JANIS Views en el caso de que sea un link externo, este renderiza un `a` estilizado.
+ 
 <Preview>
 	<List>
 		<Link href="https://janis.im" target="_blank" style={{fontSize: '14px', fontFamily: 'sans-serif'}}>Janis</Link>
