@@ -11,6 +11,7 @@ import QRCode from './QRCode';
 import ColorPicker from './ColorPicker';
 import HTML from './HTML';
 import ErrorBoundary from './ErrorBoundary';
+import Link from './Link';
 
 export {
 	ErrorBoundary,
@@ -23,6 +24,7 @@ export {
 	Input,
 	Textarea,
 	Image,
+	Link,
 	QRCode,
 	ColorPicker,
 	HTML
