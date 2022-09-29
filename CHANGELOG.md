@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.0] - 2022-09-29
+
+### Changed
+
+- revert button removing link props
+- revert Link removing react router link
+
 ## [0.1.0] - 2022-09-16
 
 ### Added
