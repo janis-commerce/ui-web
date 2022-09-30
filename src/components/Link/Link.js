@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 import styled from './styles';
 
 const Link = ({ href, children, target, icon, ...props }) => {
-	if (href.startsWith('/')) return;
-
 	const renderIcon = () => (icon ? <styled.StyledIcon name={icon} /> : null);
-
-	const validHref = href.startsWith('http') ? href : `https://${href}`;
 
 	return (
 		<styled.LinkWrapper {...props}>
 			{renderIcon()}
-			<a href={validHref} target={target}>
-				{children || validHref}
+			<a href={href} target={target}>
+				{children || href}
 			</a>
 		</styled.LinkWrapper>
 	);

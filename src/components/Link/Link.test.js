@@ -21,11 +21,6 @@ describe('Link component', () => {
 		const component = mount(<Link href={href3} />);
 		expect(component.text()).toBe(href3);
 	});
-	test('when href is an external link which does not start with "http", that character must be added to href', () => {
-		const component = mount(<Link href={href2} />);
-		console.log('target: ', component.find('a').props().href);
-		expect(component.find('a').props().href).toBe('https://janisdev.in/test');
-	});
 	test('target default is _self', () => {
 		const component = mount(<Link href={href}>{text}</Link>);
 		const LinkTargetProp = component.find('a').props().target;
