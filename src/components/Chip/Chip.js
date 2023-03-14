@@ -13,7 +13,6 @@ const Chip = ({
 	onClick,
 	onDelete,
 	selected,
-	styles,
 	textColor,
 	variant,
 	hasLink,
@@ -30,7 +29,6 @@ const Chip = ({
 			clickable={(onClick || onDelete) && !disabled}
 			onClick={disabled ? undefined : onClick}
 			selected={selected}
-			styles={styles}
 			textColor={textColor}
 			variant={variant}
 			iconColor={iconColor}

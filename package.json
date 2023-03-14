@@ -14,8 +14,7 @@
 		"storybook": "start-storybook -p 6006 -s public",
 		"build:storybook": "build-storybook -c .storybook -o ./stories",
 		"deploy-storybook": "gh-pages -d stories",
-		"build:icons": "node scripts/build-icons",
-		"postinstall": "install-peers"
+		"build:icons": "node scripts/build-icons"
 	},
 	"repository": {
 		"type": "git",
