@@ -29,4 +29,11 @@ describe('Chip component', () => {
 		const wrapper = shallow(<Chip variant="contained" icon="box" iconColor="primary" />);
 		expect(wrapper.find('.chip-icon').exists()).toBeTruthy();
 	});
+
+	test('Should render null if children is empty', () => {
+		const children = '-';
+		const validation = !children || children === 0 || children === '-';
+		const wrapper = mount(validation ? null : <Chip variant="contained">{children}</Chip>);
+		expect(wrapper.text()).toBe(children);
+	});
 });

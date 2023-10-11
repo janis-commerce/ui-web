@@ -6,14 +6,14 @@ import { mediaBreaks } from 'utils/devices';
 
 export default {
 	Chip: styled.button`
-		padding: ${(props) => (props.hasText ? '0 12px' : '0')};
+		padding: 0 12px;
 		cursor: ${(props) => (props.clickable ? 'pointer' : 'default')};
 		font-size: 13px;
 		color: ${palette.black.main};
-		height: ${(props) => (props.hasText ? '32px' : '36px')};
-		width: ${(props) => !props.hasText && '36px'};
+		height: 32px;
+		min-width: 36px;
 		max-width: 150px;
-		border-radius: ${(props) => (props.hasText ? '50px' : '50%')};
+		border-radius: 50px;
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
@@ -21,7 +21,7 @@ export default {
 		white-space: nowrap;
 
 		.chip-icon {
-			margin-right: ${(props) => props.hasText && '8px'};
+			margin-right: 8px;
 		}
 
 		${(props) => {
