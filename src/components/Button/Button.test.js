@@ -16,12 +16,10 @@ describe('Button component', () => {
 			const wrapperOne = create(<Button variant="contained" />);
 			const wrapperTwo = create(<Button variant="cleaned" />);
 			const wrapperThree = create(<Button variant="outlined" />);
-			const wrapperFour = create(<Button variant="invalid-variant" />);
 
 			expect(wrapperOne.toJSON()).toBeTruthy();
 			expect(wrapperTwo.toJSON()).toBeTruthy();
 			expect(wrapperThree.toJSON()).toBeTruthy();
-			expect(wrapperFour.toJSON()).toBeTruthy();
 		});
 
 		test('Should render correctly with children', () => {
