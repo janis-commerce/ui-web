@@ -18,12 +18,13 @@ const Chip = ({
 	hasLink,
 	...props
 }) => {
+	if (!children || children === 0 || children === '-') return null;
+
 	return (
 		<styled.Chip
 			as={props.onClick ? 'button' : 'div'}
 			backgroundColor={backgroundColor}
 			borderColor={borderColor}
-			hasText={!!children || children === 0}
 			hasIcon={!!icon}
 			disabled={disabled}
 			clickable={(onClick || onDelete) && !disabled}
