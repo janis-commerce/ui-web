@@ -1,5 +1,6 @@
 import React from 'react';
 import Chip from 'components/Chip';
+import { create } from 'react-test-renderer';
 
 describe('Chip component', () => {
 	test('render', () => {
@@ -28,10 +29,9 @@ describe('Chip component', () => {
 		expect(wrapper.find('.chip-icon')).toBeTruthy();
 	});
 
-	test('Should render null if children is empty', () => {
-		const children = '-';
-		const validation = !children || children === 0 || children === '-';
-		const wrapper = validation ? null : mount(<Chip variant="contained">{children}</Chip>).toJSON();
-		expect(wrapper).toBeNull();
+	test('Should render null if children is undefined', () => {
+		const children = undefined;
+		const wrapper = create(<Chip variant="contained">{children}</Chip>);
+		expect(wrapper.toJSON()).toBeNull();
 	});
 });
