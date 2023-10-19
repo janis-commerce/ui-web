@@ -18,7 +18,7 @@ const Chip = ({
 	hasLink,
 	...props
 }) => {
-	if (!children || (typeof children !== 'string' && !children.props.children)) return null;
+	if (!children) return null;
 
 	return (
 		<styled.Chip
