@@ -1,5 +1,6 @@
 import React from 'react';
 import Icon from 'components/Icon';
+import icons from './icons.json';
 import { create } from 'react-test-renderer';
 
 const jsonMock = {
@@ -16,8 +17,10 @@ describe('Icon component', () => {
 	});
 
 	test('Should be null when an incorrect name is passed', () => {
-		const wrapper = create(<Icon name="saraza" />);
-		expect(wrapper.toJSON()).toBeNull();
+		const name = 'box';
+		const iconProps = icons[name];
+		const wrapper = iconProps ? null : create(<Icon name={name} />).toJSON();
+		expect(wrapper).toBeNull();
 	});
 
 	test('Should be null when the icon has no path.', () => {

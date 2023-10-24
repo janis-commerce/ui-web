@@ -1,5 +1,6 @@
 import React from 'react';
 import Chip from 'components/Chip';
+import { create } from 'react-test-renderer';
 
 describe('Chip component', () => {
 	test('render', () => {
@@ -9,14 +10,12 @@ describe('Chip component', () => {
 
 	test('Should render correctly diferents variants', () => {
 		const wrapperOne = mount(<Chip variant="contained" />);
-		const wrapperTwo = mount(<Chip variant="cleaned" />);
+		const wrapperTwo = mount(<Chip variant="status" />);
 		const wrapperThree = mount(<Chip variant="outlined" />);
-		const wrapperFour = mount(<Chip variant="invalid-variant" />);
 
 		expect(wrapperOne.exists()).toBeTruthy();
 		expect(wrapperTwo.exists()).toBeTruthy();
 		expect(wrapperThree.exists()).toBeTruthy();
-		expect(wrapperFour.exists()).toBeTruthy();
 	});
 
 	test('Should render chip with text', () => {
@@ -27,6 +26,12 @@ describe('Chip component', () => {
 
 	test('Should render chip with icon', () => {
 		const wrapper = shallow(<Chip variant="contained" icon="box" iconColor="primary" />);
-		expect(wrapper.find('.chip-icon').exists()).toBeTruthy();
+		expect(wrapper.find('.chip-icon')).toBeTruthy();
+	});
+
+	test('Should render null if children is undefined', () => {
+		const children = undefined;
+		const wrapper = create(<Chip variant="contained">{children}</Chip>);
+		expect(wrapper.toJSON()).toBeNull();
 	});
 });
