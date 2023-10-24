@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.5.0] - 2022-10-24
+
+### Added
+
+- Added peer dependencies to add styled components
+
+### Removed
+
+- Removed script post-install
+- Removed hasText prop from Chip component
+
 ## [0.4.0] - 2022-03-14
 
 ### Removed
