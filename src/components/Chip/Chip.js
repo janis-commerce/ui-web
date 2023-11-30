@@ -18,7 +18,7 @@ const Chip = ({
 	hasLink,
 	...props
 }) => {
-	if (!children) return null;
+	if (!children && !icon) return null;
 
 	return (
 		<styled.Chip
@@ -34,6 +34,7 @@ const Chip = ({
 			variant={variant}
 			iconColor={iconColor}
 			hasLink={hasLink}
+			onlyIcon={!children && icon}
 			{...props}
 		>
 			{icon && (
@@ -44,7 +45,7 @@ const Chip = ({
 					pathStyles={styled.iconPathStyles}
 				/>
 			)}
-			<styled.Children>{children}</styled.Children>
+			{children && <styled.Children>{children}</styled.Children>}
 			{onDelete && (
 				<styled.DeleteButton type="button" onClick={onDelete}>
 					<Icon

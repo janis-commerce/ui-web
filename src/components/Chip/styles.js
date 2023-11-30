@@ -6,7 +6,7 @@ import { mediaBreaks } from 'utils/devices';
 
 export default {
 	Chip: styled.button`
-		padding: 0 12px;
+		padding: ${(props) => (!props.onlyIcon ? '0 12px' : '0')};
 		cursor: ${(props) => (props.clickable ? 'pointer' : 'default')};
 		font-size: 13px;
 		color: ${palette.black.main};
@@ -21,7 +21,7 @@ export default {
 		white-space: nowrap;
 
 		.chip-icon {
-			margin-right: 8px;
+			${(props) => !props.onlyIcon && 'margin-right: 8px'};
 		}
 
 		${(props) => {

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.6.1] - 2022-11-29
+
+### Fixed
+
+- Fixed validation chip when has icon and not children
+
 ## [0.6.0] - 2022-11-27
 
 ### Removed
