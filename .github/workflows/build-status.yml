@@ -22,3 +22,5 @@ jobs:
       - run: yarn
       - run: yarn test
       - run: bash ./.postpublish.sh
+      env:
+        SLACK_WEBHOOK: ${{secrets.slack_webhook}}
