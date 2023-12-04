@@ -15,7 +15,7 @@
 		"build:storybook": "build-storybook -c .storybook -o ./stories",
 		"deploy-storybook": "gh-pages -d stories",
 		"build:icons": "node scripts/build-icons",
-		"postpublish": "./.postpublish.sh"
+		"postpublish": "../.postpublish.sh"
 	},
 	"repository": {
 		"type": "git",
