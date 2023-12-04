@@ -10,10 +10,11 @@ export default {
 		cursor: ${(props) => (props.clickable ? 'pointer' : 'default')};
 		font-size: 13px;
 		color: ${palette.black.main};
-		height: 32px;
+		height: ${(props) => (!props.onlyIcon ? '32px' : '36px')};
+		width: ${(props) => props.onlyIcon && '36px'};
 		min-width: 36px;
 		max-width: 150px;
-		border-radius: 50px;
+		border-radius: ${(props) => (!props.onlyIcon ? '50px' : '50%')};
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
