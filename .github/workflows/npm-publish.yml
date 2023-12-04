@@ -2,7 +2,7 @@ name: NPM Publish
 
 on:
   push:
-    tags: [ '*' ]
+    tags: ['*']
 
 jobs:
   build:
@@ -32,3 +32,4 @@ jobs:
         run: cd dist && npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          SLACK_WEBHOOK: ${{secrets.slack_webhook}}
