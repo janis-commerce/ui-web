@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { styles as stylesPropType, iconName as iconNamePropType } from 'utils/prop-types';
 import Icon from 'components/Icon';
-import styled from './styles';
+import StyledButton from './styles';
 import { validColors } from './utils';
 
 const Button = ({
@@ -18,7 +18,7 @@ const Button = ({
 	variant,
 	...props
 }) => (
-	<styled.Button
+	<StyledButton
 		color={color}
 		iconColor={iconColor || fontColor}
 		fontColor={fontColor}
@@ -30,9 +30,9 @@ const Button = ({
 		tabIndex="0"
 		{...props}
 	>
-		{icon && <Icon className="button-icon" name={icon} size={iconSize} />}
-		{children && <styled.Children>{children}</styled.Children>}
-	</styled.Button>
+		{icon && <Icon name={icon} size={iconSize} />}
+		{children}
+	</StyledButton>
 );
 
 Button.propTypes = {
