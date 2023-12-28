@@ -131,8 +131,5 @@ export default {
 		.button-icon {
 			fill: ${(props) => findColorInTheme(props.iconColor)};
 		}
-
-		${(props) => props.styles};
-	`,
-	Children: styled.div``
+	`
 };
