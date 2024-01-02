@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { getColor as findColorInTheme, timingFunctions } from 'theme/utils';
 import mixins from 'theme/mixins';
 import colors from 'theme/palette';
-import { getColor, getHoverColor, getPressedColor } from './utils';
+import { getColor, getHoverColor, getPressedColor, buttonVariants } from './utils';
 
 export default {
 	Button: styled.button`
@@ -61,73 +61,7 @@ export default {
 			fill: ${colors.white};
 			${mixins.transition('fill', '250ms')};
 		}
-
-		${(props) => {
-			switch (props.variant) {
-				case 'contained':
-					return css`
-						color: ${findColorInTheme(props.fontColor)};
-						&:before {
-							background-color: ${getColor(props.color)};
-						}
-
-						.button-icon {
-							fill: ${colors.white};
-						}
-
-						&:focus:after,
-						&:hover:after {
-							background-color: ${getHoverColor(props.color)};
-						}
-
-						&:active:after {
-							background-color: ${getPressedColor(props.color)};
-						}
-
-						&:disabled {
-							&:before,
-							&:after {
-								background-color: ${colors.grey};
-							}
-						}
-					`;
-				case 'outlined':
-				case 'cleaned':
-					return css`
-						color: ${getColor(props.color)};
-						&:after {
-							background-color: transparent;
-						}
-
-						.button-icon {
-							fill: ${getColor(props.color)};
-						}
-
-						&:focus:after,
-						&:hover:after {
-							background-color: ${colors.lightGreyHover};
-						}
-
-						&:active:after {
-							background-color: ${colors.lightGrey};
-						}
-
-						&:disabled {
-							color: ${colors.grey};
-							&:after {
-								background-color: transparent;
-							}
-
-							.button-icon {
-								fill: ${colors.grey};
-							}
-						}
-					`;
-				default:
-					return '';
-			}
-		}};
-
+		${buttonVariants}
 		.button-icon {
 			fill: ${(props) => findColorInTheme(props.iconColor)};
 		}
