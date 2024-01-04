@@ -61,82 +61,86 @@ export const getHoverColor = (color) =>
 export const getPressedColor = (color) =>
 	isValidColor(color) ? findColor(color, 'pressed') : colors.bluePressed;
 
-export const buttonVariants = {
-	contained: (props) => css`
-		color: ${findColorInTheme(props.fontColor)};
-		&:before {
-			background-color: ${getColor(props.color)};
-		}
-		.button-icon {
-			fill: ${colors.white};
-		}
-		&:focus:after,
-		&:hover:after {
-			background-color: ${getHoverColor(props.color)};
-		}
-		&:active:after {
-			background-color: ${getPressedColor(props.color)};
-		}
-		&:disabled {
-			&:before,
-			&:after {
-				background-color: ${colors.grey};
+export const getButtonStyles = (props) => {
+	const variantStyles = {
+		contained: (props) => css`
+			color: ${findColorInTheme(props.fontColor)};
+			&:before {
+				background-color: ${getColor(props.color)};
 			}
-		}
-	`,
-	outlined: (props) => css`
-		color: ${getColor(props.color)};
-		&:after {
-			background-color: transparent;
-		}
-		.button-icon {
-			fill: ${getColor(props.color)};
-		}
-		&:focus:after,
-		&:hover:after {
-			background-color: ${colors.lightGreyHover};
-		}
-		&:active:after {
-			background-color: ${colors.lightGrey};
-		}
-		&:disabled {
-			color: ${colors.grey};
+			.button-icon {
+				fill: ${colors.white};
+			}
+			&:focus:after,
+			&:hover:after {
+				background-color: ${getHoverColor(props.color)};
+			}
+			&:active:after {
+				background-color: ${getPressedColor(props.color)};
+			}
+			&:disabled {
+				&:before,
+				&:after {
+					background-color: ${colors.grey};
+				}
+			}
+		`,
+		outlined: (props) => css`
+			color: ${getColor(props.color)};
 			&:after {
 				background-color: transparent;
 			}
 			.button-icon {
-				fill: ${colors.grey};
+				fill: ${getColor(props.color)};
 			}
-		}
-	`,
-	cleaned: (props) => css`
-		color: ${getColor(props.color)};
-		&:after {
-			background-color: transparent;
-		}
-
-		.button-icon {
-			fill: ${getColor(props.color)};
-		}
-
-		&:focus:after,
-		&:hover:after {
-			background-color: ${colors.lightGreyHover};
-		}
-
-		&:active:after {
-			background-color: ${colors.lightGrey};
-		}
-
-		&:disabled {
-			color: ${colors.grey};
+			&:focus:after,
+			&:hover:after {
+				background-color: ${colors.lightGreyHover};
+			}
+			&:active:after {
+				background-color: ${colors.lightGrey};
+			}
+			&:disabled {
+				color: ${colors.grey};
+				&:after {
+					background-color: transparent;
+				}
+				.button-icon {
+					fill: ${colors.grey};
+				}
+			}
+		`,
+		cleaned: (props) => css`
+			color: ${getColor(props.color)};
 			&:after {
 				background-color: transparent;
 			}
 
 			.button-icon {
-				fill: ${colors.grey};
+				fill: ${getColor(props.color)};
 			}
-		}
-	`
+
+			&:focus:after,
+			&:hover:after {
+				background-color: ${colors.lightGreyHover};
+			}
+
+			&:active:after {
+				background-color: ${colors.lightGrey};
+			}
+
+			&:disabled {
+				color: ${colors.grey};
+				&:after {
+					background-color: transparent;
+				}
+
+				.button-icon {
+					fill: ${colors.grey};
+				}
+			}
+		`
+	};
+
+	return variantStyles[props.variant] || '';
 };

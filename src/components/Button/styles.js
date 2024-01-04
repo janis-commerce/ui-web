@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { getColor as findColorInTheme, timingFunctions } from 'theme/utils';
 import mixins from 'theme/mixins';
 import colors from 'theme/palette';
-import { getColor, getHoverColor, getPressedColor, buttonVariants } from './utils';
+import { getButtonStyles } from './utils';
 
 export default {
 	Button: styled.button`
@@ -61,7 +61,7 @@ export default {
 			fill: ${colors.white};
 			${mixins.transition('fill', '250ms')};
 		}
-		${buttonVariants}
+		${getButtonStyles}
 		.button-icon {
 			fill: ${(props) => findColorInTheme(props.iconColor)};
 		}
