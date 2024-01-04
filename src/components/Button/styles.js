@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import { getColor as findColorInTheme, timingFunctions } from 'theme/utils';
 import mixins from 'theme/mixins';
 import colors from 'theme/palette';
