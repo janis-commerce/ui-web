@@ -28,6 +28,8 @@ export const validColors = [
 	...mainPaletteColors
 ];
 
+const { white, grey, lightGreyHover, lightGrey, blue, blueHover, bluePressed } = colors;
+
 /**
  * Find normal, hover and pressed color
  * @param {string} color
@@ -53,17 +55,15 @@ const findColor = (color, state) => {
 
 const isValidColor = (color) => validColors.includes(color);
 
-export const getColor = (color) => (isValidColor(color) ? findColor(color) : colors.blue);
+export const getColor = (color) => (isValidColor(color) ? findColor(color) : blue);
 
 export const getHoverColor = (color) =>
-	isValidColor(color) ? findColor(color, 'hover') : colors.blueHover;
+	isValidColor(color) ? findColor(color, 'hover') : blueHover;
 
 export const getPressedColor = (color) =>
-	isValidColor(color) ? findColor(color, 'pressed') : colors.bluePressed;
+	isValidColor(color) ? findColor(color, 'pressed') : bluePressed;
 
-export const getButtonStyles = (props) => {
-	const { fontColor, color } = props;
-	const { white, grey, lightGreyHover, lightGrey } = color;
+export const getButtonStyles = ({ fontColor, color }) => {
 	const variantStyles = {
 		contained: css`
 			color: ${findColorInTheme(fontColor)};
