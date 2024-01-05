@@ -62,81 +62,83 @@ export const getPressedColor = (color) =>
 	isValidColor(color) ? findColor(color, 'pressed') : colors.bluePressed;
 
 export const getButtonStyles = (props) => {
+	const { fontColor, color } = props;
+	const { white, grey, lightGreyHover, lightGrey } = color;
 	const variantStyles = {
-		contained: (props) => css`
-			color: ${findColorInTheme(props.fontColor)};
+		contained: css`
+			color: ${findColorInTheme(fontColor)};
 			&:before {
-				background-color: ${getColor(props.color)};
+				background-color: ${getColor(color)};
 			}
 			.button-icon {
-				fill: ${colors.white};
+				fill: ${white};
 			}
 			&:focus:after,
 			&:hover:after {
-				background-color: ${getHoverColor(props.color)};
+				background-color: ${getHoverColor(color)};
 			}
 			&:active:after {
-				background-color: ${getPressedColor(props.color)};
+				background-color: ${getPressedColor(color)};
 			}
 			&:disabled {
 				&:before,
 				&:after {
-					background-color: ${colors.grey};
+					background-color: ${grey};
 				}
 			}
 		`,
-		outlined: (props) => css`
-			color: ${getColor(props.color)};
+		outlined: css`
+			color: ${getColor(color)};
 			&:after {
 				background-color: transparent;
 			}
 			.button-icon {
-				fill: ${getColor(props.color)};
+				fill: ${getColor(color)};
 			}
 			&:focus:after,
 			&:hover:after {
-				background-color: ${colors.lightGreyHover};
+				background-color: ${lightGreyHover};
 			}
 			&:active:after {
-				background-color: ${colors.lightGrey};
+				background-color: ${lightGrey};
 			}
 			&:disabled {
-				color: ${colors.grey};
+				color: ${grey};
 				&:after {
 					background-color: transparent;
 				}
 				.button-icon {
-					fill: ${colors.grey};
+					fill: ${grey};
 				}
 			}
 		`,
-		cleaned: (props) => css`
-			color: ${getColor(props.color)};
+		cleaned: css`
+			color: ${getColor(color)};
 			&:after {
 				background-color: transparent;
 			}
 
 			.button-icon {
-				fill: ${getColor(props.color)};
+				fill: ${getColor(color)};
 			}
 
 			&:focus:after,
 			&:hover:after {
-				background-color: ${colors.lightGreyHover};
+				background-color: ${lightGreyHover};
 			}
 
 			&:active:after {
-				background-color: ${colors.lightGrey};
+				background-color: ${lightGrey};
 			}
 
 			&:disabled {
-				color: ${colors.grey};
+				color: ${grey};
 				&:after {
 					background-color: transparent;
 				}
 
 				.button-icon {
-					fill: ${colors.grey};
+					fill: ${grey};
 				}
 			}
 		`
