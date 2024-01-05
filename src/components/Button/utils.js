@@ -63,7 +63,7 @@ export const getHoverColor = (color) =>
 export const getPressedColor = (color) =>
 	isValidColor(color) ? findColor(color, 'pressed') : bluePressed;
 
-export const getButtonStyles = ({ fontColor, color }) => {
+export const getButtonStyles = ({ fontColor, color, variant }) => {
 	const variantStyles = {
 		contained: css`
 			color: ${findColorInTheme(fontColor)};
@@ -144,5 +144,5 @@ export const getButtonStyles = ({ fontColor, color }) => {
 		`
 	};
 
-	return variantStyles[props.variant] || '';
+	return variantStyles[variant] || '';
 };
