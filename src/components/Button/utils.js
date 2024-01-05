@@ -65,7 +65,7 @@ export const getPressedColor = (color) =>
 
 export const getButtonStyles = ({ fontColor, color, variant }) => {
 	const variantStyles = {
-		contained: css`
+		contained: () => css`
 			color: ${findColorInTheme(fontColor)};
 			&:before {
 				background-color: ${getColor(color)};
@@ -87,7 +87,7 @@ export const getButtonStyles = ({ fontColor, color, variant }) => {
 				}
 			}
 		`,
-		outlined: css`
+		outlined: () => css`
 			color: ${getColor(color)};
 			&:after {
 				background-color: transparent;
@@ -112,7 +112,7 @@ export const getButtonStyles = ({ fontColor, color, variant }) => {
 				}
 			}
 		`,
-		cleaned: css`
+		cleaned: () => css`
 			color: ${getColor(color)};
 			&:after {
 				background-color: transparent;
