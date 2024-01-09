@@ -78,6 +78,25 @@ import Button from './Button';
 					NORMAL + icon
 				</Button>
 				<Button disabled>DISABLED</Button>
+				<Button variant="contained" fontColor="black">
+					FONT COLOR
+				</Button>
+			</div>
+			<div
+				style={{
+					height: '200px',
+					display: 'flex',
+					flexDirection: 'column',
+					justifyContent: 'space-between',
+					marginLeft: '50px'
+				}}
+			>
+				<Button icon="box" variant="contained" iconSize={35}>
+					iconSize
+				</Button>
+				<Button variant="contained" color="fizzGreen" hideLabel>
+					HIDELABEL
+				</Button>
 			</div>
 		</List>
 	</Story>

@@ -31,7 +31,7 @@ const Button = ({
 		{...props}
 	>
 		{icon && <Icon className="button-icon" name={icon} size={iconSize} />}
-		{children}
+		{!hideLabel && children}
 	</styled.Button>
 );
 
