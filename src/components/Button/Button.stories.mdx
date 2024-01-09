@@ -28,6 +28,7 @@ import Button from './Button';
 					Export
 				</Button>
 				<Button iconColor="red" icon="options" variant="outlined" />
+				<Button iconColor="red" icon="trash" rounded />
 			</div>
 			<div
 				style={{
@@ -44,6 +45,9 @@ import Button from './Button';
 				</Button>
 				<Button variant="contained" disabled>
 					DISABLED
+				</Button>
+				<Button icon="box" variant="contained" iconSize={35}>
+					iconSize
 				</Button>
 			</div>
 			<div
@@ -62,40 +66,9 @@ import Button from './Button';
 				<Button variant="outlined" disabled>
 					DISABLED
 				</Button>
-			</div>
-			<div
-				style={{
-					height: '200px',
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'space-between',
-					marginLeft: '50px'
-				}}
-			>
-				<Button iconColor="red" icon="plus_circle">
-					NORMAL + icon
-				</Button>
-				<Button disabled>DISABLED</Button>
-				<Button variant="contained" fontColor="black">
-					FONT COLOR
-				</Button>
-			</div>
-			<div
-				style={{
-					height: '200px',
-					display: 'flex',
-					flexDirection: 'column',
-					justifyContent: 'space-between',
-					marginLeft: '50px'
-				}}
-			>
-				<Button icon="box" variant="contained" iconSize={35}>
-					iconSize
-				</Button>
 				<Button variant="contained" color="fizzGreen" hideLabel>
 					HIDELABEL
 				</Button>
-				<Button iconColor="red" icon="trash" rounded />
 			</div>
 			<div
 				style={{
@@ -107,6 +80,13 @@ import Button from './Button';
 				}}
 			>
 				<Button>NORMAL</Button>
+				<Button iconColor="red" icon="plus_circle">
+					NORMAL + icon
+				</Button>
+				<Button disabled>DISABLED</Button>
+				<Button variant="contained" fontColor="black">
+					FONT COLOR
+				</Button>
 			</div>
 		</List>
 	</Story>
