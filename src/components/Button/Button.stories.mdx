@@ -27,8 +27,8 @@ import Button from './Button';
 				<Button icon="star_light" variant="contained" color="fizzGreen">
 					Export
 				</Button>
-				<Button icon="options" variant="outlined" />
-				<Button icon="trash" rounded />
+				<Button iconColor="red" icon="options" variant="outlined" />
+				<Button iconColor="red" icon="trash" rounded />
 			</div>
 			<div
 				style={{
@@ -57,7 +57,7 @@ import Button from './Button';
 				}}
 			>
 				<Button variant="outlined">NORMAL</Button>
-				<Button variant="outlined" icon="plus_circle">
+				<Button variant="outlined" iconColor="red" icon="plus_circle">
 					NORMAL + icon
 				</Button>
 				<Button variant="outlined" disabled>
@@ -74,7 +74,9 @@ import Button from './Button';
 				}}
 			>
 				<Button>NORMAL</Button>
-				<Button icon="plus_circle">NORMAL + icon</Button>
+				<Button iconColor="red" icon="plus_circle">
+					NORMAL + icon
+				</Button>
 				<Button disabled>DISABLED</Button>
 			</div>
 		</List>
@@ -89,7 +91,7 @@ Estos son los unicos colores base disponibles, para poder aplicar correctamente 
 
 <List>
 	<div style={{ display: 'flex', flexWrap: 'wrap', width: '420px' }}>
-		{validColors.map(color => (
+		{validColors.map((color) => (
 			<div
 				key={color}
 				style={{
