@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from './styles';
-import Icon from 'components/Icon';
 
 const Link = ({ href, children, target, icon, ...props }) => {
-	const renderIcon = () => (icon ? <Icon name={icon} /> : null);
+	const renderIcon = () => (icon ? <styled.StyledIcon name={icon} /> : null);
 
 	return (
 		<styled.LinkWrapper {...props}>
-			<styled.LinkItem href={href} target={target}>
-				{renderIcon()}
+			{renderIcon()}
+			<a href={href} target={target}>
 				{children || href}
-			</styled.LinkItem>
+			</a>
 		</styled.LinkWrapper>
 	);
 };
