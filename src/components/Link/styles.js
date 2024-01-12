@@ -13,6 +13,10 @@ export default {
 			color: inherit;
 		}
 	`,
+	LinkItem: styled.a`
+		display: flex;
+		align-items: center;
+	`,
 	StyledIcon: styled(Icon)`
 		margin-right: 8px;
 	`
