@@ -49,7 +49,7 @@ const Chip = ({
 			{onDelete && (
 				<styled.DeleteButton type="button" onClick={onDelete}>
 					<Icon
-						color="black"
+						color={iconColor}
 						pathStyles={styled.deleteButtonPathStyles}
 						className="delete-button"
 						name="cross_circle_flat"
