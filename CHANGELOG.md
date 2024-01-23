@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Changed Button to use Icon component
+
 ## [0.7.3] - 2022-12-04
 
 ### Fixed
