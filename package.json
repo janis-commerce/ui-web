@@ -117,8 +117,8 @@
 		"dist"
 	],
 	"dependencies": {
-		"@storybook/addons": "^7.6.10",
-		"@storybook/theming": "^7.6.10",
+		"@storybook/addons": "^6.2.9",
+		"@storybook/theming": "^6.2.9",
 		"prop-types": "^15.7.2",
 		"qrcode.react": "^3.0.2",
 		"react-colorful": "^5.5.1",
