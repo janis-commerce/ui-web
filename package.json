@@ -11,7 +11,7 @@
 		"test": "jest",
 		"test-ci": "JEST_JUNIT_OUTPUT_DIR=test-reports jest --coverage --silent --ci --reporters=jest-junit",
 		"coverage": "jest --coverage --silent",
-		"storybook": "start-storybook -p 6006 --no-manager-cache",
+		"storybook": "start-storybook -p 6006 -s public",
 		"build:storybook": "build-storybook -c .storybook -o ./stories",
 		"deploy-storybook": "gh-pages -d stories",
 		"build:icons": "node scripts/build-icons",
@@ -117,8 +117,6 @@
 		"dist"
 	],
 	"dependencies": {
-		"@storybook/addons": "^6.2.9",
-		"@storybook/theming": "^6.2.9",
 		"prop-types": "^15.7.2",
 		"qrcode.react": "^3.0.2",
 		"react-colorful": "^5.5.1",
