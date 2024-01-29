@@ -14,11 +14,9 @@ const Icon = ({
 	viewBox,
 	...props
 }) => {
-	const iconProps = icons[name];
+	if (!icons[name]) return null;
 
-	if (!iconProps) return null;
-
-	const { path, size: defaultSize } = iconProps;
+	const { path, size: defaultSize } = icons[name];
 	const size = sizeProp || defaultSize;
 
 	if (!path) return null;

@@ -1,3 +1,4 @@
+import { css } from 'styled-components';
 import { getColor as findColorInTheme } from 'theme/utils';
 import colors from 'theme/palette';
 
@@ -27,6 +28,8 @@ export const validColors = [
 	...mainPaletteColors
 ];
 
+const { white, grey, lightGreyHover, lightGrey, blue, blueHover, bluePressed } = colors;
+
 /**
  * Find normal, hover and pressed color
  * @param {string} color
@@ -52,10 +55,94 @@ const findColor = (color, state) => {
 
 const isValidColor = (color) => validColors.includes(color);
 
-export const getColor = (color) => (isValidColor(color) ? findColor(color) : colors.blue);
+export const getColor = (color) => (isValidColor(color) ? findColor(color) : blue);
 
 export const getHoverColor = (color) =>
-	isValidColor(color) ? findColor(color, 'hover') : colors.blueHover;
+	isValidColor(color) ? findColor(color, 'hover') : blueHover;
 
 export const getPressedColor = (color) =>
-	isValidColor(color) ? findColor(color, 'pressed') : colors.bluePressed;
+	isValidColor(color) ? findColor(color, 'pressed') : bluePressed;
+
+export const getButtonStyles = ({ fontColor, color, variant }) => {
+	const variantStyles = {
+		contained: () => css`
+			color: ${findColorInTheme(fontColor)};
+			&:before {
+				background-color: ${getColor(color)};
+			}
+			.button-icon {
+				fill: ${white};
+			}
+			&:focus:after,
+			&:hover:after {
+				background-color: ${getHoverColor(color)};
+			}
+			&:active:after {
+				background-color: ${getPressedColor(color)};
+			}
+			&:disabled {
+				&:before,
+				&:after {
+					background-color: ${grey};
+				}
+			}
+		`,
+		outlined: () => css`
+			color: ${getColor(color)};
+			&:after {
+				background-color: transparent;
+			}
+			.button-icon {
+				fill: ${getColor(color)};
+			}
+			&:focus:after,
+			&:hover:after {
+				background-color: ${lightGreyHover};
+			}
+			&:active:after {
+				background-color: ${lightGrey};
+			}
+			&:disabled {
+				color: ${grey};
+				&:after {
+					background-color: transparent;
+				}
+				.button-icon {
+					fill: ${grey};
+				}
+			}
+		`,
+		cleaned: () => css`
+			color: ${getColor(color)};
+			&:after {
+				background-color: transparent;
+			}
+
+			.button-icon {
+				fill: ${getColor(color)};
+			}
+
+			&:focus:after,
+			&:hover:after {
+				background-color: ${lightGreyHover};
+			}
+
+			&:active:after {
+				background-color: ${lightGrey};
+			}
+
+			&:disabled {
+				color: ${grey};
+				&:after {
+					background-color: transparent;
+				}
+
+				.button-icon {
+					fill: ${grey};
+				}
+			}
+		`
+	};
+
+	return variantStyles[variant] || '';
+};

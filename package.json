@@ -1,6 +1,6 @@
 {
 	"name": "@janiscommerce/ui-web",
-	"version": "0.7.3",
+	"version": "0.8.0",
 	"description": "",
 	"main": "dist/index.umd.js",
 	"private": false,
