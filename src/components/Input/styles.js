@@ -11,15 +11,15 @@ const changeColor = (props) => {
 	const { isFocused, isFloating, disabled, error } = props;
 	switch (true) {
 		case disabled:
-			return palette.grey.main;
+			return palette.grey;
 		case error:
-			return palette.error.main;
+			return palette.statusRed;
 		case isFocused:
-			return palette.primary.main;
+			return palette.blue;
 		case isFloating:
-			return palette.grey.dark;
+			return palette.darkGrey;
 		default:
-			return palette.grey.darkPressed;
+			return palette.darkGreyPressed;
 	}
 };
 
@@ -27,13 +27,13 @@ const hoverAndFocusColor = (props) => {
 	const { isFocused, disabled, error } = props;
 	switch (true) {
 		case disabled:
-			return palette.grey.main;
+			return palette.grey;
 		case error:
-			return palette.error.main;
+			return palette.statusRed;
 		case isFocused:
-			return palette.primary.main;
+			return palette.blue;
 		default:
-			return palette.black.main;
+			return palette.black;
 	}
 };
 
@@ -68,17 +68,17 @@ export default {
 		border: none;
 		font-size: ${fontSize};
 		font-weight: 400;
-		color: ${palette.black.main};
+		color: ${palette.black};
 		transition: color 0.2s ${timingFunctions.standard};
 		cursor: pointer;
 		width: 100%;
-		border-bottom: 1px solid ${palette.grey.main};
+		border-bottom: 1px solid ${palette.grey};
 		border-radius: 0;
-		${({ error }) => error && `border-bottom-color: ${palette.error.main};`}
+		${({ error }) => error && `border-bottom-color: ${palette.statusRed};`}
 		${({ hasIcon }) => hasIcon && `padding-left: 32px;`}
 		${mixins.placeholder(css`
 			font-weight: 400;
-			color: ${({ error }) => (error ? palette.error.main : palette.grey.darkPressed)};
+			color: ${({ error }) => (error ? palette.statusRed : palette.darkGreyPressed)};
 		`)}
 
 		&:hover {
@@ -91,9 +91,9 @@ export default {
 		}
 
 		&:disabled {
-			background-color: ${palette.base.white};
-			color: ${palette.grey.main};
-			border-color: ${palette.grey.main};
+			background-color: ${palette.white};
+			color: ${palette.grey};
+			border-color: ${palette.grey};
 			cursor: default;
 		}
 
@@ -110,7 +110,7 @@ export default {
 		`}
 	`,
 	ErrorMessage: styled.span`
-		color: ${palette.error.main};
+		color: ${palette.statusRed};
 		font-size: 12px;
 		line-height: 14px;
 		transform: translateY(-6px);

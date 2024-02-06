@@ -1,7 +1,7 @@
 import React from 'react';
 import Color from 'components/Color';
 import { create } from 'react-test-renderer';
-import { getColor } from 'theme/utils';
+import { findColorInPalette } from 'theme/utils';
 import 'jest-styled-components';
 
 describe('Color component', () => {
@@ -37,7 +37,7 @@ describe('Color component', () => {
 		const color = 'statusRed';
 		const wrapper = mount(<Color color={color} />);
 		const sample = wrapper.find('div').last();
-		expect(sample).toHaveStyleRule('background-color', getColor(color));
+		expect(sample).toHaveStyleRule('background-color', findColorInPalette(color));
 	});
 
 	test('should not render text if showLabel is false or undefined', () => {
@@ -49,6 +49,6 @@ describe('Color component', () => {
 	test('should render the proper hex code label if showLabel is truthy', () => {
 		const color = 'statusRed';
 		const wrapper = mount(<Color color={color} showLabel />);
-		expect(wrapper.getDOMNode().textContent).toBe(getColor(color));
+		expect(wrapper.getDOMNode().textContent).toBe(findColorInPalette(color));
 	});
 });

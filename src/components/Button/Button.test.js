@@ -40,11 +40,11 @@ describe('Button component', () => {
 		test('Should render correctly diferents buttons', () => {
 			const children = 'SomeText';
 			const wrapperOne = create(
-				<Button icon="box" color="primary" iconColor="white" fontColor="white">
+				<Button icon="box" color="blue" iconColor="white" fontColor="white">
 					{children}
 				</Button>
 			);
-			const wrapperTwo = create(<Button icon="box" color="primary" iconColor="white" rounded />);
+			const wrapperTwo = create(<Button icon="box" color="blue" iconColor="white" rounded />);
 			const wrapperThree = create(<Button disabled>{children}</Button>);
 
 			expect(wrapperOne.toJSON()).toBeTruthy();
@@ -56,26 +56,26 @@ describe('Button component', () => {
 	describe('Utils', () => {
 		const exampleColors = [
 			{
-				color: 'primary',
-				valueColor: palette.primary.main,
-				valueHover: palette.primary.hover,
-				valuePressed: palette.primary.pressed
-			},
-			{
 				color: 'blue',
 				valueColor: palette.blue,
 				valueHover: palette.blueHover,
 				valuePressed: palette.bluePressed
 			},
 			{
-				color: 'grey.dark',
-				valueColor: palette.grey.dark,
-				valueHover: palette.grey.darkHover,
-				valuePressed: palette.grey.darkPressed
+				color: 'black',
+				valueColor: viewsPallet.black,
+				valueHover: viewsPallet.blackHover,
+				valuePressed: viewsPallet.blackPressed
+			},
+			{
+				color: 'grey',
+				valueColor: viewsPallet.grey,
+				valueHover: viewsPallet.greyHover,
+				valuePressed: viewsPallet.greyPressed
 			}
 		];
 
-		const exampleInvalidColors = ['base.white', 'transparentWhite'];
+		const exampleInvalidColors = ['transparentWhite'];
 
 		test('Should returns default colors', () => {
 			exampleInvalidColors.forEach((color) => {

@@ -11,7 +11,7 @@ export const statusColor = (props) => {
 		case disabled && checked:
 			return colors.blueDisabled;
 		case disabled:
-			return colors.grey.main;
+			return colors.grey;
 		case checked:
 			return colors.blue;
 		default:
@@ -26,7 +26,7 @@ const Ball = styled.div`
 	position: absolute;
 	top: 4px;
 	left: 4px;
-	background-color: ${colors.base.white};
+	background-color: ${colors.white};
 	transition: all ${timingFunctions.standard} 0.2s;
 
 	${(props) =>

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import colors from 'theme/palette';
-import { getColor } from 'theme/utils';
+import { findColorInPalette } from 'theme/utils';
 import mixins from 'theme/mixins';
 import { mediaBreaks } from 'utils/devices';
 
 const styles = {
 	Svg: styled.svg`
-		fill: ${(props) => getColor(props.color)};
+		fill: ${(props) => findColorInPalette(props.color)};
 
 		${mediaBreaks.onlyPrint`
 			fill: ${colors.darkGrey};

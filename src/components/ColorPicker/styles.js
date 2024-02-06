@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import palette from 'theme/palette';
-import { getColor } from 'theme/utils';
+import { findColorInPalette } from 'theme/utils';
 import InputBase from 'components/Input';
 
 export default {
@@ -14,7 +14,7 @@ export default {
 			z-index: 1;
 			display: inline-block;
 			border: 1px solid ${palette.grey};
-			background-color: ${(props) => getColor(props.color)};
+			background-color: ${(props) => findColorInPalette(props.color)};
 			border-radius: 48%;
 			width: 14px;
 			height: 14px;

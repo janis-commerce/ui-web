@@ -1,10 +1,12 @@
 import styled, { css } from 'styled-components';
-import { timingFunctions, getColor } from 'theme/utils';
+import { timingFunctions, findColorInPalette } from 'theme/utils';
 
 export default {
 	Container: styled.label`
-		background: ${(props) => (props.checked ? getColor('blue') : getColor('base.white'))};
-		border: 1px solid ${(props) => (props.checked ? getColor('blue') : getColor('black'))};
+		background: ${(props) =>
+			props.checked ? findColorInPalette('blue') : findColorInPalette('white')};
+		border: 1px solid
+			${(props) => (props.checked ? findColorInPalette('blue') : findColorInPalette('black'))};
 		border-radius: ${(props) => (props.rounded ? '50' : '3')}px;
 		width: 16px;
 		height: 16px;
@@ -24,7 +26,7 @@ export default {
 	`,
 	iconCheckStyles: css`
 		transform: translateY(-5%);
-		fill: ${getColor('base.white')};
+		fill: ${findColorInPalette('white')};
 		${(props) =>
 			!!props.rounded &&
 			`

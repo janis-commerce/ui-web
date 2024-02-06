@@ -44,13 +44,12 @@ export const mixins = {
 		`;
 	},
 	scrollbar(thumbColor, shadowColor) {
-		const { colors } = theme;
 		return css`
 			&::-webkit-scrollbar {
 				width: 5px;
 			}
 			&::-webkit-scrollbar-track {
-				box-shadow: inset 0 0 6px ${shadowColor || colors.white};
+				box-shadow: inset 0 0 6px ${shadowColor || theme.white};
 			}
 			&::-webkit-scrollbar-thumb {
 				height: 5px;

@@ -16,6 +16,7 @@ const Button = ({
 	rounded,
 	styles,
 	variant,
+	disabled,
 	...props
 }) => (
 	<styled.Button
@@ -28,6 +29,7 @@ const Button = ({
 		variant={variant}
 		hasIcon={!!icon}
 		tabIndex="0"
+		disabled={disabled}
 		{...props}
 	>
 		{icon && <Icon className="button-icon" name={icon} size={iconSize} />}
@@ -52,6 +54,8 @@ Button.propTypes = {
 	fontColor: PropTypes.string,
 	/** Si es true, el boton tiene los bordes redondeados */
 	rounded: PropTypes.bool,
+	/** Habilita y deshabilita el boton  */
+	disabled: PropTypes.bool,
 	styles: stylesPropType,
 	/** Variante de boton */
 	variant: PropTypes.oneOf(['cleaned', 'contained', 'outlined'])
@@ -61,7 +65,8 @@ Button.defaultProps = {
 	color: 'blue',
 	rounded: false,
 	fontColor: 'white',
-	variant: 'cleaned'
+	variant: 'cleaned',
+	disabled: false
 };
 
 export default Button;

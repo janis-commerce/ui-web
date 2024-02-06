@@ -87,7 +87,7 @@ describe('Switch component', () => {
 		test('statusColor function Should returns correct colors', () => {
 			expect(statusColor({ checked: true, disabled: true })).toEqual(palette.blueDisabled);
 			expect(statusColor({ checked: true, disabled: false })).toEqual(palette.blue);
-			expect(statusColor({ checked: false, disabled: true })).toEqual(palette.grey.main);
+			expect(statusColor({ checked: false, disabled: true })).toEqual(palette.grey);
 			expect(statusColor({ checked: false, disabled: false })).toEqual(palette.darkGrey);
 		});
 	});

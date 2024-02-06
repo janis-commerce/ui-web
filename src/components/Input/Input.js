@@ -87,7 +87,7 @@ class Input extends PureComponent {
 							{props.label}
 						</styled.FloatingLabel>
 					)}
-					{icon && <styled.InputIcon name={icon} color={error ? 'error' : 'black'} />}
+					{icon && <styled.InputIcon name={icon} color={error ? 'statusRed' : 'black'} />}
 					<styled.Input
 						{...props}
 						ref={this.input}

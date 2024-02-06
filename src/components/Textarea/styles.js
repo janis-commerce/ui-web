@@ -10,15 +10,15 @@ const placeholderColor = (props) => {
 	const { isFocused, isFloating, disabled, error } = props;
 	switch (true) {
 		case disabled:
-			return palette.grey.main;
+			return palette.grey;
 		case error:
-			return palette.error.main;
+			return palette.statusRed;
 		case isFocused:
-			return palette.primary.main;
+			return palette.blue;
 		case isFloating:
-			return palette.grey.dark;
+			return palette.darkGrey;
 		default:
-			return palette.grey.darkPressed;
+			return palette.darkGreyPressed;
 	}
 };
 
@@ -29,7 +29,7 @@ export default {
 	`,
 	Textarea: styled.textarea`
 		border: none;
-		border-bottom: 1px solid ${palette.grey.main};
+		border-bottom: 1px solid ${palette.grey};
 		border-radius: 0;
 		height: 23px;
 		max-height: 350px;
@@ -37,7 +37,7 @@ export default {
 		resize: none;
 		font-size: ${fontSize};
 		font-weight: 400;
-		color: ${palette.black.main};
+		color: ${palette.black};
 		${mixins.transition('color,border-color', '0.2s')};
 		width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
 
@@ -46,22 +46,22 @@ export default {
 			color: ${(props) => placeholderColor(props)};
 		`)}
 
-		${mixins.scrollbar(palette.grey.main, palette.base.white)}
+		${mixins.scrollbar(palette.grey, palette.base)}
 
 		&:hover {
-			border-color: ${palette.black.main};
+			border-color: ${palette.black};
 		}
 
 		&:focus {
-			border-color: ${palette.primary.main};
-			caret-color: ${palette.primary.main};
+			border-color: ${palette.blue};
+			caret-color: ${palette.blue};
 			outline: none;
 		}
 
 		&:disabled {
-			background-color: ${palette.base.white};
-			color: ${palette.grey.main};
-			border-color: ${palette.grey.main};
+			background-color: ${palette.white};
+			color: ${palette.grey};
+			border-color: ${palette.grey};
 			cursor: default;
 		}
 
@@ -69,7 +69,7 @@ export default {
 			props.error &&
 			`
 			&, &:hover, &:focus {
-				border-color: ${palette.error.main}
+				border-color: ${palette.statusRed}
 			}
 		`}
 
@@ -94,7 +94,7 @@ export default {
 		transition: all 0.2s ${timingFunctions.standard};
 	`,
 	ErrorMessage: styled.span`
-		color: ${palette.error.main};
+		color: ${palette.statusRed};
 		font-size: 12px;
 		line-height: 14px;
 		display: block;

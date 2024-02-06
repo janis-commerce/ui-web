@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { getColor as findColorInTheme, timingFunctions } from 'theme/utils';
+import { findColorInPalette, timingFunctions } from 'theme/utils';
 import mixins from 'theme/mixins';
 import colors from 'theme/palette';
 import { getButtonStyles } from './utils';
@@ -10,13 +10,14 @@ export default {
 		align-items: center;
 		justify-content: center;
 		height: 36px;
-		width: ${(props) => props.rounded && '36px'};
-		flex-shrink: ${(props) => (props.rounded ? '0' : 'initial')};
-		border-radius: ${(props) => (props.rounded ? '50%' : '50px')};
-		padding: ${(props) => !props.rounded && (props.hasText && props.hasIcon ? '0 12px' : '0 16px')};
-		cursor: ${(props) => (props.disabled ? 'default' : 'pointer')};
-		border: ${(props) =>
-			props.variant === 'outlined' ? `1px solid ${findColorInTheme('grey')}` : 'none'};
+		width: ${({ rounded }) => rounded && '36px'};
+		flex-shrink: ${({ rounded }) => (rounded ? '0' : 'initial')};
+		border-radius: ${({ rounded }) => (rounded ? '50%' : '50px')};
+		padding: ${({ rounded, hasText, hasIcon }) =>
+			!rounded && (hasText && hasIcon ? '0 12px' : '0 16px')};
+		cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
+		border: ${({ variant }) =>
+			variant === 'outlined' ? `1px solid ${findColorInPalette('grey')}` : 'none'};
 		font-size: 13px;
 		font-weight: 500;
 		position: relative;
@@ -57,13 +58,14 @@ export default {
 		}
 
 		.button-icon {
-			margin-right: ${(props) => props.hasText && '8px'};
+			margin-right: ${({ hasText }) => hasText && '8px'};
 			fill: ${colors.white};
 			${mixins.transition('fill', '250ms')};
 		}
 		${getButtonStyles}
 		.button-icon {
-			fill: ${(props) => findColorInTheme(props.iconColor)};
+			fill: ${({ iconColor }) => findColorInPalette(iconColor)};
 		}
+		${({ styles }) => styles};
 	`
 };
