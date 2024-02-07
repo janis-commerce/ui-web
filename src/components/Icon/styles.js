@@ -48,5 +48,9 @@ export const docz = {
 		&:hover ${styles.Svg} {
 			fill: ${colors.blue};
 		}
+	`,
+	SearchInput: styled.input`
+		margin-bottom: 10px;
+		padding: 5px;
 	`
 };
