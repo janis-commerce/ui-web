@@ -16,8 +16,7 @@ export default {
 		padding: ${({ rounded, hasText, hasIcon }) =>
 			!rounded && (hasText && hasIcon ? '0 12px' : '0 16px')};
 		cursor: ${({ disabled }) => (disabled ? 'default' : 'pointer')};
-		border: ${({ variant }) =>
-			variant === 'outlined' ? `1px solid ${findColorInPalette('grey')}` : 'none'};
+		border: none;
 		font-size: 13px;
 		font-weight: 500;
 		position: relative;

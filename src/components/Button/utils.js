@@ -1,6 +1,7 @@
 import { css } from 'styled-components';
 import { findColorInPalette } from 'theme/utils';
-import colors from 'theme/palette';
+import viewsPallet from 'theme/palette';
+import Icon from 'components/Icon';
 
 export const validColors = [
 	'black',
@@ -18,19 +19,20 @@ export const validColors = [
 	'yellow'
 ];
 
-const { white, grey, lightGreyHover, lightGrey, blue, blueHover, bluePressed } = colors;
+const { white, grey, lightGreyHover, lightGrey, blue, blueHover, bluePressed } = viewsPallet;
 
 const isValidColor = (color) => validColors.includes(color);
-export const getColor = (color) => (isValidColor(color) ? colors[color] : blue);
+export const getColor = (color) => (isValidColor(color) ? viewsPallet[color] : blue);
 
-export const getHoverColor = (color) => (isValidColor(color) ? colors[`${color}Hover`] : blueHover);
+export const getHoverColor = (color) =>
+	isValidColor(color) ? viewsPallet[`${color}Hover`] : blueHover;
 
 export const getPressedColor = (color) =>
-	isValidColor(color) ? colors[`${color}Pressed`] : bluePressed;
+	isValidColor(color) ? viewsPallet[`${color}Pressed`] : bluePressed;
 
 const commonStyles = (color) => css`
 	color: ${getColor(color)};
-	&.button-icon {
+	${Icon} {
 		fill: ${getColor(color)};
 	}
 	&:after {
@@ -48,7 +50,7 @@ const commonStyles = (color) => css`
 		&:after {
 			background-color: transparent;
 		}
-		.button-icon {
+		${Icon} {
 			fill: ${grey};
 		}
 	}
@@ -61,7 +63,7 @@ export const getButtonStyles = ({ fontColor, color, variant }) => {
 			&:before {
 				background-color: ${getColor(color)};
 			}
-			.button-icon {
+			${Icon} {
 				fill: ${white};
 			}
 			&:focus:after,
@@ -78,7 +80,10 @@ export const getButtonStyles = ({ fontColor, color, variant }) => {
 				}
 			}
 		`,
-		outlined: () => commonStyles(color),
+		outlined: () => css`
+			${commonStyles(color)};
+			border: 1px solid ${findColorInPalette(grey)};
+		`,
 		cleaned: () => commonStyles(color)
 	};
 
