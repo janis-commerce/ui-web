@@ -1,4 +1,4 @@
-const viewsPallet = {
+const viewsPalette = {
 	black: '#2F2F2F',
 	blackHover: '#585858',
 	blackPressed: '#16232D',
@@ -40,4 +40,4 @@ const viewsPallet = {
 	transparentWhite: 'rgba(256, 256, 256, 0.5)'
 };
 
-export default viewsPallet;
+export default viewsPalette;

@@ -1,11 +1,9 @@
 import React from 'react';
 import Button from 'components/Button';
 import Icon from 'components/Icon';
-import palette from 'theme/palette';
-import { getHoverColor, getPressedColor } from './utils';
+import { getColor, getHoverColor, getPressedColor } from './utils';
 import { create } from 'react-test-renderer';
-import viewsPallet from 'theme/palette';
-import { findColorInPalette } from 'theme/utils';
+import viewsPalette from 'theme/palette';
 
 describe('Button component', () => {
 	describe('Component', () => {
@@ -59,21 +57,21 @@ describe('Button component', () => {
 		const exampleColors = [
 			{
 				color: 'blue',
-				valueColor: palette.blue,
-				valueHover: palette.blueHover,
-				valuePressed: palette.bluePressed
+				valueColor: viewsPalette.blue,
+				valueHover: viewsPalette.blueHover,
+				valuePressed: viewsPalette.bluePressed
 			},
 			{
 				color: 'black',
-				valueColor: viewsPallet.black,
-				valueHover: viewsPallet.blackHover,
-				valuePressed: viewsPallet.blackPressed
+				valueColor: viewsPalette.black,
+				valueHover: viewsPalette.blackHover,
+				valuePressed: viewsPalette.blackPressed
 			},
 			{
 				color: 'grey',
-				valueColor: viewsPallet.grey,
-				valueHover: viewsPallet.greyHover,
-				valuePressed: viewsPallet.greyPressed
+				valueColor: viewsPalette.grey,
+				valueHover: viewsPalette.greyHover,
+				valuePressed: viewsPalette.greyPressed
 			}
 		];
 
@@ -81,15 +79,15 @@ describe('Button component', () => {
 
 		test('Should returns default colors', () => {
 			exampleInvalidColors.forEach((color) => {
-				expect(findColorInPalette(color)).toEqual(palette.blue);
-				expect(getHoverColor(color)).toEqual(palette.blueHover);
-				expect(getPressedColor(color)).toEqual(palette.bluePressed);
+				expect(getColor(color)).toEqual(viewsPalette.blue);
+				expect(getHoverColor(color)).toEqual(viewsPalette.blueHover);
+				expect(getPressedColor(color)).toEqual(viewsPalette.bluePressed);
 			});
 		});
 
 		test('Should returns correct colors', () => {
 			exampleColors.forEach(({ color, valueColor, valueHover, valuePressed }) => {
-				expect(findColorInPalette(color)).toEqual(valueColor);
+				expect(getColor(color)).toEqual(valueColor);
 				expect(getHoverColor(color)).toEqual(valueHover);
 				expect(getPressedColor(color)).toEqual(valuePressed);
 			});
