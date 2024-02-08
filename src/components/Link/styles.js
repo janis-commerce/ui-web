@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import Icon from 'components/Icon';
-import { findColorInPalette } from 'theme/utils';
+import { getColor } from 'theme/utils';
 
 export default {
 	LinkWrapper: styled.div`
 		display: flex;
-		color: ${findColorInPalette('blue')};
+		color: ${getColor('blue')};
 		align-items: center;
 		font-size: 13px;
 		& a {

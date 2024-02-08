@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { findColorInPalette, timingFunctions } from 'theme/utils';
+import { getColor, timingFunctions } from 'theme/utils';
 import mixins from 'theme/mixins';
 import colors from 'theme/palette';
 import { getButtonStyles } from './utils';
@@ -63,7 +63,7 @@ export default {
 		}
 		${getButtonStyles}
 		.button-icon {
-			fill: ${({ iconColor }) => findColorInPalette(iconColor)};
+			fill: ${({ iconColor }) => getColor(iconColor)};
 		}
 		${({ styles }) => styles};
 	`

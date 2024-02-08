@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import palette from 'theme/palette';
-import { findColorInPalette } from 'theme/utils';
+import { getColor } from 'theme/utils';
 import mixins from 'theme/mixins';
 import { mediaBreaks } from 'utils/devices';
 
@@ -83,8 +83,8 @@ export default {
 					`;
 				case 'status':
 					return css`
-						background-color: ${findColorInPalette(props.color || 'grey')};
-						color: ${findColorInPalette(props.sizeColor || 'white')};
+						background-color: ${getColor(props.color || 'grey')};
+						color: ${getColor(props.sizeColor || 'white')};
 						font-weight: 700;
 						border: none;
 						height: 24px;
@@ -98,12 +98,12 @@ export default {
 		}}
 		${(props) => props.styles};
 
-		${(props) => props.borderColor && `border: solid 1px ${findColorInPalette(props.borderColor)};`}
+		${(props) => props.borderColor && `border: solid 1px ${getColor(props.borderColor)};`}
 
 		${(props) =>
-			props.backgroundColor && `background-color: ${findColorInPalette(props.backgroundColor)};`}
+			props.backgroundColor && `background-color: ${getColor(props.backgroundColor)};`}
 
-		${(props) => props.textColor && `color: ${findColorInPalette(props.textColor)};`}
+		${(props) => props.textColor && `color: ${getColor(props.textColor)};`}
 
 		${mediaBreaks.onlyPrint`
 			border: 1px solid ${palette.darkGrey};
