@@ -2,8 +2,10 @@ import React from 'react';
 import Button from 'components/Button';
 import Icon from 'components/Icon';
 import palette from 'theme/palette';
-import { getColor, getHoverColor, getPressedColor } from './utils';
+import { getHoverColor, getPressedColor } from './utils';
 import { create } from 'react-test-renderer';
+import viewsPallet from 'theme/palette';
+import { findColorInPalette } from 'theme/utils';
 
 describe('Button component', () => {
 	describe('Component', () => {
@@ -79,7 +81,7 @@ describe('Button component', () => {
 
 		test('Should returns default colors', () => {
 			exampleInvalidColors.forEach((color) => {
-				expect(getColor(color)).toEqual(palette.blue);
+				expect(findColorInPalette(color)).toEqual(palette.blue);
 				expect(getHoverColor(color)).toEqual(palette.blueHover);
 				expect(getPressedColor(color)).toEqual(palette.bluePressed);
 			});
@@ -87,7 +89,7 @@ describe('Button component', () => {
 
 		test('Should returns correct colors', () => {
 			exampleColors.forEach(({ color, valueColor, valueHover, valuePressed }) => {
-				expect(getColor(color)).toEqual(valueColor);
+				expect(findColorInPalette(color)).toEqual(valueColor);
 				expect(getHoverColor(color)).toEqual(valueHover);
 				expect(getPressedColor(color)).toEqual(valuePressed);
 			});

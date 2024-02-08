@@ -1,7 +1,6 @@
 import { css } from 'styled-components';
 import { findColorInPalette } from 'theme/utils';
 import viewsPallet from 'theme/palette';
-import Icon from 'components/Icon';
 
 export const validColors = [
 	'black',
@@ -31,9 +30,9 @@ export const getPressedColor = (color) =>
 	isValidColor(color) ? viewsPallet[`${color}Pressed`] : bluePressed;
 
 const commonStyles = (color) => css`
-	color: ${getColor(color)};
-	${Icon} {
-		fill: ${getColor(color)};
+	color: ${findColorInPalette(color)};
+	.button-icon {
+		fill: ${findColorInPalette(color)};
 	}
 	&:after {
 		background-color: transparent;
@@ -50,7 +49,7 @@ const commonStyles = (color) => css`
 		&:after {
 			background-color: transparent;
 		}
-		${Icon} {
+		.button-icon {
 			fill: ${grey};
 		}
 	}
@@ -61,9 +60,9 @@ export const getButtonStyles = ({ fontColor, color, variant }) => {
 		contained: () => css`
 			color: ${fontColor ? findColorInPalette(fontColor) : white};
 			&:before {
-				background-color: ${getColor(color)};
+				background-color: ${findColorInPalette(color)};
 			}
-			${Icon} {
+			.button-icon {
 				fill: ${white};
 			}
 			&:focus:after,
