@@ -58,7 +58,7 @@ const commonStyles = (color) => css`
 export const getButtonStyles = ({ fontColor, color, variant }) => {
 	const variantStyles = {
 		contained: () => css`
-			color: ${fontColor ? findColorInTheme(fontColor) : white};
+			color: ${findColorInTheme(fontColor || 'white')};
 			&:before {
 				background-color: ${findColorInTheme(color)};
 			}
