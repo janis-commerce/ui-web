@@ -1,26 +1,14 @@
 import React from 'react';
-import Color from 'components/Color';
-import viewsPallet from 'theme/palette';
-import { storybook as styled } from 'theme/styles';
+import Colors from './Colors';
 
 export default {
 	title: 'Theme/Colors',
-	component: Color,
+	component: Colors,
 	parameters: {
 		layout: 'centered'
 	}
 };
-const colors = Object.values(viewsPallet);
 
-const Template = () => (
-	<styled.Grid>
-		{colors.map((data) => (
-			<styled.Item key={data}>
-				<span>{data}:</span>
-				<Color color={data} />
-			</styled.Item>
-		))}
-	</styled.Grid>
-);
+const Template = () => <Colors />;
 
 export const Base = Template.bind({});
