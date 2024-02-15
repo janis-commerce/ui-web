@@ -34,7 +34,6 @@ const baseArgs = {
 	children: 'Button',
 	hideLabel: false,
 	color: 'black',
-	icon: 'box',
 	iconColor: 'black',
 	iconSize: 24,
 	fontColor: 'white',
@@ -45,6 +44,7 @@ const baseArgs = {
 export const Contained = Template.bind({});
 export const Outlined = Template.bind({});
 export const Cleaned = Template.bind({});
+export const WithIcon = Template.bind({});
 
 Contained.args = {
 	...baseArgs,
@@ -60,4 +60,10 @@ Outlined.args = {
 Cleaned.args = {
 	...baseArgs,
 	variant: 'cleaned'
+};
+
+WithIcon.args = {
+	...baseArgs,
+	icon: 'box',
+	iconColor: 'white'
 };
