@@ -34,21 +34,19 @@ const commonStyles = (color) => css`
 	.button-icon {
 		fill: ${findColorInTheme(color)};
 	}
-	&:after {
-		background-color: transparent;
-	}
-	&:focus:after,
-	&:hover:after {
+	background: none;
+	&:focus,
+	&:hover {
 		background-color: ${lightGreyHover};
 	}
-	&:active:after {
+	&:active {
 		background-color: ${lightGrey};
 	}
 	&:disabled {
-		color: ${grey};
-		&:after {
+		&:hover {
 			background-color: transparent;
 		}
+		color: ${grey};
 		.button-icon {
 			fill: ${grey};
 		}
@@ -69,10 +67,13 @@ export const getButtonStyles = ({ fontColor, color, variant }) => {
 			&:hover:after {
 				background-color: ${getHoverColor(color)};
 			}
-			&:active:after {
+			&:active {
 				background-color: ${getPressedColor(color)};
 			}
 			&:disabled {
+				&:hover {
+					background-color: transparent;
+				}
 				&:before,
 				&:after {
 					background-color: ${grey};

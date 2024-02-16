@@ -33,7 +33,7 @@ const Template = (args) => <Button {...args} />;
 const baseArgs = {
 	children: 'Button',
 	hideLabel: false,
-	color: 'black',
+	color: 'blue',
 	iconColor: 'black',
 	iconSize: 24,
 	fontColor: 'white',
@@ -48,7 +48,6 @@ export const WithIcon = Template.bind({});
 
 Contained.args = {
 	...baseArgs,
-	color: 'red',
 	iconColor: 'white'
 };
 
