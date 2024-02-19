@@ -56,6 +56,7 @@ Button.propTypes = {
 	rounded: PropTypes.bool,
 	/** Habilita y deshabilita el boton  */
 	disabled: PropTypes.bool,
+	/** Permite aplicar estilos de css  */
 	styles: stylesPropType,
 	/** Variante de boton */
 	variant: PropTypes.oneOf(['cleaned', 'contained', 'outlined'])
@@ -64,7 +65,6 @@ Button.propTypes = {
 Button.defaultProps = {
 	color: 'blue',
 	rounded: false,
-	fontColor: 'white',
 	variant: 'cleaned',
 	disabled: false
 };

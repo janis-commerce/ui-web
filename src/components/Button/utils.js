@@ -29,10 +29,10 @@ export const getHoverColor = (color) =>
 export const getPressedColor = (color) =>
 	isValidColor(color) ? viewsPalette[`${color}Pressed`] : bluePressed;
 
-const commonStyles = (color) => css`
-	color: ${findColorInTheme(color)};
+const commonStyles = (iconColor, fontColor) => css`
+	color: ${findColorInTheme(fontColor || blue)};
 	.button-icon {
-		fill: ${findColorInTheme(color)};
+		fill: ${findColorInTheme(iconColor || blue)};
 	}
 	background: none;
 	&:focus,
@@ -43,9 +43,6 @@ const commonStyles = (color) => css`
 		background-color: ${lightGrey};
 	}
 	&:disabled {
-		&:hover {
-			background-color: transparent;
-		}
 		color: ${grey};
 		.button-icon {
 			fill: ${grey};
@@ -53,7 +50,7 @@ const commonStyles = (color) => css`
 	}
 `;
 
-export const getButtonStyles = ({ fontColor, color, variant }) => {
+export const getButtonStyles = ({ fontColor, color, variant, iconColor }) => {
 	const variantStyles = {
 		contained: () => css`
 			color: ${findColorInTheme(fontColor || 'white')};
@@ -71,9 +68,6 @@ export const getButtonStyles = ({ fontColor, color, variant }) => {
 				background-color: ${getPressedColor(color)};
 			}
 			&:disabled {
-				&:hover {
-					background-color: transparent;
-				}
 				&:before,
 				&:after {
 					background-color: ${grey};
@@ -84,7 +78,7 @@ export const getButtonStyles = ({ fontColor, color, variant }) => {
 			${commonStyles(color)};
 			border: 1px solid ${findColorInTheme(grey)};
 		`,
-		cleaned: () => commonStyles(color)
+		cleaned: () => commonStyles(iconColor, fontColor)
 	};
 
 	return variantStyles[variant] || '';

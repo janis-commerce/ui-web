@@ -10,6 +10,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - Changed icon in storybooks
+- Changed button theme
+- Changed Unified themes
+- Changed Button and Icon Test
+
+### Removed
+
+- Removed unused theme in favor to views actual theme
 
 ### Added
 

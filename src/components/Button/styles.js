@@ -61,6 +61,11 @@ export default {
 			fill: ${colors.white};
 			${mixins.transition('fill', '250ms')};
 		}
+		&:disabled {
+			&:hover {
+				background-color: transparent;
+			}
+		}
 		${getButtonStyles}
 		.button-icon {
 			fill: ${({ iconColor }) => getColor(iconColor)};
