@@ -21,10 +21,10 @@ export default {
 		variant: ['cleaned', 'contained', 'outlined'],
 		fontColor: { control },
 		color: { control },
-		iconColor: { control },
 		icon: {
 			options: Object.keys(icons)
-		}
+		},
+		iconColor: { control }
 	}
 };
 
