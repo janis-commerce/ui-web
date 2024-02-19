@@ -33,10 +33,8 @@ const Template = (args) => <Button {...args} />;
 const baseArgs = {
 	children: 'Button',
 	hideLabel: false,
-	color: 'blue',
 	iconColor: 'black',
 	iconSize: 24,
-	fontColor: 'white',
 	rounded: false,
 	variant: 'contained'
 };
