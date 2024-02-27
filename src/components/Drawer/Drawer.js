@@ -1,31 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'components/Icon';
 import styled from './styles';
 
 const Modal = ({ open, position, handleClose, transitionDuration, children }) => {
-	const [drawerWidthOnClose, setDrawerWidthOnClose] = useState('0');
-
-	// useEffect to check the drawer width when drawer__content is closed
-	useEffect(() => {
-		const drawerContentEl = document.querySelector('.drawer__content');
-		if (!drawerContentEl) return;
-		const setWrapperWidth = () => {
-			const isContentVisible = drawerContentEl.checkVisibility({ checkVisibilityCSS: true });
-			setDrawerWidthOnClose(isContentVisible ? '100%' : '0');
-		};
-		drawerContentEl.addEventListener('transitionend', setWrapperWidth);
-	}, []);
-
-	const drawerStyles = {
-		...(open && { width: '100%' }),
-		...(!open && { width: drawerWidthOnClose }),
-		...((position === 'right' || position === 'left') && {
-			top: 0
-		}),
-		[position]: 0
-	};
-
 	const overlayStyles = {
 		zIndex: 100
 	};
@@ -35,18 +13,12 @@ const Modal = ({ open, position, handleClose, transitionDuration, children }) =>
 	};
 
 	return (
-		<styled.Drawer className="drawer" style={drawerStyles}>
-			<styled.Checkbox
-				type="checkbox"
-				id="drawer__checkbox"
-				checked={open}
-				onChange={handleClose}
-			/>
-			<styled.Content
+		<>
+			<styled.Drawer
 				open={open}
 				position={position}
 				transitionDuration={transitionDuration}
-				className="drawer__content"
+				className="drawer"
 				style={contentStyles}
 			>
 				<styled.Header>
@@ -57,13 +29,13 @@ const Modal = ({ open, position, handleClose, transitionDuration, children }) =>
 					)}
 				</styled.Header>
 				<styled.Children>{children}</styled.Children>
-			</styled.Content>
+			</styled.Drawer>
 			<styled.Overlay
-				htmlFor="drawer__checkbox"
 				className="drawer__overlay"
+				transitionDuration={transitionDuration}
 				style={overlayStyles}
 			/>
-		</styled.Drawer>
+		</>
 	);
 };
 
