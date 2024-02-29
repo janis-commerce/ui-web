@@ -1,59 +1,70 @@
 import styled, { css } from 'styled-components';
 import Button from 'components/Button';
 
+const getPropertyForTransition = (position) =>
+	position === 'right' || position === 'left' ? 'max-width' : 'max-height';
+
 const setPosition = (position, open) => {
 	switch (position) {
 		case 'top':
 			return css`
 				width: 100%;
-				height: auto;
+				${({ fullScreen }) => fullScreen && 'height: 100%'};
+				max-height: ${open ? '100%' : 0};
 				left: 0;
 				right: 0;
 				top: 0;
-				transform: ${open ? 'scaleY(1)' : 'scaleY(0)'};
-				transform-origin: top;
 			`;
 		case 'bottom':
 			return css`
 				width: 100%;
-				height: auto;
+				${({ fullScreen }) => fullScreen && 'height: 100%'};
+				max-height: ${open ? '100%' : 0};
 				left: 0;
 				right: 0;
 				bottom: 0;
-				transform: ${open ? 'scaleY(1)' : 'scaleY(0)'};
-				transform-origin: bottom;
 			`;
 		case 'left':
 			return css`
+				height: 100%;
+				${({ fullScreen }) => fullScreen && 'width: 100%'};
+				max-width: ${open ? '100%' : 0};
 				top: 0;
 				left: 0;
-				transform: ${open ? 'scaleX(1)' : 'scaleX(0)'};
-				transform-origin: left;
 			`;
 		default:
 			return css`
+				height: 100%;
+				${({ fullScreen }) => fullScreen && 'width: 100%'};
+				max-width: ${open ? '100%' : 0};
 				top: 0;
 				right: 0;
-				transform: ${open ? 'scaleX(1)' : 'scaleX(0)'};
-				transform-origin: right;
 			`;
 	}
 };
 
 const Drawer = styled.div`
-	min-width: 200px;
-	height: 100%;
 	box-sizing: border-box;
 	background-color: #ffffff;
-	overflow: auto;
+	overflow: hidden;
 	position: absolute;
 	box-shadow: 0px 2px 5px 0px #27394727;
 	border-radius: 3px;
+	${({ position, open, transitionDuration }) => {
+		const transitionTime = transitionDuration / 1000;
+		return css`
+			${position && setPosition(position, open)};
+			${transitionDuration &&
+			`transition: ${getPropertyForTransition(position)} ${transitionTime}s ease`};
+		`;
+	}};
+`;
+
+const Content = styled.div`
+	min-height: 300px;
+	min-width: 300px;
+	box-sizing: border-box;
 	padding: 16px 28px 32px 32px;
-	${({ position, open }) => setPosition(position, open)};
-	${({ transitionDuration }) =>
-		transitionDuration &&
-		`transition: transform ${transitionDuration / 1000}s cubic-bezier(0.82, 0.085, 0.395, 0.895)`};
 `;
 
 const Header = styled.div`
@@ -61,6 +72,7 @@ const Header = styled.div`
 	justify-content: space-between;
 	align-items: center;
 	width: 100%;
+	box-sizing: border-box;
 `;
 
 const CloseBtn = styled(Button)`
@@ -73,7 +85,9 @@ const CloseBtn = styled(Button)`
 	margin-left: auto;
 `;
 
-const Children = styled.div``;
+const Children = styled.div`
+	width: inherit;
+`;
 
 const Overlay = styled.div`
 	position: absolute;
@@ -87,6 +101,7 @@ const Overlay = styled.div`
 
 export default {
 	Drawer,
+	Content,
 	Header,
 	CloseBtn,
 	Children,

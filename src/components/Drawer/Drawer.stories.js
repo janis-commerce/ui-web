@@ -1,4 +1,6 @@
 import React from 'react';
+import { useArgs } from '@storybook/addons';
+import Button from '../Button';
 import Drawer from './Drawer';
 
 const control = {
@@ -35,10 +37,8 @@ const Template = (args) => {
 };
 
 const TemplateWithHeader = (args) => {
-	const [isOpen, setIsOpen] = React.useState(false);
-	const toggleDrawer = () => {
-		setIsOpen(!isOpen);
-	};
+	const [{ open }, updateArgs] = useArgs();
+	const toggleDrawer = () => updateArgs({ open: !open });
 
 	return (
 		<div
@@ -66,10 +66,18 @@ const TemplateWithHeader = (args) => {
 				Header
 			</div>
 			<div style={{ position: 'relative', height: '500px' }}>
-				<div>
-					<button onClick={toggleDrawer}>abrir</button>
+				<div style={{ padding: '10px' }}>
+					<Button
+						icon={`${!open ? 'plus' : 'minus'}_bold_medium`}
+						iconColor="white"
+						iconSize={16}
+						variant="contained"
+						rounded
+						hideLabel
+						onClick={toggleDrawer}
+					/>
 				</div>
-				<Drawer {...args} open={isOpen} handleClose={toggleDrawer}>
+				<Drawer {...args} open={open} handleClose={toggleDrawer}>
 					<div style={{ display: 'flex', flexDirection: 'column' }}>
 						<div style={{ marginTop: '10px' }}>
 							<span style={{ display: 'block', marginBottom: '10px' }}>Conductor</span>
@@ -110,7 +118,9 @@ const baseArgs = {
 	position: 'right',
 	handleClose: () => {},
 	transitionDuration: 500,
-	children: 'This is a drawer'
+	fullScreen: false,
+	children: 'This is a drawer',
+	closeOnClickAway: true
 };
 
 export const Base = Template.bind({});
@@ -121,5 +131,6 @@ Base.args = {
 };
 
 WithHeader.args = {
-	...baseArgs
+	...baseArgs,
+	closeOnClickAway: false
 };
