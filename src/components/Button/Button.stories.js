@@ -21,10 +21,10 @@ export default {
 		variant: ['cleaned', 'contained', 'outlined'],
 		fontColor: { control },
 		color: { control },
-		iconColor: { control },
 		icon: {
 			options: Object.keys(icons)
-		}
+		},
+		iconColor: { control }
 	}
 };
 
@@ -33,11 +33,8 @@ const Template = (args) => <Button {...args} />;
 const baseArgs = {
 	children: 'Button',
 	hideLabel: false,
-	color: 'black',
-	icon: 'box',
 	iconColor: 'black',
 	iconSize: 24,
-	fontColor: 'white',
 	rounded: false,
 	variant: 'contained'
 };
@@ -45,10 +42,10 @@ const baseArgs = {
 export const Contained = Template.bind({});
 export const Outlined = Template.bind({});
 export const Cleaned = Template.bind({});
+export const WithIcon = Template.bind({});
 
 Contained.args = {
 	...baseArgs,
-	color: 'red',
 	iconColor: 'white'
 };
 
@@ -60,4 +57,10 @@ Outlined.args = {
 Cleaned.args = {
 	...baseArgs,
 	variant: 'cleaned'
+};
+
+WithIcon.args = {
+	...baseArgs,
+	icon: 'box',
+	iconColor: 'white'
 };

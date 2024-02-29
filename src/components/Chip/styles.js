@@ -9,7 +9,7 @@ export default {
 		padding: ${(props) => (!props.onlyIcon ? '0 12px' : '0')};
 		cursor: ${(props) => (props.clickable ? 'pointer' : 'default')};
 		font-size: 13px;
-		color: ${palette.black.main};
+		color: ${palette.black};
 		height: ${(props) => (!props.onlyIcon ? '32px' : '36px')};
 		width: ${(props) => props.onlyIcon && '36px'};
 		min-width: 36px;
@@ -29,62 +29,62 @@ export default {
 			switch (props.variant) {
 				case 'outlined':
 					return css`
-						border: 1px solid ${props.selected ? palette.primary.main : '#EAEBED'};
-						color: ${props.selected ? palette.primary.main : palette.black.main};
+						border: 1px solid ${props.selected ? palette.blue : '#EAEBED'};
+						color: ${props.selected ? palette.blue : palette.black};
 
 						&:hover {
-							background-color: ${palette.white.hover};
+							background-color: ${palette.lightGreyHover};
 						}
 						&:hover .chip-icon,
 						&:hover .delete-button {
-							fill: ${props.selected ? palette.primary.main : palette.black.main};
+							fill: ${props.selected ? palette.blue : palette.black};
 						}
 						&:active {
-							border-color: ${palette.primary.main};
-							color: ${palette.primary.main};
+							border-color: ${palette.blue};
+							color: ${palette.blue};
 							background-color: transparent;
 						}
 						&:active .chip-icon,
 						&:active .delete-button {
-							fill: ${palette.primary.main};
+							fill: ${palette.blue};
 						}
 					`;
 				case 'contained':
 					return css`
-						background-color: ${props.selected ? palette.primary.main : palette.white.hover};
-						color: ${props.selected ? palette.base.white : palette.black.main};
+						background-color: ${props.selected ? palette.blue : palette.lightGreyHover};
+						color: ${props.selected ? palette.white : palette.black};
 
 						.chip-icon {
-							fill: ${props.selected ? palette.base.white : palette.black.main};
+							fill: ${props.selected ? palette.white : palette.black};
 						}
 						.delete-button {
-							fill: ${props.selected ? palette.base.white : palette.grey.dark};
+							fill: ${props.selected ? palette.white : palette.darkGrey};
 						}
 
 						&:hover {
-							background-color: ${props.selected ? palette.primary.mainHover : palette.white.main};
+							background-color: ${props.selected ? palette.blueHover : palette.lightGrey};
 						}
 						&:hover .delete-button {
-							fill: ${props.selected ? palette.base.white : palette.black.main};
+							fill: ${props.selected ? palette.white : palette.black};
 						}
 						&:active {
-							background-color: ${palette.primary.main};
-							color: ${palette.base.white};
+							background-color: ${palette.blue};
+							color: ${palette.white};
 						}
 						&:active .chip-icon,
 						&:active .delete-button {
-							fill: ${palette.base.white};
+							fill: ${palette.white};
 						}
 
 						&:disabled {
-							fill: ${palette.grey.main};
-							color: ${palette.grey.main};
+							fill: ${palette.grey};
+							color: ${palette.grey};
 						}
 					`;
 				case 'status':
 					return css`
 						background-color: ${getColor(props.color || 'grey')};
-						color: ${getColor(props.sizeColor || 'base.white')};
+						color: ${getColor(props.sizeColor || 'white')};
 						font-weight: 700;
 						border: none;
 						height: 24px;
@@ -100,12 +100,13 @@ export default {
 
 		${(props) => props.borderColor && `border: solid 1px ${getColor(props.borderColor)};`}
 
-		${(props) => props.backgroundColor && `background-color: ${getColor(props.backgroundColor)};`}
+		${(props) =>
+			props.backgroundColor && `background-color: ${getColor(props.backgroundColor)};`}
 
 		${(props) => props.textColor && `color: ${getColor(props.textColor)};`}
 
 		${mediaBreaks.onlyPrint`
-			border: 1px solid ${palette.grey.dark};
+			border: 1px solid ${palette.darkGrey};
 		`}
 	`,
 	iconPathStyles: css`

@@ -1,9 +1,9 @@
 import React from 'react';
 import Button from 'components/Button';
 import Icon from 'components/Icon';
-import palette from 'theme/palette';
 import { getColor, getHoverColor, getPressedColor } from './utils';
 import { create } from 'react-test-renderer';
+import viewsPalette from 'theme/palette';
 
 describe('Button component', () => {
 	describe('Component', () => {
@@ -40,11 +40,11 @@ describe('Button component', () => {
 		test('Should render correctly diferents buttons', () => {
 			const children = 'SomeText';
 			const wrapperOne = create(
-				<Button icon="box" color="primary" iconColor="white" fontColor="white">
+				<Button icon="box" color="blue" iconColor="white" fontColor="white">
 					{children}
 				</Button>
 			);
-			const wrapperTwo = create(<Button icon="box" color="primary" iconColor="white" rounded />);
+			const wrapperTwo = create(<Button icon="box" color="blue" iconColor="white" rounded />);
 			const wrapperThree = create(<Button disabled>{children}</Button>);
 
 			expect(wrapperOne.toJSON()).toBeTruthy();
@@ -56,32 +56,32 @@ describe('Button component', () => {
 	describe('Utils', () => {
 		const exampleColors = [
 			{
-				color: 'primary',
-				valueColor: palette.primary.main,
-				valueHover: palette.primary.hover,
-				valuePressed: palette.primary.pressed
-			},
-			{
 				color: 'blue',
-				valueColor: palette.blue,
-				valueHover: palette.blueHover,
-				valuePressed: palette.bluePressed
+				valueColor: viewsPalette.blue,
+				valueHover: viewsPalette.blueHover,
+				valuePressed: viewsPalette.bluePressed
 			},
 			{
-				color: 'grey.dark',
-				valueColor: palette.grey.dark,
-				valueHover: palette.grey.darkHover,
-				valuePressed: palette.grey.darkPressed
+				color: 'black',
+				valueColor: viewsPalette.black,
+				valueHover: viewsPalette.blackHover,
+				valuePressed: viewsPalette.blackPressed
+			},
+			{
+				color: 'grey',
+				valueColor: viewsPalette.grey,
+				valueHover: viewsPalette.greyHover,
+				valuePressed: viewsPalette.greyPressed
 			}
 		];
 
-		const exampleInvalidColors = ['base.white', 'transparentWhite'];
+		const exampleInvalidColors = ['transparentWhite'];
 
 		test('Should returns default colors', () => {
 			exampleInvalidColors.forEach((color) => {
-				expect(getColor(color)).toEqual(palette.blue);
-				expect(getHoverColor(color)).toEqual(palette.blueHover);
-				expect(getPressedColor(color)).toEqual(palette.bluePressed);
+				expect(getColor(color)).toEqual(viewsPalette.blue);
+				expect(getHoverColor(color)).toEqual(viewsPalette.blueHover);
+				expect(getPressedColor(color)).toEqual(viewsPalette.bluePressed);
 			});
 		});
 

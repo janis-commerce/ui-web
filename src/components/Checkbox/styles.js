@@ -3,8 +3,10 @@ import { timingFunctions, getColor } from 'theme/utils';
 
 export default {
 	Container: styled.label`
-		background: ${(props) => (props.checked ? getColor('blue') : getColor('base.white'))};
-		border: 1px solid ${(props) => (props.checked ? getColor('blue') : getColor('black'))};
+		background: ${(props) =>
+			props.checked ? getColor('blue') : getColor('white')};
+		border: 1px solid
+			${(props) => (props.checked ? getColor('blue') : getColor('black'))};
 		border-radius: ${(props) => (props.rounded ? '50' : '3')}px;
 		width: 16px;
 		height: 16px;
@@ -24,7 +26,7 @@ export default {
 	`,
 	iconCheckStyles: css`
 		transform: translateY(-5%);
-		fill: ${getColor('base.white')};
+		fill: ${getColor('white')};
 		${(props) =>
 			!!props.rounded &&
 			`
