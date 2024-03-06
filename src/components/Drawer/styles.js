@@ -4,43 +4,42 @@ import Button from 'components/Button';
 const getPropertyForTransition = (position) =>
 	position === 'right' || position === 'left' ? 'max-width' : 'max-height';
 
+const verticalCommonStyles = (open) => css`
+	width: 100%;
+	${({ fullScreen }) => fullScreen && 'height: 100%'};
+	max-height: ${open ? '100%' : 0};
+	left: 0;
+	right: 0;
+`;
+
+const horizontalCommonStyles = (open) => css`
+	height: 100%;
+	${({ fullScreen }) => fullScreen && 'width: 100%'};
+	max-width: ${open ? '100%' : 0};
+	top: 0;
+`;
+
 const setPosition = (position, open) => {
-	switch (position) {
-		case 'top':
-			return css`
-				width: 100%;
-				${({ fullScreen }) => fullScreen && 'height: 100%'};
-				max-height: ${open ? '100%' : 0};
-				left: 0;
-				right: 0;
-				top: 0;
-			`;
-		case 'bottom':
-			return css`
-				width: 100%;
-				${({ fullScreen }) => fullScreen && 'height: 100%'};
-				max-height: ${open ? '100%' : 0};
-				left: 0;
-				right: 0;
-				bottom: 0;
-			`;
-		case 'left':
-			return css`
-				height: 100%;
-				${({ fullScreen }) => fullScreen && 'width: 100%'};
-				max-width: ${open ? '100%' : 0};
-				top: 0;
-				left: 0;
-			`;
-		default:
-			return css`
-				height: 100%;
-				${({ fullScreen }) => fullScreen && 'width: 100%'};
-				max-width: ${open ? '100%' : 0};
-				top: 0;
-				right: 0;
-			`;
-	}
+	const positions = {
+		top: () => css`
+			${verticalCommonStyles(open)};
+			top: 0;
+		`,
+		bottom: () => css`
+			${verticalCommonStyles(open)};
+			bottom: 0;
+		`,
+		left: () => css`
+			${horizontalCommonStyles(open)};
+			left: 0;
+		`,
+		right: () => css`
+			${horizontalCommonStyles(open)};
+			right: 0;
+		`
+	};
+
+	return positions[position];
 };
 
 const Drawer = styled.div`
@@ -58,6 +57,7 @@ const Drawer = styled.div`
 			`transition: ${getPropertyForTransition(position)} ${transitionTime}s ease`};
 		`;
 	}};
+	z-index: 999;
 `;
 
 const Content = styled.div`
@@ -95,8 +95,9 @@ const Overlay = styled.div`
 	height: 100%;
 	top: 0;
 	left: 0;
-	visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
-	pointer-events: ${({ open }) => (open ? 'auto' : 'none')};
+	visibility: hidden;
+	pointer-events: none;
+	z-index: 998;
 `;
 
 export default {
