@@ -101,8 +101,7 @@ Chip.defaultProps = {
 	selected: false,
 	textColor: '',
 	variant: 'outlined',
-	hasLink: false,
-	onDelete: false
+	hasLink: false
 };
 
 export default Chip;
