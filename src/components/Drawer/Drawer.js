@@ -13,22 +13,10 @@ const Drawer = ({
 	closeOnClickAway,
 	children
 }) => {
-	const overlayStyles = {
-		zIndex: 100
-	};
-
-	const contentStyles = {
-		zIndex: overlayStyles.zIndex + 1
-	};
-
 	const drawerRef = useRef(null);
 
-	const handleOnClickAway = () => {
-		if (open) handleClose();
-	};
-
 	return (
-		<ClickAwayListener onClickAway={closeOnClickAway && handleOnClickAway}>
+		<ClickAwayListener onClickAway={closeOnClickAway && open && handleClose}>
 			<>
 				<styled.Drawer
 					open={open}
@@ -36,7 +24,6 @@ const Drawer = ({
 					transitionDuration={transitionDuration}
 					fullScreen={fullScreen}
 					className="drawer"
-					style={contentStyles}
 					ref={drawerRef}
 				>
 					<styled.Content className="drawer__content">
@@ -50,11 +37,7 @@ const Drawer = ({
 						<styled.Children>{children}</styled.Children>
 					</styled.Content>
 				</styled.Drawer>
-				<styled.Overlay
-					className="drawer__overlay"
-					transitionDuration={transitionDuration}
-					style={overlayStyles}
-				/>
+				<styled.Overlay className="drawer__overlay" transitionDuration={transitionDuration} />
 			</>
 		</ClickAwayListener>
 	);
@@ -63,12 +46,19 @@ const Drawer = ({
 export default Drawer;
 
 Drawer.propTypes = {
+	/** Abre o cierra el Drawer */
 	open: PropTypes.bool,
+	/** Posición del drawer en la pantalla */
 	position: PropTypes.string,
+	/** Función para cerrar el drawer desde la cruz */
 	handleClose: PropTypes.func,
+	/** Duración de la transición al abrir y cerrar el drawer */
 	transitionDuration: PropTypes.number,
+	/** Pantalla completa */
 	fullScreen: PropTypes.bool,
+	/** El drawer se cierra al clickear por fuera del mismo */
 	closeOnClickAway: PropTypes.bool,
+	/** Contenido del drawer */
 	children: PropTypes.node
 };
 

@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 const ClickAwayListener = ({ nodeRef, onClickAway, className, children }) => {
 	let node = undefined;
@@ -25,3 +26,15 @@ const ClickAwayListener = ({ nodeRef, onClickAway, className, children }) => {
 };
 
 export default ClickAwayListener;
+
+ClickAwayListener.propTypes = {
+	nodeRef: PropTypes.node,
+	onClickAway: PropTypes.func,
+	className: PropTypes.string,
+	children: PropTypes.node
+};
+
+ClickAwayListener.defaultProps = {
+	onClickAway: () => {},
+	className: ''
+};
