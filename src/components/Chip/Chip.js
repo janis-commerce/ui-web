@@ -62,23 +62,34 @@ const Chip = ({
 };
 
 Chip.propTypes = {
+	/** Permite cambiar el color de fondo del componente */
 	backgroundColor: PropTypes.string,
+	/** Permite modificar el color del borde del componente */
 	borderColor: PropTypes.string,
+	/** Hijo del componente */
 	children: PropTypes.node,
-	// Si es true deshabilita el chip
+	/** Si es true deshabilita el chip */
 	disabled: PropTypes.bool,
+	/** Icono a mostrar dentro del chip */
 	icon: PropTypes.string,
+	/** Permite modificar el color del icono */
 	iconColor: PropTypes.string,
+	/** Función a ejecutar al clickar */
 	onClick: PropTypes.func,
+	/** Función a ejecutar para borrar */
 	onDelete: PropTypes.func,
-	// Si es true mantiene el chip seleccionado
+	/** Si es true mantiene el chip seleccionado */
 	selected: PropTypes.bool,
+	/** Permite aplicar estilos adicionales */
 	styles: PropTypes.oneOfType([
 		PropTypes.string,
 		PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.func]))
 	]),
+	/** Permite modificar el color del texto */
 	textColor: PropTypes.string,
+	/** Permite seleccionar las distintas variantes del componente */
 	variant: PropTypes.oneOf(['contained', 'outlined', 'status']),
+	/** Si es true aplica eventos de link */
 	hasLink: PropTypes.bool
 };
 
@@ -90,7 +101,8 @@ Chip.defaultProps = {
 	selected: false,
 	textColor: '',
 	variant: 'outlined',
-	hasLink: false
+	hasLink: false,
+	onDelete: false
 };
 
 export default Chip;

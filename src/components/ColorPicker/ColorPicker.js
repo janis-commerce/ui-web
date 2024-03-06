@@ -59,10 +59,14 @@ const ColorPicker = ({ color, isCollapsable, onChange, errorMessage, error }) =>
 };
 
 ColorPicker.propTypes = {
+	/** Código del color */
 	color: PropTypes.string,
 	onChange: PropTypes.func,
+	/** Agrega un input con el código del color */
 	isCollapsable: PropTypes.bool,
+	/** Si es true, el input del colapsable aparece con error */
 	error: PropTypes.bool,
+	/** Texto a mostrar en caso de error */
 	errorMessage: PropTypes.string
 };
 

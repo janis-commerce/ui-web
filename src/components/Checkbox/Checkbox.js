@@ -48,9 +48,11 @@ Checkbox.propTypes = {
 	defaultChecked: PropTypes.bool,
 	/** Callback disparado al cambiar el valor de checked */
 	onChange: PropTypes.func,
+	/** Si es true, redondea el componente */
 	rounded: PropTypes.bool,
 	/** Si es true, deshabilita el componente */
 	disabled: PropTypes.bool,
+	/** Permite aplicar estilos adicionales */
 	styles: PropTypes.shape({}),
 	/** Valor del componente en caso de mostrar contenido ya existente */
 	value: PropTypes.oneOfType([PropTypes.bool, PropTypes.number])

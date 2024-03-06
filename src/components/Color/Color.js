@@ -17,7 +17,9 @@ const Color = ({ color, showLabel }) => {
 };
 
 Color.propTypes = {
+	/** Permite modificar el color del componente */
 	color: PropTypes.string,
+	/** Si es true, muestra el código del color */
 	showLabel: PropTypes.bool
 };
 

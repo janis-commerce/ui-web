@@ -127,6 +127,7 @@ Textarea.propTypes = {
 	hasFloatingLabel: PropTypes.bool,
 	/** Atributo name del elemento textarea */
 	name: PropTypes.string,
+	/** Valor del floating label */
 	label: PropTypes.string,
 	/** Callback disparado cuando se sale del foco del textarea */
 	onBlur: PropTypes.func,

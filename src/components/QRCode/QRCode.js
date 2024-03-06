@@ -9,7 +9,9 @@ const QRCode = ({ value, size }) => {
 };
 
 QRCode.propTypes = {
+	/** Url hacia donde dirige el QR */
 	value: PropTypes.string.isRequired,
+	/** Permite modificar el tamaño del componente */
 	size: PropTypes.number
 };
 

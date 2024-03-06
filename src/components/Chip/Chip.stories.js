@@ -22,6 +22,7 @@ export default {
 		backgroundColor: { control },
 		textColor: { control },
 		borderColor: { control },
+		color: { control },
 		iconColor: { control },
 		icon: {
 			type: 'select',
@@ -34,15 +35,7 @@ const Template = (args) => <Chip {...args} />;
 
 const baseArgs = {
 	children: 'Chip',
-	backgroundColor: 'grey',
-	borderColor: 'black',
-	disabled: false,
-	icon: 'box',
-	iconColor: 'black',
-	selected: false,
-	textColor: 'black',
 	variant: 'contained',
-	hasLink: false,
 	onDelete: false
 };
 
