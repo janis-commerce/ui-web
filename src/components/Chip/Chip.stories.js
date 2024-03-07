@@ -34,15 +34,7 @@ const Template = (args) => <Chip {...args} />;
 
 const baseArgs = {
 	children: 'Chip',
-	backgroundColor: 'grey',
-	borderColor: 'black',
-	disabled: false,
-	icon: 'box',
-	iconColor: 'black',
-	selected: false,
-	textColor: 'black',
 	variant: 'contained',
-	hasLink: false,
 	onDelete: false
 };
 
@@ -51,8 +43,7 @@ export const Outlined = Template.bind({});
 export const Status = Template.bind({});
 
 Contained.args = {
-	...baseArgs,
-	color: 'red'
+	...baseArgs
 };
 
 Outlined.args = {
