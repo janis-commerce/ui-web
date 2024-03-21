@@ -7,19 +7,25 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.10.0] - 2022-03-12
+## [0.11.0] - 2024-03-21
+
+### Added
+
+- Props component documentation
+
+## [0.10.0] - 2024-03-12
 
 ### Added
 
 - Added Drawer component
 
-## [0.9.1] - 2022-02-29
+## [0.9.1] - 2024-02-29
 
 ### Fixed
 
 - Fixed fontcolor of buttons
 
-## [0.9.0] - 2022-02-19
+## [0.9.0] - 2024-02-19
 
 ### Changed
 
@@ -36,7 +42,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 - Added controls in storybooks
 
-## [0.8.0] - 2022-01-23
+## [0.8.0] - 2024-01-23
 
 ### Changed
 
