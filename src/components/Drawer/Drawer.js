@@ -11,7 +11,8 @@ const Drawer = ({
 	transitionDuration,
 	fullScreen,
 	closeOnClickAway,
-	children
+	children,
+	...props
 }) => {
 	const drawerRef = useRef(null);
 
@@ -25,6 +26,7 @@ const Drawer = ({
 					fullScreen={fullScreen}
 					className="drawer"
 					ref={drawerRef}
+					{...props}
 				>
 					<styled.Content className="drawer__content">
 						<styled.Header>
