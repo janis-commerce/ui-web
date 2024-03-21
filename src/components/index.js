@@ -12,6 +12,8 @@ import ColorPicker from './ColorPicker';
 import HTML from './HTML';
 import ErrorBoundary from './ErrorBoundary';
 import Link from './Link';
+import Drawer from './Drawer';
+import ClickAwayListener from './ClickAwayListener';
 
 export {
 	ErrorBoundary,
@@ -27,5 +29,7 @@ export {
 	Link,
 	QRCode,
 	ColorPicker,
-	HTML
+	HTML,
+	Drawer,
+	ClickAwayListener
 };

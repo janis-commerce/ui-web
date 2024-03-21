@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.10.0] - 2022-03-12
+
+### Added
+
+- Added Drawer component
+
 ## [0.9.1] - 2022-02-29
 
 ### Fixed
