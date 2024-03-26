@@ -24,8 +24,8 @@ export default {
 const Template = (args) => <Avatar {...args} />;
 
 const baseArgs = {
-	size: 'extralarge',
-	rounded: true
+	rounded: true,
+	size: 'extralarge'
 };
 
 export const WithURL = Template.bind({});
