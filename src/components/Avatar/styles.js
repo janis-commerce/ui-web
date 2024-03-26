@@ -17,7 +17,7 @@ export default {
 	Image: styled.img`
 		width: ${({ size }) => size};
 		height: ${({ size }) => size};
-		display: flex;
+		display: ${({ show }) => (show ? 'flex' : 'none')};
 		border-radius: ${({ rounded }) => (rounded ? '50%' : '3px')};
 	`
 };

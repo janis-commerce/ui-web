@@ -4,8 +4,11 @@ import useDevices from 'hooks/useDevices';
 import { getImageMeasurements } from 'theme/utils';
 import styled from './styles';
 import { getInitialsTheme, getUserColor } from './utils';
+import Skeleton from 'react-loading-skeleton';
 
 const Avatar = ({ firstname, lastname, mainColor, size, url, rounded }) => {
+	const [loading, setLoading] = useState(true);
+
 	const [image, setImage] = useState(url);
 	const [initialsData, setInitialsData] = useState();
 
@@ -21,13 +24,18 @@ const Avatar = ({ firstname, lastname, mainColor, size, url, rounded }) => {
 	const getInitials = () => (initials ? setInitialsData(initials) : setImage(defaultUserImage));
 
 	return !initialsData ? (
-		<styled.Image
-			src={url || image}
-			alt={`${firstname} ${lastname}`}
-			onError={getInitials}
-			size={imageSize}
-			rounded={rounded}
-		/>
+		<>
+			<styled.Image
+				src={url || image}
+				alt={`${firstname} ${lastname}`}
+				onError={getInitials}
+				onLoad={() => setLoading(false)}
+				show={!loading}
+				size={imageSize}
+				rounded={rounded}
+			/>
+			{loading && <Skeleton circle={rounded} width={imageSize} height={imageSize} />}
+		</>
 	) : (
 		<styled.Initials color={mainColor || getUserColor(initials)} size={imageSize} rounded={rounded}>
 			{initialsData}
