@@ -25,7 +25,7 @@ const Template = (args) => <Avatar {...args} />;
 
 const baseArgs = {
 	rounded: true,
-	size: 'extralarge'
+	size: 'large'
 };
 
 export const WithURL = Template.bind({});
@@ -34,7 +34,7 @@ export const WithName = Template.bind({});
 
 WithURL.args = {
 	...baseArgs,
-	url: 'https://avatars.githubusercontent.com/u/64233677?v=4'
+	url: '	https://janiscommerce.atlassian.net/wiki/aa-avatar/6345ddf753df3c01231fe83f'
 };
 
 Default.args = {

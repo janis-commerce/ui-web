@@ -15,6 +15,7 @@ import ErrorBoundary from './ErrorBoundary';
 import Link from './Link';
 import Drawer from './Drawer';
 import ClickAwayListener from './ClickAwayListener';
+import Skeleton from './Skeleton';
 
 export {
 	ErrorBoundary,
@@ -32,6 +33,7 @@ export {
 	Input,
 	Link,
 	QRCode,
+	Skeleton,
 	Switch,
 	Textarea
 };

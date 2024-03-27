@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import useDevices from 'hooks/useDevices';
 import { getImageMeasurements } from 'theme/utils';
+import Skeleton from 'components/Skeleton';
 import styled from './styles';
 import { getInitialsTheme, getUserColor } from './utils';
-import Skeleton from 'react-loading-skeleton';
 
 const Avatar = ({ firstname, lastname, mainColor, size, url, rounded }) => {
 	const [loading, setLoading] = useState(true);
