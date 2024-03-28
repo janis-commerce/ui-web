@@ -1,3 +1,4 @@
+import Avatar from './Avatar';
 import Button from './Button';
 import Checkbox from './Checkbox';
 import Chip from './Chip';
@@ -14,22 +15,25 @@ import ErrorBoundary from './ErrorBoundary';
 import Link from './Link';
 import Drawer from './Drawer';
 import ClickAwayListener from './ClickAwayListener';
+import Skeleton from './Skeleton';
 
 export {
 	ErrorBoundary,
+	Avatar,
 	Button,
 	Checkbox,
 	Chip,
+	ClickAwayListener,
 	Color,
+	ColorPicker,
+	Drawer,
+	HTML,
 	Icon,
-	Switch,
-	Input,
-	Textarea,
 	Image,
+	Input,
 	Link,
 	QRCode,
-	ColorPicker,
-	HTML,
-	Drawer,
-	ClickAwayListener
+	Skeleton,
+	Switch,
+	Textarea
 };

@@ -17,4 +17,26 @@ const timingFunctions = {
 	accelerate: 'cubic-bezier(0.4, 0.0, 1, 1)'
 };
 
-export { getColor, timingFunctions };
+/**
+ * @name getImageMeasurements
+ * @description return color from palette
+ * @param {string} size
+ * @param {boolean} isDesktop
+ * @returns {string}
+ * @example getImageMeasurements('large', true) // '36px'
+ */
+const getImageMeasurements = (size, isDesktop) => {
+	if (!Number.isNaN(Number(size))) return `${size}px`;
+
+	const imageSizes = {
+		small: '24px',
+		medium: '32px',
+		large: '36px',
+		extralarge: isDesktop ? '140px' : '100px',
+		auto: 'auto'
+	};
+
+	return imageSizes[size] || imageSizes.small;
+};
+
+export { getColor, getImageMeasurements, timingFunctions };
