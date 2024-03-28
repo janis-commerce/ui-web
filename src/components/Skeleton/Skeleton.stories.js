@@ -9,7 +9,11 @@ export default {
 	}
 };
 
-const Template = (args) => <Skeleton {...args} />;
+const Template = (args) => (
+	<div style={{ display: 'flex', gap: '3px' }}>
+		<Skeleton {...args} />
+	</div>
+);
 
 const baseArgs = {
 	width: '100px',
