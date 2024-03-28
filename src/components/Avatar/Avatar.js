@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import useDevices from 'hooks/useDevices';
 import { getImageMeasurements } from 'theme/utils';
@@ -21,12 +21,25 @@ const Avatar = ({ firstname, lastname, mainColor, size, url, rounded }) => {
 		imageSize && `&s=${imageSize}`
 	}`;
 
-	const getInitials = () => (initials ? setInitialsData(initials) : setImage(defaultUserImage));
+	const getInitials = () => {
+		try {
+			const initials = getInitialsTheme(firstname, lastname, mainColor);
+
+			if (initials) setInitialsData(initials);
+			else setImage(defaultUserImage);
+		} catch {
+			setImage(defaultUserImage);
+		}
+	};
+
+	useEffect(() => {
+		if (url) setImage(url);
+	}, [url]);
 
 	return !initialsData ? (
 		<>
 			<styled.Image
-				src={url || image}
+				src={image}
 				alt={`${firstname} ${lastname}`}
 				onError={getInitials}
 				onLoad={() => setLoading(false)}
