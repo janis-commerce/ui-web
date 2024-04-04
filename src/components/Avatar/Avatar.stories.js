@@ -34,7 +34,7 @@ export const WithName = Template.bind({});
 
 WithURL.args = {
 	...baseArgs,
-	url: '	https://janiscommerce.atlassian.net/wiki/aa-avatar/6345ddf753df3c01231fe83f'
+	url: 'https://cdn.id.janis.in/client-images/5ec2d43b70cd6700077c3aa1/0cdc0141-1f76-465a-8a06-8512b289eb85.png'
 };
 
 Default.args = {
