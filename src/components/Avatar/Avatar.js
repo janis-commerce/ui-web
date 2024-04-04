@@ -23,7 +23,7 @@ const Avatar = ({ firstname, lastname, mainColor, size, url, rounded }) => {
 
 	const getInitials = () => {
 		try {
-			const initials = getInitialsTheme(firstname, lastname, mainColor);
+			const initials = getInitialsTheme(firstname, lastname);
 
 			if (initials) setInitialsData(initials);
 			else setImage(defaultUserImage);

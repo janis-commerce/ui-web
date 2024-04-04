@@ -31,21 +31,7 @@ const getNamesToParse = (firstname, lastname) =>
  * @param {array} name - Array containing the firstname and lastname strings
  */
 export const getUserColor = (name) => {
-	const availableColors = [
-		'blue',
-		'bluePressed',
-		'blueDisabled',
-		'darkGreyPressed',
-		'fizzGreen',
-		'fizzGreenPressed',
-		'greenPressed',
-		'lightBluePressed',
-		'orange',
-		'orangePressed',
-		'red',
-		'redPressed',
-		'yellowPressed'
-	];
+	const availableColors = Object.keys(viewsPalette);
 
 	const availableIndexes = availableColors.length;
 
@@ -69,7 +55,6 @@ export const getUserColor = (name) => {
  * If not, returns null.
  * @param {string} firstname
  * @param {string} lastname
- * @param {string} mainColor
  */
 export const getInitialsTheme = (firstname = '', lastname = '') => {
 	if (!!firstname && !!lastname) return [firstname.substring(0, 1), lastname.substring(0, 1)];
