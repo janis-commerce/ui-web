@@ -39,13 +39,15 @@ export const getUserColor = (name) => {
 
 	const charCodes = [...name].map((letter) => letter.charCodeAt(0));
 
-	const len = charCodes.length;
+	const charCodesLength = charCodes.length;
 
-	const a = (len % (availableIndexes - 1)) + 1;
-	const c = charCodes.reduce((current, next) => current + next) % availableIndexes;
+	const rotationFactor = (charCodesLength % (availableIndexes - 1)) + 1;
+	const sumOfCharacterCodes =
+		charCodes.reduce((current, next) => current + next) % availableIndexes;
 
 	let random = charCodes[0] % availableIndexes;
-	for (let i = 0; i < len; i++) random = (a * random + c) % availableIndexes;
+	for (let i = 0; i < charCodesLength; i++)
+		random = (rotationFactor * random + sumOfCharacterCodes) % availableIndexes;
 
 	const userColor = availableColors[random];
 
