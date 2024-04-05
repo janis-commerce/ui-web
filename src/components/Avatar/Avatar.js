@@ -1,16 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import useDevices from 'hooks/useDevices';
 import { getImageMeasurements } from 'theme/utils';
 import Skeleton from 'components/Skeleton';
 import styled from './styles';
-import { getInitialsTheme, getUserColor } from './utils';
+import { getInitialsTheme } from './utils';
+import InitialsAvatar from './components/InitialsAvatar';
 
 const Avatar = ({ firstname, lastname, mainColor, size, url, rounded }) => {
-	const [loading, setLoading] = useState(true);
+	const imageRef = useRef();
 
-	const [image, setImage] = useState(url);
-	const [initialsData, setInitialsData] = useState();
+	const [loading, setLoading] = useState(true);
+	const [showInitials, setShowInitials] = useState(false);
 
 	const { onlyDesktop } = useDevices();
 
@@ -23,23 +24,28 @@ const Avatar = ({ firstname, lastname, mainColor, size, url, rounded }) => {
 
 	const getInitials = () => {
 		try {
-			const initials = getInitialsTheme(firstname, lastname);
-
-			if (initials) setInitialsData(initials);
-			else setImage(defaultUserImage);
+			if (!initials) throw new Error('First or lastname not provided');
+			return setShowInitials(true);
 		} catch {
-			setImage(defaultUserImage);
+			imageRef.current.src = defaultUserImage;
 		}
 	};
 
-	useEffect(() => {
-		if (url) setImage(url);
-	}, [url]);
+	if (showInitials)
+		return (
+			<InitialsAvatar
+				initials={initials}
+				mainColor={mainColor}
+				imageSize={imageSize}
+				rounded={rounded}
+			/>
+		);
 
-	return !initialsData ? (
+	return (
 		<>
 			<styled.Image
-				src={image}
+				ref={imageRef}
+				src={url}
 				alt={`${firstname} ${lastname}`}
 				onError={getInitials}
 				onLoad={() => setLoading(false)}
@@ -49,10 +55,6 @@ const Avatar = ({ firstname, lastname, mainColor, size, url, rounded }) => {
 			/>
 			{loading && <Skeleton circle={rounded} width={imageSize} height={imageSize} />}
 		</>
-	) : (
-		<styled.Initials color={mainColor || getUserColor(initials)} size={imageSize} rounded={rounded}>
-			{initialsData}
-		</styled.Initials>
 	);
 };
 
