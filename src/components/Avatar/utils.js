@@ -31,8 +31,10 @@ const getNamesToParse = (firstname, lastname) =>
  * @param {array} name - Array containing the firstname and lastname strings
  */
 export const getUserColor = (name) => {
+	const excludedColors = ['lightGreyHover', 'lightGrey', 'white', 'transparentWhite'];
+
 	const availableColors = Object.keys(viewsPalette).filter(
-		(color) => color !== 'white' && color !== 'transparentWhite'
+		(color) => !excludedColors.includes(color)
 	);
 
 	const availableIndexes = availableColors.length;
