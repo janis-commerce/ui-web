@@ -1,0 +1,50 @@
+[
+	{
+		"id": "6336dcf381f2a0af54ab2d55",
+		"firstname": "Damian",
+		"lastname": "Giannico",
+		"email": "damian.giannico@janis.im",
+		"url": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/631268b155b0a9e29f1b4026/5a3ee1ac-7da5-4a4c-a198-fa4c9fe7c3a6/48",
+		"status": "active"
+	},
+	{
+		"id": "5dcda8a703d3922d3c1ae19e",
+		"firstname": "Francisco",
+		"lastname": "Zapata",
+		"email": "francisco.zapata@janis.im",
+		"url": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/63da4463c2b1cb6b3470270d/fcef0861-0f44-42a3-a00c-90b765b73c17/48",
+		"status": "active"
+	},
+	{
+		"id": "5e7d127361152432f36e9c54",
+		"firstname": "Franco",
+		"lastname": "Fioravanti",
+		"email": "franco.fiora@janis.im",
+		"url": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/60f59b9ff026ab007012bd00/47395d76-956e-4df7-a0db-cd8ab74ddd02/48",
+		"status": "active"
+	},
+	{
+		"id": "5e7d192361152432f370f095",
+		"firstname": "Fernando",
+		"lastname": "Colom",
+		"email": "fernando.colom@janis.im",
+		"url": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5a8afe1fa08cc5310a6d082d/b94858d4-cfe8-4917-9711-44d21aa02e7d/48",
+		"status": "active"
+	},
+	{
+		"id": "60dc8d21d2db229ce2b077bc",
+		"firstname": "Sebastian",
+		"lastname": "Vitielo",
+		"email": "sebastian.vitielo@janis.im",
+		"url": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/5f282f1970fb250022e861ec/4f9150d8-8f60-4af9-a5ae-5baeb9454d0c/48",
+		"status": "active"
+	},
+	{
+		"id": "6336dcf381f2a0af54ab2d11",
+		"firstname": "Mauro",
+		"lastname": "Arteaga",
+		"email": "mauro.arteaga@janis.im",
+		"url": "https://avatar-management--avatars.us-west-2.prod.public.atl-paas.net/63aee3bd030d706ab0e4894d/98761154-d197-44a5-ad85-f7d03d15f88d/48",
+		"status": "active"
+	}
+]

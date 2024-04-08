@@ -47,10 +47,5 @@ export default {
 				margin-left: 0px;
 			}
 		}
-	`,
-	ExtraButton: styled.div`
-		&:active {
-			border-color: green;
-		}
 	`
 };

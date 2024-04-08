@@ -1,5 +1,5 @@
-import Avatar from 'components/Avatar';
 import React from 'react';
+import Avatar from 'components/Avatar';
 
 const AvatarList = ({ userList, hasExtraCount, extraCountActualIndex, showFull }) => {
 	return userList.map(({ firstname, lastname, url, id }, index) => {
