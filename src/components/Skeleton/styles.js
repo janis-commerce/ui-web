@@ -6,7 +6,7 @@ export default {
 		border-radius: ${({ circle }) => (circle ? ' 50%' : '3px')};
 		height: ${({ height }) => height};
 		width: ${({ width }) => width};
-		background-color: ${viewsPalette.lightGrey};
+		background-color: ${({ backgroundColor }) => backgroundColor || viewsPalette.lightGrey};
 		animation: pulse 1.5s ease-in-out infinite;
 
 		@keyframes pulse {
