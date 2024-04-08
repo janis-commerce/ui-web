@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Component Avatar
+
 ## [0.11.0] - 2024-03-21
 
 ### Added
