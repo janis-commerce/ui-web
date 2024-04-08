@@ -1,11 +1,23 @@
 import React from 'react';
 import Skeleton from './Skeleton';
+import viewsPalette from 'theme/palette';
+
+const control = {
+	type: 'select',
+	options: Object.keys(viewsPalette).reduce((options, colorName) => {
+		options[colorName] = viewsPalette[colorName];
+		return options;
+	}, {})
+};
 
 export default {
 	title: 'Components/Skeleton',
 	component: Skeleton,
 	parameters: {
 		layout: 'centered'
+	},
+	argTypes: {
+		backgroundColor: { control }
 	}
 };
 

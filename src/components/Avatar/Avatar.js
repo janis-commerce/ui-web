@@ -63,7 +63,7 @@ Avatar.propTypes = {
 	firstname: PropTypes.string,
 	/** Apellido del usuario */
 	lastname: PropTypes.string,
-	/** Color del fondo para el Avatar de texto */
+	/** Color de fondo de avatar. Aplica solo cuando se muestran las iniciales de nombre y apellido */
 	mainColor: PropTypes.string,
 	/** Medida de alto y ancho para la imagen en pixeles */
 	size: PropTypes.oneOfType([

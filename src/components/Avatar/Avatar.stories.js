@@ -17,7 +17,11 @@ export default {
 		layout: 'centered'
 	},
 	argTypes: {
-		mainColor: { control }
+		mainColor: { control },
+		size: {
+			type: 'select',
+			options: ['small', 'medium', 'large', 'extralarge', 'auto']
+		}
 	}
 };
 
