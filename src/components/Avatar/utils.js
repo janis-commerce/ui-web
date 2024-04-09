@@ -1,5 +1,21 @@
 import viewsPalette from 'theme/palette';
 
+const availableColors = [
+	'blue',
+	'bluePressed',
+	'blueDisabled',
+	'darkGreyPressed',
+	'fizzGreen',
+	'fizzGreenPressed',
+	'greenPressed',
+	'lightBluePressed',
+	'orange',
+	'orangePressed',
+	'red',
+	'redPressed',
+	'yellowPressed'
+];
+
 /**
  * Checks if the name provided is single or compound and returns either the first two letters,
  * or the initials of the two first names.
@@ -31,13 +47,11 @@ const getNamesToParse = (firstname, lastname) =>
  * @param {array} name - Array containing the firstname and lastname strings
  */
 export const getUserColor = (name) => {
-	const excludedColors = ['lightGreyHover', 'lightGrey', 'white', 'transparentWhite'];
-
-	const availableColors = Object.keys(viewsPalette).filter(
-		(color) => !excludedColors.includes(color)
+	const currentColors = Object.keys(viewsPalette).filter((color) =>
+		availableColors.includes(color)
 	);
 
-	const availableIndexes = availableColors.length;
+	const availableIndexes = currentColors.length;
 
 	const charCodes = [...name].map((letter) => letter.charCodeAt(0));
 
@@ -51,7 +65,7 @@ export const getUserColor = (name) => {
 	for (let i = 0; i < charCodesLength; i++)
 		random = (rotationFactor * random + sumOfCharacterCodes) % availableIndexes;
 
-	const userColor = availableColors[random];
+	const userColor = currentColors[random];
 
 	return viewsPalette[userColor];
 };
