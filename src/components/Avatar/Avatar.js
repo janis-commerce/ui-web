@@ -1,11 +1,12 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import useDevices from 'hooks/useDevices';
+import viewsPalette from 'theme/palette';
 import { getImageMeasurements } from 'theme/utils';
 import Skeleton from 'components/Skeleton';
 import styled from './styles';
-import { getInitialsTheme } from './utils';
 import InitialsAvatar from './components/InitialsAvatar';
+import { getInitialsTheme } from './utils';
 
 const Avatar = ({ firstname, lastname, mainColor, size, url, rounded }) => {
 	const imageRef = useRef();
@@ -81,7 +82,8 @@ Avatar.defaultProps = {
 	lastname: '',
 	size: 'small',
 	url: '',
-	rounded: true
+	rounded: true,
+	mainColor: viewsPalette.grey
 };
 
 export default Avatar;

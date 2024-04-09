@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from './styles';
-import { getUserColor } from 'components/Avatar/utils';
 
 const InitialsAvatar = ({ initials, mainColor, imageSize, rounded }) => {
 	return (
-		<styled.Initials color={mainColor || getUserColor(initials)} size={imageSize} rounded={rounded}>
+		<styled.Initials color={mainColor} size={imageSize} rounded={rounded}>
 			{initials}
 		</styled.Initials>
 	);
