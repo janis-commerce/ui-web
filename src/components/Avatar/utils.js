@@ -1,5 +1,3 @@
-import viewsPalette from 'theme/palette';
-
 /**
  * Checks if the name provided is single or compound and returns either the first two letters,
  * or the initials of the two first names.
@@ -25,36 +23,6 @@ const parseName = (nameString) => {
 
 const getNamesToParse = (firstname, lastname) =>
 	!!firstname || !!lastname ? parseName(firstname || lastname) : null;
-
-/**
- * Assigns a color to the names or initials array provided.
- * @param {array} name - Array containing the firstname and lastname strings
- */
-export const getUserColor = (name) => {
-	const excludedColors = ['lightGreyHover', 'lightGrey', 'white', 'transparentWhite'];
-
-	const availableColors = Object.keys(viewsPalette).filter(
-		(color) => !excludedColors.includes(color)
-	);
-
-	const availableIndexes = availableColors.length;
-
-	const charCodes = [...name].map((letter) => letter.charCodeAt(0));
-
-	const charCodesLength = charCodes.length;
-
-	const rotationFactor = (charCodesLength % (availableIndexes - 1)) + 1;
-	const sumOfCharacterCodes =
-		charCodes.reduce((current, next) => current + next) % availableIndexes;
-
-	let random = charCodes[0] % availableIndexes;
-	for (let i = 0; i < charCodesLength; i++)
-		random = (rotationFactor * random + sumOfCharacterCodes) % availableIndexes;
-
-	const userColor = availableColors[random];
-
-	return viewsPalette[userColor];
-};
 
 /**
  * If firstname or lastname (or both) are defined, will return an object with their initials and assigned color.
