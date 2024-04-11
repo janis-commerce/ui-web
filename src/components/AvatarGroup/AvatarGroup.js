@@ -6,8 +6,7 @@ import styled from './styles';
 import AvatarList from './components/AvatarList';
 
 const AvatarGroup = ({ users = [], usersToDisplay = 5, showFull = false, badgeColor }) => {
-	const extraCount = users.length > usersToDisplay + 1 ? users.length - (usersToDisplay + 1) : 0;
-	const extraCountActualIndex = extraCount + 1;
+	const extraCount = users.length > usersToDisplay ? users.length - usersToDisplay : 0;
 	const hasExtraCount = extraCount > 0;
 
 	return (
@@ -15,12 +14,10 @@ const AvatarGroup = ({ users = [], usersToDisplay = 5, showFull = false, badgeCo
 			<AvatarList
 				userList={users}
 				hasExtraCount={hasExtraCount}
-				extraCountActualIndex={extraCountActualIndex}
+				extraCount={extraCount}
 				showFull={showFull}
 			/>
-			{hasExtraCount && (
-				<Avatar firstname="+" lastname={`${extraCountActualIndex}`} mainColor={badgeColor} />
-			)}
+			{hasExtraCount && <Avatar firstname="+" lastname={`${extraCount}`} mainColor={badgeColor} />}
 		</styled.AvatarGroup>
 	);
 };

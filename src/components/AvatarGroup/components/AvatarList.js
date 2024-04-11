@@ -1,9 +1,9 @@
 import React from 'react';
 import Avatar from 'components/Avatar';
 
-const AvatarList = ({ userList, hasExtraCount, extraCountActualIndex, showFull }) => {
-	return userList.map(({ firstname, lastname, url, id, mainColor }, index) => {
-		if (hasExtraCount && index < extraCountActualIndex) return null;
+const AvatarList = ({ userList, hasExtraCount, extraCount, showFull }) =>
+	userList.map(({ firstname, lastname, url, id, mainColor }, index) => {
+		if (hasExtraCount && index < extraCount) return null;
 		return (
 			<Avatar
 				key={id}
@@ -15,6 +15,5 @@ const AvatarList = ({ userList, hasExtraCount, extraCountActualIndex, showFull }
 			/>
 		);
 	});
-};
 
 export default AvatarList;
