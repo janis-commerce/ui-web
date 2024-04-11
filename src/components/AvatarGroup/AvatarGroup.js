@@ -5,18 +5,13 @@ import viewsPalette from 'theme/palette';
 import styled from './styles';
 import AvatarList from './components/AvatarList';
 
-const AvatarGroup = ({ users = [], usersToDisplay = 5, showFull = false, badgeColor }) => {
+const AvatarGroup = ({ users = [], usersToDisplay = 5, badgeColor }) => {
 	const extraCount = users.length > usersToDisplay ? users.length - usersToDisplay : 0;
 	const hasExtraCount = extraCount > 0;
 
 	return (
-		<styled.AvatarGroup disabled showFull={showFull}>
-			<AvatarList
-				userList={users}
-				hasExtraCount={hasExtraCount}
-				extraCount={extraCount}
-				showFull={showFull}
-			/>
+		<styled.AvatarGroup disabled>
+			<AvatarList userList={users} hasExtraCount={hasExtraCount} extraCount={extraCount} />
 			{hasExtraCount && <Avatar firstname="+" lastname={`${extraCount}`} mainColor={badgeColor} />}
 		</styled.AvatarGroup>
 	);
@@ -27,8 +22,6 @@ AvatarGroup.propTypes = {
 	users: PropTypes.arrayOf(PropTypes.object),
 	/** Cantidad de usuarios que se verá el Avatar */
 	usersToDisplay: PropTypes.number,
-	/** Muestra la lista de Avatars en tamaño completo */
-	showFull: PropTypes.bool,
 	/** Color del fondo del Avatar en caso de mostrar mas */
 	badgeColor: PropTypes.string
 };
