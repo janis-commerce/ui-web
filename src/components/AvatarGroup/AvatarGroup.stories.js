@@ -45,7 +45,7 @@ WithFourAvatars.args = {
 
 WithSixAvatars.args = {
 	...baseArgs,
-	usersToDisplay: 4,
+	usersToDisplay: 6,
 	showFull: true
 };
 
