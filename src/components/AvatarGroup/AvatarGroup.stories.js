@@ -30,6 +30,7 @@ const baseArgs = {
 
 export const WithTwoAvatars = Template.bind({});
 export const WithFourAvatars = Template.bind({});
+export const WithSixAvatars = Template.bind({});
 export const ShowFull = Template.bind({});
 
 WithTwoAvatars.args = {
@@ -42,7 +43,14 @@ WithFourAvatars.args = {
 	usersToDisplay: 4
 };
 
+WithSixAvatars.args = {
+	...baseArgs,
+	usersToDisplay: 4,
+	showFull: true
+};
+
 ShowFull.args = {
 	...baseArgs,
-	showFull: true
+	showFull: true,
+	usersToDisplay: 10
 };

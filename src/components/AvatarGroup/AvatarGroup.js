@@ -17,7 +17,14 @@ const AvatarGroup = ({ users, usersToDisplay, showFull, badgeColor }) => {
 				extraCount={extraCount}
 				showFull={showFull}
 			/>
-			{hasExtraCount && <Avatar firstname="+" lastname={`${extraCount}`} mainColor={badgeColor} />}
+			{hasExtraCount && (
+				<Avatar
+					firstname="+"
+					lastname={`${extraCount}`}
+					mainColor={badgeColor}
+					size={showFull ? 'large' : 'small'}
+				/>
+			)}
 		</styled.AvatarGroup>
 	);
 };
