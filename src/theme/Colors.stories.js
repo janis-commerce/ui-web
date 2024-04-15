@@ -3,10 +3,7 @@ import Colors from './Colors';
 
 export default {
 	title: 'Theme/Colors',
-	component: Colors,
-	parameters: {
-		layout: 'centered'
-	}
+	component: Colors
 };
 
 const Template = () => <Colors />;

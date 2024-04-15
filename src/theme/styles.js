@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const storybook = {
 	Grid: styled.div`
+		margin-top: 25px;
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		grid-gap: 15px;

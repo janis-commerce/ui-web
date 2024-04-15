@@ -3,9 +3,9 @@ const viewsPalette = {
 	blackHover: '#585858',
 	blackPressed: '#16232D',
 	blue: '#2979FF',
+	blueDisabled: '#93BBFF',
 	blueHover: '#5393FF',
 	bluePressed: '#1759FF',
-	blueDisabled: '#93BBFF',
 	darkGrey: '#939598',
 	darkGreyHover: '#A8AAAC',
 	darkGreyPressed: '#747679',
@@ -19,6 +19,8 @@ const viewsPalette = {
 	greyHover: '#DDDFE2',
 	greyPressed: '#C4C6CC',
 	lightBlue: '#08C4C4',
+	lightBlueDark: '#02BFFB',
+	lightBlueDarkPressed: '#00A6FA',
 	lightBlueHover: '#39CFCF',
 	lightBluePressed: '#04ADAD',
 	lightGrey: '#E8EAF6',
@@ -33,11 +35,13 @@ const viewsPalette = {
 	statusRed: '#FF4343',
 	statusRedHover: '#FF6868',
 	statusRedPressed: '#FF2A2A',
+	transparentWhite: 'rgba(256, 256, 256, 0.5)',
+	violet: '#BB98F1',
+	violetPressed: '#8848E7',
 	white: '#FFF',
 	yellow: '#FFCE17',
 	yellowHover: '#FFD745',
-	yellowPressed: '#FFBA0C',
-	transparentWhite: 'rgba(256, 256, 256, 0.5)'
+	yellowPressed: '#FFBA0C'
 };
 
 export default viewsPalette;
