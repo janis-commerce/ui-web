@@ -1,11 +1,11 @@
 import React from 'react';
+import viewsPalette from 'theme/palette';
 import Color from './Color';
-import { validColors } from 'components/Button/utils';
 
 const control = {
 	type: 'select',
-	options: validColors.reduce((options, color) => {
-		options[color] = color;
+	options: Object.keys(viewsPalette).reduce((options, colorName) => {
+		options[colorName] = viewsPalette[colorName];
 		return options;
 	}, {})
 };
