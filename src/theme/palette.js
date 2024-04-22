@@ -37,6 +37,7 @@ const viewsPalette = {
 	statusRedPressed: '#FF2A2A',
 	transparentWhite: 'rgba(256, 256, 256, 0.5)',
 	violet: '#BB98F1',
+	violetHover: '#A06CEC',
 	violetPressed: '#8848E7',
 	white: '#FFF',
 	yellow: '#FFCE17',
