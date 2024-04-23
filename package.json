@@ -12,7 +12,7 @@
 		"test-ci": "JEST_JUNIT_OUTPUT_DIR=test-reports jest --coverage --silent --ci --reporters=jest-junit",
 		"coverage": "jest --coverage --silent",
 		"storybook": "start-storybook -p 6006 -s public",
-		"build:storybook": "build-storybook -c .storybook -o ./stories",
+		"storybook-web-docs": "build-storybook --config-dir ./.storybook --output-dir ./docs",
 		"deploy-storybook": "gh-pages -d stories",
 		"build:icons": "node scripts/build-icons",
 		"postpublish": "bash ./.postpublish.sh"
