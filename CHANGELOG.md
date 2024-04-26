@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- Icon drag and drop
+
 ## [0.15.0] - 2024-04-22
 
 ### Added
