@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import { Story, Canvas } from '@storybook/addon-docs/blocks';
 import { HeaderDoc, SectionDoc } from 'docs';
+import { GeneralWrapper } from 'docs/docStyles';
 
 const ButtonDoc = ({ title }) => {
 	return (
-		<div style={{ background: '#EAEBED', paddingBottom: '1rem' }}>
+		<GeneralWrapper>
 			<HeaderDoc title={title} />
 			<SectionDoc title="Component" padding={'1rem'}>
 				<h2>{title}</h2>
@@ -24,7 +25,7 @@ const ButtonDoc = ({ title }) => {
 			<SectionDoc title="Section con title" padding={'1rem'}>
 				<p>Section con title</p>
 			</SectionDoc>
-		</div>
+		</GeneralWrapper>
 	);
 };
 export default ButtonDoc;
