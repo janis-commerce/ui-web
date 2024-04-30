@@ -1,6 +1,7 @@
 import React from 'react';
 import viewsPalette from 'theme/palette';
 import Avatar from './Avatar';
+import AvatarDocs from './AvatarDocs';
 
 const control = {
 	type: 'select',
@@ -14,7 +15,10 @@ export default {
 	title: 'Components/Avatar',
 	component: Avatar,
 	parameters: {
-		layout: 'centered'
+		layout: 'centered',
+		docs: {
+			page: () => <AvatarDocs title="Avatar" />
+		}
 	},
 	argTypes: {
 		mainColor: { control },
