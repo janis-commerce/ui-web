@@ -1,4 +1,4 @@
-import { Story, Canvas } from '@storybook/addon-docs/blocks';
+import { Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
 import { HeaderDoc, SectionDoc } from 'docs';
 import { GeneralWrapper, VariantWrapper } from 'docs/docStyles';
 import PropTypes from 'prop-types';
@@ -19,22 +19,36 @@ const avatarStories = [
 		url: 'https://cdn.id.janis.in/client-images/5ec2d43b70cd6700077c3aa1/0cdc0141-1f76-465a-8a06-8512b289eb85.png'
 	}
 ];
-
 const AvatarDocs = ({ title }) => {
 	return (
 		<GeneralWrapper>
 			<HeaderDoc title={title} />
-			<SectionDoc title="Component" padding={'1rem'}>
-				<h1>Hola</h1>
+			<SectionDoc title="Componente" padding={'1rem'}>
 				<p>
 					Small image or icon representing a user within a digital interface. Avatars add a personal
 					touch and aid in quick user recognition.
 				</p>
 			</SectionDoc>
 
-			<SectionDoc title="Copy Me">
+			<SectionDoc title="Ejemplo">
 				<Canvas>
 					<Story id="components-avatar--with-url" />
+				</Canvas>
+			</SectionDoc>
+
+			<SectionDoc title="Parámetros">
+				<ArgsTable of={Avatar} />
+			</SectionDoc>
+
+			<SectionDoc title="Playground">
+				<Canvas>
+					{/* <ArgsTable of={Avatar} id="components-avatar--with-url" /> */}
+					<Story
+						id="components-avatar--with-url"
+						argTypes={{
+							controls: { table: { disable: false } }
+						}}
+					/>
 				</Canvas>
 			</SectionDoc>
 
