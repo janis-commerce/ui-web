@@ -1,4 +1,5 @@
 import Avatar from './Avatar';
+import AvatarGroup from './AvatarGroup';
 import Button from './Button';
 import Checkbox from './Checkbox';
 import Chip from './Chip';
@@ -20,6 +21,7 @@ import Skeleton from './Skeleton';
 export {
 	ErrorBoundary,
 	Avatar,
+	AvatarGroup,
 	Button,
 	Checkbox,
 	Chip,
