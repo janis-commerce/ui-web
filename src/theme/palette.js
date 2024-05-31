@@ -29,6 +29,7 @@ const viewsPalette = {
 	lightGreySelected: '#E4ECFA',
 	orange: '#FF8D10',
 	orangeHover: '#FFA33F',
+	orangeLight: '#ffead3',
 	orangePressed: '#FF6E08',
 	red: '#F13B70',
 	redHover: '#F3628C',
