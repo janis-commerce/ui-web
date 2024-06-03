@@ -2,7 +2,6 @@ import React from 'react';
 import Button from './Button';
 import { validColors } from './utils';
 import icons from '../Icon/icons.json';
-import ButtonDoc from './ButtonDoc';
 
 const control = {
 	type: 'select',
@@ -16,10 +15,7 @@ export default {
 	title: 'Components/Button',
 	component: Button,
 	parameters: {
-		layout: 'centered',
-		docs: {
-			page: () => <ButtonDoc title="Button" />
-		}
+		layout: 'centered'
 	},
 	argTypes: {
 		variant: ['cleaned', 'contained', 'outlined'],

@@ -2,8 +2,11 @@ import PropTypes from 'prop-types';
 import { Story, Canvas } from '@storybook/addon-docs/blocks';
 import { HeaderDoc, SectionDoc } from 'docs';
 import { GeneralWrapper } from 'docs/docStyles';
+import { getIdParam } from 'utils';
 
 const ButtonDoc = ({ title }) => {
+	const id = getIdParam();
+
 	return (
 		<GeneralWrapper>
 			<HeaderDoc title={title} />
@@ -16,7 +19,7 @@ const ButtonDoc = ({ title }) => {
 			</SectionDoc>
 			<SectionDoc title="Copy Me">
 				<Canvas>
-					<Story id="components-button--contained" />
+					<Story id={id} />
 				</Canvas>
 			</SectionDoc>
 			<SectionDoc padding={'1rem'}>

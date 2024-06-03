@@ -33,3 +33,13 @@ export function debounce(fn, wait) {
 
 	return debounced;
 }
+
+/**
+ * Get the id param from URL
+ * @returns {string} The id param
+ */
+export const getIdParam = () => {
+	const url = window.location.href;
+	const id = url.match(/id=([^&]*)/)[1];
+	return id;
+};
