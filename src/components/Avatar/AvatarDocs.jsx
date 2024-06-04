@@ -1,9 +1,8 @@
-import { Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
-import { HeaderDoc, SectionDoc } from 'docs';
-import { GeneralWrapper, GridWrapper, VariantWrapper } from 'docs/docStyles';
+import { ArgsTable } from '@storybook/addon-docs/blocks';
+import { SectionDoc } from 'docs';
+import { GridWrapper, VariantWrapper } from 'docs/docStyles';
 import PropTypes from 'prop-types';
 import Avatar from './Avatar';
-import { getIdParam } from 'utils';
 
 const avatarStories = [
 	{ size: 'small', description: 'Small', type: 'Initials' },
@@ -25,24 +24,9 @@ const avatarStories = [
 	}
 ];
 
-const AvatarDocs = ({ title }) => {
-	const id = getIdParam();
+const AvatarDocs = () => {
 	return (
-		<GeneralWrapper>
-			<HeaderDoc title={title} />
-			<SectionDoc title="Componente" padding={'1rem'}>
-				<p>
-					Pequeña imagen o icono que representa a un usuario dentro de una interfaz digital. Los
-					avatares añaden un toque personal y ayudan a reconocer rápidamente al usuario.
-				</p>
-			</SectionDoc>
-
-			<SectionDoc title="Ejemplo">
-				<Canvas>
-					<Story id={id} />
-				</Canvas>
-			</SectionDoc>
-
+		<>
 			<SectionDoc title="Variants">
 				<VariantWrapper>
 					<div className="type">
@@ -58,6 +42,7 @@ const AvatarDocs = ({ title }) => {
 					</GridWrapper>
 				</VariantWrapper>
 			</SectionDoc>
+
 			<SectionDoc>
 				<VariantWrapper>
 					<div className="type">
@@ -76,11 +61,7 @@ const AvatarDocs = ({ title }) => {
 					</GridWrapper>
 				</VariantWrapper>
 			</SectionDoc>
-
-			<SectionDoc title="Parámetros">
-				<ArgsTable of={Avatar} />
-			</SectionDoc>
-		</GeneralWrapper>
+		</>
 	);
 };
 export default AvatarDocs;
