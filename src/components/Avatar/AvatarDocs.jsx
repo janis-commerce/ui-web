@@ -1,4 +1,3 @@
-import { ArgsTable } from '@storybook/addon-docs/blocks';
 import { SectionDoc } from 'docs';
 import { GridWrapper, VariantWrapper } from 'docs/docStyles';
 import PropTypes from 'prop-types';
@@ -49,7 +48,7 @@ const AvatarDocs = () => {
 						<p>Type</p>
 					</div>
 
-					<GridWrapper>
+					<GridWrapper columnQuantity={3}>
 						{avatarStories.map(({ size, type, url }) =>
 							type ? (
 								<div key={size} className="stories">

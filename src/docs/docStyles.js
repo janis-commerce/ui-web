@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import viewsPalette from 'theme/palette';
 
 export const GeneralWrapper = styled.div`
-	background: #eaebed;
+	background: ${viewsPalette.lightGrey};
 	padding-bottom: 4rem;
 `;
 
@@ -11,9 +11,10 @@ export const VariantWrapper = styled.article`
 	display: flex;
 	justify-content: flex-start;
 	margin-top: 1rem;
+	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
 	.type {
-		background: #f6f6f6;
+		background: ${viewsPalette.lightGreyHover};
 		padding: 1rem;
 		border-radius: 0.5rem 0 0 0.5rem;
 		width: 150px;
@@ -23,11 +24,11 @@ export const VariantWrapper = styled.article`
 export const GridWrapper = styled.div`
 	width: 100%;
 	display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(${({ columnQuantity }) => columnQuantity || '2'}, 1fr);
 
 	.stories {
 		padding: 1rem;
-		border: 1px solid #f6f6f6;
+		border: 1px solid ${viewsPalette.lightGreyHover};
 		min-height: 200px;
 		display: flex;
 		flex-direction: column;
