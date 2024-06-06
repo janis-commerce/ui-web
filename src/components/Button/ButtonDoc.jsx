@@ -32,7 +32,7 @@ const ButtonDoc = () => {
 
 	return (
 		<>
-			<SectionDoc title="Variants">
+			<SectionDoc title="Variantes">
 				<VariantWrapper>
 					<div className="type">
 						<p>Icon - Color</p>

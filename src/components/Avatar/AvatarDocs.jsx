@@ -26,7 +26,7 @@ const avatarStories = [
 const AvatarDocs = () => {
 	return (
 		<>
-			<SectionDoc title="Variants">
+			<SectionDoc title="Variantes">
 				<VariantWrapper>
 					<div className="type">
 						<p>Size</p>
