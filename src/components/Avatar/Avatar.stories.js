@@ -18,7 +18,6 @@ export default {
 	parameters: {
 		layout: 'centered',
 		docs: {
-			// page: () => <AvatarDocs title="Avatar" />
 			page: () => (
 				<DocComponent
 					title="Avatar"

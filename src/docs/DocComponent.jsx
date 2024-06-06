@@ -21,11 +21,11 @@ export const DocComponent = ({ title, description, children, argsTableOf }) => {
 				</Canvas>
 			</SectionDoc>
 
-			{children}
-
 			<SectionDoc title="Parámetros">
 				<ArgsTable of={argsTableOf} />
 			</SectionDoc>
+
+			{children}
 		</GeneralWrapper>
 	);
 };

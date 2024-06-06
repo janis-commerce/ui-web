@@ -1,34 +1,57 @@
 import PropTypes from 'prop-types';
-import { Story, Canvas } from '@storybook/addon-docs/blocks';
-import { HeaderDoc, SectionDoc } from 'docs';
-import { GeneralWrapper } from 'docs/docStyles';
-import { getIdParam } from 'utils';
+import { SectionDoc } from 'docs';
+import { GridWrapper, VariantWrapper } from 'docs/docStyles';
+import Button from './Button';
+import { extractVariantButton } from 'utils';
 
-const ButtonDoc = ({ title }) => {
-	const id = getIdParam();
+const ButtonDoc = () => {
+	const variant = extractVariantButton();
+
+	const buttonStories = [
+		{ index: 1, variant, icon: 'warehouse', color: 'blue' },
+		{
+			index: 2,
+			variant,
+			icon: 'cross_bold',
+			color: 'statusRed',
+			children: 'Click'
+		},
+		{
+			index: 3,
+			variant,
+			icon: 'check_bold',
+			color: 'fizzGreen'
+		},
+		{
+			index: 4,
+			variant,
+			icon: 'box',
+			color: 'statusRed'
+		}
+	];
 
 	return (
-		<GeneralWrapper>
-			<HeaderDoc title={title} />
-			<SectionDoc title="Component" padding={'1rem'}>
-				<h2>{title}</h2>
-				<p>
-					Small image or icon representing a user within a digital interface. Avatars add a personal
-					touch and aid in quick user recognition.
-				</p>
+		<>
+			<SectionDoc title="Variants">
+				<VariantWrapper>
+					<div className="type">
+						<p>Icon - Color</p>
+					</div>
+					<GridWrapper columnQuantity={2}>
+						{buttonStories.map(({ variant, icon, color, children, index }) => (
+							<div key={index} className="stories">
+								<p>
+									<b>Icon:</b> {icon}
+									<br />
+									<b>Color:</b> {color}
+								</p>
+								<Button variant={variant} icon={icon} color={color} children={children} />
+							</div>
+						))}
+					</GridWrapper>
+				</VariantWrapper>
 			</SectionDoc>
-			<SectionDoc title="Copy Me">
-				<Canvas>
-					<Story id={id} />
-				</Canvas>
-			</SectionDoc>
-			<SectionDoc padding={'1rem'}>
-				<h1>Section sin title</h1>
-			</SectionDoc>
-			<SectionDoc title="Section con title" padding={'1rem'}>
-				<p>Section con title</p>
-			</SectionDoc>
-		</GeneralWrapper>
+		</>
 	);
 };
 export default ButtonDoc;

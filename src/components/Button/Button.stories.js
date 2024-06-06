@@ -3,6 +3,7 @@ import Button from './Button';
 import { validColors } from './utils';
 import icons from '../Icon/icons.json';
 import { DocComponent } from 'docs/DocComponent';
+import ButtonDoc from './ButtonDoc';
 
 const control = {
 	type: 'select',
@@ -23,7 +24,9 @@ export default {
 					title="Button"
 					description="Botón que permite al usuario interactuar con la interfaz de usuario."
 					argsTableOf={Button}
-				></DocComponent>
+				>
+					<ButtonDoc />
+				</DocComponent>
 			)
 		}
 	},
