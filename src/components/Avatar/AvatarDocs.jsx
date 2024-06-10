@@ -49,13 +49,14 @@ const AvatarDocs = () => {
 					</div>
 
 					<GridWrapper columnQuantity={3}>
-						{avatarStories.map(({ size, type, url }) =>
-							type ? (
-								<div key={size} className="stories">
-									<p>{type}</p>
-									<Avatar size={'large'} firstname={'Lionel'} url={url ? url : ''} />
-								</div>
-							) : null
+						{avatarStories.map(
+							({ size, type, url }) =>
+								type && (
+									<div key={size} className="stories">
+										<p>{type}</p>
+										<Avatar size={'large'} firstname={'Lionel'} url={url ? url : ''} />
+									</div>
+								)
 						)}
 					</GridWrapper>
 				</VariantWrapper>
