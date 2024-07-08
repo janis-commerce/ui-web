@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- color lightTurquoise to palette
+
 ## [0.18.0] - 2024-05-31
 
 ### Added
