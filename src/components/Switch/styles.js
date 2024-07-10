@@ -7,16 +7,20 @@ const { onlyDesktop, onlyPrint } = mediaBreaks;
 
 export const statusColor = (props) => {
 	const { checked, disabled } = props;
-	switch (true) {
-		case disabled && checked:
-			return colors.blueDisabled;
-		case disabled:
-			return colors.grey;
-		case checked:
-			return colors.blue;
-		default:
-			return colors.darkGrey;
+
+	if (disabled && checked) {
+		return colors.blueDisabled;
 	}
+
+	if (disabled) {
+		return colors.grey;
+	}
+
+	if (checked) {
+		return colors.blue;
+	}
+
+	return colors.darkGrey;
 };
 
 const Ball = styled.div`

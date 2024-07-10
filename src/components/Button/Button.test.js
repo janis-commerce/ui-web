@@ -1,9 +1,10 @@
 import React from 'react';
 import Button from 'components/Button';
 import Icon from 'components/Icon';
-import { getColor, getHoverColor, getPressedColor } from './utils';
+import { isValidColor, validColors } from './utils';
 import { create } from 'react-test-renderer';
 import viewsPalette from 'theme/palette';
+import { getBtnColor, getHoverColor, getPressedColor } from './styles';
 
 describe('Button component', () => {
 	describe('Component', () => {
@@ -53,7 +54,7 @@ describe('Button component', () => {
 		});
 	});
 
-	describe('Utils', () => {
+	describe('Styles', () => {
 		const exampleColors = [
 			{
 				color: 'blue',
@@ -79,7 +80,7 @@ describe('Button component', () => {
 
 		test('Should returns default colors', () => {
 			exampleInvalidColors.forEach((color) => {
-				expect(getColor(color)).toEqual(viewsPalette.blue);
+				expect(getBtnColor(color)).toEqual(viewsPalette.blue);
 				expect(getHoverColor(color)).toEqual(viewsPalette.blueHover);
 				expect(getPressedColor(color)).toEqual(viewsPalette.bluePressed);
 			});
@@ -87,9 +88,23 @@ describe('Button component', () => {
 
 		test('Should returns correct colors', () => {
 			exampleColors.forEach(({ color, valueColor, valueHover, valuePressed }) => {
-				expect(getColor(color)).toEqual(valueColor);
+				expect(getBtnColor(color)).toEqual(valueColor);
 				expect(getHoverColor(color)).toEqual(valueHover);
 				expect(getPressedColor(color)).toEqual(valuePressed);
+			});
+		});
+	});
+
+	describe('Utils', () => {
+		const invalidColors = ['transparentWhite', 'transparentBlack', 'transparentGrey'];
+		test('should return true if color is valid', () => {
+			validColors.forEach((color) => {
+				expect(isValidColor(color)).toBeTruthy();
+			});
+		});
+		test('should return false if color is invalid', () => {
+			invalidColors.forEach((color) => {
+				expect(isValidColor(color)).toBeFalsy();
 			});
 		});
 	});

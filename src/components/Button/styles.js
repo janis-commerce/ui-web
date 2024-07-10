@@ -1,8 +1,73 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { getColor, timingFunctions } from 'theme/utils';
 import mixins from 'theme/mixins';
-import colors from 'theme/palette';
-import { getButtonStyles } from './utils';
+import { isValidColor } from './utils';
+import viewsPalette from 'theme/palette';
+
+const { white, grey, lightGreyHover, lightGrey, blue, blueHover, bluePressed } = viewsPalette;
+
+export const getBtnColor = (color) => (isValidColor(color) ? viewsPalette[color] : blue);
+
+export const getHoverColor = (color) =>
+	isValidColor(color) ? viewsPalette[`${color}Hover`] : blueHover;
+
+export const getPressedColor = (color) =>
+	isValidColor(color) ? viewsPalette[`${color}Pressed`] : bluePressed;
+
+const commonStyles = (iconColor, fontColor, color) => css`
+	color: ${getColor(fontColor || color || blue)};
+	.button-icon {
+		fill: ${getColor(iconColor || color || blue)};
+	}
+	background: none;
+	&:focus,
+	&:hover {
+		background-color: ${lightGreyHover};
+	}
+	&:active {
+		background-color: ${lightGrey};
+	}
+	&:disabled {
+		color: ${grey};
+		.button-icon {
+			fill: ${grey};
+		}
+	}
+`;
+
+const getButtonStyles = ({ fontColor, color, variant, iconColor }) => {
+	const variantStyles = {
+		contained: () => css`
+			color: ${getColor(fontColor || 'white')};
+			&:before {
+				background-color: ${getColor(color)};
+			}
+			.button-icon {
+				fill: ${white};
+			}
+			&:focus:after,
+			&:hover:after {
+				background-color: ${getHoverColor(color)};
+			}
+			&:active {
+				background-color: ${getPressedColor(color)};
+			}
+			&:disabled {
+				&:before,
+				&:after {
+					background-color: ${grey};
+				}
+			}
+		`,
+		outlined: () => css`
+			${commonStyles(iconColor, fontColor, color)};
+			border: 1px solid ${getColor(grey)};
+		`,
+		cleaned: () => commonStyles(iconColor, fontColor, color)
+	};
+
+	return variantStyles[variant] || '';
+};
 
 export default {
 	Button: styled.button`
@@ -53,12 +118,12 @@ export default {
 			transform: scale(1, 1);
 		}
 		&:active {
-			-webkit-tap-highlight-color: ${colors.transparentWhite};
+			-webkit-tap-highlight-color: ${viewsPalette.transparentWhite};
 		}
 
 		.button-icon {
 			margin-right: ${({ hasText }) => hasText && '8px'};
-			fill: ${colors.white};
+			fill: ${viewsPalette.white};
 			${mixins.transition('fill', '250ms')};
 		}
 		&:disabled {

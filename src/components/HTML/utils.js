@@ -4,20 +4,14 @@
  * @param {string | number} value
  */
 export const getHeight = (value) => {
-	let measure = 400;
+	let defaultMeasure = 400;
 
-	if (!value) return measure;
+	if (!value) return defaultMeasure;
 
-	switch (value) {
-		case 'large':
-			measure = 600;
-			break;
-		case 'full':
-			measure = window.innerHeight - 250;
-			break;
-		default:
-			break;
+	const heightValue = {
+		large: 600,
+		full: window.innerHeight - 250
 	}
 
-	return typeof value === 'number' ? value : measure;
+	return typeof value === 'number' ? value : heightValue[value] || defaultMeasure;
 };
