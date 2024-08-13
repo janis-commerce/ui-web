@@ -2,6 +2,8 @@ import React from 'react';
 import Button from './Button';
 import { validColors } from './utils';
 import icons from '../Icon/icons.json';
+import { DocComponent } from 'docs/DocComponent';
+import ButtonDoc from './ButtonDoc';
 
 const control = {
 	type: 'select',
@@ -15,7 +17,18 @@ export default {
 	title: 'Components/Button',
 	component: Button,
 	parameters: {
-		layout: 'centered'
+		layout: 'centered',
+		docs: {
+			page: () => (
+				<DocComponent
+					title="Button"
+					description="Botón que permite al usuario interactuar con la interfaz de usuario."
+					argsTableOf={Button}
+				>
+					<ButtonDoc />
+				</DocComponent>
+			)
+		}
 	},
 	argTypes: {
 		variant: ['cleaned', 'contained', 'outlined'],
