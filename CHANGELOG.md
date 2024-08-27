@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.20.0] - 2024-08-27
+
+### Added
+
+- Color darkblue and magenta
+
 ### Changed
 
 - Styles of documentation
