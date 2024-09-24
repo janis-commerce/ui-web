@@ -1,20 +1,20 @@
 import styled from 'styled-components';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 
 export const GeneralWrapper = styled.div`
-	background: ${viewsPalette.lightGrey};
+	background: ${palette.lightGrey};
 	padding-bottom: 4rem;
 `;
 
 export const VariantWrapper = styled.article`
-	background: ${viewsPalette.white};
+	background: ${palette.white};
 	display: flex;
 	justify-content: flex-start;
 	margin-top: 1rem;
 	box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
 	.type {
-		background: ${viewsPalette.lightGreyHover};
+		background: ${palette.lightGreyHover};
 		padding: 1rem;
 		border-radius: 0.5rem 0 0 0.5rem;
 		width: 150px;
@@ -28,7 +28,7 @@ export const GridWrapper = styled.div`
 
 	.stories {
 		padding: 1rem;
-		border: 1px solid ${viewsPalette.lightGreyHover};
+		border: 1px solid ${palette.lightGreyHover};
 		min-height: 200px;
 		display: flex;
 		flex-direction: column;

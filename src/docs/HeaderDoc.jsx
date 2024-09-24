@@ -1,12 +1,12 @@
 import styled from 'styled-components';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 import PropTypes from 'prop-types';
 
 const Header = styled.header`
-	background-color: ${viewsPalette.blue};
+	background-color: ${palette.blue};
 	padding: 2rem 4rem;
 	margin: 0;
-	color: ${viewsPalette.white};
+	color: ${palette.white};
 
 	div {
 		display: flex;

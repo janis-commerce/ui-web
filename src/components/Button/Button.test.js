@@ -3,7 +3,7 @@ import Button from 'components/Button';
 import Icon from 'components/Icon';
 import { getColor, getHoverColor, getPressedColor } from './utils';
 import { create } from 'react-test-renderer';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 
 describe('Button component', () => {
 	describe('Component', () => {
@@ -57,21 +57,21 @@ describe('Button component', () => {
 		const exampleColors = [
 			{
 				color: 'blue',
-				valueColor: viewsPalette.blue,
-				valueHover: viewsPalette.blueHover,
-				valuePressed: viewsPalette.bluePressed
+				valueColor: palette.blue,
+				valueHover: palette.blueHover,
+				valuePressed: palette.bluePressed
 			},
 			{
 				color: 'black',
-				valueColor: viewsPalette.black,
-				valueHover: viewsPalette.blackHover,
-				valuePressed: viewsPalette.blackPressed
+				valueColor: palette.black,
+				valueHover: palette.blackHover,
+				valuePressed: palette.blackPressed
 			},
 			{
 				color: 'grey',
-				valueColor: viewsPalette.grey,
-				valueHover: viewsPalette.greyHover,
-				valuePressed: viewsPalette.greyPressed
+				valueColor: palette.grey,
+				valueHover: palette.greyHover,
+				valuePressed: palette.greyPressed
 			}
 		];
 
@@ -79,9 +79,9 @@ describe('Button component', () => {
 
 		test('Should returns default colors', () => {
 			exampleInvalidColors.forEach((color) => {
-				expect(getColor(color)).toEqual(viewsPalette.blue);
-				expect(getHoverColor(color)).toEqual(viewsPalette.blueHover);
-				expect(getPressedColor(color)).toEqual(viewsPalette.bluePressed);
+				expect(getColor(color)).toEqual(palette.blue);
+				expect(getHoverColor(color)).toEqual(palette.blueHover);
+				expect(getPressedColor(color)).toEqual(palette.bluePressed);
 			});
 		});
 
