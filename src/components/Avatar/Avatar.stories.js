@@ -1,13 +1,13 @@
 import React from 'react';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 import Avatar from './Avatar';
 import AvatarDocs from './AvatarDocs';
 import { DocComponent } from 'docs/DocComponent';
 
 const control = {
 	type: 'select',
-	options: Object.keys(viewsPalette).reduce((options, colorName) => {
-		options[colorName] = viewsPalette[colorName];
+	options: Object.keys(palette).reduce((options, colorName) => {
+		options[colorName] = palette[colorName];
 		return options;
 	}, {})
 };

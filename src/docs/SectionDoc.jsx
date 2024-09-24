@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 import PropTypes from 'prop-types';
 
 const Wrapper = styled.section`
@@ -9,13 +9,13 @@ const Wrapper = styled.section`
 	article {
 		padding: ${({ padding }) => (padding ? padding : '0')};
 		border-radius: 0.5rem;
-		background: ${viewsPalette.white};
+		background: ${palette.white};
 	}
 `;
 
 const SubTitle = styled.h2`
-	background: ${viewsPalette.blue};
-	color: ${viewsPalette.white};
+	background: ${palette.blue};
+	color: ${palette.white};
 	padding: 1rem;
 	font-size: 1.2rem;
 	border-radius: 0.5rem;

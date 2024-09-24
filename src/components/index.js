@@ -17,7 +17,7 @@ import Link from './Link';
 import Drawer from './Drawer';
 import ClickAwayListener from './ClickAwayListener';
 import Skeleton from './Skeleton';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 
 export {
 	Avatar,
@@ -39,5 +39,5 @@ export {
 	Skeleton,
 	Switch,
 	Textarea,
-	viewsPalette
+	palette
 };

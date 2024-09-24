@@ -1,4 +1,4 @@
-const viewsPalette = {
+const palette = {
 	black: '#2F2F2F',
 	blackHover: '#585858',
 	blackPressed: '#16232D',
@@ -52,4 +52,4 @@ const viewsPalette = {
 	yellowPressed: '#FFBA0C'
 };
 
-export default viewsPalette;
+export default palette;

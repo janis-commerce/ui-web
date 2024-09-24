@@ -1,6 +1,6 @@
 import { css } from 'styled-components';
 import { getColor as findColorInTheme } from 'theme/utils';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 
 export const validColors = [
 	'black',
@@ -18,16 +18,16 @@ export const validColors = [
 	'yellow'
 ];
 
-const { white, grey, lightGreyHover, lightGrey, blue, blueHover, bluePressed } = viewsPalette;
+const { white, grey, lightGreyHover, lightGrey, blue, blueHover, bluePressed } = palette;
 
 const isValidColor = (color) => validColors.includes(color);
-export const getColor = (color) => (isValidColor(color) ? viewsPalette[color] : blue);
+export const getColor = (color) => (isValidColor(color) ? palette[color] : blue);
 
 export const getHoverColor = (color) =>
-	isValidColor(color) ? viewsPalette[`${color}Hover`] : blueHover;
+	isValidColor(color) ? palette[`${color}Hover`] : blueHover;
 
 export const getPressedColor = (color) =>
-	isValidColor(color) ? viewsPalette[`${color}Pressed`] : bluePressed;
+	isValidColor(color) ? palette[`${color}Pressed`] : bluePressed;
 
 const commonStyles = (iconColor, fontColor, color) => css`
 	color: ${findColorInTheme(fontColor || color || blue)};
