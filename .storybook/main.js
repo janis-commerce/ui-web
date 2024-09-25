@@ -5,7 +5,8 @@ module.exports = {
 	addons: [
 		'@storybook/addon-actions',
 		'@storybook/addon-controls',
-		'@storybook/addon-essentials'
+		'@storybook/addon-essentials',
+		'@storybook/addon-docs'
 	],
 	webpackFinal: async (config) => {
 		config.resolve.modules = [path.resolve(process.cwd(), 'src'), 'node_modules'];

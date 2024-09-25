@@ -2,7 +2,7 @@ import React from 'react';
 import { GeneralWrapper } from './docStyles';
 import { SectionDoc } from './SectionDoc';
 import { getIdParam } from 'utils';
-import { Story, Canvas, ArgsTable } from '@storybook/addon-docs/blocks';
+import { Story, Canvas, ArgsTable } from '@storybook/addon-docs';
 import { HeaderDoc } from './HeaderDoc';
 import PropTypes from 'prop-types';
 
