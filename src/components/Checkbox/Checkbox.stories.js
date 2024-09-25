@@ -1,21 +1,11 @@
 import React from 'react';
 import Checkbox from './Checkbox';
-import { DocComponent } from 'docs/DocComponent';
 
 export default {
 	title: 'Components/Checkbox',
 	component: Checkbox,
 	parameters: {
-		layout: 'centered',
-		docs: {
-			page: () => (
-				<DocComponent
-					title="Checkbox"
-					description="Checkbox es un componente que permite al usuario seleccionar o deseleccionar una opción."
-					argsTableOf={Checkbox}
-				></DocComponent>
-			)
-		}
+		layout: 'centered'
 	}
 };
 

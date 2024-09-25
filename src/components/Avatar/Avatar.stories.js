@@ -1,8 +1,6 @@
 import React from 'react';
 import palette from 'theme/palette';
 import Avatar from './Avatar';
-import AvatarDocs from './AvatarDocs';
-import { DocComponent } from 'docs/DocComponent';
 
 const control = {
 	type: 'select',
@@ -16,18 +14,7 @@ export default {
 	title: 'Components/Avatar',
 	component: Avatar,
 	parameters: {
-		layout: 'centered',
-		docs: {
-			page: () => (
-				<DocComponent
-					title="Avatar"
-					description="Pequeña imagen o icono que representa a un usuario dentro de una interfaz digital. Los avatares añaden un toque personal y ayudan a reconocer rápidamente al usuario."
-					argsTableOf={Avatar}
-				>
-					<AvatarDocs />
-				</DocComponent>
-			)
-		}
+		layout: 'centered'
 	},
 	argTypes: {
 		mainColor: { control },
