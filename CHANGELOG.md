@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.21.0] - 2024-09-4
+## [0.22.0] - 2024-09-25
+
+### Changed
+
+- minor version of react and react dom in peer dependencies
+
+## [0.21.0] - 2024-09-24
 
 ### Added
 
