@@ -8,17 +8,11 @@ const { onlyDesktop, onlyPrint } = mediaBreaks;
 export const statusColor = (props) => {
 	const { checked, disabled } = props;
 
-	if (disabled && checked) {
-		return colors.blueDisabled;
-	}
+	if (disabled && checked) return colors.blueDisabled;
 
-	if (disabled) {
-		return colors.grey;
-	}
+	if (disabled)	return colors.grey;
 
-	if (checked) {
-		return colors.blue;
-	}
+	if (checked) return colors.blue;
 
 	return colors.darkGrey;
 };
