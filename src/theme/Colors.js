@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { storybook as styled } from 'theme/styles';
-import viewsPallet from 'theme/palette';
+import palette from 'theme/palette';
 import { Color, Input } from 'components';
 
-const colors = Object.entries(viewsPallet);
+const colors = Object.entries(palette);
 
 const Colors = () => {
 	const [searchTerm, setSearchTerm] = useState('');

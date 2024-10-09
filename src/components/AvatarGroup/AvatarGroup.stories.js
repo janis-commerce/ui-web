@@ -1,12 +1,12 @@
 import React from 'react';
 import AvatarGroup from './AvatarGroup';
 import users from './usersMock.json';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 
 const control = {
 	type: 'select',
-	options: Object.keys(viewsPalette).reduce((options, colorName) => {
-		options[colorName] = viewsPalette[colorName];
+	options: Object.keys(palette).reduce((options, colorName) => {
+		options[colorName] = palette[colorName];
 		return options;
 	}, {})
 };

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 import Chip from 'components/Chip';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 
 export default {
 	AvatarGroup: styled(Chip)`
@@ -14,7 +14,7 @@ export default {
 						max-width: inherit;
 						&:hover,
 						&:active {
-							background: ${backgroundColor || viewsPalette.white};
+							background: ${backgroundColor || palette.white};
 						}
 				  `
 				: css`
@@ -23,12 +23,12 @@ export default {
 						padding-right: 5px;
 						cursor: pointer;
 				  `}
-		background: ${({ backgroundColor }) => backgroundColor || viewsPalette.white};
+		background: ${({ backgroundColor }) => backgroundColor || palette.white};
 		${({ inactive }) =>
 			inactive &&
 			`
            &:hover {
-               background: ${viewsPalette.white};
+               background: ${palette.white};
            }
            &:active {
                border-color: #EAEBED;

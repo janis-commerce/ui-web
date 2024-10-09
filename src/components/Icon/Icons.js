@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 import { copyToClipboard } from 'utils';
 import { docz as styled } from './styles';
 import icons from './icons.json';
@@ -34,7 +34,7 @@ const Icons = ({ color }) => {
 
 Icons.propTypes = {
 	/** Color para cambiar el color de los iconos de la lista */
-	color: PropTypes.oneOf(Object.keys(viewsPalette))
+	color: PropTypes.oneOf(Object.keys(palette))
 };
 
 Icons.defaultProps = {
