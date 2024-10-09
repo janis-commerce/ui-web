@@ -7,6 +7,48 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- revert new docs to avoid publish error
+
+## [0.23.0] - 2024-10-04
+
+### Changed
+
+- peer dependencies version of packages
+
+## [0.22.0] - 2024-09-25
+
+### Changed
+
+- minor version of react and react dom in peer dependencies
+
+## [0.21.0] - 2024-09-24
+
+### Added
+
+- export palette colors
+
+### Changed
+
+- viewPalette to palette name
+
+## [0.20.0] - 2024-08-27
+
+### Added
+
+- Color darkblue and magenta
+
+### Changed
+
+- Styles of documentation
+
+## [0.19.0] - 2024-07-10
+
+### Added
+
+- color lightTurquoise to palette
+
 ## [0.18.0] - 2024-05-31
 
 ### Added

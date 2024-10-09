@@ -14,5 +14,4 @@ export const validColors = [
 	'yellow'
 ];
 
-
 export const isValidColor = (color) => validColors.includes(color);
