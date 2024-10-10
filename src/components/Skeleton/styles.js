@@ -1,8 +1,7 @@
 import styled from 'styled-components';
 import palette from 'theme/palette';
 
-export default {
-	SkeletonContainer: styled.div`
+export const SkeletonContainer = styled.div`
 		border-radius: ${({ circle }) => (circle ? ' 50%' : '3px')};
 		height: ${({ height }) => height};
 		width: ${({ width }) => width};
@@ -21,4 +20,4 @@ export default {
 			}
 		}
 	`
-};
+
