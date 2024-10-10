@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from './styles';
+import { SkeletonContainer } from './styles';
 
 const Skeleton = ({ circle, width, height, count, backgroundColor }) => {
 	const currentWidth = !Number.isNaN(Number(width)) ? `${width}px` : width;
 	const currentHeight = !Number.isNaN(Number(height)) ? `${height}px` : height;
 
 	const skeletons = Array.from({ length: count }, (_, index) => (
-		<styled.SkeletonContainer
+		<SkeletonContainer
 			key={index}
 			width={currentWidth}
 			height={currentHeight}
