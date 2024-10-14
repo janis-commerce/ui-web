@@ -20,7 +20,10 @@ export default [
 				sourcemap: true
 			}
 		],
-		plugins: plugins(ENV)
+		plugins: [
+			...plugins(ENV),
+			livereload({ watch: 'dev' }) // Corrección del nombre de la función 'livereload'
+		]
 	},
 	{
 		input: 'example/index.js',
@@ -39,7 +42,7 @@ export default [
 				host: 'localhost',
 				port: 3000
 			}),
-			livereload({ watch: 'dev' })
+			livereload({ watch: 'dev' }) // Corrección del nombre de la función 'livereload'
 		]
 	}
 ];
