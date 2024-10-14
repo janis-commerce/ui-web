@@ -8,19 +8,12 @@ const ENV = 'production';
 export default [
 	{
 		input: 'src/components/index.js',
-		output: [
-			{
-				file: 'dist/index.esm.js',
-				format: 'esm',
-				sourcemap: true
-			},
-			{
-				name: 'main',
-				file: 'dist/index.umd.js',
-				format: 'umd',
-				sourcemap: true
-			}
-		],
+		output: {
+			name: 'main',
+			file: 'dist/index.umd.js',
+			format: 'umd',
+			sourcemap: true
+		},
 		plugins: [
 			...plugins(ENV),
 			peerDepsExternal(),
@@ -43,5 +36,14 @@ export default [
 				}
 			})
 		]
+	},
+	{
+		input: 'src/components/index.js',
+		output: {
+			file: 'dist/index.esm.js',
+			format: 'es',
+			sourcemap: true
+		},
+		plugins: [...plugins(ENV), peerDepsExternal()]
 	}
 ];

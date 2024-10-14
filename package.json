@@ -2,7 +2,12 @@
 	"name": "@janiscommerce/ui-web",
 	"version": "0.24.0",
 	"description": "",
-	"main": "dist/index.umd.js",
+	"exports": {
+		".": {
+			"import": "dist/index.esm.js",
+			"require": "dist/index.umd.js"
+		}
+	},	
 	"private": false,
 	"scripts": {
 		"start": "rollup -c rollup/rollup.config.dev.js -w",
