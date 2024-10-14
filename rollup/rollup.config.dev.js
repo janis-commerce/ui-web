@@ -22,7 +22,7 @@ export default [
 		],
 		plugins: [
 			...plugins(ENV),
-			livereload({ watch: 'dev' }) // Corrección del nombre de la función 'livereload'
+			livereload({ watch: 'dev' })
 		]
 	},
 	{
@@ -42,7 +42,7 @@ export default [
 				host: 'localhost',
 				port: 3000
 			}),
-			livereload({ watch: 'dev' }) // Corrección del nombre de la función 'livereload'
+			livereload({ watch: 'dev' })
 		]
 	}
 ];
