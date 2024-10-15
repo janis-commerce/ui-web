@@ -7,7 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [0.24.0] - 2024-10-010
+## [0.25.0] - 2024-10-14
+
+### Changed
+
+- rollup config to avoid errors with new version of react
+
+## [0.24.0] - 2024-10-10
 
 ### Fixed
 
