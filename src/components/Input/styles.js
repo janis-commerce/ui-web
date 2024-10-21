@@ -34,11 +34,14 @@ const hoverAndFocusColor = (props) => {
 };
 
 export default {
-	Container: styled.div`
+	Wrapper: styled.div`
+		position: relative;
+		width: 100%;
+	`,
+	InputContainer: styled.div`
 		position: relative;
 		width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
 	`,
-
 	FloatingLabel: styled.div`
 		position: absolute;
 		font-size: ${fontSize};
@@ -67,7 +70,8 @@ export default {
 		color: ${palette.black};
 		transition: color 0.2s ${timingFunctions.standard};
 		cursor: pointer;
-		width: 100%;
+		background: ${(props) => props.background};
+		width: ${(props) => (props.fullWidth ? '100%' : 'auto')};
 		border-bottom: 1px solid ${palette.grey};
 		border-radius: 0;
 		${({ error }) => error && `border-bottom-color: ${palette.statusRed};`}
@@ -118,5 +122,6 @@ export default {
 		flex-grow: 0;
 		margin-right: 8px;
 		height: 100%;
+		max-height: 34px;
 	`
 };

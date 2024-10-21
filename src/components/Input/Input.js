@@ -7,7 +7,6 @@ class Input extends PureComponent {
 		isFocused: this.props.isFocused,
 		value: this.props.defaultValue // for uncontroled input
 	};
-
 	input = React.createRef();
 
 	componentDidUpdate(prevProps, prevState) {
@@ -53,6 +52,7 @@ class Input extends PureComponent {
 		const { isFocused, value: stateValue } = this.state;
 
 		const {
+			label,
 			icon,
 			error,
 			disabled,
@@ -64,15 +64,18 @@ class Input extends PureComponent {
 			isTranslateActive,
 			// eslint-disable-next-line no-unused-vars
 			defaultValue,
+			type,
 			...props
 		} = this.props;
+
+		console.log('thisprops', type);
 
 		const autoCompleteOff = props.type === 'password' ? 'new-password' : 'off';
 		const isFloating = isFocused || !!value.toString();
 
 		return (
-			<styled.Container fullWidth={props.fullWidth}>
-				<styled.Container fullWidth={props.fullWidth}>
+			<styled.Wrapper>
+				<styled.InputContainer fullWidth={props.fullWidth}>
 					{hasFloatingLabel && (
 						<styled.FloatingLabel
 							data-test="floatingLabel"
@@ -84,7 +87,7 @@ class Input extends PureComponent {
 							hasIcon={!!icon}
 							isTranslateActive={isTranslateActive}
 						>
-							{props.label}
+							{label}
 						</styled.FloatingLabel>
 					)}
 					{icon && <styled.InputIcon name={icon} color={error ? 'statusRed' : 'black'} />}
@@ -100,20 +103,24 @@ class Input extends PureComponent {
 						value={value}
 						isFocused={isFocused}
 						error={error}
+						type={type}
 						hasIcon={!!icon}
 						onAnimationStart={this.handleFocus}
 					/>
-				</styled.Container>
-
+				</styled.InputContainer>
 				{error && (
 					<styled.ErrorMessage data-test="errorMessage">{errorMessage}</styled.ErrorMessage>
 				)}
-			</styled.Container>
+			</styled.Wrapper>
 		);
 	}
 }
 
 Input.propTypes = {
+	/** Valor del floating label */
+	label: PropTypes.string,
+	/** Color de fondo para el input */
+	background: PropTypes.string,
 	/** Si es true deshabilita el input */
 	disabled: PropTypes.bool,
 	/** Si es true habilita el autoComplete */

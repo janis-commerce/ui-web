@@ -31,8 +31,8 @@ const baseArgs = {
 	errorMessage: 'Error',
 	autoComplete: false,
 	hasFloatingLabel: false,
-	value: 'hola',
-	isTranslateActive: false
+	isTranslateActive: false,
+	label: 'floatingText'
 };
 
 export const Base = Template.bind({});
