@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.26.0] - 2024-11-12
+
+### Added
+
+- New icon for filters
+
 ## [0.25.0] - 2024-10-14
 
 ### Changed
