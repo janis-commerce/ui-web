@@ -18,6 +18,7 @@ import Drawer from './Drawer';
 import ClickAwayListener from './ClickAwayListener';
 import Skeleton from './Skeleton';
 import palette from 'theme/palette';
+import icons from './icons.json';
 
 export {
 	Avatar,
@@ -39,5 +40,6 @@ export {
 	Skeleton,
 	Switch,
 	Textarea,
-	palette
+	palette,
+	icons
 };
