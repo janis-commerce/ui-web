@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.27.0] - 2024-12-04
+
+### Added
+
+- New icon
+- Export all icons
+
 ## [0.26.0] - 2024-11-12
 
 ### Added
