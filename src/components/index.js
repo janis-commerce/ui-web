@@ -18,7 +18,7 @@ import Drawer from './Drawer';
 import ClickAwayListener from './ClickAwayListener';
 import Skeleton from './Skeleton';
 import palette from 'theme/palette';
-import icons from './icons.json';
+import icons from './Icon/icons.json';
 
 export {
 	Avatar,
