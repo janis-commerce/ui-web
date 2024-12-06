@@ -6,7 +6,7 @@ import Locations from '../Locations';
 
 const MarkerDrawer = ({ markers, readOnly, setMarker }) => {
     const getPolylines = () => {};
-    
+    const 
 	return (
 		<>
 			{markers.map(marker => marker.drawRoute ? <Route /> : <Locations />)}
