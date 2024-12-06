@@ -17,6 +17,7 @@ import Link from './Link';
 import Drawer from './Drawer';
 import ClickAwayListener from './ClickAwayListener';
 import Skeleton from './Skeleton';
+import Map from './Map';
 
 export {
 	ErrorBoundary,
@@ -37,5 +38,6 @@ export {
 	QRCode,
 	Skeleton,
 	Switch,
-	Textarea
+	Textarea,
+	Map
 };

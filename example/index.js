@@ -13,7 +13,8 @@ import {
 	Image,
 	QRCode,
 	ColorPicker,
-	HTML
+	HTML,
+	Map
 } from '../src/components';
 
 // eslint-disable-next-line react/prop-types
@@ -50,6 +51,7 @@ const Component = () => {
 				<Chip selected variant="outlined">
 					Criterio Tienda
 				</Chip>
+				<Map height={'300px'} />
 				<Color color="primary.main"> </Color>
 				<Icon name="trash" color="red" />
 				<Button variant="contained">BUTTON</Button>
