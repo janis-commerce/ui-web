@@ -37,8 +37,6 @@ const MarkerComponent = ({
 		icon: markerData.icon
 	};
 
-	console.log({ markerData });
-
 	const infoWindowHandles = {
 		onMouseEnter: () => {
 			delayedInfoWindowHover.cancel();
@@ -51,7 +49,6 @@ const MarkerComponent = ({
 	};
 
 	const getPixelPositionOffset = (width) => {
-		console.log({ width });
 		if (width) {
 			return {
 				x: -(width / 2),

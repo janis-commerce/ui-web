@@ -16,14 +16,9 @@ const Map = ({
 	showSearchBar = false,
 	markers,
 	readOnly = true,
-	// updateMarkerCallback,
-	// canAddMarkers = false,
-	// canDragMarkers = false,
-	// maxMarkersQuantity = 1,
 	saveRouteData,
 	showPOI
 }) => {
-	/* For map viewport position */
 	const [coordinates, setCoords] = useState({ lat: 0, lng: 0 });
 	const { isLoaded } = useJsApiLoader({
 		googleMapsApiKey,
@@ -40,11 +35,6 @@ const Map = ({
 
 	const mapCenter = !validMarkersExist ? { center: coordinates } : {};
 
-	//This variables are already defined but not used until setMarker implementation
-	//const canAddMarkersValidated = canAddMarkers && !validMarkersExist;
-	// Pending validation for actual behavior
-	//const canDragMarkersValidated = canDragMarkers && !validMarkersExist;
-
 	const handlePositions = (key, value) => {
 		setControlsPositions((prev) => ({ ...prev, [key]: value }));
 	};
@@ -52,7 +42,6 @@ const Map = ({
 	const mapOptions = getMapOptions(showPOI, controlsPositions);
 
 	useEffect(() => {
-		/* Set initial map position */
 		if (!markers.length) return setCoords({ lat: center.lat, lng: center.lng });
 		setCoordinatesForGeolocation(setCoords);
 		if (!markers.length) return;
@@ -72,7 +61,7 @@ const Map = ({
 			const fullScreenPos = showSearchBar ? 'RIGHT_BOTTOM' : 'RIGHT_TOP';
 			handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
 			handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
-			/** Set the marker's additional data on load */
+
 			if (!markers.length) return;
 			showAllMarkers(map, markers);
 		}
@@ -94,7 +83,6 @@ const Map = ({
 			onLoad={(map) => onLoad(map)}
 			mapContainerStyle={{ height, width }}
 			options={mapOptions}
-			//onClick={({ latLng }) => setMarker(latLng)}
 			{...mapCenter}
 		>
 			<>

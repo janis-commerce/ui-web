@@ -16,8 +16,6 @@ const Route = ({ readOnly, setMarker, routeData, saveRouteData, googleMapsApiKey
 		});
 	}, [routeData]);
 
-	console.log({ polylines, points: routeData.points });
-
 	return (
 		<>
 			{routeData.points.map((point, idx) => (

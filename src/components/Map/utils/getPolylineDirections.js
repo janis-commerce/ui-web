@@ -31,8 +31,6 @@ export const getPolylineDirections = async (params = {}) => {
 			formatCoordinates(destination.lat, destination.lng)
 		];
 
-        console.log({allWaypoints, waypoints});
-
 		const numRequests = Math.ceil(allWaypoints.length / maxWaypointsPerRequest);
 		let allCoords = [];
 		let route = {};

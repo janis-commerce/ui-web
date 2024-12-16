@@ -98,7 +98,6 @@ export const parseAddressComponents = async (latLng, preferredTypes = []) => {
 	}
 };
 
-// Map styles format
 const mapStylers = {
 	visibility: {
 		on: 'on',
@@ -201,7 +200,6 @@ export const findSelectedPosition = (selectedRows, marker) => {
 
 /* Maps every marker to extend the map's bounds so they can all be initially shown */
 export const getBounds = (markers) => {
-	console.log({ ...markers });
 	const bounds = new window.google.maps.LatLngBounds();
 	markers.map((marker) => {
 		const { lat, lng } = marker;
@@ -217,7 +215,6 @@ export const showAllMarkers = (map, markers, centerCoordinate) => {
 		const markersFlatted = markers.flatMap((marker) =>
 			marker.points.map((point) => point.position)
 		);
-		console.log({ markersFlatted });
 		map.fitBounds(getBounds(markersFlatted));
 		map.setCenter(centerCoordinate);
 	}
