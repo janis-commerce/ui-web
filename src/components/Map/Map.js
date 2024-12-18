@@ -1,12 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
-import { getBounds, showAllMarkers } from './utils/utils';
+import { showAllMarkers } from './utils/utils';
 import MarkerDrawer from './components/MarkersDrawer';
 import SearchBox from './components/SearchBox';
 import { libraries, initialControlsPosition } from './utils/mapConstants';
 import { getMapOptions } from './utils/getMapOptions';
-import { setCoordinatesForGeolocation } from './utils/setCoordinatesForGeolocation';
+import { setCenterByGeolocationOrCenter } from './utils/setCenterByGeolocationOrCenter';
+import { setCenterByMarkers } from './utils/setCenterByMarkers';
 
 const Map = ({
 	googleMapsApiKey,
@@ -41,12 +42,6 @@ const Map = ({
 
 	const mapOptions = getMapOptions(showPOI, controlsPositions);
 
-	useEffect(() => {
-		if (!markers.length) return setCoords({ lat: center.lat, lng: center.lng });
-		setCoordinatesForGeolocation(setCoords);
-		if (!markers.length) return;
-	}, []);
-
 	const onLoad = (map) => {
 		if (map) {
 			mapRef.current = map;
@@ -68,25 +63,23 @@ const Map = ({
 	};
 
 	useEffect(() => {
-		if (!mapRef || !mapRef.current) return;
-		if (!!markers.length && !firstLoad) {
-			const centerCoordinate = !markers.length ? center : getBounds(markers).getCenter();
-			showAllMarkers(mapRef.current, markers, centerCoordinate);
-			if (!markers.length) mapRef.current.setZoom(13);
-			setFirstLoad(true);
-		}
+		setCenterByGeolocationOrCenter(markers, setCoords, center);
+	}, []);
+
+	useEffect(() => {
+		setCenterByMarkers(mapRef, markers, center, firstLoad, setFirstLoad);
 	}, [markers, mapState, center]);
 
 	return isLoaded ? (
 		<GoogleMap
-			class="google-map-component"
+			className="google-map-component"
 			onLoad={(map) => onLoad(map)}
 			mapContainerStyle={{ height, width }}
 			options={mapOptions}
 			{...mapCenter}
 		>
 			<>
-				{showSearchBar && <SearchBox class="search-box-component" />}
+				{showSearchBar && <SearchBox className="search-box-component" />}
 				{validMarkersExist && (
 					<MarkerDrawer
 						markers={markers}
