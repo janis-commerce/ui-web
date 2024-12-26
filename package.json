@@ -103,6 +103,7 @@
 		"testEnvironment": "jsdom"
 	},
 	"peerDependencies": {
+		"axios": "^1.7.7",
 		"react": "17.x",
 		"react-dom": "17.x",
 		"styled-components": "<= 5.3.0"
@@ -117,9 +118,12 @@
 		"dist"
 	],
 	"dependencies": {
+		"@mapbox/polyline": "^1.2.1",
+		"@react-google-maps/api": "^2.20.3",
 		"prop-types": "^15.7.2",
 		"qrcode.react": "^3.0.2",
 		"react-colorful": "^5.5.1",
-		"react-frame-component": "^5.2.3"
+		"react-frame-component": "^5.2.3",
+		"svgpath": "^2.6.0"
 	}
 }
