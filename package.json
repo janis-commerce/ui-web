@@ -10,6 +10,7 @@
 	},
 	"private": false,
 	"scripts": {
+		"preinstall": "node scripts/preinstall-script.js",
 		"start": "rollup -c rollup/rollup.config.dev.js -w",
 		"build": "rollup -c rollup/rollup.config.prod.js",
 		"lint": "eslint src/",
