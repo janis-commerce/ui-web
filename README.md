@@ -6,6 +6,14 @@ A package for use generic components from Janis
 
 `npm install @janiscommerce/ui-web`
 
+> **Important:** When developing or contributing to this library, please make sure to use `yarn` to install dependencies. Do **not** use `npm` as it might cause issues. 
+
+To install dependencies while developing the library:
+
+```bash
+yarn install
+```
+
 ### Usage
 
 ```js
