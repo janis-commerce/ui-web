@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { showAllMarkers } from './utils/utils';
 import MarkerDrawer from './components/MarkersDrawer';
 import SearchBox from './components/SearchBox';
-import { libraries, initialControlsPosition } from './utils/mapConstants';
-import { getMapOptions } from './utils/getMapOptions';
-import { setCenterByGeolocationOrCenter } from './utils/setCenterByGeolocationOrCenter';
-import { setCenterByMarkers } from './utils/setCenterByMarkers';
+import { LIBRARIES, INITIAL_CONTROLS_POSITION } from './utils/constants';
+import getMapOptions from './utils/getMapOptions';
+import setCenterByGeolocationOrCenter from './utils/setCenterByGeolocationOrCenter';
+import setCenterByMarkers from './utils/setCenterByMarkers';
 
 const Map = ({
 	googleMapsApiKey,
@@ -23,14 +23,14 @@ const Map = ({
 	const [coordinates, setCoords] = useState({ lat: 0, lng: 0 });
 	const { isLoaded } = useJsApiLoader({
 		googleMapsApiKey,
-		libraries
+		LIBRARIES
 	});
 
 	const mapRef = useRef();
 	const [firstLoad, setFirstLoad] = useState(false);
 	const [mapState, setMapState] = useState('');
 
-	const [controlsPositions, setControlsPositions] = useState(initialControlsPosition);
+	const [controlsPositions, setControlsPositions] = useState(INITIAL_CONTROLS_POSITION);
 
 	const validMarkersExist = Array.isArray(markers) && markers.length;
 
@@ -43,23 +43,20 @@ const Map = ({
 	const mapOptions = getMapOptions(showPOI, controlsPositions);
 
 	const onLoad = (map) => {
-		if (map) {
-			mapRef.current = map;
-			setMapState(mapRef);
+		if (!map) return;
+		mapRef.current = map;
+		setMapState(mapRef);
 
-			mapRef.current = map;
+		map.setOptions({
+			gestureHandling: 'greedy'
+		});
 
-			map.setOptions({
-				gestureHandling: 'greedy'
-			});
+		const fullScreenPos = showSearchBar ? 'RIGHT_BOTTOM' : 'RIGHT_TOP';
+		handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
+		handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
 
-			const fullScreenPos = showSearchBar ? 'RIGHT_BOTTOM' : 'RIGHT_TOP';
-			handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
-			handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
-
-			if (!markers.length) return;
-			showAllMarkers(map, markers);
-		}
+		if (!markers.length) return;
+		showAllMarkers(map, markers);
 	};
 
 	useEffect(() => {
@@ -101,23 +98,16 @@ Map.propTypes = {
 	canAddMarkers: PropTypes.bool,
 	/** Load markers from outside the component */
 	markers: PropTypes.arrayOf(
-		PropTypes.arrayOf({
+		PropTypes.shape({
 			drawRoute: PropTypes.bool,
-			/** Array of coordinates that  */
-			points: PropTypes.arrayOf({
-				/** Coordinates for marker position */
-				position: {
-					lat: PropTypes.number,
-					lng: PropTypes.number
-				},
-				/** Object that contains the string url for drawing an icon */
-				icon: PropTypes.shape({}),
-				/** React component that is rendered bellow the marker */
-				overlay: PropTypes.element,
-				/** React component that is rendered in the tooltip of the marker on hover */
-				infoWindowChildren: PropTypes.element
-			}),
-			/** Object that contains settable options for route drawing */
+			points: PropTypes.arrayOf(
+				PropTypes.shape({
+					position: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number }),
+					icon: PropTypes.object,
+					overlay: PropTypes.element,
+					infoWindowChildren: PropTypes.element
+				})
+			),
 			polylineOptions: PropTypes.shape({
 				strokeColor: PropTypes.string,
 				strokeOpacity: PropTypes.number,

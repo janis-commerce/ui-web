@@ -19,7 +19,7 @@ const Locations = ({ readOnly, setMarker, markers }) => {
 };
 
 Locations.propTypes = {
-	markers: PropTypes.arrayOf({}),
+	markers: PropTypes.arrayOf(PropTypes.shape({})),
 	readOnly: PropTypes.bool,
 	setMarker: PropTypes.func
 };

@@ -15,9 +15,9 @@ import { isObject } from './utils';
 const validateCoordinates = (region) => {
 	if (!region || !isObject(region) || !Object.keys(region).length) return false;
 
-	if (!('lng' in region) || !('lat' in region)) return false;
-
 	const { lng, lat } = region;
+
+	if (!lng || !lat) return false;
 
 	if (!isNumber(lng) || !isNumber(lat)) return false;
 

@@ -1,9 +1,11 @@
-import { createLatLngObjectsFromArray, formatCoordinates, isObject } from './utils';
+import { isObject } from './utils';
 import axios from 'axios';
 import { decode } from '@mapbox/polyline';
-
-const directionsURL = 'https://routes.googleapis.com/directions/v2:computeRoutes';
-const maxWaypointsPerRequest = 25;
+import { DIRECTIONS_URL, MAX_WAYPOINTS_PER_REQUEST } from './constants';
+import formatBody from './formatBody';
+import getGoogleHeaders from './getGoogleAPIKEYHeaders';
+import getAllWaypoints from './getAllWaypoints';
+import keepWaypointsEdges from './keepWaypointsEdges';
 
 /**
 
@@ -15,7 +17,7 @@ Retrieves the polyline directions from Google Maps API based on the provided par
 @throws {Error} - If params is not a valid object or any of its properties are not valid.
 
 */
-export const getPolylineDirections = async (params = {}) => {
+const getPolylineDirections = async (params = {}) => {
 	try {
 		if (!params || !isObject(params) || !Object.keys(params).length)
 			throw new Error('params is not a valid object');
@@ -25,51 +27,23 @@ export const getPolylineDirections = async (params = {}) => {
 			waypoints
 		} = params;
 
-		const allWaypoints = [
-			formatCoordinates(origin.lat, origin.lng),
-			...createLatLngObjectsFromArray(waypoints),
-			formatCoordinates(destination.lat, destination.lng)
-		];
+		const allWaypoints = getAllWaypoints(origin, destination, waypoints);
 
-		const numRequests = Math.ceil(allWaypoints.length / maxWaypointsPerRequest);
+		const numRequests = Math.ceil(allWaypoints.length / MAX_WAYPOINTS_PER_REQUEST);
 		let allCoords = [];
 		let route = {};
 
 		for (let i = 0; i < numRequests; i++) {
-			const startIndex = i * maxWaypointsPerRequest;
-			const endIndex = Math.min(startIndex + maxWaypointsPerRequest, allWaypoints.length);
+			const startIndex = i * MAX_WAYPOINTS_PER_REQUEST;
+			const endIndex = Math.min(startIndex + MAX_WAYPOINTS_PER_REQUEST, allWaypoints.length);
 			let waypointsSubset = allWaypoints.slice(startIndex, endIndex);
 
-			waypointsSubset = [
-				waypointsSubset[0],
-				...waypointsSubset.slice(1, -1),
-				waypointsSubset[waypointsSubset.length - 1]
-			];
+			waypointsSubset = keepWaypointsEdges(waypointsSubset);
 
-			const body = {
-				origin: waypointsSubset[0],
-				destination: waypointsSubset[waypointsSubset.length - 1],
-				intermediates: waypointsSubset.slice(1, -1),
-				travelMode: 'drive',
-				routingPreference: 'traffic_unaware',
-				polylineQuality: 'high_quality',
-				computeAlternativeRoutes: false,
-				routeModifiers: {
-					avoidTolls: false,
-					avoidHighways: false,
-					avoidFerries: false,
-					avoidIndoor: false
-				}
-			};
-			const header = {
-				headers: {
-					'content-type': 'application/json',
-					'x-goog-api-key': googleMapsApiKey,
-					'x-goog-fieldmask': '*'
-				}
-			};
+			const body = formatBody(waypointsSubset);
+			const header = getGoogleHeaders(googleMapsApiKey);
 			// eslint-disable-next-line no-await-in-loop
-			const { data } = await axios.post(directionsURL, body, header);
+			const { data } = await axios.post(DIRECTIONS_URL, body, header);
 			const points = decode(data.routes[0].polyline.encodedPolyline);
 			const coords = points.map((point) => ({
 				lat: point[0],
@@ -86,3 +60,5 @@ export const getPolylineDirections = async (params = {}) => {
 		return Promise.reject(reason?.response?.data || reason);
 	}
 };
+
+export default getPolylineDirections;

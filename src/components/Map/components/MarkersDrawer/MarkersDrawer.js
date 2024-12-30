@@ -10,7 +10,7 @@ const MarkerDrawer = ({ markers, readOnly, setMarker, saveRouteData, googleMapsA
 			{markers.map((marker, idx) =>
 				marker.drawRoute ? (
 					<Route
-						key={idx}
+						key={`${idx.toString()}`}
 						{...commonProps}
 						routeData={marker}
 						saveRouteData={saveRouteData}

@@ -1,4 +1,4 @@
-import { validLock } from './utils';
+import { validLocation } from './utils';
 
 /**
  * takes an array of coordinates with it's type, and parses it into valid coordinates to draw a polyline
@@ -6,18 +6,20 @@ import { validLock } from './utils';
  * @param {array} coords
  * @return {object} of coordinates to draw polylines
  */
-export const parseCoordsForPolylines = (coords) => {
+const parseCoordsForPolylines = (coords) => {
 	if (!coords || !Array.isArray(coords) || !coords.length) return {};
 
 	const origin = coords[0].position;
 	const destination = coords[coords.length - 1].position;
 
-	const validPickupLoc = validLock(origin);
-	const validDestinationLoc = validLock(destination);
+	const validPickupLocation = validLocation(origin);
+	const validDestinationLocation = validLocation(destination);
 
-	if (!validPickupLoc || !validDestinationLoc) return {};
+	if (!validPickupLocation || !validDestinationLocation) return {};
 
 	const coordinate = { origin, destination };
 
 	return coordinate;
 };
+
+export default parseCoordsForPolylines;

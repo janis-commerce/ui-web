@@ -1,4 +1,6 @@
 import { intersection } from 'lodash';
+import getParsedComponents from './getParsedComponents';
+import parsePlaces from './parsePlaces';
 
 export const isObject = (value) =>
 	typeof value === 'object' && !Array.isArray(value) && value instanceof Object;
@@ -13,13 +15,14 @@ const getPlaces = (latLng) =>
 		geocoder.geocode({ location: latLng }, (results) => resolve(results));
 	});
 
-const findName = (result, type) => {
-	if (result.types.includes(type)) {
-		const data = result.address_components
-			? result.address_components.find((component) => component.types.includes(type))
-			: result;
-		return data.long_name;
-	}
+export const findName = (result, type) => {
+	if (!result.types.includes(type)) return null;
+
+	const data = result.address_components
+		? result.address_components.find((component) => component.types.includes(type))
+		: result;
+
+	return data.long_name;
 };
 
 /**
@@ -32,69 +35,22 @@ export const parseAddressComponents = async (latLng, preferredTypes = []) => {
 
 	const places = await getPlaces(latLng);
 
-	if (places && places.length) {
-		/** Grab the main result according to the search result's types.
-		 * If no preferredTypes are provided, set the first result as the main one. */
-		const place =
-			places.find((result) => !!intersection(result.types, preferredTypes).length) || places[0];
+	if (!places || !places.length) return {};
+	/** Grab the main result according to the search result's types.
+	 * If no preferredTypes are provided, set the first result as the main one. */
+	const place =
+		places.find((result) => !!intersection(result.types, preferredTypes).length) || places[0];
 
-		let parsedData = {};
+	let parsedData = {};
 
-		/* Get most accurate data from the main result */
-		if (place.address_components) {
-			parsedData = place.address_components.reduce(
-				(accum, component) => {
-					const { long_name: name, types } = component;
+	/* Get most accurate data from the main result */
+	if (place.address_components) {
+		parsedData = getParsedComponents(place);
+	}
 
-					const parsedComponents = accum;
-
-					switch (true) {
-						case types.includes('country'):
-							parsedComponents.country = name;
-							break;
-						case types.includes('street_number'):
-							parsedComponents.number = name;
-							break;
-						case types.includes('administrative_area_level_1'):
-							parsedComponents.state = name;
-							break;
-						case types.includes('route'):
-							parsedComponents.street = name;
-							break;
-						case types.includes('postal_code'):
-							parsedComponents.postalCode = name;
-							break;
-						default:
-							break;
-					}
-
-					return parsedComponents;
-				},
-				{ formattedAddress: place.formatted_address }
-			);
-		}
-
-		/* Go deeper to find the right city and neighborhood values */
-		if (places.length) {
-			const dataTypes = ['locality', 'neighborhood', 'sublocality'];
-
-			return places.reduce(
-				(accum, result) => {
-					const parsedComponents = accum;
-
-					const { types } = result;
-					const [match] = intersection(types, dataTypes);
-
-					const name = match === 'locality' ? 'city' : 'neighborhood';
-
-					if (types.includes(match))
-						return { ...parsedComponents, [name]: findName(result, match) };
-
-					return parsedComponents;
-				},
-				{ ...parsedData }
-			);
-		}
+	/* Go deeper to find the right city and neighborhood values */
+	if (places.length) {
+		return parsePlaces(places, parsedData);
 	}
 };
 
@@ -142,6 +98,7 @@ export const getMapStylers = (rules) => {
 };
 
 export const formatCoordinates = (latitude, longitude) => {
+	if (!latitude || !longitude) return null;
 	const direction = {
 		vehicleStopover: false,
 		sideOfRoad: false,
@@ -165,20 +122,17 @@ export const createLatLngObjectsFromArray = (waypoints) => {
 	if (!waypoints || !Array.isArray(waypoints) || !waypoints.length) return [];
 
 	return waypoints
-		.map((waypoint) =>
-			waypoint.position.lng && waypoint.position.lat
-				? formatCoordinates(waypoint.position.lat, waypoint.position.lng)
-				: null
-		)
+		.map((waypoint) => formatCoordinates(waypoint.position.lat, waypoint.position.lng))
 		.filter(Boolean);
 };
 
 /**
  *
- * @param {object} lock
+ * @param {object} location
  * @returns {boolean}
  */
-export const validLock = (lock) => !!lock && isObject(lock) && !!Object.keys(lock).length;
+export const validLocation = (location) =>
+	!!location && isObject(location) && !!Object.keys(location).length;
 
 const parseProp = (prop) => (typeof prop === 'object' ? prop : { icon: prop });
 
@@ -191,18 +145,15 @@ export const addOriginAndDestination = (originMarker, destinationMarker, index, 
 };
 
 export const findSelectedPosition = (selectedRows, marker) => {
-	const index =
-		marker.type === 'warehouse'
-			? selectedRows.indexOf(marker.id)
-			: selectedRows.indexOf(marker.shippingId);
+	const { id, shippingId, type } = marker;
+	const index = selectedRows.indexOf(type === 'warehouse' ? id : shippingId);
 	return index !== -1 ? index + 1 : null;
 };
 
 /* Maps every marker to extend the map's bounds so they can all be initially shown */
 export const getBounds = (markers) => {
 	const bounds = new window.google.maps.LatLngBounds();
-	markers.map((marker) => {
-		const { lat, lng } = marker;
+	markers.map(({ lat, lng }) => {
 		return bounds.extend(new window.google.maps.LatLng(lat, lng));
 	});
 
@@ -211,13 +162,10 @@ export const getBounds = (markers) => {
 
 /* If there are several markers, updates the map's bounds to show them all, otherwise, the map keeps its original position */
 export const showAllMarkers = (map, markers, centerCoordinate) => {
-	if (markers.length) {
-		const markersFlatted = markers.flatMap((marker) =>
-			marker.points.map((point) => point.position)
-		);
-		map.fitBounds(getBounds(markersFlatted));
-		map.setCenter(centerCoordinate);
-	}
+	if (!markers.length) return;
+	const markersFlatted = markers.flatMap((marker) => marker.points.map((point) => point.position));
+	map.fitBounds(getBounds(markersFlatted));
+	map.setCenter(centerCoordinate);
 
 	return null;
 };

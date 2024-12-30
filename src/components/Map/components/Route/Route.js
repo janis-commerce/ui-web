@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Marker from '../Marker';
 import { Polyline } from '@react-google-maps/api';
-import { getRouteDirections } from 'components/Map/utils/getDirections';
+import getRouteDirections from 'components/Map/utils/getDirections';
 
 const Route = ({ readOnly, setMarker, routeData, saveRouteData, googleMapsApiKey }) => {
 	const [polylines, setPolylines] = useState([]);
@@ -21,7 +21,7 @@ const Route = ({ readOnly, setMarker, routeData, saveRouteData, googleMapsApiKey
 			{routeData.points.map((point, idx) => (
 				<Marker
 					markerData={{ ...point }}
-					key={idx}
+					key={`${idx.toString()}`}
 					readOnly={readOnly}
 					markerIdx={idx}
 					setMarkerCallback={setMarker}
@@ -35,7 +35,11 @@ const Route = ({ readOnly, setMarker, routeData, saveRouteData, googleMapsApiKey
 Route.propTypes = {
 	routeData: PropTypes.shape({
 		drawRoute: PropTypes.bool,
-		points: PropTypes.arrayOf({ lat: PropTypes.number, lng: PropTypes.number }),
+		points: PropTypes.arrayOf(
+			PropTypes.shape({
+				position: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number })
+			})
+		),
 		polylineOptions: PropTypes.shape({
 			strokeColor: PropTypes.string,
 			strokeOpacity: PropTypes.number,

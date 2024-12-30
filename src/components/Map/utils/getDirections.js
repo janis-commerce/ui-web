@@ -1,14 +1,17 @@
-import { getPolylineDirections } from './getPolylineDirections';
-import { parseCoordsForPolylines } from './parseCoordsForPolylines';
-import { promiseWrapper } from './promiseWrapper';
+import getPolylineDirections from './getPolylineDirections';
+import parseCoordsForPolylines from './parseCoordsForPolylines';
+import promiseWrapper from './promiseWrapper';
 import validateCoordinates from './validateCoordinates';
 
-export const getRouteDirections = ({
-	routeData,
-	saveRouteData,
-	googleMapsApiKey,
-	setPolylines
-}) => {
+/**
+ * Calculates route directions and processes them for use in a mapping application.
+ * @param {Object} options An object containing the necessary parameters for calculating directions.
+ * @param {Object} options.routeData An object with route information, including points with coordinates.
+ * @param {Function} options.saveRouteData A callback function to save route details after processing.
+ * @param {string} options.googleMapsApiKey The API key for accessing Google Maps services.
+ * @param {Function} options.setPolylines A callback function to update polylines with processed coordinates.
+ */
+const getRouteDirections = ({ routeData, saveRouteData, googleMapsApiKey, setPolylines }) => {
 	const validCoordinates =
 		Array.isArray(routeData?.points) &&
 		routeData?.points?.filter((coord) => validateCoordinates(coord.position)).filter(Boolean);
@@ -35,3 +38,5 @@ export const getRouteDirections = ({
 
 	getDirections();
 };
+
+export default getRouteDirections;
