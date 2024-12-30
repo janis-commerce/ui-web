@@ -4,6 +4,72 @@ import { getColor } from 'theme/utils';
 import mixins from 'theme/mixins';
 import { mediaBreaks } from 'utils/devices';
 
+const getChipVariant = (props) => {
+	const { selected, color, sizeColor, variant } = props;
+	const variantStyles= {
+		outlined: () => css`
+			border: 1px solid ${selected ? palette.blue : '#EAEBED'};
+			color: ${selected ? palette.blue : palette.black};
+			&:hover {
+				background-color: ${palette.lightGreyHover};
+			}
+			&:hover .chip-icon,
+			&:hover .delete-button {
+				fill: ${selected ? palette.blue : palette.black};
+			}
+			&:active {
+				border-color: ${palette.blue};
+				color: ${palette.blue};
+				background-color: transparent;
+			}
+			&:active .chip-icon,
+			&:active .delete-button {
+				fill: ${palette.blue};
+			}
+		`,
+		contained: () => css`
+			background-color: ${selected ? palette.blue : palette.lightGreyHover};
+				color: ${selected ? palette.white : palette.black};
+					.chip-icon {
+						fill: ${selected ? palette.white : palette.black};
+					}
+					.delete-button {
+						fill: ${selected ? palette.white : palette.darkGrey};
+					}
+					&:hover {
+						background-color: ${selected ? palette.blueHover : palette.lightGrey};
+					}
+					&:hover .delete-button {
+						fill: ${selected ? palette.white : palette.black};
+					}
+					&:active {
+						background-color: ${palette.blue};
+						color: ${palette.white};
+					}
+					&:active .chip-icon,
+					&:active .delete-button {
+						fill: ${palette.white};
+					}
+					&:disabled {
+						fill: ${palette.grey};
+						color: ${palette.grey};
+					}
+		`,
+		status: () => css`
+			background-color: ${getColor(color || 'grey')};
+			color: ${getColor(sizeColor || 'white')};
+			font-weight: 700;
+			border: none;
+			height: 24px;
+			padding: 0 17px;
+			line-height: 28px;
+			max-width: 170px;
+		`
+	};
+
+	return variantStyles[variant] || '';
+};
+
 export default {
 	Chip: styled.button`
 		padding: ${(props) => (!props.onlyIcon ? '0 12px' : '0')};
@@ -25,77 +91,8 @@ export default {
 			${(props) => !props.onlyIcon && 'margin-right: 8px'};
 		}
 
-		${(props) => {
-			switch (props.variant) {
-				case 'outlined':
-					return css`
-						border: 1px solid ${props.selected ? palette.blue : '#EAEBED'};
-						color: ${props.selected ? palette.blue : palette.black};
+		${(props) => getChipVariant(props)};
 
-						&:hover {
-							background-color: ${palette.lightGreyHover};
-						}
-						&:hover .chip-icon,
-						&:hover .delete-button {
-							fill: ${props.selected ? palette.blue : palette.black};
-						}
-						&:active {
-							border-color: ${palette.blue};
-							color: ${palette.blue};
-							background-color: transparent;
-						}
-						&:active .chip-icon,
-						&:active .delete-button {
-							fill: ${palette.blue};
-						}
-					`;
-				case 'contained':
-					return css`
-						background-color: ${props.selected ? palette.blue : palette.lightGreyHover};
-						color: ${props.selected ? palette.white : palette.black};
-
-						.chip-icon {
-							fill: ${props.selected ? palette.white : palette.black};
-						}
-						.delete-button {
-							fill: ${props.selected ? palette.white : palette.darkGrey};
-						}
-
-						&:hover {
-							background-color: ${props.selected ? palette.blueHover : palette.lightGrey};
-						}
-						&:hover .delete-button {
-							fill: ${props.selected ? palette.white : palette.black};
-						}
-						&:active {
-							background-color: ${palette.blue};
-							color: ${palette.white};
-						}
-						&:active .chip-icon,
-						&:active .delete-button {
-							fill: ${palette.white};
-						}
-
-						&:disabled {
-							fill: ${palette.grey};
-							color: ${palette.grey};
-						}
-					`;
-				case 'status':
-					return css`
-						background-color: ${getColor(props.color || 'grey')};
-						color: ${getColor(props.sizeColor || 'white')};
-						font-weight: 700;
-						border: none;
-						height: 24px;
-						padding: 0 17px;
-						line-height: 28px;
-						max-width: 170px;
-					`;
-				default:
-					return '';
-			}
-		}}
 		${(props) => props.styles};
 
 		${(props) => props.borderColor && `border: solid 1px ${getColor(props.borderColor)};`}

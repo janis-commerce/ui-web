@@ -7,13 +7,23 @@ const ENV = 'development';
 export default [
 	{
 		input: 'src/components/index.js',
-		output: {
-			name: 'main',
-			file: 'dev/index.umd.js',
-			format: 'umd',
-			sourcemap: true
-		},
-		plugins: plugins(ENV)
+		output: [
+			{
+				file: 'dist/index.esm.js',
+				format: 'esm',
+				sourcemap: true
+			},
+			{
+				name: 'main',
+				file: 'dev/index.umd.js',
+				format: 'umd',
+				sourcemap: true
+			}
+		],
+		plugins: [
+			...plugins(ENV),
+			livereload({ watch: 'dev' })
+		]
 	},
 	{
 		input: 'example/index.js',

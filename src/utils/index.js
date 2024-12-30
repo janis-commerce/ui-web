@@ -33,3 +33,32 @@ export function debounce(fn, wait) {
 
 	return debounced;
 }
+
+/**
+ * Get the id param from URL
+ * @returns {string} The id param
+ */
+export const getIdParam = () => {
+	const url = window.location.href;
+	const id = url.match(/id=([^&]*)/)[1];
+	return id;
+};
+
+/**
+ * Get the variant param from URL
+ * @returns {string} The variant param
+ * @returns {null} If the id param is not present
+ *
+ * @example
+ *
+ */
+export const extractVariantButton = () => {
+	const url = window.location.href;
+	const params = new URL(url).searchParams;
+
+	if (!params.has('id')) return null;
+
+	const idValue = params.get('id');
+	const variant = idValue.split('--').pop();
+	return variant;
+};

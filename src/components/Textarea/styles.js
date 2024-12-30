@@ -8,18 +8,16 @@ const fontSize = typography.size.medium;
 
 const placeholderColor = (props) => {
 	const { isFocused, isFloating, disabled, error } = props;
-	switch (true) {
-		case disabled:
-			return palette.grey;
-		case error:
-			return palette.statusRed;
-		case isFocused:
-			return palette.blue;
-		case isFloating:
-			return palette.darkGrey;
-		default:
-			return palette.darkGreyPressed;
-	}
+
+	if (disabled) return palette.grey;
+
+	if (error) return palette.statusRed;
+
+	if (isFocused) return palette.blue;
+
+	if (isFloating) return palette.darkGrey;
+
+	return palette.darkGreyPressed;
 };
 
 export default {

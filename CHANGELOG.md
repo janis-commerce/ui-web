@@ -7,6 +7,85 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- nvm file
+- script to check installation command to avoid npm install
+
+## [0.27.1] - 2024-12-04
+
+### Fixed
+
+- Path export for icons.json
+
+## [0.27.0] - 2024-12-04
+
+### Added
+
+- New icon
+- Export all icons
+
+## [0.26.0] - 2024-11-12
+
+### Added
+
+- New icon for filters
+
+## [0.25.0] - 2024-10-14
+
+### Changed
+
+- rollup config to avoid errors with new version of react
+
+## [0.24.0] - 2024-10-10
+
+### Fixed
+
+- export skeleton component
+
+### Changed
+
+- revert new docs to avoid publish error
+- switch styles in components utils
+
+## [0.23.0] - 2024-10-04
+
+### Changed
+
+- peer dependencies version of packages
+
+## [0.22.0] - 2024-09-25
+
+### Changed
+
+- minor version of react and react dom in peer dependencies
+
+## [0.21.0] - 2024-09-24
+
+### Added
+
+- export palette colors
+
+### Changed
+
+- viewPalette to palette name
+
+## [0.20.0] - 2024-08-27
+
+### Added
+
+- Color darkblue and magenta
+
+### Changed
+
+- Styles of documentation
+
+## [0.19.0] - 2024-07-10
+
+### Added
+
+- color lightTurquoise to palette
+
 ## [0.18.0] - 2024-05-31
 
 ### Added

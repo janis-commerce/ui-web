@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import useDevices from 'hooks/useDevices';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 import { getImageMeasurements } from 'theme/utils';
 import Skeleton from 'components/Skeleton';
 import styled from './styles';
@@ -83,7 +83,7 @@ Avatar.defaultProps = {
 	size: 'small',
 	url: '',
 	rounded: true,
-	mainColor: viewsPalette.grey
+	mainColor: palette.grey
 };
 
 export default Avatar;

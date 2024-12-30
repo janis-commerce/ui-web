@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Avatar from 'components/Avatar';
-import viewsPalette from 'theme/palette';
+import palette from 'theme/palette';
 import styled from './styles';
 import AvatarList from './components/AvatarList';
 
@@ -41,7 +41,7 @@ AvatarGroup.propTypes = {
 };
 
 AvatarGroup.defaultProps = {
-	badgeColor: viewsPalette.blue,
+	badgeColor: palette.blue,
 	users: [],
 	usersToDisplay: 5,
 	showFull: false

@@ -36,5 +36,14 @@ export default [
 				}
 			})
 		]
+	},
+	{
+		input: 'src/components/index.js',
+		output: {
+			file: 'dist/index.esm.js',
+			format: 'es',
+			sourcemap: true
+		},
+		plugins: [...plugins(ENV), peerDepsExternal()]
 	}
 ];
