@@ -165,6 +165,7 @@ export const showAllMarkers = (map, markers, centerCoordinate) => {
 	if (!markers.length) return;
 	const markersFlatted = markers.flatMap((marker) => marker.points.map((point) => point.position));
 	map.fitBounds(getBounds(markersFlatted));
+	if (!centerCoordinate || isNaN(centerCoordinate).lat || isNaN(centerCoordinate.lng)) return;
 	map.setCenter(centerCoordinate);
 
 	return null;

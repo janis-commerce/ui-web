@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
 import { showAllMarkers } from './utils/utils';
-import MarkerDrawer from './components/MarkersDrawer';
+import MarkersDrawer from './components/MarkersDrawer';
 import SearchBox from './components/SearchBox';
 import { LIBRARIES, INITIAL_CONTROLS_POSITION } from './utils/constants';
 import getMapOptions from './utils/getMapOptions';
@@ -78,10 +78,9 @@ const Map = ({
 			<>
 				{showSearchBar && <SearchBox className="search-box-component" />}
 				{validMarkersExist && (
-					<MarkerDrawer
+					<MarkersDrawer
 						markers={markers}
 						readOnly={readOnly}
-						//setMarker={setMarker}
 						saveRouteData={saveRouteData}
 						googleMapsApiKey={googleMapsApiKey}
 					/>
