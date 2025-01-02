@@ -3,6 +3,16 @@ import Icon from 'components/Icon';
 import ErrorBoundary from 'components/ErrorBoundary';
 
 describe('ErrorBoundary component', () => {
+	let consoleErrorSpy;
+
+	beforeEach(() => {
+		consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+	});
+
+	afterEach(() => {
+		consoleErrorSpy.mockRestore();
+	});
+
 	test('must contain a child component', () => {
 		const wrapper = mount(
 			<ErrorBoundary>
