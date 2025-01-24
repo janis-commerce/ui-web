@@ -1,9 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Locations from '../Locations';
-import Route from '../Route';
+import Markers from './components/Markers';
+import Route from './components/Route';
 
-const MarkersDrawer = ({ markers, readOnly, setMarker, saveRouteData, googleMapsApiKey }) => {
+const MarkersDrawer = ({
+	markers,
+	readOnly,
+	setMarker,
+	callbackOnSuccessDirections,
+	callbackOnErrorDirections,
+	googleMapsApiKey
+}) => {
 	const commonProps = { readOnly, setMarker };
 	return (
 		<>
@@ -13,11 +20,12 @@ const MarkersDrawer = ({ markers, readOnly, setMarker, saveRouteData, googleMaps
 						key={`${idx.toString()}`}
 						{...commonProps}
 						routeData={marker}
-						saveRouteData={saveRouteData}
+						callbackOnSuccessDirections={callbackOnSuccessDirections}
+						callbackOnErrorDirections={callbackOnErrorDirections}
 						googleMapsApiKey={googleMapsApiKey}
 					/>
 				) : (
-					<Locations key={idx} {...commonProps} markers={marker.points} />
+					<Markers key={idx} {...commonProps} markers={marker.points} />
 				)
 			)}
 		</>
@@ -45,7 +53,8 @@ MarkersDrawer.propTypes = {
 	),
 	readOnly: PropTypes.bool,
 	setMarker: PropTypes.func,
-	saveRouteData: PropTypes.func,
+	callbackOnSuccessDirections: PropTypes.func,
+	callbackOnErrorDirections: PropTypes.func,
 	googleMapsApiKey: PropTypes.string
 };
 

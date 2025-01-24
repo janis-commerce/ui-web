@@ -1,5 +1,5 @@
 import { isNumber } from 'lodash';
-import { isObject } from './utils';
+import { isObject } from './isObject';
 
 /**
  * @function validateCoordinates

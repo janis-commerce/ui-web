@@ -1,11 +1,11 @@
 import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
-import { StandaloneSearchBox as SearchBox } from '@react-google-maps/api';
+import { StandaloneSearchBox as SearchBoxComponent } from '@react-google-maps/api';
 import Input from 'components/Input';
-import styled from '../styles';
-import { parseAddressComponents } from '../utils/utils';
+import styled from '../../styles';
+import { parseAddressComponents } from 'components/Map/utils/parseAddressComponents';
 
-const SearchBar = ({ updateMarker }) => {
+const SearchBox = ({ updateMarker }) => {
 	const searchBoxRef = useRef(null);
 
 	const onPlacesChanged = async () => {
@@ -34,17 +34,17 @@ const SearchBar = ({ updateMarker }) => {
 	};
 
 	return (
-		<SearchBox onPlacesChanged={onPlacesChanged} onLoad={onLoad}>
+		<SearchBoxComponent onPlacesChanged={onPlacesChanged} onLoad={onLoad}>
 			<styled.SearchBoxWrapper>
 				<Input placeholder={'search'} hasFloatingLabel={false} />
 			</styled.SearchBoxWrapper>
-		</SearchBox>
+		</SearchBoxComponent>
 	);
 };
 
-SearchBar.propTypes = {
+SearchBox.propTypes = {
 	updateMarker: PropTypes.func,
 	translateHelperString: PropTypes.func
 };
 
-export default SearchBar;
+export default SearchBox;

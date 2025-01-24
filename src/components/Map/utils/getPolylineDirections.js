@@ -1,11 +1,7 @@
-import { isObject } from './utils';
-import axios from 'axios';
-import { decode } from '@mapbox/polyline';
-import { DIRECTIONS_URL, MAX_WAYPOINTS_PER_REQUEST } from './constants';
-import formatBody from './formatBody';
-import getGoogleHeaders from './getGoogleAPIKEYHeaders';
+import { MAX_WAYPOINTS_PER_REQUEST } from './constants';
 import getAllWaypoints from './getAllWaypoints';
-import keepWaypointsEdges from './keepWaypointsEdges';
+import splitWaypointsIntoChunks from './splitWaypointsIntoChunks';
+import fetchPolylines from './fetchPolylines';
 
 /**
 
@@ -19,8 +15,7 @@ Retrieves the polyline directions from Google Maps API based on the provided par
 */
 const getPolylineDirections = async (params = {}) => {
 	try {
-		if (!params || !isObject(params) || !Object.keys(params).length)
-			throw new Error('params is not a valid object');
+		if (!Object.keys(params).length) throw new Error('params is not a valid object');
 		const {
 			coordinates: { origin, destination },
 			googleMapsApiKey,
@@ -28,34 +23,9 @@ const getPolylineDirections = async (params = {}) => {
 		} = params;
 
 		const allWaypoints = getAllWaypoints(origin, destination, waypoints);
+		const waypointsChunks = splitWaypointsIntoChunks(allWaypoints, MAX_WAYPOINTS_PER_REQUEST);
 
-		const numRequests = Math.ceil(allWaypoints.length / MAX_WAYPOINTS_PER_REQUEST);
-		let allCoords = [];
-		let route = {};
-
-		for (let i = 0; i < numRequests; i++) {
-			const startIndex = i * MAX_WAYPOINTS_PER_REQUEST;
-			const endIndex = Math.min(startIndex + MAX_WAYPOINTS_PER_REQUEST, allWaypoints.length);
-			let waypointsSubset = allWaypoints.slice(startIndex, endIndex);
-
-			waypointsSubset = keepWaypointsEdges(waypointsSubset);
-
-			const body = formatBody(waypointsSubset);
-			const header = getGoogleHeaders(googleMapsApiKey);
-			// eslint-disable-next-line no-await-in-loop
-			const { data } = await axios.post(DIRECTIONS_URL, body, header);
-			const points = decode(data.routes[0].polyline.encodedPolyline);
-			const coords = points.map((point) => ({
-				lat: point[0],
-				lng: point[1]
-			}));
-
-			allCoords = allCoords.concat(coords);
-			// eslint-disable-next-line prefer-destructuring
-			route = data.routes[0];
-		}
-
-		return { allCoords, route };
+		return fetchPolylines(waypointsChunks, googleMapsApiKey);
 	} catch (reason) {
 		return Promise.reject(reason?.response?.data || reason);
 	}

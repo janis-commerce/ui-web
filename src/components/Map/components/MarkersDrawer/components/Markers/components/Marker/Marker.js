@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Marker, OverlayView } from '@react-google-maps/api';
+import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
 import { debounce } from 'utils';
-import InfoWindow from '../InfoWindow';
 import PropTypes from 'prop-types';
+import InfoWindow from './components/InfoWindow';
 
-const MarkerComponent = ({
+const Marker = ({
 	markerData,
 	readOnly,
 	setMarkerCallback = () => {},
@@ -63,7 +63,7 @@ const MarkerComponent = ({
 
 	return (
 		<>
-			<Marker {...markerProps} />
+			<MarkerComponent {...markerProps} />
 			{markerData.overlay && (
 				<OverlayView
 					className="overlay-view-component"
@@ -87,7 +87,7 @@ const MarkerComponent = ({
 	);
 };
 
-MarkerComponent.propTypes = {
+Marker.propTypes = {
 	markerData: PropTypes.shape({
 		overlay: PropTypes.element,
 		icon: PropTypes.shape({}),
@@ -101,4 +101,4 @@ MarkerComponent.propTypes = {
 	children: PropTypes.element
 };
 
-export default MarkerComponent;
+export default Marker;

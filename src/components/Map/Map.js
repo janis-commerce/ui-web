@@ -1,13 +1,12 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
-import { showAllMarkers } from './utils/utils';
+import { getBoundsFromMarkers } from './utils/getBoundsFromMarkers';
 import MarkersDrawer from './components/MarkersDrawer';
-import SearchBox from './components/SearchBox';
 import { LIBRARIES, INITIAL_CONTROLS_POSITION } from './utils/constants';
 import getMapOptions from './utils/getMapOptions';
-import setCenterByGeolocationOrCenter from './utils/setCenterByGeolocationOrCenter';
-import setCenterByMarkers from './utils/setCenterByMarkers';
+import getCenterByGeolocationOrCenter from './utils/getCenterByGeolocationOrCenter';
+import SearchBox from './components/SearchBox';
 
 const Map = ({
 	googleMapsApiKey,
@@ -17,24 +16,22 @@ const Map = ({
 	showSearchBar = false,
 	markers,
 	readOnly = true,
-	saveRouteData,
+	callbackOnSuccessDirections,
+	callbackOnErrorDirections,
 	showPOI
 }) => {
-	const [coordinates, setCoords] = useState({ lat: 0, lng: 0 });
 	const { isLoaded } = useJsApiLoader({
 		googleMapsApiKey,
 		LIBRARIES
 	});
 
 	const mapRef = useRef();
-	const [firstLoad, setFirstLoad] = useState(false);
-	const [mapState, setMapState] = useState('');
 
 	const [controlsPositions, setControlsPositions] = useState(INITIAL_CONTROLS_POSITION);
 
 	const validMarkersExist = Array.isArray(markers) && markers.length;
 
-	const mapCenter = !validMarkersExist ? { center: coordinates } : {};
+	const defaultMapCenter = { center: { lat: 0, lng: 0 }, zoom: 13 };
 
 	const handlePositions = (key, value) => {
 		setControlsPositions((prev) => ({ ...prev, [key]: value }));
@@ -42,10 +39,9 @@ const Map = ({
 
 	const mapOptions = getMapOptions(showPOI, controlsPositions);
 
-	const onLoad = (map) => {
+	const onLoad = async (map) => {
 		if (!map) return;
 		mapRef.current = map;
-		setMapState(mapRef);
 
 		map.setOptions({
 			gestureHandling: 'greedy'
@@ -55,17 +51,13 @@ const Map = ({
 		handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
 		handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
 
-		if (!markers.length) return;
-		showAllMarkers(map, markers);
+		if (!markers?.length) {
+			map.setCenter(await getCenterByGeolocationOrCenter(markers, center));
+			return;
+		}
+		map.fitBounds(getBoundsFromMarkers(markers));
+		mapRef.current.setZoom(13);
 	};
-
-	useEffect(() => {
-		setCenterByGeolocationOrCenter(markers, setCoords, center);
-	}, []);
-
-	useEffect(() => {
-		setCenterByMarkers(mapRef, markers, center, firstLoad, setFirstLoad);
-	}, [markers, mapState, center]);
 
 	return isLoaded ? (
 		<GoogleMap
@@ -73,7 +65,7 @@ const Map = ({
 			onLoad={(map) => onLoad(map)}
 			mapContainerStyle={{ height, width }}
 			options={mapOptions}
-			{...mapCenter}
+			{...defaultMapCenter}
 		>
 			<>
 				{showSearchBar && <SearchBox className="search-box-component" />}
@@ -81,7 +73,8 @@ const Map = ({
 					<MarkersDrawer
 						markers={markers}
 						readOnly={readOnly}
-						saveRouteData={saveRouteData}
+						callbackOnSuccessDirections={callbackOnSuccessDirections}
+						callbackOnErrorDirections={callbackOnErrorDirections}
 						googleMapsApiKey={googleMapsApiKey}
 					/>
 				)}
@@ -137,7 +130,9 @@ Map.propTypes = {
 	/** String that contains the API KEY for google maps api */
 	googleMapsApiKey: PropTypes.string,
 	/** Callback that is called when directions are obtained, polylines are passed as argument on call */
-	saveRouteData: PropTypes.func
+	callbackOnSuccessDirections: PropTypes.func,
+	/** Callback that is called when an error occurred when directions are obtained */
+	callbackOnErrorDirections: PropTypes.func
 };
 
 export default Map;

@@ -1,4 +1,9 @@
-const formatBody = (waypointsSubset) => {
+/**
+ * Function to format waypoints for the routing API
+ * @param {Array} waypointsSubset Array of waypoints
+ * @returns Returns the formatted waypoints
+ */
+const formatWaypoints = (waypointsSubset) => {
 	return {
 		origin: waypointsSubset[0],
 		destination: waypointsSubset[waypointsSubset.length - 1],
@@ -16,4 +21,4 @@ const formatBody = (waypointsSubset) => {
 	};
 };
 
-export default formatBody;
+export default formatWaypoints;

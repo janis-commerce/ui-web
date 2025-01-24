@@ -1,4 +1,4 @@
-import setCoordinatesForGeolocation from "./setCoordinatesForGeolocation";
+import getGeolocationCoordinates from './getGeolocationCoordinates';
 
 /**
  * Checks if the given center object contains valid latitude and longitude values.
@@ -15,16 +15,13 @@ const isValidCenter = (center) => {
 
 /**
  * Sets the map center based on the provided markers or a default center value.
- * @param {Array} markers An array of marker objects to determine the map center.
- * @param {Function} setCoords A callback function to update the map's center coordinates.
  * @param {Object} center A default center object with latitude and longitude values.
  * @param {number} center.lat The latitude value of the default center.
  * @param {number} center.lng The longitude value of the default center.
  */
-const setCenterByGeolocationOrCenter = (markers, setCoords, center) => {
-	if (!markers.length && isValidCenter(center))
-		return setCoords({ lat: center.lat, lng: center.lng });
-	setCoordinatesForGeolocation(setCoords);
+const getCenterByGeolocationOrCenter = async (center) => {
+	if (isValidCenter(center)) return { lat: center.lat, lng: center.lng };
+	return await getGeolocationCoordinates();
 };
 
-export default setCenterByGeolocationOrCenter;
+export default getCenterByGeolocationOrCenter;

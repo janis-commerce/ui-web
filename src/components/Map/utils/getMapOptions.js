@@ -1,4 +1,6 @@
-const { getMapStylers, mapFeatureTypes } = require('./utils');
+import { MAP_FEATURE_TYPES } from './constants';
+
+const { getMapStylers } = require('./getMapStylers');
 
 /**
  * Parses configuration for map styles and controls based on the provided options.
@@ -9,7 +11,7 @@ const { getMapStylers, mapFeatureTypes } = require('./utils');
  * @returns {Object} An object containing the parsed map options, including styles and control settings.
  */
 const parseCoordsForPolylines = (showPOI, controlsPositions) => {
-	const { poi, transit } = mapFeatureTypes;
+	const { poi, transit } = MAP_FEATURE_TYPES;
 	const hideFeaturesRules = !showPOI && [poi, transit];
 	const mapStyleOptions = getMapStylers(hideFeaturesRules);
 

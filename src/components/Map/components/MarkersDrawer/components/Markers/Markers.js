@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Marker from '../Marker';
+import Marker from './components/Marker';
 
-const Locations = ({ readOnly, setMarker, markers }) => {
+const Markers = ({ readOnly, setMarker, markers }) => {
 	return (
 		<>
 			{markers.map((marker, idx) => (
@@ -18,10 +18,10 @@ const Locations = ({ readOnly, setMarker, markers }) => {
 	);
 };
 
-Locations.propTypes = {
+Markers.propTypes = {
 	markers: PropTypes.arrayOf(PropTypes.shape({})),
 	readOnly: PropTypes.bool,
 	setMarker: PropTypes.func
 };
 
-export default Locations;
+export default Markers;

@@ -1,3 +1,8 @@
+/**
+ * Extracts the relevant components from the address_components array
+ * @param {Object} place Object with the location data
+ * @returns Returns the	parsed components
+ */
 const getParsedComponents = (place) => {
 	return place.address_components.reduce(
 		(accum, component) => {
