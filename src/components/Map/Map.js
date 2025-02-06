@@ -68,7 +68,7 @@ const Map = ({
 			{...defaultMapCenter}
 		>
 			<>
-				{showSearchBar && <SearchBox className="search-box-component" />}
+				{showSearchBar && <SearchBox className="google-map-component__search-box" />}
 				{validMarkersExist && (
 					<MarkersDrawer
 						markers={markers}

@@ -66,7 +66,7 @@ const Marker = ({
 			<MarkerComponent {...markerProps} />
 			{markerData.overlay && (
 				<OverlayView
-					className="overlay-view-component"
+					className="google-map-component__overlay-view"
 					position={markerData.position}
 					mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
 					getPixelPositionOffset={(width, height) => getPixelPositionOffset(width, height)}
@@ -76,7 +76,7 @@ const Marker = ({
 			)}
 			{infoWindowOpen && markerData.infoWindowChildren && (
 				<InfoWindow
-					className="info-window-component"
+					className="google-map-component__info-window"
 					data={markerData.position}
 					infoWindowHandles={infoWindowHandles}
 				>
