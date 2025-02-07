@@ -14,7 +14,5 @@ export default (coords = []) => {
 
 	if (!isValidLocation(origin) || !isValidLocation(destination)) return {};
 
-	const coordinate = { origin, destination };
-
-	return coordinate;
+	return { origin, destination };
 };

@@ -32,8 +32,5 @@ export default async (latLng = {}, preferredTypes = []) => {
 		parsedData = getParsedComponents(place);
 	}
 
-	/* Go deeper to find the right city and neighborhood values */
-	if (places.length) {
-		return parsePlaces(places, parsedData);
-	}
+	return parsePlaces(places, parsedData);
 };
