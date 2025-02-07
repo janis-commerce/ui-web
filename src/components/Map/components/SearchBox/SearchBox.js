@@ -21,12 +21,13 @@ const SearchBox = ({ updateMarker }) => {
 		const addressData = await parseAddressComponents(location, place?.types);
 		const { formattedAddress, ...addressComponents } = addressData;
 
-		updateMarker({
-			lat: newLat(),
-			lng: newLng(),
-			addressComponents,
-			formattedAddress
-		});
+		if (updateMarker)
+			updateMarker({
+				lat: newLat(),
+				lng: newLng(),
+				addressComponents,
+				formattedAddress
+			});
 	};
 
 	const onLoad = (searchBox) => {
