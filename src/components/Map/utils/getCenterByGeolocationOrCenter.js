@@ -1,4 +1,4 @@
-import getGeolocationCoordinates from './getGeolocationCoordinates';
+import { getGeolocationCoordinates } from './';
 
 /**
  * Checks if the given center object contains valid latitude and longitude values.
@@ -7,7 +7,7 @@ import getGeolocationCoordinates from './getGeolocationCoordinates';
  * @param {number} center.lng The longitude value of the center.
  * @returns {boolean} Returns true if the center has valid lat and lng properties, otherwise false.
  */
-const isValidCenter = (center) => {
+const isValidCenter = (center = {}) => {
 	if (!center) return false;
 	if (!center.lat || !center.lng) return false;
 	return true;
@@ -19,9 +19,7 @@ const isValidCenter = (center) => {
  * @param {number} center.lat The latitude value of the default center.
  * @param {number} center.lng The longitude value of the default center.
  */
-const getCenterByGeolocationOrCenter = async (center) => {
+export default async (center = {}) => {
 	if (isValidCenter(center)) return { lat: center.lat, lng: center.lng };
 	return await getGeolocationCoordinates();
 };
-
-export default getCenterByGeolocationOrCenter;

@@ -1,4 +1,4 @@
-import { validLocation } from './validLocation';
+import { isValidLocation } from './';
 
 /**
  * takes an array of coordinates with it's type, and parses it into valid coordinates to draw a polyline
@@ -6,17 +6,15 @@ import { validLocation } from './validLocation';
  * @param {array} coords
  * @return {object} of coordinates to draw polylines
  */
-const parseCoordsForPolylines = (coords = []) => {
+export default (coords = []) => {
 	if (!coords.length) return {};
 
 	const origin = coords[0].position;
 	const destination = coords[coords.length - 1].position;
 
-	if (!validLocation(origin) || !validLocation(destination)) return {};
+	if (!isValidLocation(origin) || !isValidLocation(destination)) return {};
 
 	const coordinate = { origin, destination };
 
 	return coordinate;
 };
-
-export default parseCoordsForPolylines;

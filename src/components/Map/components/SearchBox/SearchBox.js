@@ -2,8 +2,8 @@ import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import { StandaloneSearchBox as SearchBoxComponent } from '@react-google-maps/api';
 import Input from 'components/Input';
+import { parseAddressComponents } from '../../utils';
 import styled from '../../styles';
-import { parseAddressComponents } from 'components/Map/utils/parseAddressComponents';
 
 const SearchBox = ({ updateMarker }) => {
 	const searchBoxRef = useRef(null);
@@ -16,9 +16,9 @@ const SearchBox = ({ updateMarker }) => {
 				location,
 				location: { lat: newLat, lng: newLng }
 			}
-		} = place;
+		} = place || {};
 
-		const addressData = await parseAddressComponents(location, place.types);
+		const addressData = await parseAddressComponents(location, place?.types);
 		const { formattedAddress, ...addressComponents } = addressData;
 
 		updateMarker({
@@ -36,7 +36,7 @@ const SearchBox = ({ updateMarker }) => {
 	return (
 		<SearchBoxComponent onPlacesChanged={onPlacesChanged} onLoad={onLoad}>
 			<styled.SearchBoxWrapper>
-				<Input placeholder={'search'} hasFloatingLabel={false} />
+				<Input placeholder="search" hasFloatingLabel={false} />
 			</styled.SearchBoxWrapper>
 		</SearchBoxComponent>
 	);

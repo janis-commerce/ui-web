@@ -1,6 +1,5 @@
 import { MAP_FEATURE_TYPES } from './constants';
-
-const { getMapStylers } = require('./getMapStylers');
+import { getMapStylers } from './';
 
 /**
  * Parses configuration for map styles and controls based on the provided options.
@@ -10,12 +9,12 @@ const { getMapStylers } = require('./getMapStylers');
  * @param {number} controlsPositions.fullScreen The position of the fullscreen control on the map.
  * @returns {Object} An object containing the parsed map options, including styles and control settings.
  */
-const parseCoordsForPolylines = (showPOI, controlsPositions) => {
+export default (showPOI = false, controlsPositions = {}) => {
 	const { poi, transit } = MAP_FEATURE_TYPES;
 	const hideFeaturesRules = !showPOI && [poi, transit];
 	const mapStyleOptions = getMapStylers(hideFeaturesRules);
 
-	const mapOptions = {
+	return {
 		mapTypeControl: false,
 		streetViewControl: false,
 		zoomControl: true,
@@ -28,8 +27,4 @@ const parseCoordsForPolylines = (showPOI, controlsPositions) => {
 		clickableIcons: false,
 		styles: mapStyleOptions
 	};
-
-	return mapOptions;
 };
-
-export default parseCoordsForPolylines;

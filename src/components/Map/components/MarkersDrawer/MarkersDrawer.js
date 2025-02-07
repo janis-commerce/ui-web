@@ -25,7 +25,7 @@ const MarkersDrawer = ({
 						googleMapsApiKey={googleMapsApiKey}
 					/>
 				) : (
-					<Markers key={idx} {...commonProps} markers={marker.points} />
+					<Markers key={`${idx.toString()}`} {...commonProps} markers={marker.points} />
 				)
 			)}
 		</>

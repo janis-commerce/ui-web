@@ -1,5 +1,5 @@
 import { isNumber } from 'lodash';
-import { isObject } from './isObject';
+import { isObject } from 'utils/isObject';
 
 /**
  * @function validateCoordinates
@@ -12,8 +12,8 @@ import { isObject } from './isObject';
  * @example isValidRegionData({latitude: -345345, longitude: '3453453453'}) => false
  * @example isValidRegionData({latitude: -345345}) => false
  */
-const validateCoordinates = (region) => {
-	if (!region || !isObject(region) || !Object.keys(region).length) return false;
+export default (region = {}) => {
+	if (!isObject(region) || !Object.keys(region).length) return false;
 
 	const { lng, lat } = region;
 
@@ -23,5 +23,3 @@ const validateCoordinates = (region) => {
 
 	return true;
 };
-
-export default validateCoordinates;

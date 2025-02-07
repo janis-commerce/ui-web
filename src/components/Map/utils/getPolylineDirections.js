@@ -1,7 +1,5 @@
 import { MAX_WAYPOINTS_PER_REQUEST } from './constants';
-import getAllWaypoints from './getAllWaypoints';
-import splitWaypointsIntoChunks from './splitWaypointsIntoChunks';
-import fetchPolylines from './fetchPolylines';
+import { getAllWaypoints, splitWaypointsIntoChunks, fetchPolylines } from './';
 
 /**
 
@@ -13,7 +11,7 @@ Retrieves the polyline directions from Google Maps API based on the provided par
 @throws {Error} - If params is not a valid object or any of its properties are not valid.
 
 */
-const getPolylineDirections = async (params = {}) => {
+export default async (params = {}) => {
 	try {
 		if (!Object.keys(params).length) throw new Error('params is not a valid object');
 		const {
@@ -30,5 +28,3 @@ const getPolylineDirections = async (params = {}) => {
 		return Promise.reject(reason?.response?.data || reason);
 	}
 };
-
-export default getPolylineDirections;

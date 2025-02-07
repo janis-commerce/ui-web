@@ -1,12 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
-import { getBoundsFromMarkers } from './utils/getBoundsFromMarkers';
 import MarkersDrawer from './components/MarkersDrawer';
-import { LIBRARIES, INITIAL_CONTROLS_POSITION } from './utils/constants';
-import getMapOptions from './utils/getMapOptions';
-import getCenterByGeolocationOrCenter from './utils/getCenterByGeolocationOrCenter';
 import SearchBox from './components/SearchBox';
+import { LIBRARIES, INITIAL_CONTROLS_POSITION } from './utils/constants';
+import { getMapOptions, getBoundsFromMarkers, getCenterByGeolocationOrCenter } from './utils';
 
 const Map = ({
 	googleMapsApiKey,
@@ -51,10 +49,9 @@ const Map = ({
 		handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
 		handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
 
-		if (!markers?.length) {
-			map.setCenter(await getCenterByGeolocationOrCenter(markers, center));
-			return;
-		}
+		if (!markers?.length)
+			return map.setCenter(await getCenterByGeolocationOrCenter(markers, center));
+
 		map.fitBounds(getBoundsFromMarkers(markers));
 		mapRef.current.setZoom(13);
 	};

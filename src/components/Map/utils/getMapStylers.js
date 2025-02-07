@@ -5,9 +5,7 @@ import { MAP_FEATURE_TYPES, MAP_STYLERS } from './constants';
  * @param {Array} rules	Array of rules
  * @returns Returns the list of stylers
  */
-export const getMapStylers = (rules) => {
-	if (!rules) return [];
-
+export default (rules = []) => {
 	const styleRules = [];
 	const allRules = Array.isArray(rules) ? rules : [rules];
 

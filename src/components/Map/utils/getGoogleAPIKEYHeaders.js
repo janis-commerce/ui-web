@@ -3,7 +3,7 @@
  * @param {string} apiKey String with the API key
  * @returns Returns the headers for the Google API Key
  */
-const getGoogleHeaders = (apiKey) => {
+export default (apiKey = '') => {
 	return {
 		headers: {
 			'content-type': 'application/json',
@@ -12,5 +12,3 @@ const getGoogleHeaders = (apiKey) => {
 		}
 	};
 };
-
-export default getGoogleHeaders;

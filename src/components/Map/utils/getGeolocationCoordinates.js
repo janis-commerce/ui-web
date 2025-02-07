@@ -1,7 +1,7 @@
 /**
  * Retrieves the current geolocation of the user and updates the map's center coordinates.
  */
-const getGeolocationCoordinates = () => {
+export default () => {
 	return new Promise((resolve, reject) => {
 		navigator.geolocation.getCurrentPosition(
 			(pos) => {
@@ -17,5 +17,3 @@ const getGeolocationCoordinates = () => {
 		);
 	});
 };
-
-export default getGeolocationCoordinates;

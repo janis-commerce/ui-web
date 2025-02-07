@@ -1,12 +1,11 @@
 import { intersection } from 'lodash';
-import getParsedComponents from './getParsedComponents';
-import parsePlaces from './parsePlaces';
+import { getParsedComponents, parsePlaces } from './';
 
 /**
  * Get places data for the provided coordinates
  * @param {lat, lng} latLng a Google latLng object
  */
-const getPlaces = (latLng) =>
+const getPlaces = (latLng = {}) =>
 	new Promise((resolve) => {
 		const geocoder = new window.google.maps.Geocoder();
 		geocoder.geocode({ location: latLng }, (results) => resolve(results));
@@ -17,9 +16,7 @@ const getPlaces = (latLng) =>
  * @param {lat, lng} latLng A Google latLng object.
  * @param {Array} preferredTypes Array of place types to match with the getPlaces results to increase the parsing accuracy.
  */
-export const parseAddressComponents = async (latLng, preferredTypes = []) => {
-	if (!latLng) return {};
-
+export default async (latLng = {}, preferredTypes = []) => {
 	const places = await getPlaces(latLng);
 
 	if (!places || !places.length) return {};

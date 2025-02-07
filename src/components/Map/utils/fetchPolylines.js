@@ -1,18 +1,16 @@
 import axios from 'axios';
-import { DIRECTIONS_URL } from './constants';
 import { decode } from '@mapbox/polyline';
-import formatWaypoints from './formatWaypoints';
-import getGoogleHeaders from './getGoogleAPIKEYHeaders';
+import { DIRECTIONS_URL } from './constants';
+import { formatWaypoints, getGoogleHeaders } from './';
 
-const fetchPolylines = (waypointsChunks, googleMapsApiKey) => {
+export default (waypointsChunks = [], googleMapsApiKey = '') => {
 	let route = {};
-	const allCoords = waypointsChunks.reduce(async (coordsAccumulator, currentChunk) => {
-		const coordinates = coordsAccumulator;
-		const body = formatWaypoints(currentChunk);
-		const header = getGoogleHeaders(googleMapsApiKey);
+	const allCoords = waypointsChunks.reduce(async (coordinates, currentChunk) => {
+		const formattedWaypoints = formatWaypoints(currentChunk);
+		const headers = getGoogleHeaders(googleMapsApiKey);
 		// eslint-disable-next-line no-await-in-loop
-		const { data } = await axios.post(DIRECTIONS_URL, body, header);
-		const points = decode(data.routes[0].polyline.encodedPolyline);
+		const { data } = await axios.post(DIRECTIONS_URL, formattedWaypoints, headers);
+		const points = decode(data?.routes[0]?.polyline?.encodedPolyline);
 		const coords = points.map((point) => ({
 			lat: point[0],
 			lng: point[1]
@@ -22,5 +20,3 @@ const fetchPolylines = (waypointsChunks, googleMapsApiKey) => {
 	}, []);
 	return { allCoords, route };
 };
-
-export default fetchPolylines;

@@ -3,7 +3,7 @@
  * @param {Object} place Object with the location data
  * @returns Returns the	parsed components
  */
-const getParsedComponents = (place) => {
+export default (place = {}) => {
 	return place.address_components.reduce(
 		(accum, component) => {
 			const { long_name: name, types } = component;
@@ -35,5 +35,3 @@ const getParsedComponents = (place) => {
 		{ formattedAddress: place.formatted_address }
 	);
 };
-
-export default getParsedComponents;

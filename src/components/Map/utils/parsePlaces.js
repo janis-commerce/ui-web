@@ -6,7 +6,7 @@ import { intersection } from 'lodash';
  * @param {string} type Type of location to find
  * @returns Returns the name of the location
  */
-const findName = (place, type) => {
+const findName = (place = {}, type = '') => {
 	if (!place.types.includes(type)) return null;
 
 	const data = place.address_components
@@ -22,13 +22,11 @@ const findName = (place, type) => {
  * @param {Object} parsedData Object with the parsed data
  * @returns Returns the parsed data
  */
-const parsePlaces = (places, parsedData) => {
+export default (places, parsedData) => {
 	const dataTypes = ['locality', 'neighborhood', 'sublocality'];
 
 	return places.reduce(
-		(accum, place) => {
-			const parsedComponents = accum;
-
+		(parsedComponents, place) => {
 			const { types } = place;
 			const [match] = intersection(types, dataTypes);
 
@@ -41,5 +39,3 @@ const parsePlaces = (places, parsedData) => {
 		{ ...parsedData }
 	);
 };
-
-export default parsePlaces;

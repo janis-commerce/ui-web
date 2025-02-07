@@ -3,7 +3,7 @@
  * @param {Array} markers Array of markers
  * @returns Returns the bounds of the map
  */
-export const getBounds = (markers) => {
+export default (markers = []) => {
 	const bounds = new window.google.maps.LatLngBounds();
 	markers.map(({ lat, lng }) => {
 		return bounds.extend(new window.google.maps.LatLng(lat, lng));

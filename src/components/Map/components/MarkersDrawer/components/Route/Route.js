@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Polyline } from '@react-google-maps/api';
-import getRouteDirections from 'components/Map/utils/getDirections';
-import Markers from '../Markers/Markers';
+import { getRouteDirections } from '../../../../utils';
+import Markers from '../Markers';
 
 const Route = ({
 	readOnly,
@@ -14,16 +14,18 @@ const Route = ({
 }) => {
 	const [polylines, setPolylines] = useState([]);
 
-	useEffect(() => {
-		const fetchPolylines = async () => {
-			const polylines = await getRouteDirections({
+	const fetchPolylines = async () => {
+		setPolylines(
+			await getRouteDirections({
 				routeData,
 				callbackOnSuccessDirections,
 				callbackOnErrorDirections,
 				googleMapsApiKey
-			});
-			setPolylines(polylines);
-		};
+			})
+		);
+	};
+
+	useEffect(() => {
 		fetchPolylines();
 	}, [routeData]);
 

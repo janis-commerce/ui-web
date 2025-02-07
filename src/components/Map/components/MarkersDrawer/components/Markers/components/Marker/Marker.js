@@ -48,18 +48,7 @@ const Marker = ({
 		}
 	};
 
-	const getPixelPositionOffset = (width) => {
-		if (width) {
-			return {
-				x: -(width / 2),
-				y: 0
-			};
-		}
-		return {
-			x: -68,
-			y: 0
-		};
-	};
+	const getPixelPositionOffset = (width) => ({ x: width ? -(width / 2) : -68, y: 0 });
 
 	return (
 		<>
@@ -69,7 +58,7 @@ const Marker = ({
 					className="google-map-component__overlay-view"
 					position={markerData.position}
 					mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-					getPixelPositionOffset={(width, height) => getPixelPositionOffset(width, height)}
+					getPixelPositionOffset={(width) => getPixelPositionOffset(width)}
 				>
 					{markerData.overlay()}
 				</OverlayView>

@@ -1,21 +1,19 @@
-import getPolylineDirections from './getPolylineDirections';
-import parseCoordsForPolylines from './parseCoordsForPolylines';
-import promiseWrapper from './promiseWrapper';
-import validateCoordinates from './validateCoordinates';
+import promiseWrapper from 'utils/promiseWrapper';
+import { getPolylineDirections, parseCoordsForPolylines, validateCoordinates } from './';
 
 /**
  * Calculates route directions and processes them for use in a mapping application.
- * @param {Object} options An object containing the necessary parameters for calculating directions.
- * @param {Object} options.routeData An object with route information, including points with coordinates.
- * @param {Function} options.callbackOnSuccessDirections A callback function to save route details after processing.
- * @param {Function} options.callbackOnErrorDirections A callback that is invoked when an error occurred while obtaining directions.
- * @param {string} options.googleMapsApiKey The API key for accessing Google Maps services.
+ * @param {Object} routeData An object with route information, including points with coordinates.
+ * @param {Function} callbackOnSuccessDirections A callback function to save route details after processing.
+ * @param {Function} callbackOnErrorDirections A callback that is invoked when an error occurred while obtaining directions.
+ * @param {string} googleMapsApiKey The API key for accessing Google Maps services.
+ * @returns {Promise[]} a promise array with all coordinates
  */
-const getRouteDirections = async ({
-	routeData,
-	callbackOnSuccessDirections,
-	callbackOnErrorDirections,
-	googleMapsApiKey
+export default async ({
+	routeData = {},
+	callbackOnSuccessDirections = () => {},
+	callbackOnErrorDirections = () => {},
+	googleMapsApiKey = ''
 }) => {
 	const validCoordinates =
 		Array.isArray(routeData?.points) &&
@@ -40,7 +38,7 @@ const getRouteDirections = async ({
 
 	if (callbackOnSuccessDirections) callbackOnSuccessDirections(route);
 
+	console.log({ allCoords });
+
 	return allCoords;
 };
-
-export default getRouteDirections;

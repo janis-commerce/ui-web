@@ -3,7 +3,9 @@
  * @param {Array} waypointsSubset Array of waypoints
  * @returns Returns the formatted waypoints
  */
-const formatWaypoints = (waypointsSubset) => {
+export default (waypointsSubset = []) => {
+	if (!waypointsSubset.length) return;
+
 	return {
 		origin: waypointsSubset[0],
 		destination: waypointsSubset[waypointsSubset.length - 1],
@@ -20,5 +22,3 @@ const formatWaypoints = (waypointsSubset) => {
 		}
 	};
 };
-
-export default formatWaypoints;

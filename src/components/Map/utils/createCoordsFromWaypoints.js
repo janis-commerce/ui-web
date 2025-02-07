@@ -1,4 +1,4 @@
-import { formatCoordinates } from './formatCoordinates';
+import { formatCoordinates } from './';
 
 /**
  * takes an array of waypoints and returns them parsed
@@ -6,10 +6,12 @@ import { formatCoordinates } from './formatCoordinates';
  * @param {array} waypoints
  * @return {array}
  */
-export const createLatLngObjectsFromArray = (waypoints = []) => {
+export default (waypoints = []) => {
 	if (!waypoints.length) return [];
 
-	return waypoints
+	const obj = waypoints
 		.map((waypoint) => formatCoordinates(waypoint.position.lat, waypoint.position.lng))
 		.filter(Boolean);
+	console.log({ obj });
+	return obj;
 };

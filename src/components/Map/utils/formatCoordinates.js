@@ -4,9 +4,10 @@
  * @param {number} longitude Value of the longitude
  * @returns Returns the formatted coordinates
  */
-export const formatCoordinates = (latitude, longitude) => {
+export default (latitude, longitude) => {
 	if (!latitude || !longitude) return null;
-	const direction = {
+
+	return {
 		vehicleStopover: false,
 		sideOfRoad: false,
 		location: {
@@ -16,5 +17,4 @@ export const formatCoordinates = (latitude, longitude) => {
 			}
 		}
 	};
-	return direction;
 };

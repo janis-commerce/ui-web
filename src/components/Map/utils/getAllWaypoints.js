@@ -1,5 +1,4 @@
-import { createLatLngObjectsFromArray } from './createLatLngObjectsFromArray';
-import { formatCoordinates } from './formatCoordinates';
+import { formatCoordinates, createCoordsFromWaypoints } from './';
 
 /**
  * Format coordinates to be used in the map
@@ -8,12 +7,10 @@ import { formatCoordinates } from './formatCoordinates';
  * @param {Array} waypoints List of waypoints
  * @returns Returns the list of waypoints
  */
-const getAllWaypoints = (origin, destination, waypoints) => {
+export default (origin = {}, destination = {}, waypoints = []) => {
 	return [
 		formatCoordinates(origin.lat, origin.lng),
-		...createLatLngObjectsFromArray(waypoints),
+		...createCoordsFromWaypoints(waypoints),
 		formatCoordinates(destination.lat, destination.lng)
 	];
 };
-
-export default getAllWaypoints;
