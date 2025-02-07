@@ -11,17 +11,17 @@ const Map = ({
 	width = '800px',
 	height = '400px',
 	center = {},
-	showSearchBar = false,
+	zoom = 13,
 	markers = [],
+	showSearchBar = false,
 	readOnly = true,
 	showPOI = false,
-	zoom = 13,
 	callbackOnSuccessDirections = () => {},
 	callbackOnErrorDirections = () => {}
 }) => {
 	const { isLoaded } = useJsApiLoader({
 		googleMapsApiKey,
-		LIBRARIES
+		libraries: LIBRARIES
 	});
 
 	const mapRef = useRef();
@@ -83,8 +83,16 @@ const Map = ({
 };
 
 Map.propTypes = {
-	/** If new markers can be added */
-	canAddMarkers: PropTypes.bool,
+	/** String that contains the API KEY for google maps api */
+	googleMapsApiKey: PropTypes.string,
+	/** Map width */
+	width: PropTypes.string,
+	/** Map height */
+	height: PropTypes.string,
+	/** Allows to declare a point where the map is centered, its used when there no markers available */
+	center: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number }),
+	/** Map zoom */
+	zoom: PropTypes.number,
 	/** Load markers from outside the component */
 	markers: PropTypes.arrayOf(
 		PropTypes.shape({
@@ -104,30 +112,12 @@ Map.propTypes = {
 			})
 		})
 	),
-	/** Maximum markers to display */
-	maxMarkersQuantity: PropTypes.number,
-	/** Prevents markers from being moved */
-	readOnly: PropTypes.bool,
 	/** Enables search bar (in combination with canAddMarkers) */
 	showSearchBar: PropTypes.bool,
-	/** Callback that executes when an marker was updated */
-	updateMarkerCallback: PropTypes.func,
-	/** Map height */
-	height: PropTypes.string,
-	/** Map width */
-	width: PropTypes.string,
-	/** Determines if markers can be draggable. If `showSearchBar` or `canAddMarkers` are enabled,
-	 * this prop will always evaluate to true.
-	 */
-	canDragMarkers: PropTypes.bool,
+	/** Prevents markers from being moved */
+	readOnly: PropTypes.bool,
 	/** Enables points of interest on the map */
 	showPOI: PropTypes.bool,
-	/** Allows to declare a point where the map is centered, its used when there no markers available */
-	center: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number }),
-	/** String that contains the API KEY for google maps api */
-	googleMapsApiKey: PropTypes.string,
-	/** Map zoom */
-	zoom: PropTypes.number,
 	/** Callback that is called when directions are obtained, polylines are passed as argument on call */
 	callbackOnSuccessDirections: PropTypes.func,
 	/** Callback that is called when an error occurred when directions are obtained */
