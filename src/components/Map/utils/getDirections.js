@@ -38,7 +38,5 @@ export default async ({
 
 	if (callbackOnSuccessDirections) callbackOnSuccessDirections(route);
 
-	console.log({ allCoords });
-
 	return allCoords;
 };

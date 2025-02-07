@@ -1,7 +1,7 @@
 export const LIBRARIES = ['geometry', 'drawing', 'places'];
 
 export const INITIAL_CONTROLS_POSITION = {
-	zoom: 10,
+	zoom: 13,
 	fullScreen: 0
 };
 

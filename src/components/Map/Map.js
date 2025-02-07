@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
 import MarkersDrawer from './components/MarkersDrawer';
@@ -7,16 +7,17 @@ import { LIBRARIES, INITIAL_CONTROLS_POSITION } from './utils/constants';
 import { getMapOptions, getBoundsFromMarkers, getCenterByGeolocationOrCenter } from './utils';
 
 const Map = ({
-	googleMapsApiKey,
-	height,
-	width,
-	center,
+	googleMapsApiKey = '',
+	width = '800px',
+	height = '400px',
+	center = {},
 	showSearchBar = false,
-	markers,
+	markers = [],
 	readOnly = true,
-	callbackOnSuccessDirections,
-	callbackOnErrorDirections,
-	showPOI
+	showPOI = false,
+	zoom = 13,
+	callbackOnSuccessDirections = () => {},
+	callbackOnErrorDirections = () => {}
 }) => {
 	const { isLoaded } = useJsApiLoader({
 		googleMapsApiKey,
@@ -29,7 +30,7 @@ const Map = ({
 
 	const validMarkersExist = Array.isArray(markers) && markers.length;
 
-	const defaultMapCenter = { center: { lat: 0, lng: 0 }, zoom: 13 };
+	const defaultMapCenter = { center: { lat: 0, lng: 0 }, zoom };
 
 	const handlePositions = (key, value) => {
 		setControlsPositions((prev) => ({ ...prev, [key]: value }));
@@ -37,7 +38,7 @@ const Map = ({
 
 	const mapOptions = getMapOptions(showPOI, controlsPositions);
 
-	const onLoad = async (map) => {
+	const onLoad = useCallback((map) => {
 		if (!map) return;
 		mapRef.current = map;
 
@@ -49,17 +50,16 @@ const Map = ({
 		handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
 		handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
 
-		if (!markers?.length)
-			return map.setCenter(await getCenterByGeolocationOrCenter(markers, center));
+		if (!markers?.length) return map.setCenter(getCenterByGeolocationOrCenter(center));
 
 		map.fitBounds(getBoundsFromMarkers(markers));
-		mapRef.current.setZoom(13);
-	};
+		mapRef.current.setZoom(zoom);
+	}, []);
 
 	return isLoaded ? (
 		<GoogleMap
 			className="google-map-component"
-			onLoad={(map) => onLoad(map)}
+			onLoad={onLoad}
 			mapContainerStyle={{ height, width }}
 			options={mapOptions}
 			{...defaultMapCenter}
@@ -126,6 +126,8 @@ Map.propTypes = {
 	center: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number }),
 	/** String that contains the API KEY for google maps api */
 	googleMapsApiKey: PropTypes.string,
+	/** Map zoom */
+	zoom: PropTypes.number,
 	/** Callback that is called when directions are obtained, polylines are passed as argument on call */
 	callbackOnSuccessDirections: PropTypes.func,
 	/** Callback that is called when an error occurred when directions are obtained */

@@ -2,16 +2,13 @@ import { formatCoordinates } from './';
 
 /**
  * takes an array of waypoints and returns them parsed
- *
- * @param {array} waypoints
- * @return {array}
+ * @param {array} waypoints - list of waypoints
+ * @return {array} - waypoints list with formatted coordinates
  */
 export default (waypoints = []) => {
 	if (!waypoints.length) return [];
 
-	const obj = waypoints
+	return waypoints
 		.map((waypoint) => formatCoordinates(waypoint.position.lat, waypoint.position.lng))
 		.filter(Boolean);
-	console.log({ obj });
-	return obj;
 };

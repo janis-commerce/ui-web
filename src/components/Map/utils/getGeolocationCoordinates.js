@@ -2,18 +2,16 @@
  * Retrieves the current geolocation of the user and updates the map's center coordinates.
  */
 export default () => {
-	return new Promise((resolve, reject) => {
-		navigator.geolocation.getCurrentPosition(
-			(pos) => {
-				const {
-					coords: { latitude, longitude }
-				} = pos;
+	try {
+		navigator.geolocation.getCurrentPosition((pos = {}) => {
+			const {
+				coords: { latitude: lat, longitude: lng }
+			} = pos;
 
-				resolve({ lat: latitude, lng: longitude });
-			},
-			(error) => {
-				reject(error);
-			}
-		);
-	});
+			return { lat, lng };
+		});
+	} catch (error) {
+		console.log(error);
+		return {};
+	}
 };
