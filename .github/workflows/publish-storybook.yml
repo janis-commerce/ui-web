@@ -20,7 +20,7 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -42,5 +42,4 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v2
         with:
-          artifact_name: 'docs'
           token: ${{ secrets.GITHUB_TOKEN }}
