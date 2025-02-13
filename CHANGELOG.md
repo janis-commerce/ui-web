@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.28.5] - 2025-02-13
+
+### Removed
+
+- script preinstall
+
 ## [0.28.4] - 2025-02-13
 
 ### Fixed
