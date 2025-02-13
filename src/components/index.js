@@ -17,6 +17,7 @@ import Link from './Link';
 import Drawer from './Drawer';
 import ClickAwayListener from './ClickAwayListener';
 import Skeleton from './Skeleton';
+import Map from './Map';
 import palette from 'theme/palette';
 import icons from './Icon/icons.json';
 
@@ -36,6 +37,7 @@ export {
 	Image,
 	Input,
 	Link,
+	Map,
 	QRCode,
 	Skeleton,
 	Switch,
