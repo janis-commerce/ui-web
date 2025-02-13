@@ -51,28 +51,20 @@ jobs:
       id-token: write
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+           fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: '16'
 
-      - name: Build docs Storybooks
-        run: |
-          yarn install
-          npm run storybook-web-docs
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
-        with:
-          # Upload entire repository
-          path: './docs/'
-          name: docs
-
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: bitovi/github-actions-storybook-to-github-pages@v1.0.3
         with:
-          artifact_name: 'docs'
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          install_command: yarn install # default: npm ci
+          build_command: yarn storybook-web-docs # default: npm run build-storybook
+          path: docs # default: dist/storybook
+          checkout: false # default: true
