@@ -10,7 +10,7 @@
 	},
 	"private": false,
 	"scripts": {
-		"preinstall": "node -e \"if (process.env.npm_lifecycle_event === 'preinstall') { require('./scripts/preinstall-script.js'); }\"",
+		"preinstall": "if [ \"$npm_package_name\" = \"@janiscommerce/ui-web\" ]; then node scripts/preinstall-script.js; fi",
 		"start": "rollup -c rollup/rollup.config.dev.js -w",
 		"build": "rollup -c rollup/rollup.config.prod.js",
 		"lint": "eslint src/",
