@@ -17,7 +17,12 @@ export default [
 		plugins: [
 			...plugins(ENV),
 			peerDepsExternal(),
-			copy({ targets: [{ src: 'README.md', dest: 'dist' }] }),
+			copy({
+				targets: [
+					{ src: 'scripts/preinstall-script.js', dest: 'dist/scripts' },
+					{ src: 'README.md', dest: 'dist' }
+				]
+			}),
 			generatePackageJson({
 				outputFolder: 'dist',
 				baseContents: (pkg) => {
