@@ -10,7 +10,7 @@
 	},
 	"private": false,
 	"scripts": {
-		"preinstall": "node scripts/preinstall-script.js",
+		"preinstall": "node -e \"if (process.env.npm_lifecycle_event === 'preinstall') { require('./scripts/preinstall-script.js'); }\"",
 		"start": "rollup -c rollup/rollup.config.dev.js -w",
 		"build": "rollup -c rollup/rollup.config.prod.js",
 		"lint": "eslint src/",
