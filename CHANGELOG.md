@@ -7,10 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.28.0] - 2025-02-12
+
 ### Added
 
 - nvm file
 - script to check installation command to avoid npm install
+- Map component
 
 ## [0.27.1] - 2024-12-04
 
