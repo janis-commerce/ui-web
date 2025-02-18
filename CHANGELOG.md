@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.28.6] - 2025-02-18
+
+### Fixed
+
+- version of react-google-map/api to 2.7.0 to avoid error of jsx-runtime
+
+### Changed
+
+- Downgrade react version to 16
+
 ## [0.28.5] - 2025-02-13
 
 ### Removed
