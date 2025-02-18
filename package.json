@@ -66,8 +66,8 @@
 		"jest-junit": "^13.1.0",
 		"jest-styled-components": "^7.0.5",
 		"prettier": "^2.3.0",
-		"react": "16.x",
-		"react-dom": "16.x",
+		"react": "17.x",
+		"react-dom": "17.x",
 		"react-test-renderer": "^17.0.2",
 		"rollup": "^2.48.0",
 		"rollup-plugin-copy": "^3.4.0",
@@ -110,8 +110,8 @@
 	},
 	"peerDependencies": {
 		"axios": "^0.27.2",
-		"react": ">= 16.x",
-		"react-dom": ">= 16.x",
+		"react": ">= 17.x",
+		"react-dom": ">= 17.x",
 		"styled-components": ">= 5.3.0"
 	},
 	"babel": {
