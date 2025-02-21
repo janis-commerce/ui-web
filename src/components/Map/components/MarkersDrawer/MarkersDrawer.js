@@ -15,7 +15,7 @@ const MarkersDrawer = ({
 	return (
 		<>
 			{markers.map((marker, idx) =>
-				marker?.polylines ? (
+				marker?.polylines && marker?.polylines?.length ? (
 					<Route
 						key={`${idx.toString()}`}
 						{...commonProps}
