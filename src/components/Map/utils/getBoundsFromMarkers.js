@@ -5,6 +5,6 @@ import { getBounds } from './';
  * @returns Returns the bounds of the map
  */
 export default (markers = []) => {
-	const markersFlatted = markers.flatMap((marker) => marker.points.map((point) => point.position));
+	const markersFlatted = markers.flatMap((marker) => marker?.points.map((point) => point.position));
 	return getBounds(markersFlatted);
 };

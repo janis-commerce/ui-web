@@ -1,34 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Polyline } from '@react-google-maps/api';
-import { getRouteDirections } from '../../../../utils';
 import Markers from '../Markers';
 
-const Route = ({
-	readOnly,
-	setMarker,
-	routeData,
-	callbackOnSuccessDirections,
-	callbackOnErrorDirections,
-	googleMapsApiKey
-}) => {
-	const [polylines, setPolylines] = useState([]);
-
-	const fetchPolylines = async () => {
-		setPolylines(
-			await getRouteDirections({
-				routeData,
-				callbackOnSuccessDirections,
-				callbackOnErrorDirections,
-				googleMapsApiKey
-			})
-		);
-	};
-
-	useEffect(() => {
-		fetchPolylines();
-	}, [routeData]);
-
+const Route = ({ routeData = {}, readOnly = false, setMarker = () => {} }) => {
+	const { polylines = [] } = routeData;
 	return (
 		<>
 			<Markers readOnly={readOnly} setMarker={setMarker} markers={routeData.points} />
@@ -39,7 +15,7 @@ const Route = ({
 
 Route.propTypes = {
 	routeData: PropTypes.shape({
-		drawRoute: PropTypes.bool,
+		polylines: PropTypes.array,
 		points: PropTypes.arrayOf(
 			PropTypes.shape({
 				position: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number })
@@ -52,10 +28,7 @@ Route.propTypes = {
 		})
 	}),
 	readOnly: PropTypes.bool,
-	setMarker: PropTypes.func,
-	callbackOnSuccessDirections: PropTypes.func,
-	callbackOnErrorDirections: PropTypes.func,
-	googleMapsApiKey: PropTypes.string
+	setMarker: PropTypes.func
 };
 
 export default Route;

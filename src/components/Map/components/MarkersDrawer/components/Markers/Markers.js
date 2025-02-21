@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Marker from './components/Marker';
 
-const Markers = ({ readOnly, setMarker, markers }) => {
+const Markers = ({ readOnly = false, setMarker = () => {}, markers = [] }) => {
+	if (!markers.length) return null;
+
 	return (
 		<>
 			{markers.map((marker, idx) => (

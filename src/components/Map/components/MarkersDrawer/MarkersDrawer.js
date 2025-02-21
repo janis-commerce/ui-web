@@ -4,18 +4,18 @@ import Markers from './components/Markers';
 import Route from './components/Route';
 
 const MarkersDrawer = ({
-	markers,
-	readOnly,
-	setMarker,
-	callbackOnSuccessDirections,
-	callbackOnErrorDirections,
-	googleMapsApiKey
+	markers = [],
+	readOnly = false,
+	setMarker = () => {},
+	callbackOnSuccessDirections = () => {},
+	callbackOnErrorDirections = () => {},
+	googleMapsApiKey = ''
 }) => {
 	const commonProps = { readOnly, setMarker };
 	return (
 		<>
 			{markers.map((marker, idx) =>
-				marker.drawRoute ? (
+				marker?.polylines ? (
 					<Route
 						key={`${idx.toString()}`}
 						{...commonProps}
@@ -35,7 +35,7 @@ const MarkersDrawer = ({
 MarkersDrawer.propTypes = {
 	markers: PropTypes.arrayOf(
 		PropTypes.shape({
-			drawRoute: PropTypes.bool,
+			polylines: PropTypes.array,
 			points: PropTypes.arrayOf(
 				PropTypes.shape({
 					position: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number }),
