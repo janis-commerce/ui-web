@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.29.0] - 2025-02-21
+
+### Removed
+
+- Api direction from map Components
+
 ## [0.28.7] - 2025-02-18
 
 ### Changed
