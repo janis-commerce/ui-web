@@ -96,7 +96,7 @@ Map.propTypes = {
 	/** Load markers from outside the component */
 	markers: PropTypes.arrayOf(
 		PropTypes.shape({
-			drawRoute: PropTypes.bool,
+			polylines: PropTypes.array,
 			points: PropTypes.arrayOf(
 				PropTypes.shape({
 					position: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number }),
