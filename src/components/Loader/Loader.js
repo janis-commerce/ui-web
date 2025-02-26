@@ -4,7 +4,7 @@ import Icon from 'components/Icon';
 import PropTypes from 'prop-types';
 import { icons } from 'components';
 
-const Loader = ({ children, icon = 'iso_janis', color = 'blue', effect = 'blur' }) => {
+const Loader = ({ children, icon = 'iso_janis', color = 'blue', effect = 'none' }) => {
 	return (
 		<styles.Container effect={effect}>
 			<styles.LoaderContainer>
