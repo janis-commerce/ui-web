@@ -7,6 +7,6 @@ import { getGeolocationCoordinates, validateCoordinates } from './';
  * @param {number} center.lng The longitude value of the default center.
  */
 export default (center = {}) => {
-	if (validateCoordinates(center)) return { lat: center.lat, lng: center.lng };
+	if (validateCoordinates(center)) return center;
 	return getGeolocationCoordinates();
 };
