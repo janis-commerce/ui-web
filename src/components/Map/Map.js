@@ -30,7 +30,7 @@ const Map = ({
 
 	const validMarkersExist = Array.isArray(markers) && markers.length;
 
-	const defaultMapCenter = { center: { lat: 0, lng: 0 }, zoom };
+	const defaultMapCenter = { lat: 0, lng: 0 };
 
 	const handlePositions = (key, value) => {
 		setControlsPositions((prev) => ({ ...prev, [key]: value }));
@@ -42,7 +42,7 @@ const Map = ({
 		if (!map) return;
 		mapRef.current = map;
 
-		map.setOptions({
+		mapRef.current.setOptions({
 			gestureHandling: 'greedy'
 		});
 
@@ -50,19 +50,21 @@ const Map = ({
 		handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
 		handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
 
-		if (!markers?.length) return map.setCenter(getCenterByGeolocationOrCenter(center));
+		if (!markers?.length)
+			mapRef.current.setCenter(getCenterByGeolocationOrCenter(center || defaultMapCenter));
 
-		map.fitBounds(getBoundsFromMarkers(markers));
+		if (markers?.length) mapRef.current.fitBounds(getBoundsFromMarkers(markers));
 		mapRef.current.setZoom(zoom);
 	}, []);
 
-	return isLoaded ? (
+	if (!isLoaded) return null;
+
+	return (
 		<GoogleMap
 			className="google-map-component"
 			onLoad={onLoad}
 			mapContainerStyle={{ height, width }}
 			options={mapOptions}
-			{...defaultMapCenter}
 		>
 			<>
 				{showSearchBar && <SearchBox className="google-map-component__search-box" />}
@@ -77,8 +79,6 @@ const Map = ({
 				)}
 			</>
 		</GoogleMap>
-	) : (
-		<></>
 	);
 };
 
