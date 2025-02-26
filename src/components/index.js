@@ -18,6 +18,7 @@ import Drawer from './Drawer';
 import ClickAwayListener from './ClickAwayListener';
 import Skeleton from './Skeleton';
 import Map from './Map';
+import Loader from './Loader';
 import palette from 'theme/palette';
 import icons from './Icon/icons.json';
 
@@ -43,5 +44,6 @@ export {
 	Switch,
 	Textarea,
 	palette,
-	icons
+	icons,
+	Loader
 };
