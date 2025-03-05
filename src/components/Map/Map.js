@@ -58,7 +58,7 @@ const Map = ({
 			handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
 
 			if (!markers?.length)
-				mapRef.current.setCenter(getCenterByGeolocationOrCenter(center || defaultMapCenter));
+				setCurrentCenter(getCenterByGeolocationOrCenter(center || defaultMapCenter));
 
 			if (markers?.length) mapRef.current.fitBounds(getBoundsFromMarkers(markers));
 			mapRef.current.setZoom(zoom);
