@@ -18,7 +18,8 @@ import Drawer from './Drawer';
 import ClickAwayListener from './ClickAwayListener';
 import Skeleton from './Skeleton';
 import Map from './Map';
-import Loader from './Loader';
+import FullLoader from './FullLoader';
+import Spinner from './Spinner';
 import palette from 'theme/palette';
 import icons from './Icon/icons.json';
 
@@ -33,6 +34,7 @@ export {
 	ColorPicker,
 	Drawer,
 	ErrorBoundary,
+	FullLoader,
 	HTML,
 	Icon,
 	Image,
@@ -41,9 +43,9 @@ export {
 	Map,
 	QRCode,
 	Skeleton,
+	Spinner,
 	Switch,
 	Textarea,
 	palette,
-	icons,
-	Loader
+	icons
 };
