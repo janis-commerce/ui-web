@@ -5,7 +5,7 @@ import Route from './components/Route';
 
 const MarkersDrawer = ({
 	markers = [],
-	readOnly = false,
+	readOnly = true,
 	setMarker = () => {},
 	callbackOnSuccessDirections = () => {},
 	callbackOnErrorDirections = () => {},
