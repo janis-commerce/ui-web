@@ -53,7 +53,7 @@ const Map = ({
 				gestureHandling: 'greedy'
 			});
 
-			const fullScreenPos = options.showSearchBar ? 'RIGHT_BOTTOM' : 'RIGHT_TOP';
+			const fullScreenPos = mapOptions.showSearchBar ? 'RIGHT_BOTTOM' : 'RIGHT_TOP';
 			handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
 			handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
 
@@ -77,13 +77,13 @@ const Map = ({
 			center={currentCenter}
 			{...props}
 		>
-			{options.showSearchBar && (
+			{mapOptions.showSearchBar && (
 				<SearchBox updateMarker={updateMarker} className="google-map-component__search-box" />
 			)}
 			{validMarkersExist && (
 				<MarkersDrawer
 					markers={markers}
-					readOnly={options.readOnly}
+					readOnly={mapOptions.readOnly}
 					callbackOnSuccessDirections={callbackOnSuccessDirections}
 					callbackOnErrorDirections={callbackOnErrorDirections}
 					googleMapsApiKey={googleMapsApiKey}

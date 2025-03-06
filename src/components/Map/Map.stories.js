@@ -1974,7 +1974,6 @@ const baseArgs = {
 	center,
 	markers: markersMockMultiRutas,
 	googleMapsApiKey: '',
-	heading: 160,
 	...containerStyle
 };
 export const OnlyMap = Template.bind({});
@@ -1991,27 +1990,18 @@ HiddenInfo.args = {
 		zoomControl: false,
 		poiRules: [
 			{
-				featureType: 'road',
-				stylers: [{ visibility: 'on' }, { saturation: -50 }, { lightness: 30 }]
+				featureType: 'all',
+				stylers: [{ color: '#C0C0C0' }]
 			},
-
 			{
-				featureType: 'poi',
+				featureType: 'road.arterial',
+				elementType: 'geometry',
+				stylers: [{ color: '#CCFFFF' }]
+			},
+			{
+				featureType: 'landscape',
+				elementType: 'labels',
 				stylers: [{ visibility: 'off' }]
-			},
-
-			{
-				featureType: 'poi.business',
-				stylers: [{ visibility: 'off' }]
-			},
-			{
-				featureType: 'poi.park',
-				stylers: [{ visibility: 'off' }]
-			},
-
-			{
-				featureType: 'administrative.locality',
-				stylers: [{ visibility: 'on' }, { saturation: -10 }, { lightness: 40 }]
 			}
 		]
 	}
