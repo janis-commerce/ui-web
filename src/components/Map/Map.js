@@ -35,10 +35,8 @@ const Map = ({
 	const mapOptions = getMapOptions(options, controlsPositions);
 
 	const updateMarker = (newCenter) => {
-		mapRef.current.setCenter(newCenter);
-		if (mapRef.current) {
-			mapRef.current.panTo(newCenter);
-		}
+		if (!mapRef.current) return;
+		mapRef.current.panTo(newCenter);
 	};
 
 	const onLoad = useCallback(
