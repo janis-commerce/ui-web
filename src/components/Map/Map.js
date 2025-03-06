@@ -24,12 +24,9 @@ const Map = ({
 	});
 
 	const mapRef = useRef();
-	const [currentCenter, setCurrentCenter] = useState(center);
 	const [controlsPositions, setControlsPositions] = useState(INITIAL_CONTROLS_POSITION);
 
 	const validMarkersExist = Array.isArray(markers) && markers.length;
-
-	const defaultMapCenter = { lat: 0, lng: 0 };
 
 	const handlePositions = (key, value) => {
 		setControlsPositions((prev) => ({ ...prev, [key]: value }));
@@ -38,7 +35,7 @@ const Map = ({
 	const mapOptions = getMapOptions(options, controlsPositions);
 
 	const updateMarker = (newCenter) => {
-		setCurrentCenter(newCenter);
+		mapRef.current.setCenter(newCenter);
 		if (mapRef.current) {
 			mapRef.current.panTo(newCenter);
 		}
@@ -58,7 +55,7 @@ const Map = ({
 			handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
 
 			if (!markers?.length)
-				setCurrentCenter(getCenterByGeolocationOrCenter(center || defaultMapCenter));
+				mapRef.current.setCenter(getCenterByGeolocationOrCenter(center || DEFAULT_CENTER));
 
 			if (markers?.length) mapRef.current.fitBounds(getBoundsFromMarkers(markers));
 			mapRef.current.setZoom(zoom);
@@ -74,7 +71,7 @@ const Map = ({
 			onLoad={onLoad}
 			mapContainerStyle={{ height, width }}
 			options={mapOptions}
-			center={currentCenter}
+			center={mapRef.current?.center}
 			{...props}
 		>
 			{mapOptions.showSearchBar && (
