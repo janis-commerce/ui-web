@@ -37,7 +37,7 @@ const SearchBox = ({ updateMarker }) => {
 	return (
 		<SearchBoxComponent onPlacesChanged={onPlacesChanged} onLoad={onLoad}>
 			<styled.SearchBoxWrapper>
-				<Input placeholder="search" hasFloatingLabel={false} />
+				<Input placeholder="Search" hasFloatingLabel={false} />
 			</styled.SearchBoxWrapper>
 		</SearchBoxComponent>
 	);
