@@ -80,16 +80,12 @@ const TemplateWithChildren = (args) => (
 
 const baseArgs = {};
 
-export const None = Template.bind({});
 export const Blur = TemplateWithChildren.bind({});
 export const Dark = TemplateWithChildren.bind({});
 export const DarkBlur = TemplateWithChildren.bind({});
-export const Opaque = TemplateWithChildren.bind({});
 export const Glass = TemplateWithChildren.bind({});
-
-None.args = {
-	...baseArgs
-};
+export const None = Template.bind({});
+export const Opaque = TemplateWithChildren.bind({});
 
 Blur.args = {
 	effect: EFFECTS.blur
@@ -103,10 +99,14 @@ DarkBlur.args = {
 	effect: EFFECTS.darkBlur
 };
 
-Opaque.args = {
-	effect: EFFECTS.opaque
-};
-
 Glass.args = {
 	effect: EFFECTS.glass
+};
+
+None.args = {
+	...baseArgs
+};
+
+Opaque.args = {
+	effect: EFFECTS.opaque
 };
