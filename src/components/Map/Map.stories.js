@@ -6,8 +6,6 @@ const center = {
 	lng: -58.4373331
 };
 
-const containerStyle = { width: '400px', height: '400px' };
-
 const markersMockMultiRutas = [
 	{
 		polylines: [
@@ -1889,70 +1887,70 @@ const markersMockMultiRutas = [
 			{
 				position: { lat: -34.6065, lng: -58.4207 },
 				icon: {
-					url: `data:image/svg+xml;utf-8, 		<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(%23filter0_d_491_165663)">
-	<path fill-rule="evenodd" clip-rule="evenodd" d="M22 4C28.6274 4 34 9.2873 34 15.8095C34 19.6038 32.5151 23.4609 29.5454 27.3809C27.6409 29.8948 22 35 22 35C18.2394 31.5965 15.7243 29.0568 14.4546 27.3809C11.4849 23.4609 10 19.6038 10 15.8095C10 9.2873 15.3726 4 22 4Z" fill="white"/>
-</g>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M22 8C26.4183 8 30 11.5817 30 16C30 18.5703 29.0101 21.1832 27.0302 23.8387C25.7606 25.5416 22 29 22 29C19.4929 26.6944 17.8162 24.974 16.9698 23.8387C14.9899 21.1832 14 18.5703 14 16C14 11.5817 17.5817 8 22 8Z" fill="%23bb22aa"/>
-<text x="49%" y="43%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="Roboto" font-weight="1000" fill="white" >1</text>
-<defs>
-	<filter id="filter0_d_491_165663" x="0" y="0" width="44" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-		<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-		<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-		<feOffset dy="6"/>
-		<feGaussianBlur stdDeviation="5"/>
-		<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.223529 0 0 0 0 0.278431 0 0 0 0.393597 0"/>
-		<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_491_165663"/>
-		<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_491_165663" result="shape"/>
-	</filter>
-</defs>
-</svg>`
+					url: `data:image/svg+xml;utf-8, <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g filter="url(%23filter0_d_491_165663)">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M22 4C28.6274 4 34 9.2873 34 15.8095C34 19.6038 32.5151 23.4609 29.5454 27.3809C27.6409 29.8948 22 35 22 35C18.2394 31.5965 15.7243 29.0568 14.4546 27.3809C11.4849 23.4609 10 19.6038 10 15.8095C10 9.2873 15.3726 4 22 4Z" fill="white"/>
+						</g>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M22 8C26.4183 8 30 11.5817 30 16C30 18.5703 29.0101 21.1832 27.0302 23.8387C25.7606 25.5416 22 29 22 29C19.4929 26.6944 17.8162 24.974 16.9698 23.8387C14.9899 21.1832 14 18.5703 14 16C14 11.5817 17.5817 8 22 8Z" fill="%23bb22aa"/>
+						<text x="49%" y="43%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="Roboto" font-weight="1000" fill="white" >1</text>
+						<defs>
+							<filter id="filter0_d_491_165663" x="0" y="0" width="44" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+								<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+								<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+								<feOffset dy="6"/>
+								<feGaussianBlur stdDeviation="5"/>
+								<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.223529 0 0 0 0 0.278431 0 0 0 0.393597 0"/>
+								<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_491_165663"/>
+								<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_491_165663" result="shape"/>
+							</filter>
+						</defs>
+					</svg>`
 				}
 			},
 			{
 				position: { lat: -34.6043, lng: -58.4301 },
 				icon: {
-					url: `data:image/svg+xml;utf-8, 		<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(%23filter0_d_491_165663)">
-	<path fill-rule="evenodd" clip-rule="evenodd" d="M22 4C28.6274 4 34 9.2873 34 15.8095C34 19.6038 32.5151 23.4609 29.5454 27.3809C27.6409 29.8948 22 35 22 35C18.2394 31.5965 15.7243 29.0568 14.4546 27.3809C11.4849 23.4609 10 19.6038 10 15.8095C10 9.2873 15.3726 4 22 4Z" fill="white"/>
-</g>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M22 8C26.4183 8 30 11.5817 30 16C30 18.5703 29.0101 21.1832 27.0302 23.8387C25.7606 25.5416 22 29 22 29C19.4929 26.6944 17.8162 24.974 16.9698 23.8387C14.9899 21.1832 14 18.5703 14 16C14 11.5817 17.5817 8 22 8Z" fill="%23bb22aa"/>
-<text x="49%" y="43%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="Roboto" font-weight="1000" fill="white" >2</text>
-<defs>
-	<filter id="filter0_d_491_165663" x="0" y="0" width="44" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-		<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-		<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-		<feOffset dy="6"/>
-		<feGaussianBlur stdDeviation="5"/>
-		<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.223529 0 0 0 0 0.278431 0 0 0 0.393597 0"/>
-		<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_491_165663"/>
-		<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_491_165663" result="shape"/>
-	</filter>
-</defs>
-</svg>`
+					url: `data:image/svg+xml;utf-8, <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g filter="url(%23filter0_d_491_165663)">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M22 4C28.6274 4 34 9.2873 34 15.8095C34 19.6038 32.5151 23.4609 29.5454 27.3809C27.6409 29.8948 22 35 22 35C18.2394 31.5965 15.7243 29.0568 14.4546 27.3809C11.4849 23.4609 10 19.6038 10 15.8095C10 9.2873 15.3726 4 22 4Z" fill="white"/>
+						</g>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M22 8C26.4183 8 30 11.5817 30 16C30 18.5703 29.0101 21.1832 27.0302 23.8387C25.7606 25.5416 22 29 22 29C19.4929 26.6944 17.8162 24.974 16.9698 23.8387C14.9899 21.1832 14 18.5703 14 16C14 11.5817 17.5817 8 22 8Z" fill="%23bb22aa"/>
+						<text x="49%" y="43%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="Roboto" font-weight="1000" fill="white" >2</text>
+						<defs>
+							<filter id="filter0_d_491_165663" x="0" y="0" width="44" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+								<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+								<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+								<feOffset dy="6"/>
+								<feGaussianBlur stdDeviation="5"/>
+								<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.223529 0 0 0 0 0.278431 0 0 0 0.393597 0"/>
+								<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_491_165663"/>
+								<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_491_165663" result="shape"/>
+							</filter>
+						</defs>
+					</svg>`
 				}
 			},
 			{
 				position: { lat: -34.6035, lng: -58.435 },
 				icon: {
-					url: `data:image/svg+xml;utf-8, 		<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(%23filter0_d_491_165663)">
-	<path fill-rule="evenodd" clip-rule="evenodd" d="M22 4C28.6274 4 34 9.2873 34 15.8095C34 19.6038 32.5151 23.4609 29.5454 27.3809C27.6409 29.8948 22 35 22 35C18.2394 31.5965 15.7243 29.0568 14.4546 27.3809C11.4849 23.4609 10 19.6038 10 15.8095C10 9.2873 15.3726 4 22 4Z" fill="white"/>
-</g>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M22 8C26.4183 8 30 11.5817 30 16C30 18.5703 29.0101 21.1832 27.0302 23.8387C25.7606 25.5416 22 29 22 29C19.4929 26.6944 17.8162 24.974 16.9698 23.8387C14.9899 21.1832 14 18.5703 14 16C14 11.5817 17.5817 8 22 8Z" fill="%23bb22aa"/>
-<text x="49%" y="43%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="Roboto" font-weight="1000" fill="white" >3</text>
-<defs>
-	<filter id="filter0_d_491_165663" x="0" y="0" width="44" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-		<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-		<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
-		<feOffset dy="6"/>
-		<feGaussianBlur stdDeviation="5"/>
-		<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.223529 0 0 0 0 0.278431 0 0 0 0.393597 0"/>
-		<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_491_165663"/>
-		<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_491_165663" result="shape"/>
-	</filter>
-</defs>
-</svg>`
+					url: `data:image/svg+xml;utf-8, <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g filter="url(%23filter0_d_491_165663)">
+							<path fill-rule="evenodd" clip-rule="evenodd" d="M22 4C28.6274 4 34 9.2873 34 15.8095C34 19.6038 32.5151 23.4609 29.5454 27.3809C27.6409 29.8948 22 35 22 35C18.2394 31.5965 15.7243 29.0568 14.4546 27.3809C11.4849 23.4609 10 19.6038 10 15.8095C10 9.2873 15.3726 4 22 4Z" fill="white"/>
+						</g>
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M22 8C26.4183 8 30 11.5817 30 16C30 18.5703 29.0101 21.1832 27.0302 23.8387C25.7606 25.5416 22 29 22 29C19.4929 26.6944 17.8162 24.974 16.9698 23.8387C14.9899 21.1832 14 18.5703 14 16C14 11.5817 17.5817 8 22 8Z" fill="%23bb22aa"/>
+						<text x="49%" y="43%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="Roboto" font-weight="1000" fill="white" >3</text>
+						<defs>
+							<filter id="filter0_d_491_165663" x="0" y="0" width="44" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+								<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+								<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+								<feOffset dy="6"/>
+								<feGaussianBlur stdDeviation="5"/>
+								<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.223529 0 0 0 0 0.278431 0 0 0 0.393597 0"/>
+								<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_491_165663"/>
+								<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_491_165663" result="shape"/>
+							</filter>
+						</defs>
+					</svg>`
 				}
 			}
 		]
@@ -1973,11 +1971,44 @@ const Template = (args) => <Map {...args} />;
 const baseArgs = {
 	center,
 	markers: markersMockMultiRutas,
-	googleMapsApiKey: '',
-	...containerStyle
+	googleMapsApiKey: ''
 };
 export const OnlyMap = Template.bind({});
+export const HiddenInfo = Template.bind({});
 
 OnlyMap.args = {
 	...baseArgs
+};
+
+HiddenInfo.args = {
+	...baseArgs,
+	options: {
+		showSearchBar: false,
+		zoomControl: false,
+		poiRules: [
+			{
+				featureType: 'road',
+				stylers: [{ visibility: 'on' }, { saturation: 0 }, { lightness: 0 }]
+			},
+
+			{
+				featureType: 'poi',
+				stylers: [{ visibility: 'off' }]
+			},
+
+			{
+				featureType: 'poi.business',
+				stylers: [{ visibility: 'off' }]
+			},
+			{
+				featureType: 'poi.park',
+				stylers: [{ visibility: 'off' }]
+			},
+
+			{
+				featureType: 'administrative.locality',
+				stylers: [{ visibility: 'on' }, { saturation: 0 }, { lightness: 0 }]
+			}
+		]
+	}
 };

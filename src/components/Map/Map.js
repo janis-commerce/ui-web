@@ -3,21 +3,20 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
 import MarkersDrawer from './components/MarkersDrawer';
 import SearchBox from './components/SearchBox';
-import { LIBRARIES, INITIAL_CONTROLS_POSITION } from './utils/constants';
+import { LIBRARIES, INITIAL_CONTROLS_POSITION, DEFAULT_CENTER } from './utils/constants';
 import { getMapOptions, getBoundsFromMarkers, getCenterByGeolocationOrCenter } from './utils';
 
 const Map = ({
 	googleMapsApiKey = '',
 	width = '800px',
 	height = '400px',
-	center = {},
+	center = DEFAULT_CENTER,
 	zoom = 13,
 	markers = [],
-	showSearchBar = false,
-	readOnly = true,
-	showPOI = false,
+	options = {},
 	callbackOnSuccessDirections = () => {},
-	callbackOnErrorDirections = () => {}
+	callbackOnErrorDirections = () => {},
+	...props
 }) => {
 	const { isLoaded } = useJsApiLoader({
 		googleMapsApiKey,
@@ -25,60 +24,67 @@ const Map = ({
 	});
 
 	const mapRef = useRef();
-
 	const [controlsPositions, setControlsPositions] = useState(INITIAL_CONTROLS_POSITION);
 
 	const validMarkersExist = Array.isArray(markers) && markers.length;
-
-	const defaultMapCenter = { center: { lat: 0, lng: 0 }, zoom };
 
 	const handlePositions = (key, value) => {
 		setControlsPositions((prev) => ({ ...prev, [key]: value }));
 	};
 
-	const mapOptions = getMapOptions(showPOI, controlsPositions);
+	const mapOptions = getMapOptions(options, controlsPositions);
 
-	const onLoad = useCallback((map) => {
-		if (!map) return;
-		mapRef.current = map;
+	const updateMarker = (newCenter) => {
+		if (!mapRef.current) return;
+		mapRef.current.panTo(newCenter);
+	};
 
-		map.setOptions({
-			gestureHandling: 'greedy'
-		});
+	const onLoad = useCallback(
+		(map) => {
+			if (!map) return;
+			mapRef.current = map;
 
-		const fullScreenPos = showSearchBar ? 'RIGHT_BOTTOM' : 'RIGHT_TOP';
-		handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
-		handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
+			mapRef.current.setOptions({
+				gestureHandling: 'greedy'
+			});
 
-		if (!markers?.length) return map.setCenter(getCenterByGeolocationOrCenter(center));
+			const fullScreenPos = mapOptions.showSearchBar ? 'RIGHT_BOTTOM' : 'RIGHT_TOP';
+			handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
+			handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
 
-		map.fitBounds(getBoundsFromMarkers(markers));
-		mapRef.current.setZoom(zoom);
-	}, []);
+			if (!markers?.length)
+				mapRef.current.setCenter(getCenterByGeolocationOrCenter(center || DEFAULT_CENTER));
 
-	return isLoaded ? (
+			if (markers?.length) mapRef.current.fitBounds(getBoundsFromMarkers(markers));
+			mapRef.current.setZoom(zoom);
+		},
+		[center, markers, options, zoom]
+	);
+
+	if (!isLoaded) return null;
+
+	return (
 		<GoogleMap
 			className="google-map-component"
 			onLoad={onLoad}
 			mapContainerStyle={{ height, width }}
 			options={mapOptions}
-			{...defaultMapCenter}
+			center={mapRef.current?.center}
+			{...props}
 		>
-			<>
-				{showSearchBar && <SearchBox className="google-map-component__search-box" />}
-				{validMarkersExist && (
-					<MarkersDrawer
-						markers={markers}
-						readOnly={readOnly}
-						callbackOnSuccessDirections={callbackOnSuccessDirections}
-						callbackOnErrorDirections={callbackOnErrorDirections}
-						googleMapsApiKey={googleMapsApiKey}
-					/>
-				)}
-			</>
+			{mapOptions.showSearchBar && (
+				<SearchBox updateMarker={updateMarker} className="google-map-component__search-box" />
+			)}
+			{validMarkersExist && (
+				<MarkersDrawer
+					markers={markers}
+					readOnly={mapOptions.readOnly}
+					callbackOnSuccessDirections={callbackOnSuccessDirections}
+					callbackOnErrorDirections={callbackOnErrorDirections}
+					googleMapsApiKey={googleMapsApiKey}
+				/>
+			)}
 		</GoogleMap>
-	) : (
-		<></>
 	);
 };
 
@@ -112,12 +118,9 @@ Map.propTypes = {
 			})
 		})
 	),
-	/** Enables search bar (in combination with canAddMarkers) */
-	showSearchBar: PropTypes.bool,
 	/** Prevents markers from being moved */
-	readOnly: PropTypes.bool,
-	/** Enables points of interest on the map */
-	showPOI: PropTypes.bool,
+	/** Config to customize map */
+	options: PropTypes.shape({}),
 	/** Callback that is called when directions are obtained, polylines are passed as argument on call */
 	callbackOnSuccessDirections: PropTypes.func,
 	/** Callback that is called when an error occurred when directions are obtained */
