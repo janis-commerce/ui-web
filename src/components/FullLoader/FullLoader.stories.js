@@ -78,9 +78,7 @@ const TemplateWithChildren = (args) => (
 	</>
 );
 
-const baseArgs = {
-	effect: { backdropFilter: 'blur(5px)' }
-};
+const baseArgs = {};
 
 export const None = Template.bind({});
 export const Blur = TemplateWithChildren.bind({});
