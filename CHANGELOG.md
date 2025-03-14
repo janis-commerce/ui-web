@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.31.0] - 2025-03-14
+
+### Added
+
+- Full loader component
+- Spinner loader component
+
 ## [0.30.0] - 2025-03-06
 
 ### Added
