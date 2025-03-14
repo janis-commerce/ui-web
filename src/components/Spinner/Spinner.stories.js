@@ -1,6 +1,7 @@
 import React from 'react';
 import palette from 'theme/palette';
 import Spinner from './Spinner';
+import Icon from 'components/Icon';
 
 const control = {
 	type: 'select',
@@ -24,13 +25,28 @@ export default {
 };
 
 const Template = (args) => <Spinner {...args} />;
+const TemplateWithIcon = (args) => (
+	<Spinner {...args}>
+		<Icon name="iso_janis" size={50} color="blue" />
+	</Spinner>
+);
 
 const baseArgs = {
-	config: { color: 'blue', duration: 2, size: 50, thickness: 18 }
+	config: {
+		color: 'blue',
+		duration: 1,
+		thickness: 3,
+		backSpinnerColor: 'rgba(169, 161, 161, 0.15)'
+	}
 };
 
 export const Basic = Template.bind({});
+export const WithIcon = TemplateWithIcon.bind({});
 
 Basic.args = {
+	...baseArgs
+};
+
+WithIcon.args = {
 	...baseArgs
 };

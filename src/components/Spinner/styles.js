@@ -8,7 +8,7 @@ const rotate = keyframes`
 `;
 
 const Spinner = styled.div`
-	${({ color, duration, size, thickness }) => css`
+	${({ color, duration, size, thickness, backSpinnerColor }) => css`
 		width: ${size}px;
 		height: ${size}px;
 		border-radius: 50%;
@@ -16,7 +16,7 @@ const Spinner = styled.div`
 		border-top: ${thickness}px solid ${getColor(color)};
 		border-right: ${thickness}px solid ${getColor(color)};
 		border-bottom: ${thickness}px solid ${getColor(color)};
-		border-left: ${thickness}px solid ${getColor('grey')};
+		border-left: ${thickness}px solid ${getColor(backSpinnerColor)};
 		animation: ${rotate} ${duration}s linear infinite;
 		position: absolute;
 	`}
