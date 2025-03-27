@@ -4,13 +4,7 @@ import { debounce } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
 
-const Marker = ({
-	markerData,
-	readOnly,
-	setMarkerCallback = () => {},
-	markerIdx,
-	markerProps: schemaMarkerProps
-}) => {
+const Marker = ({ markerData, readOnly, markerProps: schemaMarkerProps }) => {
 	const { onClick } = schemaMarkerProps || {};
 
 	const [infoWindowOpen, setInfoWindowOpen] = useState(false);
@@ -23,18 +17,15 @@ const Marker = ({
 		if (!mouseOverInfoWindow) closeInfoWindow();
 	}, 100);
 
-	const markerHandles = {
-		...(onClick && { onClick: () => onClick(markerData) }),
-		onMouseOver: () => openInfoWindow(),
-		onMouseOut: () => delayedInfoWindowHover()
-	};
-
 	const markerProps = {
 		position: markerData.position,
-		draggable: !readOnly,
-		onDragEnd: ({ latLng }) => setMarkerCallback(latLng, markerIdx, markerData),
-		...(true && { ...markerHandles }),
-		icon: markerData.icon
+		draggable: markerData.isDraggable || !readOnly,
+		icon: markerData.icon,
+		onDragEnd: markerData.dragEnd,
+		onDragStart: markerData.dragStart,
+		onMouseOver: () => openInfoWindow(),
+		onMouseOut: () => delayedInfoWindowHover(),
+		...(onClick && { onClick: () => onClick(markerData) })
 	};
 
 	const infoWindowHandles = {
@@ -81,7 +72,10 @@ Marker.propTypes = {
 		overlay: PropTypes.element,
 		icon: PropTypes.shape({}),
 		infoWindowChildren: PropTypes.shape({}),
-		position: PropTypes.shape({})
+		position: PropTypes.shape({}),
+		isDraggable: PropTypes.bool,
+		dragEnd: PropTypes.func,
+		dragStart: PropTypes.func
 	}),
 	readOnly: PropTypes.bool,
 	setMarkerCallback: PropTypes.func,
