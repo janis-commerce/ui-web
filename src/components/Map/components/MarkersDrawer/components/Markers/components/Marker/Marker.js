@@ -21,8 +21,8 @@ const Marker = ({ markerData, readOnly, markerProps: schemaMarkerProps }) => {
 		position: markerData.position,
 		draggable: markerData.isDraggable || !readOnly,
 		icon: markerData.icon,
-		onDragEnd: markerData.dragEnd,
-		onDragStart: markerData.dragStart,
+		onDragEnd: markerData.onDragEnd,
+		onDragStart: markerData.onDragStart,
 		onMouseOver: () => openInfoWindow(),
 		onMouseOut: () => delayedInfoWindowHover(),
 		...(onClick && { onClick: () => onClick(markerData) })
@@ -74,8 +74,8 @@ Marker.propTypes = {
 		infoWindowChildren: PropTypes.shape({}),
 		position: PropTypes.shape({}),
 		isDraggable: PropTypes.bool,
-		dragEnd: PropTypes.func,
-		dragStart: PropTypes.func
+		onDragEnd: PropTypes.func,
+		onDragStart: PropTypes.func
 	}),
 	readOnly: PropTypes.bool,
 	setMarkerCallback: PropTypes.func,
