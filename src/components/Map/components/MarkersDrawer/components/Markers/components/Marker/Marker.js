@@ -4,14 +4,8 @@ import { debounce } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
 
-const Marker = ({
-	markerData,
-	readOnly,
-	setMarkerCallback = () => {},
-	markerIdx,
-	markerProps: schemaMarkerProps
-}) => {
-	const { onClick } = schemaMarkerProps || {};
+const Marker = ({ markerData, readOnly, setMarkerCallback = () => {}, markerIdx }) => {
+	const { onClick, icon, position, overlay, infoWindowChildren } = markerData || {};
 
 	const [infoWindowOpen, setInfoWindowOpen] = useState(false);
 	const [mouseOverInfoWindow, setMouseOverInfoWindow] = useState(false);
@@ -30,11 +24,11 @@ const Marker = ({
 	};
 
 	const markerProps = {
-		position: markerData.position,
+		position: position,
 		draggable: !readOnly,
 		onDragEnd: ({ latLng }) => setMarkerCallback(latLng, markerIdx, markerData),
 		...(true && { ...markerHandles }),
-		icon: markerData.icon
+		icon: icon
 	};
 
 	const infoWindowHandles = {
@@ -53,23 +47,23 @@ const Marker = ({
 	return (
 		<>
 			<MarkerComponent {...markerProps} />
-			{markerData.overlay && (
+			{overlay && (
 				<OverlayView
 					className="google-map-component__overlay-view"
-					position={markerData.position}
+					position={position}
 					mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
 					getPixelPositionOffset={(width) => getPixelPositionOffset(width)}
 				>
-					{markerData.overlay()}
+					{overlay()}
 				</OverlayView>
 			)}
-			{infoWindowOpen && markerData.infoWindowChildren && (
+			{infoWindowOpen && infoWindowChildren && (
 				<InfoWindow
 					className="google-map-component__info-window"
-					data={markerData.position}
+					data={position}
 					infoWindowHandles={infoWindowHandles}
 				>
-					{markerData.infoWindowChildren()}
+					{infoWindowChildren()}
 				</InfoWindow>
 			)}
 		</>
