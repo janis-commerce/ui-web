@@ -4,8 +4,17 @@ import { debounce } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
 
-const Marker = ({ markerData, readOnly, setMarkerCallback = () => {}, markerIdx }) => {
-	const { onClick, icon, position, overlay, infoWindowChildren } = markerData || {};
+const Marker = ({ markerData, readOnly }) => {
+	const {
+		onClick,
+		icon,
+		position,
+		overlay,
+		infoWindowChildren,
+		isDraggable,
+		onDragEnd,
+		onDragStart
+	} = markerData || {};
 
 	const [infoWindowOpen, setInfoWindowOpen] = useState(false);
 	const [mouseOverInfoWindow, setMouseOverInfoWindow] = useState(false);
@@ -17,18 +26,15 @@ const Marker = ({ markerData, readOnly, setMarkerCallback = () => {}, markerIdx 
 		if (!mouseOverInfoWindow) closeInfoWindow();
 	}, 100);
 
-	const markerHandles = {
-		...(onClick && { onClick: () => onClick(markerData) }),
-		onMouseOver: () => openInfoWindow(),
-		onMouseOut: () => delayedInfoWindowHover()
-	};
-
 	const markerProps = {
-		position: position,
-		draggable: !readOnly,
-		onDragEnd: ({ latLng }) => setMarkerCallback(latLng, markerIdx, markerData),
-		...(true && { ...markerHandles }),
-		icon: icon
+		position,
+		draggable: isDraggable || !readOnly,
+		icon,
+		onDragEnd: ({ latLng }) => onDragEnd(latLng, markerData),
+		onDragStart: ({ latLng }) => onDragStart(latLng, markerData),
+		onMouseOver: () => openInfoWindow(),
+		onMouseOut: () => delayedInfoWindowHover(),
+		...(onClick && { onClick: () => onClick(markerData) })
 	};
 
 	const infoWindowHandles = {
@@ -75,10 +81,13 @@ Marker.propTypes = {
 		overlay: PropTypes.element,
 		icon: PropTypes.shape({}),
 		infoWindowChildren: PropTypes.shape({}),
-		position: PropTypes.shape({})
+		position: PropTypes.shape({}),
+		isDraggable: PropTypes.bool,
+		onDragEnd: PropTypes.func,
+		onDragStart: PropTypes.func,
+		onClick: PropTypes.func
 	}),
 	readOnly: PropTypes.bool,
-	setMarkerCallback: PropTypes.func,
 	markerIdx: PropTypes.number,
 	markerProps: PropTypes.shape({}),
 	children: PropTypes.element

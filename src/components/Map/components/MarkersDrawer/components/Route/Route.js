@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Polyline } from '@react-google-maps/api';
 import Markers from '../Markers';
 
-const Route = ({ routeData = {}, readOnly = false, setMarker = () => {} }) => {
+const Route = ({ routeData = {}, readOnly = true, setMarker = () => {} }) => {
 	const { polylines = [] } = routeData;
 	return (
 		<>
