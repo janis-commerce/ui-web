@@ -361,7 +361,6 @@ const markersMockMultiRutas = [
 		},
 		points: [
 			{
-				onClick: (args) => console.log('marker 1', args),
 				position: { lng: -58.43, lat: -34.5986 },
 				icon: {
 					url: `data:image/svg+xml;utf-8, 		<svg width="72"
@@ -984,6 +983,7 @@ const markersMockMultiRutas = [
 		},
 		points: [
 			{
+				onClick: (args) => console.log('marker 1', args),
 				position: { lat: -34.6064, lng: -58.4371 },
 				icon: {
 					url: `data:image/svg+xml;utf-8, 		<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
