@@ -983,7 +983,6 @@ const markersMockMultiRutas = [
 		},
 		points: [
 			{
-				onClick: (args) => console.log('marker 1', args),
 				position: { lat: -34.6064, lng: -58.4371 },
 				icon: {
 					url: `data:image/svg+xml;utf-8, 		<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1976,6 +1975,7 @@ const baseArgs = {
 };
 export const OnlyMap = Template.bind({});
 export const HiddenInfo = Template.bind({});
+export const WithOnClick = Template.bind({});
 
 OnlyMap.args = {
 	...baseArgs
@@ -2012,4 +2012,15 @@ HiddenInfo.args = {
 			}
 		]
 	}
+};
+
+WithOnClick.args = {
+	...baseArgs,
+	markers: baseArgs.markers.map((marker, routeIdx) => ({
+		...marker,
+		points: marker.points.map((point, idx) => ({
+			...point,
+			onClick: () => alert(`Clicked on marker with id: ${routeIdx} - ${idx}`)
+		}))
+	}))
 };
