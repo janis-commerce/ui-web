@@ -6,14 +6,14 @@ import InfoWindow from './components/InfoWindow';
 
 const Marker = ({ markerData, readOnly }) => {
 	const {
-		onClick,
 		icon,
 		position,
 		overlay,
 		infoWindowChildren,
 		isDraggable,
-		onDragEnd,
-		onDragStart
+		onClick = () => {},
+		onDragEnd = () => {},
+		onDragStart = () => {}
 	} = markerData || {};
 
 	const [infoWindowOpen, setInfoWindowOpen] = useState(false);
@@ -30,11 +30,11 @@ const Marker = ({ markerData, readOnly }) => {
 		position,
 		draggable: isDraggable || !readOnly,
 		icon,
+		onClick: () => onClick(markerData),
 		onDragEnd: ({ latLng }) => onDragEnd(latLng, markerData),
 		onDragStart: ({ latLng }) => onDragStart(latLng, markerData),
 		onMouseOver: () => openInfoWindow(),
-		onMouseOut: () => delayedInfoWindowHover(),
-		...(onClick && { onClick: () => onClick(markerData) })
+		onMouseOut: () => delayedInfoWindowHover()
 	};
 
 	const infoWindowHandles = {
@@ -93,4 +93,4 @@ Marker.propTypes = {
 	children: PropTypes.element
 };
 
-export default Marker;
+export default React.memo(Marker);
