@@ -4,17 +4,10 @@ import { debounce } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
 
-const Marker = ({ markerData, readOnly }) => {
-	const {
-		icon,
-		position,
-		overlay,
-		infoWindowChildren,
-		isDraggable,
-		onClick = () => {},
-		onDragEnd = () => {},
-		onDragStart = () => {}
-	} = markerData || {};
+const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
+	const { icon, position, overlay, infoWindowChildren, isDraggable } = markerData || {};
+
+	const { onClick = () => {}, onDragStart = () => {}, onDragEnd = () => {} } = markerOptions;
 
 	const [infoWindowOpen, setInfoWindowOpen] = useState(false);
 	const [mouseOverInfoWindow, setMouseOverInfoWindow] = useState(false);
@@ -30,9 +23,9 @@ const Marker = ({ markerData, readOnly }) => {
 		position,
 		draggable: isDraggable || !readOnly,
 		icon,
-		onClick: () => onClick(markerData),
-		onDragEnd: ({ latLng }) => onDragEnd(latLng, markerData),
-		onDragStart: ({ latLng }) => onDragStart(latLng, markerData),
+		onClick: (eventData) => onClick(markerData, eventData),
+		onDragEnd: (eventData) => onDragEnd(markerData, eventData),
+		onDragStart: (eventData) => onDragStart(markerData, eventData),
 		onMouseOver: () => openInfoWindow(),
 		onMouseOut: () => delayedInfoWindowHover()
 	};
@@ -87,6 +80,7 @@ Marker.propTypes = {
 		onDragStart: PropTypes.func,
 		onClick: PropTypes.func
 	}),
+	markerOptions: PropTypes.shape({}),
 	readOnly: PropTypes.bool,
 	markerIdx: PropTypes.number,
 	markerProps: PropTypes.shape({}),

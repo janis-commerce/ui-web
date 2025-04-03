@@ -1971,6 +1971,15 @@ const Template = (args) => <Map {...args} />;
 const baseArgs = {
 	center,
 	markers: markersMockMultiRutas,
+	options: {
+		readOnly: false
+	},
+	markerOptions: {
+		onClick: ({ position }) => {
+			alert(`Clicked on marker at position ${position?.lat}, ${position?.lng}`);
+		},
+		onDragEnd: (_, { latLng: { lat, lng } }) => alert(`New position: ${lat()}, ${lng()}`)
+	},
 	googleMapsApiKey: ''
 };
 export const OnlyMap = Template.bind({});
@@ -2015,12 +2024,5 @@ HiddenInfo.args = {
 };
 
 WithOnClick.args = {
-	...baseArgs,
-	markers: baseArgs.markers.map((marker, routeIdx) => ({
-		...marker,
-		points: marker.points.map((point, idx) => ({
-			...point,
-			onClick: () => alert(`Clicked on marker with id: ${routeIdx} - ${idx}`)
-		}))
-	}))
+	...baseArgs
 };

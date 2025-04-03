@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Polyline } from '@react-google-maps/api';
 import Markers from '../Markers';
 
-const Route = ({ routeData = {}, readOnly = true, setMarker = () => {} }) => {
+const Route = ({ routeData = {}, markerOptions = {}, readOnly = true }) => {
 	const { polylines = [] } = routeData;
 	return (
 		<>
-			<Markers readOnly={readOnly} setMarker={setMarker} markers={routeData.points} />
+			<Markers readOnly={readOnly} markers={routeData.points} markerOptions={markerOptions} />
 			<Polyline path={polylines} options={routeData.polylineOptions} />
 		</>
 	);
@@ -27,8 +27,8 @@ Route.propTypes = {
 			strokeWeight: PropTypes.number
 		})
 	}),
-	readOnly: PropTypes.bool,
-	setMarker: PropTypes.func
+	markerOptions: PropTypes.shape({}),
+	readOnly: PropTypes.bool
 };
 
 export default Route;

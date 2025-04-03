@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Marker from './components/Marker';
 
-const Markers = ({ readOnly = true, setMarker = () => {}, markers = [] }) => {
+const Markers = ({ readOnly = true, markers = [], markerOptions = {} }) => {
 	if (!markers.length) return null;
 
 	return (
@@ -10,10 +10,10 @@ const Markers = ({ readOnly = true, setMarker = () => {}, markers = [] }) => {
 			{markers.map((marker, idx) => (
 				<Marker
 					markerData={{ ...marker }}
+					markerOptions={markerOptions}
 					key={idx}
 					readOnly={readOnly}
 					markerIdx={idx}
-					setMarkerCallback={setMarker}
 				/>
 			))}
 		</>
@@ -22,8 +22,8 @@ const Markers = ({ readOnly = true, setMarker = () => {}, markers = [] }) => {
 
 Markers.propTypes = {
 	markers: PropTypes.arrayOf(PropTypes.shape({})),
-	readOnly: PropTypes.bool,
-	setMarker: PropTypes.func
+	markerOptions: PropTypes.shape({}),
+	readOnly: PropTypes.bool
 };
 
 export default Markers;

@@ -5,13 +5,13 @@ import Route from './components/Route';
 
 const MarkersDrawer = ({
 	markers = [],
+	markerOptions = {},
 	readOnly = true,
-	setMarker = () => {},
 	callbackOnSuccessDirections = () => {},
 	callbackOnErrorDirections = () => {},
 	googleMapsApiKey = ''
 }) => {
-	const commonProps = { readOnly, setMarker };
+	const commonProps = { readOnly };
 	return (
 		<>
 			{markers.map((marker, idx) =>
@@ -20,12 +20,18 @@ const MarkersDrawer = ({
 						key={`${idx.toString()}`}
 						{...commonProps}
 						routeData={marker}
+						markerOptions={markerOptions}
 						callbackOnSuccessDirections={callbackOnSuccessDirections}
 						callbackOnErrorDirections={callbackOnErrorDirections}
 						googleMapsApiKey={googleMapsApiKey}
 					/>
 				) : (
-					<Markers key={`${idx.toString()}`} {...commonProps} markers={marker.points} />
+					<Markers
+						key={`${idx.toString()}`}
+						{...commonProps}
+						markers={marker.points}
+						markerOptions={markerOptions}
+					/>
 				)
 			)}
 		</>
@@ -51,8 +57,8 @@ MarkersDrawer.propTypes = {
 			})
 		})
 	),
+	markerOptions: PropTypes.shape({}),
 	readOnly: PropTypes.bool,
-	setMarker: PropTypes.func,
 	callbackOnSuccessDirections: PropTypes.func,
 	callbackOnErrorDirections: PropTypes.func,
 	googleMapsApiKey: PropTypes.string
