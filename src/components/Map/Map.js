@@ -13,6 +13,7 @@ const Map = ({
 	center = DEFAULT_CENTER,
 	zoom = 13,
 	markers = [],
+	markerOptions = {},
 	options = {},
 	callbackOnSuccessDirections = () => {},
 	callbackOnErrorDirections = () => {},
@@ -78,6 +79,7 @@ const Map = ({
 			{validMarkersExist && (
 				<MarkersDrawer
 					markers={markers}
+					markerOptions={markerOptions}
 					readOnly={mapOptions.readOnly}
 					callbackOnSuccessDirections={callbackOnSuccessDirections}
 					callbackOnErrorDirections={callbackOnErrorDirections}
@@ -118,6 +120,8 @@ Map.propTypes = {
 			})
 		})
 	),
+	/** Extra config for each marker */
+	markerOptions: PropTypes.shape({}),
 	/** Prevents markers from being moved */
 	/** Config to customize map */
 	options: PropTypes.shape({}),
