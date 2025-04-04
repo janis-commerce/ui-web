@@ -88,10 +88,7 @@ Marker.propTypes = {
 };
 
 export default React.memo(Marker, (prev, next) => {
-	return (
-		prev.markerData.position.lat === next.markerData.position.lat &&
-		prev.markerData.position.lng === next.markerData.position.lng &&
-		prev.markerData.icon.url === next.markerData.icon.url &&
-		prev.readOnly === next.readOnly
-	);
+	const serializedPrev = JSON.stringify(prev);
+	const serializedNext = JSON.stringify(next);
+	return serializedPrev === serializedNext;
 });
