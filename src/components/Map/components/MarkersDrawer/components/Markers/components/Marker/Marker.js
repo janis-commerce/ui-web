@@ -87,4 +87,11 @@ Marker.propTypes = {
 	children: PropTypes.element
 };
 
-export default React.memo(Marker);
+export default React.memo(Marker, (prev, next) => {
+	return (
+		prev.markerData.position.lat === next.markerData.position.lat &&
+		prev.markerData.position.lng === next.markerData.position.lng &&
+		prev.markerData.icon.url === next.markerData.icon.url &&
+		prev.readOnly === next.readOnly
+	);
+});
