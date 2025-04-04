@@ -87,4 +87,8 @@ Marker.propTypes = {
 	children: PropTypes.element
 };
 
-export default React.memo(Marker);
+export default React.memo(Marker, (prev, next) => {
+	const serializedPrev = JSON.stringify(prev);
+	const serializedNext = JSON.stringify(next);
+	return serializedPrev === serializedNext;
+});
