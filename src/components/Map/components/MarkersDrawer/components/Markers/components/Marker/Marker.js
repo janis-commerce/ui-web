@@ -7,7 +7,12 @@ import InfoWindow from './components/InfoWindow';
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const { icon, position, overlay, infoWindowChildren, isDraggable } = markerData || {};
 
-	const { onClick = () => {}, onDragStart = () => {}, onDragEnd = () => {} } = markerOptions;
+	const {
+		onLoad = () => {},
+		onClick = () => {},
+		onDragStart = () => {},
+		onDragEnd = () => {}
+	} = markerOptions;
 
 	const [infoWindowOpen, setInfoWindowOpen] = useState(false);
 	const [mouseOverInfoWindow, setMouseOverInfoWindow] = useState(false);
@@ -23,6 +28,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		position,
 		draggable: isDraggable || !readOnly,
 		icon,
+		onLoad: (markerInstance) => onLoad(markerData, markerInstance),
 		onClick: (eventData) => onClick(markerData, eventData),
 		onDragEnd: (eventData) => onDragEnd(markerData, eventData),
 		onDragStart: (eventData) => onDragStart(markerData, eventData),

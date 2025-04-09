@@ -11,7 +11,7 @@ const Markers = ({ readOnly = true, markers = [], markerOptions = {} }) => {
 				<Marker
 					markerData={{ ...marker }}
 					markerOptions={markerOptions}
-					key={idx}
+					key={`${idx.toString()}-${marker?.position?.lat}-${marker?.position?.lng}`}
 					readOnly={readOnly}
 					markerIdx={idx}
 				/>
