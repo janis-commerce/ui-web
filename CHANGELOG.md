@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
-- add Memo for markers
+- Memo for markers
+- OnLoad cb on markers
 
 ## [0.32.0] - 2025-04-03
 
