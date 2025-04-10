@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
 import { debounce } from 'utils';
 import PropTypes from 'prop-types';
@@ -14,6 +14,8 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		onDragEnd = () => {}
 	} = markerOptions;
 
+	const markerRef = useRef(null);
+
 	const [infoWindowOpen, setInfoWindowOpen] = useState(false);
 	const [mouseOverInfoWindow, setMouseOverInfoWindow] = useState(false);
 
@@ -25,13 +27,14 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	}, 100);
 
 	const markerProps = {
+		ref: markerRef,
 		position,
 		draggable: isDraggable || !readOnly,
 		icon,
 		onLoad: (markerInstance) => onLoad(markerData, markerInstance),
-		onClick: (eventData) => onClick(markerData, eventData),
-		onDragEnd: (eventData) => onDragEnd(markerData, eventData),
-		onDragStart: (eventData) => onDragStart(markerData, eventData),
+		onClick: (eventData) => onClick(markerData, eventData, markerRef.current?.marker),
+		onDragEnd: (eventData) => onDragEnd(markerData, eventData, markerRef.current?.marker),
+		onDragStart: (eventData) => onDragStart(markerData, eventData, markerRef.current?.marker),
 		onMouseOver: () => openInfoWindow(),
 		onMouseOut: () => delayedInfoWindowHover()
 	};
