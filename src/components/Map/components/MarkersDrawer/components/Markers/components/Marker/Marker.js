@@ -42,7 +42,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		const hasEqualLng = marker.lng === updatedMarkerCoords.lng;
 
 		return {
-			marker: hasEqualLat && hasEqualLng ? marker : updateMarker(updatedMarkerCoords),
+			marker: hasEqualLat && hasEqualLng ? marker : updateMarker({ position: updatedMarkerCoords }),
 			prevMarker: marker,
 			instance: markerRef.current?.marker
 		};

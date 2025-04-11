@@ -1979,10 +1979,6 @@ const baseArgs = {
 			const { position } = marker;
 			alert(`Clicked on marker at position ${position?.lat}, ${position?.lng}`);
 		},
-		onDragStart: ({ marker }) => {
-			const { position } = marker;
-			alert(`Clicked on marker at position ${position?.lat}, ${position?.lng}`);
-		},
 		onDragEnd: ({ marker }) => {
 			const { position } = marker;
 			alert(`New position: ${position?.lat}, ${position?.lng}`);
