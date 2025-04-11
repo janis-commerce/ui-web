@@ -3,7 +3,7 @@ import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
 import { debounce } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
-import { getCoordsFromEvent } from './utils';
+import { getCoordsFromEvent, markerHasEqualPosition } from './utils';
 
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const [marker, setMarker] = useState(markerData);
@@ -36,13 +36,12 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	};
 
 	const getEventHandlerData = (event) => {
-		const updatedMarkerCoords = getCoordsFromEvent(event);
-
-		const hasEqualLat = marker.lat === updatedMarkerCoords.lat;
-		const hasEqualLng = marker.lng === updatedMarkerCoords.lng;
+		const newPosition = getCoordsFromEvent(event);
 
 		return {
-			marker: hasEqualLat && hasEqualLng ? marker : updateMarker({ position: updatedMarkerCoords }),
+			marker: markerHasEqualPosition(marker?.position, newPosition)
+				? marker
+				: updateMarker({ position: newPosition }),
 			prevMarker: marker,
 			instance: markerRef.current?.marker
 		};
