@@ -157,3 +157,9 @@ export const getCoordsFromEvent = (event = {}) => {
 	const { latLng: { lat = () => {}, lng = () => {} } = {} } = event;
 	return { lat: lat(), lng: lng() };
 };
+
+export const markerHasEqualPosition = (prevPosition = {}, newPosition = {}) => {
+	const hasEqualLat = prevPosition?.lat === newPosition?.lat;
+	const hasEqualLng = prevPosition?.lng === newPosition?.lng;
+	return hasEqualLat && hasEqualLng;
+};
