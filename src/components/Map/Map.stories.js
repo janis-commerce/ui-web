@@ -1975,10 +1975,18 @@ const baseArgs = {
 		readOnly: false
 	},
 	markerOptions: {
-		onClick: ({ position }) => {
+		onClick: ({ marker }) => {
+			const { position } = marker;
 			alert(`Clicked on marker at position ${position?.lat}, ${position?.lng}`);
 		},
-		onDragEnd: (_, { latLng: { lat, lng } }) => alert(`New position: ${lat()}, ${lng()}`)
+		onDragStart: ({ marker }) => {
+			const { position } = marker;
+			alert(`Clicked on marker at position ${position?.lat}, ${position?.lng}`);
+		},
+		onDragEnd: ({ marker }) => {
+			const { position } = marker;
+			alert(`New position: ${position?.lat}, ${position?.lng}`);
+		}
 	},
 	googleMapsApiKey: ''
 };

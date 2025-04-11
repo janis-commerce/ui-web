@@ -3,13 +3,16 @@ import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
 import { debounce } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
+import { getCoordsFromEvent } from './utils';
 
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
-	const { icon, position, overlay, infoWindowChildren, isDraggable } = markerData || {};
+	const [marker, setMarker] = useState(markerData);
+	const { icon, position, overlay, infoWindowChildren, isDraggable } = marker || {};
 
 	const {
 		onLoad = () => {},
 		onClick = () => {},
+		onDrag = () => {},
 		onDragStart = () => {},
 		onDragEnd = () => {}
 	} = markerOptions;
@@ -26,15 +29,35 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		if (!mouseOverInfoWindow) closeInfoWindow();
 	}, 100);
 
+	const updateMarker = (newData = {}) => {
+		const updatedMarker = { ...marker, ...newData };
+		setMarker(updatedMarker);
+		return updatedMarker;
+	};
+
+	const getEventHandlerData = (event) => {
+		const updatedMarkerCoords = getCoordsFromEvent(event);
+
+		const hasEqualLat = marker.lat === updatedMarkerCoords.lat;
+		const hasEqualLng = marker.lng === updatedMarkerCoords.lng;
+
+		return {
+			marker: hasEqualLat && hasEqualLng ? marker : updateMarker(updatedMarkerCoords),
+			prevMarker: marker,
+			instance: markerRef.current?.marker
+		};
+	};
+
 	const markerProps = {
 		ref: markerRef,
 		position,
 		draggable: isDraggable || !readOnly,
 		icon,
-		onLoad: (markerInstance) => onLoad(markerData, markerInstance),
-		onClick: (eventData) => onClick(markerData, eventData, markerRef.current?.marker),
-		onDragEnd: (eventData) => onDragEnd(markerData, eventData, markerRef.current?.marker),
-		onDragStart: (eventData) => onDragStart(markerData, eventData, markerRef.current?.marker),
+		onLoad: (instance) => onLoad({ prevMarker: marker, instance }),
+		onClick: (event) => onClick(getEventHandlerData(event)),
+		onDrag: (event) => onDrag(event),
+		onDragEnd: (event) => onDragEnd(getEventHandlerData(event)),
+		onDragStart: (event) => onDragStart(getEventHandlerData(event)),
 		onMouseOver: () => openInfoWindow(),
 		onMouseOut: () => delayedInfoWindowHover()
 	};
