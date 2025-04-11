@@ -1,18 +1,23 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
 import { debounce } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
+import { getCoordsFromEvent, markerHasEqualPosition } from './utils';
 
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
-	const { icon, position, overlay, infoWindowChildren, isDraggable } = markerData || {};
+	const [marker, setMarker] = useState(markerData);
+	const { icon, position, overlay, infoWindowChildren, isDraggable } = marker || {};
 
 	const {
 		onLoad = () => {},
 		onClick = () => {},
+		onDrag = () => {},
 		onDragStart = () => {},
 		onDragEnd = () => {}
 	} = markerOptions;
+
+	const markerRef = useRef(null);
 
 	const [infoWindowOpen, setInfoWindowOpen] = useState(false);
 	const [mouseOverInfoWindow, setMouseOverInfoWindow] = useState(false);
@@ -24,14 +29,34 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		if (!mouseOverInfoWindow) closeInfoWindow();
 	}, 100);
 
+	const updateMarker = (newData = {}) => {
+		const updatedMarker = { ...marker, ...newData };
+		setMarker(updatedMarker);
+		return updatedMarker;
+	};
+
+	const getEventHandlerData = (event) => {
+		const newPosition = getCoordsFromEvent(event);
+
+		return {
+			marker: markerHasEqualPosition(marker?.position, newPosition)
+				? marker
+				: updateMarker({ position: newPosition }),
+			prevMarker: marker,
+			instance: markerRef.current?.marker
+		};
+	};
+
 	const markerProps = {
+		ref: markerRef,
 		position,
 		draggable: isDraggable || !readOnly,
 		icon,
-		onLoad: (markerInstance) => onLoad(markerData, markerInstance),
-		onClick: (eventData) => onClick(markerData, eventData),
-		onDragEnd: (eventData) => onDragEnd(markerData, eventData),
-		onDragStart: (eventData) => onDragStart(markerData, eventData),
+		onLoad: (instance) => onLoad({ prevMarker: marker, instance }),
+		onClick: (event) => onClick(getEventHandlerData(event)),
+		onDrag: (event) => onDrag(event),
+		onDragEnd: (event) => onDragEnd(getEventHandlerData(event)),
+		onDragStart: (event) => onDragStart(getEventHandlerData(event)),
 		onMouseOver: () => openInfoWindow(),
 		onMouseOut: () => delayedInfoWindowHover()
 	};
