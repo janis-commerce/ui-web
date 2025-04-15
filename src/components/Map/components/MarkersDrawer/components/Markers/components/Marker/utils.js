@@ -151,3 +151,15 @@ export const getSvgUrl = ({ color, icon, size, label, iconColor }, index) =>
 	icons[icon]
 		? getIconSvgTemplate({ color, icon, size, iconColor, index })
 		: getDefaultSvgTemplate(color, label);
+
+export const getCoordsFromEvent = (event = {}) => {
+	if (typeof event !== 'object') return;
+	const { latLng: { lat = () => {}, lng = () => {} } = {} } = event;
+	return { lat: lat(), lng: lng() };
+};
+
+export const markerHasEqualPosition = (prevPosition = {}, newPosition = {}) => {
+	const hasEqualLat = prevPosition?.lat === newPosition?.lat;
+	const hasEqualLng = prevPosition?.lng === newPosition?.lng;
+	return hasEqualLat && hasEqualLng;
+};

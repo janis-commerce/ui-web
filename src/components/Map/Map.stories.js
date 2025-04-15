@@ -1968,23 +1968,61 @@ export default {
 
 const Template = (args) => <Map {...args} />;
 
+const WithMarkerOptionsTemplate = (args) => {
+	const changeHandlerInfo = (info) => {
+		document.querySelector('.eventHandlerInfo').textContent = info;
+	};
+
+	const onLoad = () => changeHandlerInfo('onLoad event');
+
+	const onClick = ({ marker }) => {
+		const { position } = marker;
+		changeHandlerInfo(
+			`onClick event | Clicked on marker at position ${position?.lat}, ${position?.lng}`
+		);
+	};
+
+	const onDragStart = ({ marker }) => {
+		const { position } = marker;
+		changeHandlerInfo(`onDragStart event | ${position}`);
+	};
+
+	const onDrag = (event = {}) => {
+		const {
+			latLng: { lat, lng }
+		} = event;
+		changeHandlerInfo(`onDrag event | ${lat()}, ${lng()}`);
+	};
+
+	const onDragEnd = ({ marker }) => {
+		const { position } = marker;
+		changeHandlerInfo(`onDragEnd event | New position: ${position?.lat}, ${position?.lng}`);
+	};
+
+	return (
+		<>
+			<Map {...args} markerOptions={{ onLoad, onClick, onDragStart, onDrag, onDragEnd }} />
+			<div
+				className="eventHandlerInfo"
+				style={{
+					marginTop: '30px',
+					padding: '20px 0',
+					textAlign: 'center',
+					borderTop: '1px solid grey'
+				}}
+			/>
+		</>
+	);
+};
+
 const baseArgs = {
 	center,
 	markers: markersMockMultiRutas,
-	options: {
-		readOnly: false
-	},
-	markerOptions: {
-		onClick: ({ position }) => {
-			alert(`Clicked on marker at position ${position?.lat}, ${position?.lng}`);
-		},
-		onDragEnd: (_, { latLng: { lat, lng } }) => alert(`New position: ${lat()}, ${lng()}`)
-	},
 	googleMapsApiKey: ''
 };
 export const OnlyMap = Template.bind({});
 export const HiddenInfo = Template.bind({});
-export const WithOnClick = Template.bind({});
+export const WithMarkerOptions = WithMarkerOptionsTemplate.bind({});
 
 OnlyMap.args = {
 	...baseArgs
@@ -2023,6 +2061,9 @@ HiddenInfo.args = {
 	}
 };
 
-WithOnClick.args = {
-	...baseArgs
+WithMarkerOptions.args = {
+	...baseArgs,
+	options: {
+		readOnly: false
+	}
 };

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.34.0] - 2025-04-10
+
+### Added
+
+- callback onDrag on Marker component
+
 ## [0.33.0] - 2025-04-10
 
 ### Added
