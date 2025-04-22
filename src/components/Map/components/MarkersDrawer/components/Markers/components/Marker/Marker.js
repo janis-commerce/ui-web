@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
 import { debounce } from 'utils';
 import PropTypes from 'prop-types';
@@ -28,6 +28,10 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const delayedInfoWindowHover = debounce(() => {
 		if (!mouseOverInfoWindow) closeInfoWindow();
 	}, 100);
+
+	useEffect(() => {
+		setMarker(markerData);
+	}, [markerData]);
 
 	const updateMarker = (newData = {}) => {
 		const updatedMarker = { ...marker, ...newData };
