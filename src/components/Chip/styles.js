@@ -6,7 +6,7 @@ import { mediaBreaks } from 'utils/devices';
 
 const getChipVariant = (props) => {
 	const { selected, color, sizeColor, variant } = props;
-	const variantStyles= {
+	const variantStyles = {
 		outlined: () => css`
 			border: 1px solid ${selected ? palette.blue : '#EAEBED'};
 			color: ${selected ? palette.blue : palette.black};
@@ -29,31 +29,31 @@ const getChipVariant = (props) => {
 		`,
 		contained: () => css`
 			background-color: ${selected ? palette.blue : palette.lightGreyHover};
-				color: ${selected ? palette.white : palette.black};
-					.chip-icon {
-						fill: ${selected ? palette.white : palette.black};
-					}
-					.delete-button {
-						fill: ${selected ? palette.white : palette.darkGrey};
-					}
-					&:hover {
-						background-color: ${selected ? palette.blueHover : palette.lightGrey};
-					}
-					&:hover .delete-button {
-						fill: ${selected ? palette.white : palette.black};
-					}
-					&:active {
-						background-color: ${palette.blue};
-						color: ${palette.white};
-					}
-					&:active .chip-icon,
-					&:active .delete-button {
-						fill: ${palette.white};
-					}
-					&:disabled {
-						fill: ${palette.grey};
-						color: ${palette.grey};
-					}
+			color: ${selected ? palette.white : palette.black};
+			.chip-icon {
+				fill: ${selected ? palette.white : palette.black};
+			}
+			.delete-button {
+				fill: ${selected ? palette.white : palette.darkGrey};
+			}
+			&:hover {
+				background-color: ${selected ? palette.blueHover : palette.lightGrey};
+			}
+			&:hover .delete-button {
+				fill: ${selected ? palette.white : palette.black};
+			}
+			&:active {
+				background-color: ${palette.blue};
+				color: ${palette.white};
+			}
+			&:active .chip-icon,
+			&:active .delete-button {
+				fill: ${palette.white};
+			}
+			&:disabled {
+				fill: ${palette.grey};
+				color: ${palette.grey};
+			}
 		`,
 		status: () => css`
 			background-color: ${getColor(color || 'grey')};
@@ -87,18 +87,18 @@ export default {
 		pointer-events: ${(props) => (props.clickable || props.hasLink ? 'auto' : 'none')};
 		white-space: nowrap;
 
+		${(props) => getChipVariant(props)};
+
 		.chip-icon {
 			${(props) => !props.onlyIcon && 'margin-right: 8px'};
+			${(props) => props.iconColor && `fill: ${getColor(props.iconColor)}`};
 		}
-
-		${(props) => getChipVariant(props)};
 
 		${(props) => props.styles};
 
 		${(props) => props.borderColor && `border: solid 1px ${getColor(props.borderColor)};`}
 
-		${(props) =>
-			props.backgroundColor && `background-color: ${getColor(props.backgroundColor)};`}
+		${(props) => props.backgroundColor && `background-color: ${getColor(props.backgroundColor)};`}
 
 		${(props) => props.textColor && `color: ${getColor(props.textColor)};`}
 

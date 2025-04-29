@@ -10,6 +10,7 @@ const Chip = ({
 	disabled,
 	icon,
 	iconColor,
+	iconSize,
 	onClick,
 	onDelete,
 	selected,
@@ -42,6 +43,7 @@ const Chip = ({
 					className="chip-icon"
 					name={icon}
 					color={iconColor}
+					size={iconSize}
 					pathStyles={styled.iconPathStyles}
 				/>
 			)}
@@ -74,6 +76,8 @@ Chip.propTypes = {
 	icon: PropTypes.string,
 	/** Permite modificar el color del icono */
 	iconColor: PropTypes.string,
+	/** Permite modificar el tamaño del icono */
+	iconSize: PropTypes.number,
 	/** Función a ejecutar al clickar */
 	onClick: PropTypes.func,
 	/** Función a ejecutar para borrar */
