@@ -41,6 +41,7 @@ const baseArgs = {
 export const Contained = Template.bind({});
 export const Outlined = Template.bind({});
 export const Status = Template.bind({});
+export const WithoutVariant = Template.bind({});
 
 Contained.args = {
 	...baseArgs
@@ -54,4 +55,9 @@ Outlined.args = {
 Status.args = {
 	...baseArgs,
 	variant: 'status'
+};
+
+WithoutVariant.args = {
+	...baseArgs,
+	variant: ''
 };
