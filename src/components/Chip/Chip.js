@@ -33,30 +33,15 @@ const Chip = ({
 			selected={selected}
 			textColor={textColor}
 			variant={variant}
-			iconColor={iconColor}
 			hasLink={hasLink}
 			onlyIcon={!children && icon}
 			{...props}
 		>
-			{icon && (
-				<Icon
-					className="chip-icon"
-					name={icon}
-					color={iconColor}
-					size={iconSize}
-					pathStyles={styled.iconPathStyles}
-				/>
-			)}
+			{icon && <Icon className="chip-icon" name={icon} color={iconColor} size={iconSize} />}
 			{children && <styled.Children>{children}</styled.Children>}
 			{onDelete && (
 				<styled.DeleteButton type="button" onClick={onDelete}>
-					<Icon
-						color="black"
-						pathStyles={styled.deleteButtonPathStyles}
-						className="delete-button"
-						name="cross_circle_flat"
-						size={16}
-					/>
+					<Icon color="black" className="delete-button" name="cross_circle_flat" size={16} />
 				</styled.DeleteButton>
 			)}
 		</styled.Chip>

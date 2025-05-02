@@ -12,6 +12,8 @@ const styles = {
 			fill: ${colors.darkGrey};
 		`}
 
+		${mixins.transition('fill')};
+
 		${(props) => props.styles};
 	`,
 	Path: styled.path`

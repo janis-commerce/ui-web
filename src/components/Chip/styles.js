@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components';
 import palette from 'theme/palette';
 import { getColor } from 'theme/utils';
-import mixins from 'theme/mixins';
 import { mediaBreaks } from 'utils/devices';
 
 const getChipVariant = (props) => {
@@ -87,12 +86,11 @@ export default {
 		pointer-events: ${(props) => (props.clickable || props.hasLink ? 'auto' : 'none')};
 		white-space: nowrap;
 
-		${(props) => getChipVariant(props)};
-
 		.chip-icon {
 			${(props) => !props.onlyIcon && 'margin-right: 8px'};
-			${(props) => props.iconColor && `fill: ${getColor(props.iconColor)}`};
 		}
+
+		${(props) => getChipVariant(props)};
 
 		${(props) => props.styles};
 
@@ -106,16 +104,10 @@ export default {
 			border: 1px solid ${palette.darkGrey};
 		`}
 	`,
-	iconPathStyles: css`
-		${mixins.transition('fill')};
-	`,
 	DeleteButton: styled.button`
 		width: 16px;
 		height: 16px;
 		margin-left: 12px;
-	`,
-	deleteButtonPathStyles: css`
-		${mixins.transition('fill')};
 	`,
 	Children: styled.div`
 		text-overflow: ellipsis;
