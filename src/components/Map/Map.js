@@ -1,47 +1,50 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState, useRef, forwardRef, useImperativeHandle, useEffect } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import PropTypes from 'prop-types';
 import MarkersDrawer from './components/MarkersDrawer';
 import SearchBox from './components/SearchBox';
 import { LIBRARIES, INITIAL_CONTROLS_POSITION, DEFAULT_CENTER } from './utils/constants';
-import { getMapOptions, getBoundsFromMarkers, getCenterByGeolocationOrCenter } from './utils';
+import { getMapOptions, getBoundsFromMarkers } from './utils';
 
-const Map = ({
-	googleMapsApiKey = '',
-	width = '800px',
-	height = '400px',
-	center = DEFAULT_CENTER,
-	zoom = 13,
-	markers = [],
-	markerOptions = {},
-	options = {},
-	callbackOnSuccessDirections = () => {},
-	callbackOnErrorDirections = () => {},
-	...props
-}) => {
-	const { isLoaded } = useJsApiLoader({
-		googleMapsApiKey,
-		libraries: LIBRARIES
-	});
+const Map = forwardRef(
+	(
+		{
+			googleMapsApiKey = '',
+			width = '800px',
+			height = '400px',
+			center,
+			zoom = 13,
+			markers = [],
+			markerOptions = {},
+			options = {},
+			callbackOnSuccessDirections = () => {},
+			callbackOnErrorDirections = () => {},
+			...props
+		},
+		ref
+	) => {
+		const { isLoaded } = useJsApiLoader({
+			googleMapsApiKey,
+			libraries: LIBRARIES
+		});
 
-	const mapRef = useRef();
-	const [controlsPositions, setControlsPositions] = useState(INITIAL_CONTROLS_POSITION);
+		const mapRef = useRef();
+		const [controlsPositions, setControlsPositions] = useState(INITIAL_CONTROLS_POSITION);
 
-	const validMarkersExist = Array.isArray(markers) && markers.length;
+		const validMarkersExist = Array.isArray(markers) && markers.length;
 
-	const handlePositions = (key, value) => {
-		setControlsPositions((prev) => ({ ...prev, [key]: value }));
-	};
+		const handlePositions = (key, value) => {
+			setControlsPositions((prev) => ({ ...prev, [key]: value }));
+		};
 
-	const mapOptions = getMapOptions(options, controlsPositions);
+		const mapOptions = getMapOptions(options, controlsPositions);
 
-	const updateMarker = (newCenter) => {
-		if (!mapRef.current) return;
-		mapRef.current.panTo(newCenter);
-	};
+		const updateMarker = (newCenter) => {
+			if (!mapRef.current) return;
+			mapRef.current.panTo(newCenter);
+		};
 
-	const onLoad = useCallback(
-		(map) => {
+		const onLoad = (map) => {
 			if (!map) return;
 			mapRef.current = map;
 
@@ -53,42 +56,50 @@ const Map = ({
 			handlePositions('fullScreen', window.google.maps.ControlPosition[fullScreenPos]);
 			handlePositions('zoom', window.google.maps.ControlPosition.RIGHT_BOTTOM);
 
-			if (!markers?.length)
-				mapRef.current.setCenter(getCenterByGeolocationOrCenter(center || DEFAULT_CENTER));
+			if (!markers?.length) mapRef.current.setCenter(center || DEFAULT_CENTER);
 
-			if (markers?.length) mapRef.current.fitBounds(getBoundsFromMarkers(markers));
-			mapRef.current.setZoom(zoom);
-		},
-		[center, markers, options, zoom]
-	);
+			mapRef.current.setZoom(!center ? 2 : zoom);
+		};
 
-	if (!isLoaded) return null;
+		useImperativeHandle(ref, () => ({}));
 
-	return (
-		<GoogleMap
-			className="google-map-component"
-			onLoad={onLoad}
-			mapContainerStyle={{ height, width }}
-			options={mapOptions}
-			center={mapRef.current?.center}
-			{...props}
-		>
-			{mapOptions.showSearchBar && (
-				<SearchBox updateMarker={updateMarker} className="google-map-component__search-box" />
-			)}
-			{validMarkersExist && (
-				<MarkersDrawer
-					markers={markers}
-					markerOptions={markerOptions}
-					readOnly={mapOptions.readOnly}
-					callbackOnSuccessDirections={callbackOnSuccessDirections}
-					callbackOnErrorDirections={callbackOnErrorDirections}
-					googleMapsApiKey={googleMapsApiKey}
-				/>
-			)}
-		</GoogleMap>
-	);
-};
+		useEffect(() => {
+			if (mapRef.current && markers?.length) {
+				mapRef.current.fitBounds(getBoundsFromMarkers(markers));
+				mapRef.current.setZoom(zoom);
+			}
+		}, [mapRef.current, markers]);
+
+		if (!isLoaded) return null;
+
+		return (
+			<GoogleMap
+				className="google-map-component"
+				onLoad={onLoad}
+				mapContainerStyle={{ height, width }}
+				options={mapOptions}
+				center={mapRef.current?.center}
+				{...props}
+			>
+				{mapOptions.showSearchBar && (
+					<SearchBox updateMarker={updateMarker} className="google-map-component__search-box" />
+				)}
+				{validMarkersExist && (
+					<MarkersDrawer
+						markers={markers}
+						markerOptions={markerOptions}
+						readOnly={mapOptions.readOnly}
+						callbackOnSuccessDirections={callbackOnSuccessDirections}
+						callbackOnErrorDirections={callbackOnErrorDirections}
+						googleMapsApiKey={googleMapsApiKey}
+					/>
+				)}
+			</GoogleMap>
+		);
+	}
+);
+
+Map.displayName = 'Map';
 
 Map.propTypes = {
 	/** String that contains the API KEY for google maps api */

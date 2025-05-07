@@ -1,8 +1,6 @@
 export { default as findSelectedPosition } from './findSelectedPosition';
 export { default as getBounds } from './getBounds';
 export { default as getBoundsFromMarkers } from './getBoundsFromMarkers';
-export { default as getCenterByGeolocationOrCenter } from './getCenterByGeolocationOrCenter';
-export { default as getGeolocationCoordinates } from './getGeolocationCoordinates';
 export { default as getMapOptions } from './getMapOptions';
 export { default as getMapStylers } from './getMapStylers';
 export { default as getParsedComponents } from './getParsedComponents';
