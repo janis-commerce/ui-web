@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.38.0] - 2025-05-08
+
+### ADDED
+
+- forwardRef, useImperativeHandle and useEffect for set bounds and zoom in Map component
+
+### REMOVED
+
+- getCenterByGeolocationOrCenter, getGeolocationCoordinates map utils
+
 ## [0.37.0] - 2025-05-02
 
 ### Removed

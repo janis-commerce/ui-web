@@ -61,7 +61,9 @@ const Map = forwardRef(
 			mapRef.current.setZoom(!center ? 2 : zoom);
 		};
 
-		useImperativeHandle(ref, () => ({}));
+		useImperativeHandle(ref, () => ({
+			setZoom: (zoom) => mapRef.current.setZoom(zoom)
+		}));
 
 		useEffect(() => {
 			if (mapRef.current && markers?.length) {
