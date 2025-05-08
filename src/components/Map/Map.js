@@ -66,7 +66,6 @@ const Map = forwardRef(
 		useEffect(() => {
 			if (mapRef.current && markers?.length) {
 				mapRef.current.fitBounds(getBoundsFromMarkers(markers));
-				mapRef.current.setZoom(zoom);
 			}
 		}, [mapRef.current, markers]);
 
@@ -78,7 +77,7 @@ const Map = forwardRef(
 				onLoad={onLoad}
 				mapContainerStyle={{ height, width }}
 				options={mapOptions}
-				center={mapRef.current?.center}
+				center={mapRef.current?.getCenter()}
 				{...props}
 			>
 				{mapOptions.showSearchBar && (
