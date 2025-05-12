@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
-import { debounce } from 'utils';
+import { debounce, isNumber } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
 import { getCoordsFromEvent, markerHasEqualPosition } from './utils';
 
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const [marker, setMarker] = useState(markerData);
-	const { icon, position, overlay, infoWindowChildren, isDraggable } = marker || {};
+	const { icon, position, animation, overlay, infoWindowChildren, isDraggable } = marker || {};
 
 	const {
 		onLoad = () => {},
@@ -50,6 +50,24 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 			instance: markerRef.current?.marker
 		};
 	};
+
+	const startAnimation = () => {
+		if (!animation || !Object.keys(animation).length) return;
+
+		if (markerRef.current) {
+			markerRef.current?.marker?.setAnimation(window.google.maps.Animation[animation?.name]);
+
+			if (animation?.duration && isNumber(animation?.duration)) {
+				setTimeout(() => {
+					markerRef.current?.marker?.setAnimation(null);
+				}, animation?.duration);
+			}
+		}
+	};
+
+	useEffect(() => {
+		startAnimation();
+	}, []);
 
 	const markerProps = {
 		ref: markerRef,
