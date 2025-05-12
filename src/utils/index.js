@@ -62,3 +62,5 @@ export const extractVariantButton = () => {
 	const variant = idValue.split('--').pop();
 	return variant;
 };
+
+export const isNumber = (num) => typeof num === 'number' && !Number.isNaN(Number(num));
