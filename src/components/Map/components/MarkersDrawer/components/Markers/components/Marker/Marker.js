@@ -51,7 +51,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		};
 	};
 
-	const startAnimation = () => {
+	const animate = () => {
 		if (markerRef.current) {
 			markerRef.current?.marker?.setAnimation(window.google.maps.Animation[animation?.name]);
 
@@ -64,7 +64,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	};
 
 	useEffect(() => {
-		if (animation && isObject(animation)) startAnimation();
+		if (animation && isObject(animation)) animate();
 	}, [animation]);
 
 	const markerProps = {
