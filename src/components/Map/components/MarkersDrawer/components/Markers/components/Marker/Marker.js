@@ -3,7 +3,7 @@ import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
 import { debounce, isNumber, isObject } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
-import { getCoordsFromEvent, markerHasEqualPosition } from './utils';
+import { getCoordsFromEvent, markerHasEqualPosition, isValidAnimation } from './utils';
 
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const [marker, setMarker] = useState(markerData);
@@ -18,6 +18,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	} = markerOptions;
 
 	const markerRef = useRef(null);
+	const timeoutRef = useRef(null);
 
 	const [infoWindowOpen, setInfoWindowOpen] = useState(false);
 	const [mouseOverInfoWindow, setMouseOverInfoWindow] = useState(false);
@@ -54,10 +55,14 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const animate = () => {
 		if (!markerRef.current) return;
 
+		if (!isValidAnimation(animation)) return;
+
 		markerRef.current?.marker?.setAnimation(window.google.maps.Animation[animation?.name]);
 
+		if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
 		if (animation?.duration && isNumber(animation?.duration)) {
-			setTimeout(() => {
+			timeoutRef.current = setTimeout(() => {
 				markerRef.current?.marker?.setAnimation(null);
 			}, animation?.duration);
 		}
@@ -65,6 +70,10 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 
 	useEffect(() => {
 		if (animation && isObject(animation)) animate();
+
+		return () => {
+			if (timeoutRef.current) clearTimeout(timeoutRef.current);
+		};
 	}, [animation]);
 
 	const markerProps = {
