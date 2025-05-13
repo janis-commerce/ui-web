@@ -52,14 +52,14 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	};
 
 	const animate = () => {
-		if (markerRef.current) {
-			markerRef.current?.marker?.setAnimation(window.google.maps.Animation[animation?.name]);
+		if (!markerRef.current) return;
 
-			if (animation?.duration && isNumber(animation?.duration)) {
-				setTimeout(() => {
-					markerRef.current?.marker?.setAnimation(null);
-				}, animation?.duration);
-			}
+		markerRef.current?.marker?.setAnimation(window.google.maps.Animation[animation?.name]);
+
+		if (animation?.duration && isNumber(animation?.duration)) {
+			setTimeout(() => {
+				markerRef.current?.marker?.setAnimation(null);
+			}, animation?.duration);
 		}
 	};
 
