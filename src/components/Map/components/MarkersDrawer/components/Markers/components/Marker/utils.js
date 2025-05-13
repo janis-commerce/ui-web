@@ -163,3 +163,8 @@ export const markerHasEqualPosition = (prevPosition = {}, newPosition = {}) => {
 	const hasEqualLng = prevPosition?.lng === newPosition?.lng;
 	return hasEqualLat && hasEqualLng;
 };
+
+export const isValidAnimation = (animation = {}) => {
+	const validAnimations = window.google?.maps?.Animation;
+	return animation?.name && validAnimations && validAnimations[animation?.name] !== undefined;
+};
