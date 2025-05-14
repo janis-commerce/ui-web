@@ -52,27 +52,29 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		};
 	};
 
-	const animate = () => {
+	const stopAnimate = () => {
+		if (timeoutRef.current) clearTimeout(timeoutRef.current);
+		if (markerRef.current?.marker) markerRef.current.marker.setAnimation(null);
+	};
+
+	const startAnimate = () => {
 		if (!markerRef.current) return;
 
 		if (!isValidAnimation(animation)) return;
 
-		markerRef.current?.marker?.setAnimation(window.google.maps.Animation[animation?.name]);
+		stopAnimate();
 
-		if (timeoutRef.current) clearTimeout(timeoutRef.current);
+		markerRef.current.marker.setAnimation(window.google.maps.Animation[animation?.name]);
 
-		if (animation?.duration && isNumber(animation?.duration)) {
-			timeoutRef.current = setTimeout(() => {
-				markerRef.current?.marker?.setAnimation(null);
-			}, animation?.duration);
-		}
+		if (animation?.duration && isNumber(animation?.duration))
+			timeoutRef.current = setTimeout(() => stopAnimate(), animation.duration);
 	};
 
 	useEffect(() => {
-		if (animation && isObject(animation)) animate();
+		if (animation && isObject(animation)) startAnimate();
 
 		return () => {
-			if (timeoutRef.current) clearTimeout(timeoutRef.current);
+			stopAnimate();
 		};
 	}, [animation]);
 
@@ -84,10 +86,19 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		onLoad: (instance) => onLoad({ prevMarker: marker, instance }),
 		onClick: (event) => onClick(getEventHandlerData(event)),
 		onDrag: (event) => onDrag(event),
-		onDragEnd: (event) => onDragEnd(getEventHandlerData(event)),
+		onDragEnd: (event) => {
+			startAnimate();
+			onDragEnd(getEventHandlerData(event));
+		},
 		onDragStart: (event) => onDragStart(getEventHandlerData(event)),
-		onMouseOver: () => openInfoWindow(),
-		onMouseOut: () => delayedInfoWindowHover()
+		onMouseOver: () => {
+			stopAnimate();
+			openInfoWindow();
+		},
+		onMouseOut: () => {
+			startAnimate();
+			delayedInfoWindowHover();
+		}
 	};
 
 	const infoWindowHandles = {
