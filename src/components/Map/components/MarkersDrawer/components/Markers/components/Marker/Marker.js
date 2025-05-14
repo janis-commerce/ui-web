@@ -52,29 +52,29 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		};
 	};
 
-	const stopAnimate = () => {
+	const stopAnimation = () => {
 		if (timeoutRef.current) clearTimeout(timeoutRef.current);
 		if (markerRef.current?.marker) markerRef.current.marker.setAnimation(null);
 	};
 
-	const startAnimate = () => {
+	const startAnimation = () => {
 		if (!markerRef.current) return;
 
 		if (!isValidAnimation(animation)) return;
 
-		stopAnimate();
+		stopAnimation();
 
 		markerRef.current.marker.setAnimation(window.google.maps.Animation[animation?.name]);
 
 		if (animation?.duration && isNumber(animation?.duration))
-			timeoutRef.current = setTimeout(() => stopAnimate(), animation.duration);
+			timeoutRef.current = setTimeout(() => stopAnimation(), animation.duration);
 	};
 
 	useEffect(() => {
-		if (animation && isObject(animation)) startAnimate();
+		if (animation && isObject(animation)) startAnimation();
 
 		return () => {
-			stopAnimate();
+			stopAnimation();
 		};
 	}, [animation]);
 
@@ -87,16 +87,16 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		onClick: (event) => onClick(getEventHandlerData(event)),
 		onDrag: (event) => onDrag(event),
 		onDragEnd: (event) => {
-			startAnimate();
+			startAnimation();
 			onDragEnd(getEventHandlerData(event));
 		},
 		onDragStart: (event) => onDragStart(getEventHandlerData(event)),
 		onMouseOver: () => {
-			stopAnimate();
+			stopAnimation();
 			openInfoWindow();
 		},
 		onMouseOut: () => {
-			startAnimate();
+			startAnimation();
 			delayedInfoWindowHover();
 		}
 	};
