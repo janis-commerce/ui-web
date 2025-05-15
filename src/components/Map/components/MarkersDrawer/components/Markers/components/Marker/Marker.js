@@ -7,7 +7,8 @@ import { getCoordsFromEvent, markerHasEqualPosition, isValidAnimation } from './
 
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const [marker, setMarker] = useState(markerData);
-	const { icon, position, animation, overlay, infoWindowChildren, isDraggable } = marker || {};
+	const { icon, position, animation, overlay, infoWindowChildren, isDraggable, zIndex } =
+		marker || {};
 
 	const {
 		onLoad = () => {},
@@ -83,6 +84,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		position,
 		draggable: isDraggable || !readOnly,
 		icon,
+		zIndex,
 		onLoad: (instance) => onLoad({ prevMarker: marker, instance }),
 		onClick: (event) => onClick(getEventHandlerData(event)),
 		onDrag: (event) => onDrag(event),
