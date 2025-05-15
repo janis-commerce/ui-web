@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
-import { debounce, isNumber, isObject } from 'utils';
+import { debounce, isNumber } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
-import { getCoordsFromEvent, markerHasEqualPosition, isValidAnimation } from './utils';
+import { getCoordsFromEvent, markerHasEqualPosition, validateAnimation } from './utils';
 
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const [marker, setMarker] = useState(markerData);
@@ -54,6 +54,8 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	};
 
 	const stopAnimation = () => {
+		if (!validateAnimation(animation)) return;
+
 		if (timeoutRef.current) clearTimeout(timeoutRef.current);
 		if (markerRef.current?.marker) markerRef.current.marker.setAnimation(null);
 	};
@@ -61,7 +63,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const startAnimation = () => {
 		if (!markerRef.current) return;
 
-		if (!isValidAnimation(animation)) return;
+		if (!validateAnimation(animation)) return;
 
 		stopAnimation();
 
@@ -72,7 +74,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	};
 
 	useEffect(() => {
-		if (animation && isObject(animation)) startAnimation();
+		startAnimation();
 
 		return () => {
 			stopAnimation();
