@@ -1957,6 +1957,501 @@ const markersMockMultiRutas = [
 	}
 ];
 
+const animatedMarkersMock = [
+	{
+		polylines: [
+			{
+				lat: -34.59844,
+				lng: -58.42975
+			},
+			{
+				lat: -34.59897,
+				lng: -58.42924
+			},
+			{
+				lat: -34.59905,
+				lng: -58.42936
+			},
+			{
+				lat: -34.59912,
+				lng: -58.42944
+			},
+			{
+				lat: -34.59921,
+				lng: -58.42956
+			},
+			{
+				lat: -34.59933,
+				lng: -58.42969
+			},
+			{
+				lat: -34.59974,
+				lng: -58.43016
+			},
+			{
+				lat: -34.59977,
+				lng: -58.43018
+			},
+			{
+				lat: -34.59988,
+				lng: -58.43029
+			},
+			{
+				lat: -34.60074,
+				lng: -58.43105
+			},
+			{
+				lat: -34.60085,
+				lng: -58.43096
+			},
+			{
+				lat: -34.60086,
+				lng: -58.43094
+			},
+			{
+				lat: -34.60088,
+				lng: -58.43091
+			},
+			{
+				lat: -34.60089,
+				lng: -58.43087
+			},
+			{
+				lat: -34.60091,
+				lng: -58.43072
+			},
+			{
+				lat: -34.60095,
+				lng: -58.4304
+			},
+			{
+				lat: -34.60099,
+				lng: -58.42996
+			},
+			{
+				lat: -34.60114,
+				lng: -58.4284
+			},
+			{
+				lat: -34.60103,
+				lng: -58.42838
+			},
+			{
+				lat: -34.60101,
+				lng: -58.42838
+			},
+			{
+				lat: -34.60009,
+				lng: -58.42824
+			},
+			{
+				lat: -34.59995,
+				lng: -58.42822
+			},
+			{
+				lat: -34.59989,
+				lng: -58.42881
+			},
+			{
+				lat: -34.59979,
+				lng: -58.42973
+			},
+			{
+				lat: -34.59976,
+				lng: -58.43
+			},
+			{
+				lat: -34.59975,
+				lng: -58.43005
+			},
+			{
+				lat: -34.59974,
+				lng: -58.43016
+			},
+			{
+				lat: -34.59977,
+				lng: -58.43018
+			},
+			{
+				lat: -34.59988,
+				lng: -58.43029
+			},
+			{
+				lat: -34.60074,
+				lng: -58.43105
+			},
+			{
+				lat: -34.60098,
+				lng: -58.43127
+			},
+			{
+				lat: -34.60161,
+				lng: -58.43182
+			},
+			{
+				lat: -34.60165,
+				lng: -58.4319
+			},
+			{
+				lat: -34.60172,
+				lng: -58.43194
+			},
+			{
+				lat: -34.60189,
+				lng: -58.43207
+			},
+			{
+				lat: -34.60205,
+				lng: -58.43219
+			},
+			{
+				lat: -34.60214,
+				lng: -58.43229
+			},
+			{
+				lat: -34.60219,
+				lng: -58.4324
+			},
+			{
+				lat: -34.60252,
+				lng: -58.43305
+			},
+			{
+				lat: -34.60258,
+				lng: -58.43316
+			},
+			{
+				lat: -34.60266,
+				lng: -58.43333
+			},
+			{
+				lat: -34.6027,
+				lng: -58.43343
+			},
+			{
+				lat: -34.60284,
+				lng: -58.43371
+			},
+			{
+				lat: -34.60293,
+				lng: -58.43388
+			},
+			{
+				lat: -34.60295,
+				lng: -58.43392
+			},
+			{
+				lat: -34.60356,
+				lng: -58.43515
+			},
+			{
+				lat: -34.6036,
+				lng: -58.43522
+			},
+			{
+				lat: -34.60415,
+				lng: -58.43635
+			},
+			{
+				lat: -34.60417,
+				lng: -58.43638
+			},
+			{
+				lat: -34.60424,
+				lng: -58.43646
+			},
+			{
+				lat: -34.60426,
+				lng: -58.43649
+			},
+			{
+				lat: -34.60428,
+				lng: -58.43651
+			},
+			{
+				lat: -34.60431,
+				lng: -58.43654
+			},
+			{
+				lat: -34.60435,
+				lng: -58.43664
+			},
+			{
+				lat: -34.60455,
+				lng: -58.43704
+			},
+			{
+				lat: -34.6046,
+				lng: -58.43718
+			},
+			{
+				lat: -34.60464,
+				lng: -58.4373
+			},
+			{
+				lat: -34.60491,
+				lng: -58.43784
+			},
+			{
+				lat: -34.60493,
+				lng: -58.43793
+			},
+			{
+				lat: -34.60496,
+				lng: -58.43799
+			},
+			{
+				lat: -34.60523,
+				lng: -58.43851
+			},
+			{
+				lat: -34.60524,
+				lng: -58.43856
+			},
+			{
+				lat: -34.60556,
+				lng: -58.43922
+			},
+			{
+				lat: -34.60559,
+				lng: -58.43929
+			},
+			{
+				lat: -34.60577,
+				lng: -58.43995
+			},
+			{
+				lat: -34.6058,
+				lng: -58.44007
+			},
+			{
+				lat: -34.60584,
+				lng: -58.4402
+			},
+			{
+				lat: -34.60589,
+				lng: -58.44039
+			},
+			{
+				lat: -34.60595,
+				lng: -58.44064
+			},
+			{
+				lat: -34.60623,
+				lng: -58.44166
+			},
+			{
+				lat: -34.60656,
+				lng: -58.44288
+			},
+			{
+				lat: -34.6066,
+				lng: -58.44303
+			},
+			{
+				lat: -34.60689,
+				lng: -58.44413
+			},
+			{
+				lat: -34.6069,
+				lng: -58.44419
+			},
+			{
+				lat: -34.60724,
+				lng: -58.4453
+			},
+			{
+				lat: -34.60736,
+				lng: -58.44562
+			},
+			{
+				lat: -34.60742,
+				lng: -58.44574
+			},
+			{
+				lat: -34.6075,
+				lng: -58.44594
+			},
+			{
+				lat: -34.60755,
+				lng: -58.44606
+			},
+			{
+				lat: -34.60763,
+				lng: -58.44624
+			},
+			{
+				lat: -34.60779,
+				lng: -58.44653
+			},
+			{
+				lat: -34.60794,
+				lng: -58.44653
+			},
+			{
+				lat: -34.6087,
+				lng: -58.44654
+			},
+			{
+				lat: -34.60896,
+				lng: -58.4465
+			},
+			{
+				lat: -34.60907,
+				lng: -58.44655
+			},
+			{
+				lat: -34.6092,
+				lng: -58.44656
+			}
+		],
+		polylineOptions: {
+			strokeColor: 'blue',
+			strokeOpacity: 0.8,
+			strokeWeight: 4
+		},
+		points: [
+			{
+				position: { lng: -58.43, lat: -34.5986 },
+				icon: {
+					url: `data:image/svg+xml;utf-8, 		<svg width="72"
+			height="78"
+			viewBox="0 0 60 82"
+			fill="none"
+			xmlns="http://www.w3.org/2000/svg"
+		>
+			<style>
+				.iconPath {
+					transform: translate(6px, 6px);
+				}
+				.text {
+					font-family: 'Roboto', sans-serif;
+					font-size: 12px;
+					font-weight: 700;
+					fill: white;
+					line-height: 14px;
+				}
+			</style>
+			
+			<g filter="url(%23filter0_d_1140_220191)">
+				<circle
+					cx="24"
+					cy="24"
+					r="22"
+					fill="none"
+					stroke="%23FFF"
+					stroke-width="2" 
+				/>
+				<rect
+					x="2"
+					y="2"
+					width="44"
+					height="44"
+					rx="22"
+					fill="%23000000"
+				/>
+			</g>
+			<g class='iconPath'>
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M19.0000078125 21h-1.9999921875v-9.4999921875c0-0.27614062500000003-0.2238515625-0.49999218749999996-0.49999218749999996-0.49999218749999996v0h-9c-0.0008906249999999999 0-0.0019453125 0-0.003 0-0.1348359375 0-0.257203125 0.0533671875-0.34715625 0.14015625l0.00014062500000000002-0.00014062500000000002c-0.0890859375 0.09410156249999999-0.14533593749999998 0.22005468749999998-0.1499765625 0.3590859375l-0.0000234375 0.0009140624999999999v9.4999921875h-1.9999921875v-12h-1.0000078125v12.4900078125c0 0.27614062500000003 0.2238515625 0.49999218749999996 0.49999218749999996 0.49999218749999996v0h3.4999921875v-9.99h7.9999921875v10.0000078125h3.4999921875c0.27614062500000003 0 0.49999218749999996-0.2238515625 0.49999218749999996-0.49999218749999996v0-12.499992187499998h-1.0000078125zM21.8299921875 7.68l-9.5800078125-5.61c-0.07338281249999999-0.0420234375-0.161296875-0.0668203125-0.255-0.0668203125s-0.1816171875 0.024796875000000003-0.2575546875 0.06815625l0.0025546875-0.0013359375-9.57 5.61c-0.14763281250000002 0.0887109375-0.2448984375 0.24801562500000002-0.2448984375 0.43003125 0 0.27435937499999996 0.22096875000000002 0.49708593749999996 0.494625 0.49996875l0.00028125000000000003 0c0.002625 0.000046875 0.00571875 0.00009375 0.0088359375 0.00009375 0.089484375 0 0.172875-0.026132812499999998 0.242953125-0.07115625l-0.0017812499999999998 0.001078125 9.33-5.4499921874999995 9.3199921875 5.4499921874999995c0.07082812499999999 0.0396328125 0.1554375 0.0629765625 0.245484375 0.0629765625 0.182859375 0 0.3432421875-0.096234375 0.4332421875-0.24082031250000002l0.0012421875-0.00215625c0.0433828125-0.0725390625 0.06902343749999999-0.16003125 0.06902343749999999-0.2535 0-0.1796015625-0.09471093750000001-0.3371015625-0.23690625-0.42524999999999996l-0.0021328125-0.0012421875zM9.0400078125 13.68h6.0100078125000005v1.0000078125h-6.0100078125000005v-1.0000078125zM9.0400078125 16.0099921875h6.0100078125000005v1.0000078125h-6.0100078125000005v-1.0000078125z" fill="%23FFF" class="iconPath"/>	
+			</g>
+			<defs>
+				<filter
+					id="filter0_d_1140_220191"
+					x="-6"
+					y="-6"
+					width="60"
+					height="80"
+					filterUnits="userSpaceOnUse"
+					color-interpolation-filters="sRGB"
+				>
+					<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+					<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+					<feOffset dy="4"/>
+					<feGaussianBlur stdDeviation="3"/>
+					<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.292799 0"/>
+					<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_1140_220191"/>
+					<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_1140_220191" result="shape"/>
+				</filter>
+			</defs>
+		</svg>`
+				}
+			},
+			{
+				position: { lat: -34.601, lng: -58.4285 },
+				icon: {
+					url: `data:image/svg+xml;utf-8, 		<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<g filter="url(%23filter0_d_491_165663)">
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M22 4C28.6274 4 34 9.2873 34 15.8095C34 19.6038 32.5151 23.4609 29.5454 27.3809C27.6409 29.8948 22 35 22 35C18.2394 31.5965 15.7243 29.0568 14.4546 27.3809C11.4849 23.4609 10 19.6038 10 15.8095C10 9.2873 15.3726 4 22 4Z" fill="white"/>
+			</g>
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M22 8C26.4183 8 30 11.5817 30 16C30 18.5703 29.0101 21.1832 27.0302 23.8387C25.7606 25.5416 22 29 22 29C19.4929 26.6944 17.8162 24.974 16.9698 23.8387C14.9899 21.1832 14 18.5703 14 16C14 11.5817 17.5817 8 22 8Z" fill="%23f11111"/>
+			<text x="49%" y="43%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="Roboto" font-weight="1000" fill="white" >2</text>
+			<defs>
+				<filter id="filter0_d_491_165663" x="0" y="0" width="44" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+					<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+					<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+					<feOffset dy="6"/>
+					<feGaussianBlur stdDeviation="5"/>
+					<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.223529 0 0 0 0 0.278431 0 0 0 0.393597 0"/>
+					<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_491_165663"/>
+					<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_491_165663" result="shape"/>
+				</filter>
+			</defs>
+		</svg>`
+				}
+			},
+			{
+				position: { lat: -34.6092, lng: -58.4465 },
+				icon: {
+					url: `data:image/svg+xml;utf-8, 		<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<g filter="url(%23filter0_d_491_165663)">
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M22 4C28.6274 4 34 9.2873 34 15.8095C34 19.6038 32.5151 23.4609 29.5454 27.3809C27.6409 29.8948 22 35 22 35C18.2394 31.5965 15.7243 29.0568 14.4546 27.3809C11.4849 23.4609 10 19.6038 10 15.8095C10 9.2873 15.3726 4 22 4Z" fill="white"/>
+			</g>
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M22 8C26.4183 8 30 11.5817 30 16C30 18.5703 29.0101 21.1832 27.0302 23.8387C25.7606 25.5416 22 29 22 29C19.4929 26.6944 17.8162 24.974 16.9698 23.8387C14.9899 21.1832 14 18.5703 14 16C14 11.5817 17.5817 8 22 8Z" fill="%23f11111"/>
+			<text x="49%" y="43%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="Roboto" font-weight="1000" fill="white" >3</text>
+			<defs>
+				<filter id="filter0_d_491_165663" x="0" y="0" width="44" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+					<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+					<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+					<feOffset dy="6"/>
+					<feGaussianBlur stdDeviation="5"/>
+					<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.223529 0 0 0 0 0.278431 0 0 0 0.393597 0"/>
+					<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_491_165663"/>
+					<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_491_165663" result="shape"/>
+				</filter>
+			</defs>
+		</svg>`
+				},
+				isDraggable: true,
+				animation: { name: 'BOUNCE', duration: 3000 }
+			},
+			{
+				position: { lat: -34.601, lng: -58.4266 },
+				icon: {
+					url: `data:image/svg+xml;utf-8, 		<svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<g filter="url(%23filter0_d_491_165663)">
+				<path fill-rule="evenodd" clip-rule="evenodd" d="M22 4C28.6274 4 34 9.2873 34 15.8095C34 19.6038 32.5151 23.4609 29.5454 27.3809C27.6409 29.8948 22 35 22 35C18.2394 31.5965 15.7243 29.0568 14.4546 27.3809C11.4849 23.4609 10 19.6038 10 15.8095C10 9.2873 15.3726 4 22 4Z" fill="white"/>
+			</g>
+			<path fill-rule="evenodd" clip-rule="evenodd" d="M22 8C26.4183 8 30 11.5817 30 16C30 18.5703 29.0101 21.1832 27.0302 23.8387C25.7606 25.5416 22 29 22 29C19.4929 26.6944 17.8162 24.974 16.9698 23.8387C14.9899 21.1832 14 18.5703 14 16C14 11.5817 17.5817 8 22 8Z" fill="%23f11111"/>
+			<text x="49%" y="43%" text-anchor="middle" dominant-baseline="middle" font-size="12" font-family="Roboto" font-weight="1000" fill="white" >4</text>
+			<defs>
+				<filter id="filter0_d_491_165663" x="0" y="0" width="44" height="51" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+					<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+					<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+					<feOffset dy="6"/>
+					<feGaussianBlur stdDeviation="5"/>
+					<feColorMatrix type="matrix" values="0 0 0 0 0.152941 0 0 0 0 0.223529 0 0 0 0 0.278431 0 0 0 0.393597 0"/>
+					<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_491_165663"/>
+					<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_491_165663" result="shape"/>
+				</filter>
+			</defs>
+		</svg>`
+				},
+				animation: { name: 'DROP' }
+			}
+		]
+	}
+];
+
 export default {
 	title: 'Components/Map',
 	component: Map,
@@ -2023,6 +2518,7 @@ const baseArgs = {
 export const OnlyMap = Template.bind({});
 export const HiddenInfo = Template.bind({});
 export const WithMarkerOptions = WithMarkerOptionsTemplate.bind({});
+export const WithAnimatedMarkers = Template.bind({});
 
 OnlyMap.args = {
 	...baseArgs
@@ -2066,4 +2562,9 @@ WithMarkerOptions.args = {
 	options: {
 		readOnly: false
 	}
+};
+
+WithAnimatedMarkers.args = {
+	...baseArgs,
+	markers: animatedMarkersMock
 };
