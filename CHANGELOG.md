@@ -11,6 +11,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ### Added
 
+- startAnimation and stopAnimation functions
+- zIndex prop
+
+### CHANGED
+
+- onDragEnd, onMouseOver and onMouseOut event functions
+
+## [0.39.0] - 2025-05-13
+
+### Added
+
 - Enhanced map markers with animation support, including the ability to specify animation duration for each marker. Markers now animate automatically when added to the map.
 
 ## [0.38.0] - 2025-05-08
