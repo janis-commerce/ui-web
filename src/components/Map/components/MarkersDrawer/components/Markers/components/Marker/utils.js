@@ -2,6 +2,7 @@ import icons from 'components/Icon/icons.json';
 /* Library used for transform svg paths: https://github.com/fontello/svgpath */
 import svgpath from 'svgpath';
 import colors from 'theme/palette';
+import { isObject } from 'utils';
 
 const encodeColor = (color) => {
 	const parsedColor = /#/.test(color) ? color : `#${color}`;
@@ -166,5 +167,8 @@ export const markerHasEqualPosition = (prevPosition = {}, newPosition = {}) => {
 
 export const isValidAnimation = (animation = {}) => {
 	const validAnimations = window.google?.maps?.Animation;
+
+	if (!animation || !isObject(animation)) return false;
+
 	return animation?.name && validAnimations && validAnimations[animation?.name] !== undefined;
 };

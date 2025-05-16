@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
-import { debounce, isNumber, isObject } from 'utils';
+import { debounce, isNumber } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
 import { getCoordsFromEvent, isValidAnimation, markerHasEqualPosition } from './utils';
@@ -70,7 +70,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	};
 
 	useEffect(() => {
-		if (animation && isObject(animation)) startAnimation();
+		if (isValidAnimation(animation)) startAnimation();
 
 		return () => {
 			stopAnimation();
@@ -87,16 +87,16 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		onClick: (event) => onClick(getEventHandlerData(event)),
 		onDrag: (event) => onDrag(event),
 		onDragEnd: (event) => {
-			if (animation && isValidAnimation(animation)) startAnimation();
+			if (isValidAnimation(animation)) startAnimation();
 			onDragEnd(getEventHandlerData(event));
 		},
 		onDragStart: (event) => onDragStart(getEventHandlerData(event)),
 		onMouseOver: () => {
-			if (animation) stopAnimation();
+			if (isValidAnimation(animation)) stopAnimation();
 			openInfoWindow();
 		},
 		onMouseOut: () => {
-			if (animation && isValidAnimation(animation)) startAnimation();
+			if (isValidAnimation(animation)) startAnimation();
 			delayedInfoWindowHover();
 		}
 	};
