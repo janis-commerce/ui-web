@@ -2,7 +2,6 @@ import icons from 'components/Icon/icons.json';
 /* Library used for transform svg paths: https://github.com/fontello/svgpath */
 import svgpath from 'svgpath';
 import colors from 'theme/palette';
-import { isObject } from 'utils';
 
 const encodeColor = (color) => {
 	const parsedColor = /#/.test(color) ? color : `#${color}`;
