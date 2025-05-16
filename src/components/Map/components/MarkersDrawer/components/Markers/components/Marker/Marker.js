@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
-import { debounce, isNumber } from 'utils';
+import { debounce, isNumber, isObject } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
-import { getCoordsFromEvent, markerHasEqualPosition, validateAnimation } from './utils';
+import { getCoordsFromEvent, isValidAnimation, markerHasEqualPosition } from './utils';
 
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const [marker, setMarker] = useState(markerData);
@@ -54,16 +54,12 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	};
 
 	const stopAnimation = () => {
-		if (!validateAnimation(animation)) return;
-
 		if (timeoutRef.current) clearTimeout(timeoutRef.current);
 		if (markerRef.current?.marker) markerRef.current.marker.setAnimation(null);
 	};
 
 	const startAnimation = () => {
 		if (!markerRef.current) return;
-
-		if (!validateAnimation(animation)) return;
 
 		stopAnimation();
 
@@ -74,7 +70,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	};
 
 	useEffect(() => {
-		startAnimation();
+		if (animation && isObject(animation)) startAnimation();
 
 		return () => {
 			stopAnimation();
@@ -91,16 +87,16 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		onClick: (event) => onClick(getEventHandlerData(event)),
 		onDrag: (event) => onDrag(event),
 		onDragEnd: (event) => {
-			startAnimation();
+			if (animation && isValidAnimation(animation)) startAnimation();
 			onDragEnd(getEventHandlerData(event));
 		},
 		onDragStart: (event) => onDragStart(getEventHandlerData(event)),
 		onMouseOver: () => {
-			stopAnimation();
+			if (animation) stopAnimation();
 			openInfoWindow();
 		},
 		onMouseOut: () => {
-			startAnimation();
+			if (animation && isValidAnimation(animation)) startAnimation();
 			delayedInfoWindowHover();
 		}
 	};

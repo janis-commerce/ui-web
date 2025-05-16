@@ -169,7 +169,3 @@ export const isValidAnimation = (animation = {}) => {
 	const validAnimations = window.google?.maps?.Animation;
 	return animation?.name && validAnimations && validAnimations[animation?.name] !== undefined;
 };
-
-export const validateAnimation = (animation = {}) => {
-	return animation && isObject(animation) && isValidAnimation(animation);
-};
