@@ -60,10 +60,11 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const startAnimation = () => {
 		if (!markerRef.current) return;
 
+		if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
 		markerRef.current.marker.setAnimation(window.google.maps.Animation[animation?.name]);
 
 		if (animation?.duration && isNumber(animation?.duration)) {
-			if (timeoutRef.current) clearTimeout(timeoutRef.current);
 			timeoutRef.current = setTimeout(() => stopAnimation(), animation.duration);
 		}
 	};
