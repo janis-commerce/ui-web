@@ -54,19 +54,18 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	};
 
 	const stopAnimation = () => {
-		if (timeoutRef.current) clearTimeout(timeoutRef.current);
 		if (markerRef.current?.marker) markerRef.current.marker.setAnimation(null);
 	};
 
 	const startAnimation = () => {
 		if (!markerRef.current) return;
 
-		stopAnimation();
-
 		markerRef.current.marker.setAnimation(window.google.maps.Animation[animation?.name]);
 
-		if (animation?.duration && isNumber(animation?.duration))
+		if (animation?.duration && isNumber(animation?.duration)) {
+			if (timeoutRef.current) clearTimeout(timeoutRef.current);
 			timeoutRef.current = setTimeout(() => stopAnimation(), animation.duration);
+		}
 	};
 
 	useEffect(() => {
