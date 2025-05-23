@@ -20,10 +20,7 @@ export default [
 				sourcemap: true
 			}
 		],
-		plugins: [
-			...plugins(ENV),
-			livereload({ watch: 'dev' })
-		]
+		plugins: [...plugins(ENV), livereload({ watch: 'dev' })]
 	},
 	{
 		input: 'example/index.js',
