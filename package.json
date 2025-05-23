@@ -16,8 +16,7 @@
 	"scripts": {
 		"start": "rollup -c rollup/rollup.config.dev.js -w",
 		"build": "rollup -c rollup/rollup.config.prod.js",
-		"prepare": "npm run build:if-needed",
-		"prepublishOnly": "npm run build",
+		"prepare": "npm run build",
 		"lint": "eslint src/",
 		"test": "jest",
 		"test-ci": "JEST_JUNIT_OUTPUT_DIR=test-reports jest --coverage --silent --ci --reporters=jest-junit",
