@@ -7,6 +7,24 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.41.0] - 2025-05-23
+
+### Changed
+
+- Updated build configuration and export setup
+- Fixed dist folder configuration in rollup build
+- Improved build command configuration
+
+### Removed
+
+- Removed axios dependency from package.json
+- Removed preinstall script functionality
+
+### Fixed
+
+- Fixed export configuration in rollup build setup
+- Fixed build process for better package distribution
+
 ## [0.40.1] - 2025-05-21
 
 ### Fixed
