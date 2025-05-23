@@ -1,7 +1,7 @@
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
+import generatePackageJson from 'rollup-plugin-generate-package-json';
 import copy from 'rollup-plugin-copy';
 import plugins from './plugins';
-import generatePackageJson from 'rollup-plugin-generate-package-json';
 
 const ENV = 'production';
 
@@ -25,6 +25,8 @@ export default [
 				baseContents: (pkg) => {
 					const {
 						name,
+						main,
+						module,
 						exports,
 						homepage,
 						bugs,
@@ -35,8 +37,8 @@ export default [
 					} = pkg;
 
 					return {
-						main: 'index.umd.js',
-						module: 'index.esm.js',
+						main,
+						module,
 						exports,
 						name,
 						homepage,
