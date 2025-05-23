@@ -27,12 +27,13 @@ export default [
 
 					return {
 						main: 'index.umd.js',
-						main,
-						module,
-						exports,
 						name,
 						homepage,
-						bugs
+						bugs,
+						repository,
+						version,
+						dependencies,
+						peerDependencies
 					};
 				}
 			})

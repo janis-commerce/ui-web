@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.41.2] - 2025-05-23
+
+### Fixed
+
+- main key in rollback config
+
 ## [0.41.1] - 2025-05-23
 
 ### Changed
