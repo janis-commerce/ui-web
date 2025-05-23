@@ -23,30 +23,16 @@ export default [
 			generatePackageJson({
 				outputFolder: 'dist',
 				baseContents: (pkg) => {
-					const {
-						name,
-						main,
-						module,
-						exports,
-						homepage,
-						bugs,
-						repository,
-						version,
-						dependencies,
-						peerDependencies
-					} = pkg;
+					const { name, homepage, bugs, repository, version, dependencies, peerDependencies } = pkg;
 
 					return {
+						main: 'index.umd.js',
 						main,
 						module,
 						exports,
 						name,
 						homepage,
-						bugs,
-						repository,
-						version,
-						dependencies,
-						peerDependencies
+						bugs
 					};
 				}
 			})
