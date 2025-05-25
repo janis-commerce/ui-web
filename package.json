@@ -1,17 +1,13 @@
 {
 	"name": "@janiscommerce/ui-web",
-	"version": "0.40.1",
+	"version": "0.40.2",
 	"description": "",
 	"main": "dist/index.umd.js",
-	"module": "dist/index.esm.js",
 	"exports": {
 		".": {
-			"import": "./dist/index.esm.js",
-			"require": "./dist/index.umd.js",
-			"default": "./dist/index.esm.js"
+			"import": "dist/index.esm.js"
 		}
 	},
-	"type": "module",
 	"private": false,
 	"scripts": {
 		"start": "rollup -c rollup/rollup.config.dev.js -w",
