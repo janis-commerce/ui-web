@@ -1,5 +1,4 @@
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import copy from 'rollup-plugin-copy';
 import plugins from './plugins';
 
 const ENV = 'production';
@@ -13,16 +12,7 @@ export default [
 			format: 'umd',
 			sourcemap: true
 		},
-		plugins: [
-			...plugins(ENV),
-			peerDepsExternal(),
-			copy({
-				targets: [
-					{ src: 'README.md', dest: 'dist' },
-					{ src: 'package.json', dest: 'dist' }
-				]
-			})
-		]
+		plugins: [...plugins(ENV), peerDepsExternal()]
 	},
 	{
 		input: 'src/components/index.js',
