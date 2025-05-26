@@ -25,6 +25,7 @@ export default (env) => [
 			]
 		],
 		plugins: [
+			'@babel/plugin-proposal-class-properties',
 			'babel-plugin-styled-components',
 			env === 'production' && 'babel-plugin-transform-react-remove-prop-types'
 		].filter(Boolean)
