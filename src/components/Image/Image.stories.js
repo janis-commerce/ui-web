@@ -24,7 +24,7 @@ export default {
 const Template = (args) => <Image {...args} />;
 
 const baseArgs = {
-	url: 'https://app.janis.in/static/media/janis-logo-base.0cc15e53.svg',
+	url: 'https://cdn.id.janis.in/client-images/5ec2d43b70cd6700077c3aa1/964e3f17-17fd-4fa1-856f-79c5345176ae.png',
 	width: 100,
 	height: 100,
 	altText: 'Que',

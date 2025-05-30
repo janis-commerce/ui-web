@@ -1,11 +1,12 @@
-import {create} from '@storybook/theming';
+import { create } from '@storybook/theming';
+import brandImage from '../src/images/janis-logo.png';
 
 export default create({
 	base: 'light',
 	brandTitle: 'Janis UI Web',
 	brandUrl: 'https://janis.im',
-	brandImage: 'https://app.janis.in/static/media/janis-logo-base.0cc15e53.svg',
 	brandTarget: 'https://janis.im',
 	fontBase: '"Roboto", sans-serif',
 	fontCode: 'Roboto',
+	brandImage
 });
