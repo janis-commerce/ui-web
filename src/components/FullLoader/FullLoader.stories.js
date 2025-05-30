@@ -1,7 +1,7 @@
 import React from 'react';
 import palette from 'theme/palette';
 import FullLoader from './FullLoader';
-import Icon from 'components/Icon';
+import JanisGif from 'images/janis-loader.gif';
 import Spinner from 'components/Spinner';
 import Link from 'components/Link';
 
@@ -72,7 +72,7 @@ const TemplateWithChildren = (args) => (
 		{LinkText}
 		<FullLoader {...args}>
 			<Spinner config={{ color: args.color, size: 115 }}>
-				<Icon name="iso_janis" color={args.color || 'blue'} size={50} />
+				<img src={JanisGif} alt="Loading..." width={50} />
 			</Spinner>
 		</FullLoader>
 	</>

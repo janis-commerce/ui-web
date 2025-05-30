@@ -29,6 +29,8 @@ const palette = {
 	lightGreyPressed: '#D0D3E3',
 	lightTurquoise: '#BBE9D6',
 	magenta: '#ED14A4',
+	midnightBlue: '#001233',
+	midnightBlueHover: '#33415c',
 	orange: '#FF8D10',
 	orangeHover: '#FFA33F',
 	orangeLight: '#ffead3',

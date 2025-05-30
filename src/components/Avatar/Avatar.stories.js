@@ -38,7 +38,7 @@ export const WithName = Template.bind({});
 
 WithURL.args = {
 	...baseArgs,
-	url: 'https://cdn.id.janis.in/client-images/5ec2d43b70cd6700077c3aa1/0cdc0141-1f76-465a-8a06-8512b289eb85.png'
+	url: 'https://cdn.id.janis.in/client-images/5ec2d43b70cd6700077c3aa1/964e3f17-17fd-4fa1-856f-79c5345176ae.png'
 };
 
 Default.args = {

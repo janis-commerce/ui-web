@@ -1,7 +1,7 @@
 import React from 'react';
 import palette from 'theme/palette';
 import Spinner from './Spinner';
-import Icon from 'components/Icon';
+import JanisGif from 'images/janis-loader.gif';
 
 const control = {
 	type: 'select',
@@ -27,7 +27,7 @@ export default {
 const Template = (args) => <Spinner {...args} />;
 const TemplateWithIcon = (args) => (
 	<Spinner {...args}>
-		<Icon name="iso_janis" size={50} color="blue" />
+		<img src={JanisGif} alt="Loading..." width={50} />{' '}
 	</Spinner>
 );
 
