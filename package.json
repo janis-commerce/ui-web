@@ -128,6 +128,7 @@
 		"qrcode.react": "^3.0.2",
 		"react-colorful": "^5.5.1",
 		"react-frame-component": "^5.2.3",
+		"react-progressbar": "^15.4.1",
 		"svgpath": "^2.5.0"
 	}
 }
