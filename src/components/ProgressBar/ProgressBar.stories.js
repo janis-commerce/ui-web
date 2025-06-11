@@ -40,7 +40,7 @@ const AnimatedTemplate = ({ onComplete, ...args }) => {
 			<ProgressBar
 				{...args}
 				progress={progress}
-				isCompleted={completed && args.isCompleted}
+				isCompleted={completed}
 				hasError={completed && args.hasError}
 			/>
 			<Button

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Progress from 'react-progressbar';
 import palette from 'theme/palette';
@@ -13,11 +13,15 @@ const ProgressBar = ({ progress = 0, isCompleted = false, hasError = false, conf
 	} = config;
 
 	const barColor = isCompleted ? success : defaultColor;
-	const color = hasError ? error : barColor;
+
+	const color = useMemo(
+		() => (hasError ? error : barColor),
+		[hasError, isCompleted, success, error, defaultColor]
+	);
 
 	return (
 		<Progress
-			completed={progress}
+			completed={Math.min(Math.max(progress, 0), 100)}
 			style={{ backgroundColor: background }}
 			color={color}
 			height={height}
