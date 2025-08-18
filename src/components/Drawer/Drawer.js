@@ -31,7 +31,7 @@ const Drawer = ({
 					<styled.Content className="drawer__content">
 						<styled.Header>
 							{handleClose && typeof handleClose === 'function' && (
-								<styled.CloseBtn onClick={handleClose} rounded>
+								<styled.CloseBtn onClick={handleClose} type="button" rounded>
 									<Icon className="close-btn" name="cross_light" width={24} height={24} />
 								</styled.CloseBtn>
 							)}
