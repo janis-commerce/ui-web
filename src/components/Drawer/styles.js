@@ -76,12 +76,8 @@ const Header = styled.div`
 `;
 
 const CloseBtn = styled(Button)`
-	width: 24px;
-	height: 24px;
 	padding: 0;
 	background-color: transparent;
-	border-radius: 0;
-	outline: 0;
 	margin-left: auto;
 `;
 
