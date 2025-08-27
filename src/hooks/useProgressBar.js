@@ -6,7 +6,7 @@ const useProgressBar = (value = 0, animated = false, maxValue = 100) => {
 	);
 
 	useEffect(() => {
-		if (!animated) return setProgress(value);
+		if (!animated) return setProgress(Math.max(0, Math.min(maxValue, value)));
 
 		const timer = setInterval(() => {
 			setProgress((prevValue) => {
@@ -18,7 +18,7 @@ const useProgressBar = (value = 0, animated = false, maxValue = 100) => {
 			});
 		}, 100);
 		return () => clearInterval(timer);
-	}, [value, animated]);
+	}, [value, animated, maxValue]);
 
 	return { progress };
 };
