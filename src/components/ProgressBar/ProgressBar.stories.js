@@ -2,14 +2,6 @@ import React from 'react';
 import ProgressBar from './ProgressBar';
 import palette from 'theme/palette';
 
-const control = {
-	type: 'select',
-	options: Object.keys(palette).reduce((options, colorName) => {
-		options[colorName] = palette[colorName];
-		return options;
-	}, {})
-};
-
 export default {
 	title: 'Components/ProgressBar',
 	component: ProgressBar,
@@ -17,7 +9,10 @@ export default {
 		layout: 'centered'
 	},
 	argTypes: {
-		color: { control }
+		color: {
+			control: { type: 'select' },
+			options: Object.keys(palette)
+		}
 	}
 };
 

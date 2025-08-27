@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 
 const useProgressBar = (value = 0, animated = false, maxValue = 100) => {
-	const [progress, setProgress] = useState(0);
+	const [progress, setProgress] = useState(() =>
+		Math.max(0, Math.min(maxValue, animated ? 0 : value))
+	);
 
 	useEffect(() => {
 		if (!animated) return setProgress(value);
