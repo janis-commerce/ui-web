@@ -78,7 +78,7 @@ export default {
 		height: ${(props) => (!props.onlyIcon ? '32px' : '36px')};
 		width: ${(props) => props.onlyIcon && '36px'};
 		min-width: 36px;
-		max-width: 150px;
+		${(props) => props.maxWidth && `max-width: ${props.maxWidth}`};
 		border-radius: ${(props) => (!props.onlyIcon ? '50px' : '50%')};
 		display: inline-flex;
 		justify-content: center;
