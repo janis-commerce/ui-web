@@ -8,17 +8,14 @@ const ProgressBar = ({ value = 10, animated = false, height = 16, color = 'blue'
 	const { progress } = useProgressBar(value, animated);
 
 	return (
-		<styled.Bar
+		<styled.Progress
+			value={progress}
+			max={100}
 			height={height}
-			role="progressbar"
-			aria-valuemin={0}
-			aria-valuemax={100}
-			aria-valuenow={animated ? undefined : Math.round(progress)}
+			color={getColor(color)}
 			aria-busy={animated || undefined}
 			aria-valuetext={animated ? undefined : `${Math.round(progress)}%`}
-		>
-			<styled.ProgressFill value={progress} color={getColor(color)} />
-		</styled.Bar>
+		/>
 	);
 };
 
