@@ -20,6 +20,7 @@ import Skeleton from './Skeleton';
 import Map from './Map';
 import FullLoader from './FullLoader';
 import Spinner from './Spinner';
+import ProgressBar from './ProgressBar';
 import palette from 'theme/palette';
 import icons from './Icon/icons.json';
 
@@ -41,6 +42,7 @@ export {
 	Input,
 	Link,
 	Map,
+	ProgressBar,
 	QRCode,
 	Skeleton,
 	Spinner,
