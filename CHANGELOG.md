@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Removed
+
+- maxWidth in Chip component
+
 ## [0.44.0] - 2025-08-18
 
 ### Changed
