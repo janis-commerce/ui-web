@@ -24,19 +24,16 @@ const Template = (args) => {
 	);
 };
 
-const baseArgs = {
-	value: 35
-};
-
 export const Base = Template.bind({});
 export const Animated = Template.bind({});
 
 Base.args = {
-	...baseArgs
+	value: 10
 };
 
 Animated.args = {
-	...baseArgs,
+	value: 2,
+	maxValue: 5,
 	animated: true,
 	color: 'fizzGreen'
 };

@@ -1,5 +1,6 @@
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import palette from 'theme/palette';
+import { isNumber } from 'utils';
 
 const Bar = styled.div`
 	width: 100%;
@@ -9,11 +10,28 @@ const Bar = styled.div`
 	overflow: hidden;
 `;
 
+const progressAnimation = (scale = 1) => keyframes`
+	0% { transform: scaleX(0); }
+	100% { transform: scaleX(${scale}); }
+`;
+
 const ProgressFill = styled.div`
+	width: 100%;
 	height: 100%;
-	transition: all 0.25s;
-	width: ${({ value = 0 }) => `${Math.max(0, Math.min(100, value))}%`};
+	transform-origin: left center;
 	background-color: ${({ color = palette.blue }) => color};
+
+	${({ value = 0, maxValue = 100, animated = false, duration = 10 }) => {
+		const scale = value / maxValue;
+
+		return animated && isNumber(duration)
+			? css`
+					animation: ${progressAnimation(scale)} ${`${duration}s`} linear forwards;
+			  `
+			: css`
+					transform: scaleX(${scale});
+			  `;
+	}}
 `;
 
 export default {
