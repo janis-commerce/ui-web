@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getColor } from 'theme/utils';
-import { isValidValue } from './utils';
+import { isNumber } from 'utils';
 import styled from './styles';
+
+const isValidValue = (value) => !!value && isNumber(value) && value > 0;
 
 const ProgressBar = ({
 	value,
