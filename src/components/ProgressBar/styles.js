@@ -21,7 +21,7 @@ const ProgressFill = styled.div`
 	transform-origin: left center;
 	background-color: ${({ color = palette.blue }) => color};
 
-	${({ value = 0, maxValue = 100, animated = false, duration = 10 }) => {
+	${({ value = 0, maxValue = 100, animated = false, duration = 1 }) => {
 		const scale = value / maxValue;
 
 		return animated && isNumber(duration)
