@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.45.0] - 2025-09-30
+
+### Added
+
+- ProgressBar component with animated fill and accessibility attributes
+- Storybook stories for ProgressBar
+
 ### Removed
 
 - maxWidth in Chip component
