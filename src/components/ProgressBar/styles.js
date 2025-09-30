@@ -24,7 +24,7 @@ const ProgressFill = styled.div`
 	${({ value = 0, maxValue = 100, animated = false, duration = 1 }) => {
 		const scale = value / maxValue;
 
-		return animated && isNumber(duration)
+		return animated && isNumber(duration) && duration > 0
 			? css`
 					animation: ${progressAnimation(scale)} ${`${duration}s`} linear forwards;
 			  `
