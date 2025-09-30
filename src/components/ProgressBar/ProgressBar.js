@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { isNumber } from 'utils';
 import { getColor } from 'theme/utils';
+import { isValidValue } from './utils';
 import styled from './styles';
-
-const isValidValue = (value) => !!value && isNumber(value) && value > 0;
 
 const ProgressBar = ({
 	value,
 	maxValue = 100,
 	animated = false,
-	duration = 10,
+	duration = 1,
 	height = 16,
 	color = 'blue'
 }) => {
@@ -40,11 +38,17 @@ const ProgressBar = ({
 };
 
 ProgressBar.propTypes = {
+	/* Valor numérico actual del progreso */
 	value: PropTypes.number.isRequired,
+	/* Valor máximo permitido del progreso */
 	maxValue: PropTypes.number,
+	/* Activa la animación del relleno */
 	animated: PropTypes.bool,
+	/* Duración de la animación en segundos */
 	duration: PropTypes.number,
+	/* Altura de la barra en píxeles */
 	height: PropTypes.number,
+	/* Color del progreso (nombre de paleta o valor CSS) */
 	color: PropTypes.string
 };
 
