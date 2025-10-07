@@ -4,23 +4,23 @@ import { debounce } from 'utils';
 import Marker from './components/Marker';
 
 const Markers = ({ readOnly = true, markers = [], markerOptions = {} }) => {
-	const [activeMarkerIdx, setActiveMarkerIdx] = useState(null);
+	const [activeMarkerId, setActiveMarkerId] = useState(null);
 	const [mouseOverInfoWindow, setMouseOverInfoWindow] = useState(false);
 
-	const openInfoWindow = (markerIdx) => setActiveMarkerIdx(markerIdx);
-	const closeInfoWindow = () => setActiveMarkerIdx(null);
+	const openInfoWindow = (markerId) => setActiveMarkerId(markerId);
+	const closeInfoWindow = () => setActiveMarkerId(null);
 
 	const delayedInfoWindowHover = debounce(() => {
 		if (!mouseOverInfoWindow) closeInfoWindow();
 	}, 100);
 
-	const handleMarkerMouseOver = (marker, markerIdx) => {
-		if (!marker?.infoWindowChildren) return;
+	const handleMarkerMouseOver = (marker, markerId) => {
+		if (!marker?.infoWindowContent) return;
 
 		const { onInfoWindowChange = () => {} } = markerOptions;
 		onInfoWindowChange();
 
-		openInfoWindow(markerIdx);
+		openInfoWindow(markerId);
 	};
 
 	const handleMarkerMouseOut = () => delayedInfoWindowHover();
@@ -51,7 +51,7 @@ const Markers = ({ readOnly = true, markers = [], markerOptions = {} }) => {
 					<Marker
 						markerData={{
 							...marker,
-							infoWindowOpen: marker?.showInfoWindow || activeMarkerIdx === uniqueId
+							infoWindowOpen: marker?.showInfoWindow || activeMarkerId === uniqueId
 						}}
 						markerOptions={{
 							...markerOptions,

@@ -2106,7 +2106,7 @@ export const markersWithInfoWindow = multiRoutesMarkersMock.map((marker, markerI
 		points: marker.points.map((point, pointIdx) => ({
 			...point,
 			id: `#marker${markerIdx + 1}/point${pointIdx + 1}`,
-			infoWindowChildren: (
+			infoWindowContent: (
 				<div>
 					Marker {markerIdx + 1} - Point {pointIdx + 1}
 				</div>

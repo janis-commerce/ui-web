@@ -12,7 +12,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		position,
 		animation,
 		overlay,
-		infoWindowChildren,
+		infoWindowContent,
 		isDraggable,
 		zIndex,
 		infoWindowOpen
@@ -123,13 +123,13 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 					{overlay()}
 				</OverlayView>
 			)}
-			{infoWindowOpen && infoWindowChildren && (
+			{infoWindowOpen && infoWindowContent && (
 				<InfoWindow
 					className="google-map-component__info-window"
 					data={position}
 					infoWindowHandles={infoWindowHandles}
 				>
-					{infoWindowChildren}
+					{infoWindowContent}
 				</InfoWindow>
 			)}
 		</>
