@@ -7,18 +7,10 @@ import { getCoordsFromEvent, isValidAnimation, markerHasEqualPosition } from './
 
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const [marker, setMarker] = useState(markerData);
-	const {
-		icon,
-		position,
-		animation,
-		overlay,
-		infoWindowContent,
-		isDraggable,
-		zIndex,
-		infoWindowOpen
-	} = marker || {};
+	const { icon, position, animation, overlay, isDraggable, zIndex, infoWindowOpen } = marker || {};
 
 	const {
+		infoWindowContent,
 		onLoad = () => {},
 		onClick = () => {},
 		onDrag = () => {},
@@ -129,7 +121,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 					data={position}
 					infoWindowHandles={infoWindowHandles}
 				>
-					{infoWindowContent}
+					{infoWindowContent()}
 				</InfoWindow>
 			)}
 		</>
@@ -147,7 +139,9 @@ Marker.propTypes = {
 		onDragStart: PropTypes.func,
 		onClick: PropTypes.func
 	}),
-	markerOptions: PropTypes.shape({}),
+	markerOptions: PropTypes.shape({
+		infoWindowContent: PropTypes.func
+	}),
 	readOnly: PropTypes.bool,
 	markerIdx: PropTypes.number,
 	markerProps: PropTypes.shape({}),

@@ -10,16 +10,15 @@ const Markers = ({ readOnly = true, markers = [], markerOptions = {} }) => {
 	const openInfoWindow = (markerId) => setActiveMarkerId(markerId);
 	const closeInfoWindow = () => setActiveMarkerId(null);
 
+	const { infoWindowContent, onInfoWindowChange = () => {} } = markerOptions;
+
 	const delayedInfoWindowHover = debounce(() => {
 		if (!mouseOverInfoWindow) closeInfoWindow();
 	}, 100);
 
-	const handleMarkerMouseOver = (marker, markerId) => {
-		if (!marker?.infoWindowContent) return;
-
-		const { onInfoWindowChange = () => {} } = markerOptions;
+	const handleMarkerMouseOver = (markerId) => {
+		if (!infoWindowContent) return;
 		onInfoWindowChange();
-
 		openInfoWindow(markerId);
 	};
 
@@ -55,7 +54,7 @@ const Markers = ({ readOnly = true, markers = [], markerOptions = {} }) => {
 						}}
 						markerOptions={{
 							...markerOptions,
-							onMarkerMouseOver: () => handleMarkerMouseOver(marker, uniqueId),
+							onMarkerMouseOver: () => handleMarkerMouseOver(uniqueId),
 							onMarkerMouseOut: handleMarkerMouseOut,
 							onInfoWindowMouseEnter: handleInfoWindowMouseEnter,
 							onInfoWindowMouseLeave: handleInfoWindowMouseLeave
@@ -72,7 +71,9 @@ const Markers = ({ readOnly = true, markers = [], markerOptions = {} }) => {
 
 Markers.propTypes = {
 	markers: PropTypes.arrayOf(PropTypes.shape({})),
-	markerOptions: PropTypes.shape({}),
+	markerOptions: PropTypes.shape({
+		infoWindowContent: PropTypes.func
+	}),
 	readOnly: PropTypes.bool
 };
 

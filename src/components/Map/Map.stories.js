@@ -119,7 +119,10 @@ const WithInfoWindowTemplate = (args) => {
 			<Map
 				{...args}
 				markers={updatedMarkers}
-				markerOptions={{ onInfoWindowChange: handleCloseAllInfoWindows }}
+				markerOptions={{
+					onInfoWindowChange: handleCloseAllInfoWindows,
+					infoWindowContent: () => <div>Info window content</div>
+				}}
 			/>
 		</div>
 	);

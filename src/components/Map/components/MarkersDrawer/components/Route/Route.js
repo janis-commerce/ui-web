@@ -27,7 +27,9 @@ Route.propTypes = {
 			strokeWeight: PropTypes.number
 		})
 	}),
-	markerOptions: PropTypes.shape({}),
+	markerOptions: PropTypes.shape({
+		infoWindowContent: PropTypes.func
+	}),
 	readOnly: PropTypes.bool
 };
 

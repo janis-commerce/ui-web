@@ -125,8 +125,7 @@ Map.propTypes = {
 				PropTypes.shape({
 					position: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number }),
 					icon: PropTypes.object,
-					overlay: PropTypes.element,
-					infoWindowChildren: PropTypes.node
+					overlay: PropTypes.element
 				})
 			),
 			polylineOptions: PropTypes.shape({
@@ -137,7 +136,9 @@ Map.propTypes = {
 		})
 	),
 	/** Extra config for each marker */
-	markerOptions: PropTypes.shape({}),
+	markerOptions: PropTypes.shape({
+		infoWindowContent: PropTypes.func
+	}),
 	/** Prevents markers from being moved */
 	/** Config to customize map */
 	options: PropTypes.shape({}),
