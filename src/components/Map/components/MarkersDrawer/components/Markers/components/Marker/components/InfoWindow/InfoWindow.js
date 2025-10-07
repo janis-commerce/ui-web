@@ -1,24 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { InfoWindow as InfoWindowComponent } from '@react-google-maps/api';
+import styled from './styles';
 
 const InfoWindow = ({ infoWindowHandles, data, children }) => {
-	const infoWindowProps = { ...infoWindowHandles };
-
 	return (
-		<div {...infoWindowProps}>
-			<InfoWindowComponent position={data}>{children}</InfoWindowComponent>
-		</div>
+		<InfoWindowComponent position={data}>
+			<styled.Content className="google-map-component__info-window--content" {...infoWindowHandles}>
+				{children}
+			</styled.Content>
+		</InfoWindowComponent>
 	);
 };
 
 InfoWindow.propTypes = {
-	/** The edit data */
 	data: PropTypes.shape({}),
-	/* themes object */
-	themes: PropTypes.shape({}),
-	/** The schema to display */
-	schema: PropTypes.shape({}),
 	infoWindowHandles: PropTypes.shape({}),
 	children: PropTypes.element
 };

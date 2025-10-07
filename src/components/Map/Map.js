@@ -5,6 +5,7 @@ import MarkersDrawer from './components/MarkersDrawer';
 import SearchBox from './components/SearchBox';
 import { LIBRARIES, INITIAL_CONTROLS_POSITION, DEFAULT_CENTER } from './utils/constants';
 import { getMapOptions, getBoundsFromMarkers } from './utils';
+import { InfoWindowStyles } from './styles';
 
 const Map = forwardRef(
 	(
@@ -74,28 +75,31 @@ const Map = forwardRef(
 		if (!isLoaded) return null;
 
 		return (
-			<GoogleMap
-				className="google-map-component"
-				onLoad={onLoad}
-				mapContainerStyle={{ height, width }}
-				options={mapOptions}
-				center={mapRef.current?.getCenter()}
-				{...props}
-			>
-				{mapOptions.showSearchBar && (
-					<SearchBox updateMarker={updateMarker} className="google-map-component__search-box" />
-				)}
-				{validMarkersExist && (
-					<MarkersDrawer
-						markers={markers}
-						markerOptions={markerOptions}
-						readOnly={mapOptions.readOnly}
-						callbackOnSuccessDirections={callbackOnSuccessDirections}
-						callbackOnErrorDirections={callbackOnErrorDirections}
-						googleMapsApiKey={googleMapsApiKey}
-					/>
-				)}
-			</GoogleMap>
+			<>
+				<InfoWindowStyles />
+				<GoogleMap
+					className="google-map-component"
+					onLoad={onLoad}
+					mapContainerStyle={{ height, width }}
+					options={mapOptions}
+					center={mapRef.current?.getCenter()}
+					{...props}
+				>
+					{mapOptions.showSearchBar && (
+						<SearchBox updateMarker={updateMarker} className="google-map-component__search-box" />
+					)}
+					{validMarkersExist && (
+						<MarkersDrawer
+							markers={markers}
+							markerOptions={markerOptions}
+							readOnly={mapOptions.readOnly}
+							callbackOnSuccessDirections={callbackOnSuccessDirections}
+							callbackOnErrorDirections={callbackOnErrorDirections}
+							googleMapsApiKey={googleMapsApiKey}
+						/>
+					)}
+				</GoogleMap>
+			</>
 		);
 	}
 );
