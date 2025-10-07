@@ -1,35 +1,37 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Marker as MarkerComponent, OverlayView } from '@react-google-maps/api';
-import { debounce, isNumber } from 'utils';
+import { isNumber } from 'utils';
 import PropTypes from 'prop-types';
 import InfoWindow from './components/InfoWindow';
 import { getCoordsFromEvent, isValidAnimation, markerHasEqualPosition } from './utils';
 
 const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 	const [marker, setMarker] = useState(markerData);
-	const { icon, position, animation, overlay, infoWindowChildren, isDraggable, zIndex } =
-		marker || {};
+	const {
+		icon,
+		position,
+		animation,
+		overlay,
+		infoWindowChildren,
+		isDraggable,
+		zIndex,
+		infoWindowOpen
+	} = marker || {};
 
 	const {
 		onLoad = () => {},
 		onClick = () => {},
 		onDrag = () => {},
 		onDragStart = () => {},
-		onDragEnd = () => {}
+		onDragEnd = () => {},
+		onMarkerMouseOver = () => {},
+		onMarkerMouseOut = () => {},
+		onInfoWindowMouseEnter = () => {},
+		onInfoWindowMouseLeave = () => {}
 	} = markerOptions;
 
 	const markerRef = useRef(null);
 	const timeoutRef = useRef(null);
-
-	const [infoWindowOpen, setInfoWindowOpen] = useState(false);
-	const [mouseOverInfoWindow, setMouseOverInfoWindow] = useState(false);
-
-	const openInfoWindow = () => setInfoWindowOpen(true);
-	const closeInfoWindow = () => setInfoWindowOpen(false);
-
-	const delayedInfoWindowHover = debounce(() => {
-		if (!mouseOverInfoWindow) closeInfoWindow();
-	}, 100);
 
 	useEffect(() => {
 		setMarker(markerData);
@@ -93,23 +95,17 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 		onDragStart: (event) => onDragStart(getEventHandlerData(event)),
 		onMouseOver: () => {
 			if (isValidAnimation(animation)) stopAnimation();
-			openInfoWindow();
+			onMarkerMouseOver();
 		},
 		onMouseOut: () => {
 			if (isValidAnimation(animation)) startAnimation();
-			delayedInfoWindowHover();
+			onMarkerMouseOut();
 		}
 	};
 
 	const infoWindowHandles = {
-		onMouseEnter: () => {
-			delayedInfoWindowHover.cancel();
-			setMouseOverInfoWindow(true);
-		},
-		onMouseLeave: () => {
-			closeInfoWindow();
-			setMouseOverInfoWindow(false);
-		}
+		onMouseEnter: onInfoWindowMouseEnter,
+		onMouseLeave: onInfoWindowMouseLeave
 	};
 
 	const getPixelPositionOffset = (width) => ({ x: width ? -(width / 2) : -68, y: 0 });
@@ -133,7 +129,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 					data={position}
 					infoWindowHandles={infoWindowHandles}
 				>
-					{infoWindowChildren()}
+					{infoWindowChildren}
 				</InfoWindow>
 			)}
 		</>
@@ -144,7 +140,7 @@ Marker.propTypes = {
 	markerData: PropTypes.shape({
 		overlay: PropTypes.element,
 		icon: PropTypes.shape({}),
-		infoWindowChildren: PropTypes.shape({}),
+		infoWindowChildren: PropTypes.element,
 		position: PropTypes.shape({}),
 		isDraggable: PropTypes.bool,
 		onDragEnd: PropTypes.func,
