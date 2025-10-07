@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.0] - 2025-10-07
+
+### Added
+
+- Story data `MarkersWithInfoWindow` example in Map stories
+- `infoWindowOpen` support in `Marker` via `markerData`
+- `markerOptions.onInfoWindowChange` and InfoWindow mouse enter/leave handlers
+
+### Changed
+
+- Moved InfoWindow open/close logic from `Marker` to `Markers` with debounced hover behavior **BREAKING CHANGE** 🚨
+- Updated `Map.stories.js` to include `WithInfoWindowTemplate` and control example
+
 ## [0.45.0] - 2025-09-30
 
 ### Added
