@@ -140,7 +140,7 @@ Marker.propTypes = {
 	markerData: PropTypes.shape({
 		overlay: PropTypes.element,
 		icon: PropTypes.shape({}),
-		infoWindowChildren: PropTypes.element,
+		infoWindowChildren: PropTypes.node,
 		position: PropTypes.shape({}),
 		isDraggable: PropTypes.bool,
 		onDragEnd: PropTypes.func,

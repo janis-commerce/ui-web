@@ -47,7 +47,7 @@ MarkersDrawer.propTypes = {
 					position: PropTypes.shape({ lat: PropTypes.number, lng: PropTypes.number }),
 					icon: PropTypes.object,
 					overlay: PropTypes.element,
-					infoWindowChildren: PropTypes.element
+					infoWindowChildren: PropTypes.node
 				})
 			),
 			polylineOptions: PropTypes.shape({
