@@ -121,7 +121,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 					data={position}
 					infoWindowHandles={infoWindowHandles}
 				>
-					{infoWindowContent()}
+					{infoWindowContent(markerData)}
 				</InfoWindow>
 			)}
 		</>
