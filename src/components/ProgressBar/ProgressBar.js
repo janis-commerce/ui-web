@@ -4,6 +4,8 @@ import { getColor } from 'theme/utils';
 import { isNumber } from 'utils';
 import styled from './styles';
 
+const isValidValue = (value) => isNumber(value) && value >= 0;
+
 const ProgressBar = ({
 	value,
 	maxValue = 100,
@@ -12,7 +14,7 @@ const ProgressBar = ({
 	height = 16,
 	color = 'blue'
 }) => {
-	if (!isNumber(value) || !isNumber(maxValue) || value > maxValue) return null;
+	if (!isValidValue(value) || !isValidValue(maxValue) || value > maxValue) return null;
 
 	const progress = Math.max(0, Math.min(maxValue, value));
 
