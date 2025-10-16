@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.2.0] - 2025-10-16
+
+### Changed
+
+- Validations for valid values in Progress bar
+
 ## [1.1.0] - 2025-10-08
 
 ### Added
