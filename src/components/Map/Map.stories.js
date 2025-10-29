@@ -71,7 +71,7 @@ const WithMarkerOptionsTemplate = (args) => {
 };
 
 const WithInfoWindowTemplate = (args) => {
-	const { markers } = args;
+	const { markers, markerOptions } = args;
 
 	const [selectedPoint, setSelectedPoint] = useState('');
 	const [updatedMarkers, setUpdatedMarkers] = useState(markers);
@@ -120,6 +120,7 @@ const WithInfoWindowTemplate = (args) => {
 				{...args}
 				markers={updatedMarkers}
 				markerOptions={{
+					...markerOptions,
 					onInfoWindowChange: handleCloseAllInfoWindows,
 					infoWindowContent: () => <div>Info window content</div>
 				}}

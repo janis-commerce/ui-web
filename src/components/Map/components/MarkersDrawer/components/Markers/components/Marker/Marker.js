@@ -11,6 +11,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 
 	const {
 		infoWindowContent,
+		infoWindowOptions = {},
 		onLoad = () => {},
 		onClick = () => {},
 		onDrag = () => {},
@@ -119,6 +120,7 @@ const Marker = ({ markerData = {}, markerOptions = {}, readOnly = true }) => {
 				<InfoWindow
 					className="google-map-component__info-window"
 					data={position}
+					infoWindowOptions={infoWindowOptions}
 					infoWindowHandles={infoWindowHandles}
 				>
 					{infoWindowContent(markerData)}
