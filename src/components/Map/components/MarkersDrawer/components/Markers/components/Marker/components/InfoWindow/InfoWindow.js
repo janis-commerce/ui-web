@@ -27,7 +27,7 @@ const InfoWindow = ({ data, infoWindowOptions = {}, infoWindowHandles, children 
 InfoWindow.propTypes = {
 	data: PropTypes.shape({}),
 	infoWindowOptions: PropTypes.shape({
-		position: PropTypes.shape({
+		infoWindowPosition: PropTypes.shape({
 			x: PropTypes.number,
 			y: PropTypes.number
 		})
