@@ -16,9 +16,6 @@ export default {
 		'toggleIcon.position': 'left'
 	},
 	argTypes: {
-		renderContent: {
-			control: 'string'
-		},
 		toggleIcon: {
 			table: {
 				disable: true
