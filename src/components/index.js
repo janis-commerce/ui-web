@@ -21,7 +21,7 @@ import Map from './Map';
 import FullLoader from './FullLoader';
 import Spinner from './Spinner';
 import ProgressBar from './ProgressBar';
-import Collapser from './Collapser';
+import Collapse from './Collapse';
 import palette from 'theme/palette';
 import icons from './Icon/icons.json';
 
@@ -34,7 +34,7 @@ export {
 	ClickAwayListener,
 	Color,
 	ColorPicker,
-	Collapser,
+	Collapse,
 	Drawer,
 	ErrorBoundary,
 	FullLoader,

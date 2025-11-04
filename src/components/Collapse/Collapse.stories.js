@@ -1,11 +1,11 @@
 import React from 'react';
 import palette from 'theme/palette';
-import Collapser from './Collapser';
+import Collapse from './Collapse';
 import Chip from 'components/Chip';
 
 export default {
-	title: 'Components/Collapser',
-	component: Collapser,
+	title: 'Components/Collapse',
+	component: Collapse,
 	parameters: {
 		layout: 'centered'
 	},
@@ -81,7 +81,7 @@ const Template = (args) => {
 				padding: '20px'
 			}}
 		>
-			<Collapser {...args} toggleIcon={toggleIcon} />
+			<Collapse {...args} toggleIcon={toggleIcon} />
 		</div>
 	);
 };

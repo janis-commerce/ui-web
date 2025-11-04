@@ -8,7 +8,7 @@ const AVAILABLE_ICONS = ['minus_big_light', 'plus_big_light', 'arrow_down_flat',
 
 const getIcon = (iconName) => AVAILABLE_ICONS.includes(iconName) && iconName;
 
-const Collapser = ({
+const Collapse = ({
 	disabled = false,
 	isDefaultOpen = false,
 	renderHeader,
@@ -26,7 +26,7 @@ const Collapser = ({
 	const [isClicked, setIsClicked] = useState(false);
 
 	const triggerHandler = (state) => {
-		const collapserState = {
+		const collapseState = {
 			expandStart: expandStartHandler,
 			expanding: expandingHandler,
 			expandEnd: expandEndHandler,
@@ -34,7 +34,7 @@ const Collapser = ({
 			collapsing: collapsingHandler,
 			collapseEnd: collapseEndHandler
 		};
-		return collapserState[state]?.();
+		return collapseState[state]?.();
 	};
 
 	const { getCollapseProps = () => {}, getToggleProps = () => {} } = useCollapse({
@@ -59,7 +59,7 @@ const Collapser = ({
 	} = toggleIcon || {};
 
 	const buttonProps = {
-		className: 'collapser__collapseButton',
+		className: 'collapse__collapseButton',
 		icon: isOpen
 			? getIcon(iconNames?.opened) || 'minus_big_light'
 			: getIcon(iconNames?.closed) || 'plus_big_light',
@@ -70,9 +70,9 @@ const Collapser = ({
 		return null;
 
 	return (
-		<styled.Wrapper className="collapser" isOpen={isOpen}>
+		<styled.Wrapper className="collapse" isOpen={isOpen}>
 			<styled.HeaderWrapper
-				className="collapser__header"
+				className="collapse__header"
 				{...getToggleProps({ onClick: handleClick })}
 				isOpen={isOpen}
 				position={position}
@@ -81,7 +81,7 @@ const Collapser = ({
 				{renderHeader && renderHeader()}
 			</styled.HeaderWrapper>
 			<div {...getCollapseProps()}>
-				<styled.ContentWrapper className="collapser__content" contentBorder={contentBorder}>
+				<styled.ContentWrapper className="collapse__content" contentBorder={contentBorder}>
 					{renderContent && renderContent()}
 				</styled.ContentWrapper>
 			</div>
@@ -89,10 +89,10 @@ const Collapser = ({
 	);
 };
 
-Collapser.propTypes = {
-	/** Indica si un collapser esta desabilitado o no */
+Collapse.propTypes = {
+	/** Indica si el colapsable esta desabilitado o no */
 	disabled: PropTypes.bool,
-	/** Fuerza la apertura o cierre por defecto (o desde fuera del componente) del Collapser */
+	/** Fuerza la apertura o cierre por defecto (o desde fuera del componente) del colapsable */
 	isDefaultOpen: PropTypes.bool,
 	/** Funcion que se ejecuta para renderizar el encabezado del colapsable */
 	renderHeader: PropTypes.func,
@@ -123,4 +123,4 @@ Collapser.propTypes = {
 	collapseEndHandler: PropTypes.func
 };
 
-export default Collapser;
+export default Collapse;
