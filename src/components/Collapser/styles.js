@@ -26,9 +26,8 @@ const CollapseButton = styled(Button)`
 `;
 
 const ContentWrapper = styled.section`
-	border-top: 1px solid transparent;
 	padding: 16px;
-	${({ contentBorder }) => contentBorder && `border-top-color: ${palette.blue}`};
+	border-top: ${({ contentBorder }) => `1px solid ${contentBorder ? palette.blue : 'transparent'}`};
 `;
 
 export default {

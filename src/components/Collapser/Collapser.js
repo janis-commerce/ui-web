@@ -43,7 +43,6 @@ const Collapser = ({
 	});
 
 	useEffect(() => {
-		setIsOpen(isDefaultOpen);
 		setIsClicked(false);
 	}, [isDefaultOpen]);
 
