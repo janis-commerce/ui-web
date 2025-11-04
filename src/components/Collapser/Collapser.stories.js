@@ -136,13 +136,22 @@ WithCallbacks.args = {
 		</div>
 	),
 	contentBorder: false,
-	expandHandler: () => {
-		console.log('expandHandler() -> abierto');
+	expandStartHandler: () => {
+		console.log('expandStartHandler() -> inicio apertura');
 	},
-	isExpandingHandler: () => {
-		console.log('isExpandingHandler() -> abriendo');
+	expandingHandler: () => {
+		console.log('expandingHandler() -> abriendo');
 	},
-	collapseHandler: () => {
-		console.log('collapseHandler() -> cerrado');
+	expandEndHandler: () => {
+		console.log('expandEndHandler() -> fin apertura');
+	},
+	collapseStartHandler: () => {
+		console.log('collapseStartHandler() -> inicio cierre');
+	},
+	collapsingHandler: () => {
+		console.log('collapsingHandler() -> cerrando');
+	},
+	collapseEndHandler: () => {
+		console.log('collapseEndHandler() -> fin cierre');
 	}
 };

@@ -15,18 +15,24 @@ const Collapser = ({
 	renderContent,
 	toggleIcon = {},
 	contentBorder = true,
-	expandHandler = () => {},
-	isExpandingHandler = () => {},
-	collapseHandler = () => {}
+	expandStartHandler = () => {},
+	expandingHandler = () => {},
+	expandEndHandler = () => {},
+	collapseStartHandler = () => {},
+	collapsingHandler = () => {},
+	collapseEndHandler = () => {}
 }) => {
 	const [isOpen, setIsOpen] = useState(isDefaultOpen);
 	const [isClicked, setIsClicked] = useState(false);
 
 	const triggerHandler = (state) => {
 		const collapserState = {
-			expandStart: expandHandler,
-			expanding: isExpandingHandler,
-			collapseEnd: collapseHandler
+			expandStart: expandStartHandler,
+			expanding: expandingHandler,
+			expandEnd: expandEndHandler,
+			collapseStart: collapseStartHandler,
+			collapsing: collapsingHandler,
+			collapseEnd: collapseEndHandler
 		};
 		return collapserState[state]?.();
 	};
@@ -104,12 +110,18 @@ Collapser.propTypes = {
 	}),
 	/** Borde para el contenido del colapsable */
 	contentBorder: PropTypes.bool,
+	/** Funcion que se ejecuta cuando inicia la animacion de expandir */
+	expandStartHandler: PropTypes.func,
+	/** Funcion que se ejecuta cuando el colapsable se esta abriendo */
+	expandingHandler: PropTypes.func,
 	/** Funcion que se ejecuta cuando termina la animacion de expandir */
-	expandHandler: PropTypes.func,
-	/** Funcion que se ejecuta cuando se inicia la animacion de expandir */
-	isExpandingHandler: PropTypes.func,
+	expandEndHandler: PropTypes.func,
+	/** Funcion que se ejecuta cuando inicia la animacion de colapsar */
+	collapseStartHandler: PropTypes.func,
+	/** Funcion que se ejecuta cuando el colapsable se esta cerrando */
+	collapsingHandler: PropTypes.func,
 	/** Funcion que se ejecuta cuando termina la animacion de colapsar */
-	collapseHandler: PropTypes.func
+	collapseEndHandler: PropTypes.func
 };
 
 export default Collapser;
