@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useCollapse } from 'react-collapsed';
 import { isFunction } from 'utils';
 import styled from './styles';
-
-const AVAILABLE_ICONS = ['minus_big_light', 'plus_big_light', 'arrow_down_flat', 'arrow_up_flat'];
+import { AVAILABLE_ICONS, DEFAULT_TOGGLE_ICON } from './constants';
 
 const getIcon = (iconName) => AVAILABLE_ICONS.includes(iconName) && iconName;
 
@@ -23,7 +22,6 @@ const Collapse = ({
 	collapseEndHandler = () => {}
 }) => {
 	const [isOpen, setIsOpen] = useState(isDefaultOpen);
-	const [isClicked, setIsClicked] = useState(false);
 
 	const triggerHandler = (state) => {
 		const collapseState = {
@@ -39,24 +37,12 @@ const Collapse = ({
 
 	const { getCollapseProps = () => {}, getToggleProps = () => {} } = useCollapse({
 		isExpanded: isOpen,
-		onTransitionStateChange: (state) => isClicked && triggerHandler(state)
+		onTransitionStateChange: (state) => !disabled && triggerHandler(state)
 	});
 
-	useEffect(() => {
-		setIsClicked(false);
-	}, [isDefaultOpen]);
+	const handleClick = () => !disabled && setIsOpen((prevOpenState) => !prevOpenState);
 
-	const handleClick = () => {
-		if (disabled) return;
-		setIsOpen((oldOpen) => !oldOpen);
-		setIsClicked(true);
-	};
-
-	const {
-		iconNames = { opened: 'minus_big_light', closed: 'plus_big_light' },
-		color = 'blue',
-		position = 'left'
-	} = toggleIcon || {};
+	const { iconNames = {}, color = '', position = '' } = { ...DEFAULT_TOGGLE_ICON, ...toggleIcon };
 
 	const buttonProps = {
 		className: 'collapse__collapseButton',
