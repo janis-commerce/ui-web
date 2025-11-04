@@ -67,3 +67,5 @@ export const isObject = (value) =>
 	typeof value === 'object' && !Array.isArray(value) && value instanceof Object;
 
 export const isNumber = (num) => typeof num === 'number' && !Number.isNaN(Number(num));
+
+export const isFunction = (value) => typeof value === 'function';
