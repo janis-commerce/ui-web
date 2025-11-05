@@ -40,16 +40,21 @@ const Collapse = ({
 		onTransitionStateChange: (state) => !disabled && triggerHandler(state)
 	});
 
-	const handleClick = () => !disabled && setIsOpen((prevOpenState) => !prevOpenState);
-
 	const { iconNames = {}, color = '', position = '' } = { ...DEFAULT_TOGGLE_ICON, ...toggleIcon };
+
+	const handleClick = () => setIsOpen((prevOpenState) => !prevOpenState);
+
+	const togglePropsParams = {
+		...(!disabled && { onClick: handleClick })
+	};
 
 	const buttonProps = {
 		className: 'collapse__collapseButton',
 		icon: isOpen
 			? getIcon(iconNames?.opened) || 'minus_big_light'
 			: getIcon(iconNames?.closed) || 'plus_big_light',
-		iconColor: color
+		iconColor: color,
+		disabled
 	};
 
 	if (!renderHeader || !isFunction(renderHeader) || !renderContent || !isFunction(renderContent))
@@ -59,7 +64,7 @@ const Collapse = ({
 		<styled.Wrapper className="collapse" isOpen={isOpen}>
 			<styled.HeaderWrapper
 				className="collapse__header"
-				{...getToggleProps({ onClick: handleClick })}
+				{...getToggleProps(togglePropsParams)}
 				isOpen={isOpen}
 				position={position}
 			>
@@ -78,7 +83,7 @@ const Collapse = ({
 Collapse.propTypes = {
 	/** Indica si el colapsable esta desabilitado o no */
 	disabled: PropTypes.bool,
-	/** Fuerza la apertura o cierre por defecto (o desde fuera del componente) del colapsable */
+	/** Establece el estado inicial (abierto/cerrado) del colapsable al montarse */
 	isDefaultOpen: PropTypes.bool,
 	/** Funcion que se ejecuta para renderizar el encabezado del colapsable */
 	renderHeader: PropTypes.func,
