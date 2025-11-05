@@ -5,7 +5,7 @@ import { isFunction } from 'utils';
 import styled from './styles';
 import { AVAILABLE_ICONS, DEFAULT_TOGGLE_ICON } from './constants';
 
-const getIcon = (iconName) => AVAILABLE_ICONS.includes(iconName) && iconName;
+const getIcon = (iconName) => (AVAILABLE_ICONS.includes(iconName) ? iconName : null);
 
 const Collapse = ({
 	disabled = false,
@@ -35,7 +35,7 @@ const Collapse = ({
 		return collapseState[state]?.();
 	};
 
-	const { getCollapseProps = () => {}, getToggleProps = () => {} } = useCollapse({
+	const { getCollapseProps, getToggleProps } = useCollapse({
 		isExpanded: isOpen,
 		onTransitionStateChange: (state) => !disabled && triggerHandler(state)
 	});
@@ -69,11 +69,11 @@ const Collapse = ({
 				position={position}
 			>
 				<styled.CollapseButton {...buttonProps} />
-				{renderHeader && renderHeader()}
+				{renderHeader()}
 			</styled.HeaderWrapper>
 			<div {...getCollapseProps()}>
 				<styled.ContentWrapper className="collapse__content" contentBorder={contentBorder}>
-					{renderContent && renderContent()}
+					{renderContent()}
 				</styled.ContentWrapper>
 			</div>
 		</styled.Wrapper>
