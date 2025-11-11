@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useCollapse } from 'react-collapsed';
 import { isFunction } from 'utils';
@@ -9,7 +9,7 @@ const getIcon = (iconName) => (AVAILABLE_ICONS.includes(iconName) ? iconName : n
 
 const Collapse = ({
 	disabled = false,
-	isDefaultOpen = false,
+	isOpen = false,
 	renderHeader,
 	renderContent,
 	toggleIcon = {},
@@ -21,28 +21,37 @@ const Collapse = ({
 	collapsingHandler = () => {},
 	collapseEndHandler = () => {}
 }) => {
-	const [isOpen, setIsOpen] = useState(isDefaultOpen);
+	const [isOpenState, setIsOpenState] = useState(isOpen);
 
-	const triggerHandler = (state) => {
-		const collapseState = {
+	const collapseState = useMemo(
+		() => ({
 			expandStart: expandStartHandler,
 			expanding: expandingHandler,
 			expandEnd: expandEndHandler,
 			collapseStart: collapseStartHandler,
 			collapsing: collapsingHandler,
 			collapseEnd: collapseEndHandler
-		};
-		return collapseState[state]?.();
-	};
+		}),
+		[
+			expandStartHandler,
+			expandingHandler,
+			expandEndHandler,
+			collapseStartHandler,
+			collapsingHandler,
+			collapseEndHandler
+		]
+	);
+
+	const triggerHandler = (state) => collapseState[state]?.();
 
 	const { getCollapseProps, getToggleProps } = useCollapse({
-		isExpanded: isOpen,
+		isExpanded: isOpenState,
 		onTransitionStateChange: (state) => !disabled && triggerHandler(state)
 	});
 
 	const { iconNames = {}, color = '', position = '' } = { ...DEFAULT_TOGGLE_ICON, ...toggleIcon };
 
-	const handleClick = () => setIsOpen((prevOpenState) => !prevOpenState);
+	const handleClick = useCallback(() => setIsOpenState((prevOpenState) => !prevOpenState), []);
 
 	const togglePropsParams = {
 		...(!disabled && { onClick: handleClick })
@@ -50,22 +59,26 @@ const Collapse = ({
 
 	const buttonProps = {
 		className: 'collapse__collapseButton',
-		icon: isOpen
+		icon: isOpenState
 			? getIcon(iconNames?.opened) || 'minus_big_light'
 			: getIcon(iconNames?.closed) || 'plus_big_light',
 		iconColor: color,
 		disabled
 	};
 
+	useEffect(() => {
+		setIsOpenState(isOpen);
+	}, [isOpen]);
+
 	if (!renderHeader || !isFunction(renderHeader) || !renderContent || !isFunction(renderContent))
 		return null;
 
 	return (
-		<styled.Wrapper className="collapse" isOpen={isOpen}>
+		<styled.Wrapper className="collapse" isOpen={isOpenState}>
 			<styled.HeaderWrapper
 				className="collapse__header"
 				{...getToggleProps(togglePropsParams)}
-				isOpen={isOpen}
+				isOpen={isOpenState}
 				position={position}
 			>
 				<styled.CollapseButton {...buttonProps} />
@@ -84,7 +97,7 @@ Collapse.propTypes = {
 	/** Indica si el colapsable esta desabilitado o no */
 	disabled: PropTypes.bool,
 	/** Establece el estado inicial (abierto/cerrado) del colapsable al montarse */
-	isDefaultOpen: PropTypes.bool,
+	isOpen: PropTypes.bool,
 	/** Funcion que se ejecuta para renderizar el encabezado del colapsable */
 	renderHeader: PropTypes.func,
 	/** Funcion que se ejecuta para renderizar el contenido del colapsable */
@@ -114,4 +127,4 @@ Collapse.propTypes = {
 	collapseEndHandler: PropTypes.func
 };
 
-export default Collapse;
+export default React.memo(Collapse);
