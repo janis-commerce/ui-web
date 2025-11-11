@@ -96,7 +96,7 @@ const Collapse = ({
 Collapse.propTypes = {
 	/** Indica si el colapsable esta desabilitado o no */
 	disabled: PropTypes.bool,
-	/** Establece el estado inicial (abierto/cerrado) del colapsable al montarse */
+	/** Controla el estado (abierto/cerrado) del colapsable */
 	isOpen: PropTypes.bool,
 	/** Funcion que se ejecuta para renderizar el encabezado del colapsable */
 	renderHeader: PropTypes.func,
