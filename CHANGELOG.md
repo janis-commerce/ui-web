@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.4.0] - 2025-11-12
+
+### Added
+
+- Collapser component and associated styles and stories
+- react-collapsed dependency
+- isFunction utility exported from utils
+
+### Changed
+
+- Storybook config updated to support .mjs files
+- components index updated to export Collapser
+
 ## [1.3.0] - 2025-10-29
 
 ### Added
