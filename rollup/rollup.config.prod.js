@@ -27,6 +27,13 @@ export default [
 
 					return {
 						main: 'index.umd.js',
+						module: 'index.esm.js',
+						exports: {
+							'.': {
+								import: './index.esm.js',
+								require: './index.umd.js'
+							}
+						},
 						name,
 						homepage,
 						bugs,
