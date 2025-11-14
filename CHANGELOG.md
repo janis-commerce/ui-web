@@ -7,6 +7,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.5.0-beta.1] - 2025-11-14
+
+### Fixed
+
+- Webpack 5 compatibility: added explicit `require` mapping in package.json exports field
+- Peer dependencies version conflicts: updated React/React-DOM to support `^16.8.0 || ^17.0.0 || ^18.0.0` (previously `>= 17.x` syntax was invalid)
+
+### Changed
+
+- package.json: added `module` field for better tree-shaking support
+- package.json exports: now provides both `import` (ESM) and `require` (CommonJS) mappings
+- rollup config: dist/package.json now includes `module` and `exports` fields for consistency
+- GitHub Actions workflows: updated Node.js versions from 12.x/14.x (EOL) to 18.x/20.x (LTS)
+- GitHub Actions: updated all action versions from v1/v2 to v4
+- GitHub Actions: added yarn cache to improve CI/CD performance
+
+### Added
+
+- npm-publish-beta workflow for pre-release tags (_-beta_, _-alpha_, _-rc_)
+
 ## [1.4.0] - 2025-11-12
 
 ### Added
