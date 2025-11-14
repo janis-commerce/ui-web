@@ -1,12 +1,11 @@
-name: NPM Publish
+name: NPM Publish Beta
 
 on:
   push:
     tags:
-      - '*'
-      - '!*-beta*'
-      - '!*-alpha*'
-      - '!*-rc*'
+      - '*-beta*'
+      - '*-alpha*'
+      - '*-rc*'
 
 jobs:
   build:
