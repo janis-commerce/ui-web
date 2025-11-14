@@ -2,16 +2,20 @@ name: NPM Publish
 
 on:
   push:
-    tags: ['*']
+    tags:
+      - '*'
+      - '!*-beta*'
+      - '!*-alpha*'
+      - '!*-rc*'
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14.x
+          node-version: 18.x
       - run: yarn
       - run: yarn test
       - run: yarn build
@@ -21,10 +25,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 14.x
+          node-version: 18.x
           registry-url: https://registry.npmjs.org/
       - run: yarn
       - run: yarn build
@@ -33,7 +37,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
           SLACK_WEBHOOK: ${{secrets.slack_webhook}}
-          
+
   build-and-deploy-storybooks:
     needs: publish-npm
     runs-on: ubuntu-latest
@@ -53,12 +57,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-           fetch-depth: 0
+          fetch-depth: 0
 
       - name: Setup Node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '18'
 
       - name: Deploy to GitHub Pages
         id: deployment
