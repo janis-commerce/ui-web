@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.5.0-beta.2] - 2025-11-14
+
+### Fixed
+
+- react-collapsed dependency conflict: moved from peerDependencies to dependencies and bundled to avoid version conflicts with consuming projects
+
+### Changed
+
+- react-collapsed: now bundled within ui-web to prevent conflicts with projects using different versions (v3.x vs v4.x)
+- rollup config: excludes bundled dependencies (react-collapsed) from dist/package.json
+
 ## [1.5.0-beta.1] - 2025-11-14
 
 ### Fixed
