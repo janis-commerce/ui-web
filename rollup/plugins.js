@@ -12,7 +12,8 @@ export default (env) => [
 	babel({
 		babelHelpers: 'bundled',
 		exclude: /node_modules\/(?!react-collapsed)/,
-		extensions: ['.js', '.jsx'],
+		include: [/node_modules\/react-collapsed/, /src/],
+		extensions: ['.js', '.jsx', '.mjs'],
 		presets: [
 			'@babel/preset-react',
 			[
@@ -27,16 +28,20 @@ export default (env) => [
 			]
 		],
 		plugins: [
-			'@babel/plugin-proposal-optional-chaining',
-			'@babel/plugin-proposal-nullish-coalescing-operator',
+			'@babel/plugin-transform-optional-chaining',
+			'@babel/plugin-transform-nullish-coalescing-operator',
 			'babel-plugin-styled-components',
 			env === 'production' && 'babel-plugin-transform-react-remove-prop-types'
-		].filter(Boolean)
+		].filter(Boolean),
+		babelrc: false,
+		configFile: false
 	}),
 	nodeResolve({
 		moduleDirectories: ['node_modules', 'src'],
 		extensions: ['.js', '.jsx']
 	}),
-	commonjs({ exclude: ['node_modules'] }),
+	commonjs({
+		transformMixedEsModules: true
+	}),
 	json()
 ];
