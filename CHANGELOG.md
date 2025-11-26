@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Changed
+
+- Node version reverted from 20 to 14 to maintain compatibility with projects not yet migrated
+
 ## [1.5.0-beta.7] - 2025-11-26
 
 ### Fixed
