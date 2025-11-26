@@ -25,9 +25,6 @@ export default [
 				baseContents: (pkg) => {
 					const { name, homepage, bugs, repository, version, dependencies, peerDependencies } = pkg;
 
-					// Remove react-collapsed from dependencies since it's bundled
-					const { 'react-collapsed': _removed, ...filteredDeps } = dependencies;
-
 					return {
 						main: 'index.umd.js',
 						module: 'index.esm.js',
@@ -42,7 +39,7 @@ export default [
 						bugs,
 						repository,
 						version,
-						dependencies: filteredDeps,
+						dependencies,
 						peerDependencies
 					};
 				}

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.5.0-beta.6] - 2025-11-26
+
+### Fixed
+
+- react-collapsed dependency: restored as regular dependency in dist/package.json to ensure consuming projects have access to the library
+
 ## [1.5.0-beta.5] - 2025-11-20
 
 ### Changed
