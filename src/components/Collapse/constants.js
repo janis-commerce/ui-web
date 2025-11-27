@@ -2,7 +2,9 @@ export const AVAILABLE_ICONS = [
 	'minus_big_light',
 	'plus_big_light',
 	'arrow_down_flat',
-	'arrow_up_flat'
+	'arrow_up_flat',
+	'chevron_down',
+	'chevron_up'
 ];
 
 export const DEFAULT_TOGGLE_ICON = {

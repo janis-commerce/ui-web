@@ -25,7 +25,7 @@ export default {
 			name: 'Closed',
 			description: 'Nombre del icono cuando está cerrado',
 			control: 'select',
-			options: ['plus_big_light', 'arrow_down_flat'],
+			options: ['plus_big_light', 'arrow_down_flat', 'chevron_down'],
 			table: {
 				category: 'toggleIcon',
 				subcategory: 'iconNames'
@@ -35,7 +35,7 @@ export default {
 			name: 'Opened',
 			control: 'select',
 			description: 'Nombre del icono cuando está abierto',
-			options: ['minus_big_light', 'arrow_up_flat'],
+			options: ['minus_big_light', 'arrow_up_flat', 'chevron_up'],
 			table: {
 				category: 'toggleIcon',
 				subcategory: 'iconNames'
