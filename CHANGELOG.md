@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+## [1.5.0] - 2025-11-27
+
+- Added `chevron_down` and `chevron_up` icons as available options for Collapse component toggle icons
+
 ## [1.4.0] - 2025-11-12
 
 ### Added
