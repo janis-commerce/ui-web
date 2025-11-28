@@ -12,6 +12,72 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [1.5.0] - 2025-11-27
 
 - Added `chevron_down` and `chevron_up` icons as available options for Collapse component toggle icons
+## [1.5.0-beta.8] - 2025-11-26
+
+### Changed
+
+- Node version reverted from 20 to 14 to maintain compatibility with projects not yet migrated
+
+## [1.5.0-beta.7] - 2025-11-26
+
+### Fixed
+
+- Package structure: removed duplicate package.json generation in dist folder to avoid conflicts when publishing
+
+## [1.5.0-beta.6] - 2025-11-26
+
+### Fixed
+
+- react-collapsed dependency: restored as regular dependency to ensure consuming projects have access to the library
+
+## [1.5.0-beta.5] - 2025-11-20
+
+### Changed
+
+- Node version from 14 to 20
+
+## [1.5.0-beta.4] - 2025-11-20
+
+### Fixed
+
+- Add mjs extension in plugins
+
+## [1.5.0-beta.3] - 2025-11-20
+
+### Fixed
+
+- Error optional chain with plugins
+
+## [1.5.0-beta.2] - 2025-11-14
+
+### Fixed
+
+- react-collapsed dependency conflict: moved from peerDependencies to dependencies and bundled to avoid version conflicts with consuming projects
+
+### Changed
+
+- react-collapsed: now bundled within ui-web to prevent conflicts with projects using different versions (v3.x vs v4.x)
+- rollup config: excludes bundled dependencies (react-collapsed) from dist/package.json
+
+## [1.5.0-beta.1] - 2025-11-14
+
+### Fixed
+
+- Webpack 5 compatibility: added explicit `require` mapping in package.json exports field
+- Peer dependencies version conflicts: updated React/React-DOM to support `^16.8.0 || ^17.0.0 || ^18.0.0` (previously `>= 17.x` syntax was invalid)
+
+### Changed
+
+- package.json: added `module` field for better tree-shaking support
+- package.json exports: now provides both `import` (ESM) and `require` (CommonJS) mappings
+- rollup config: dist/package.json now includes `module` and `exports` fields for consistency
+- GitHub Actions workflows: updated Node.js versions from 12.x/14.x (EOL) to 18.x/20.x (LTS)
+- GitHub Actions: updated all action versions from v1/v2 to v4
+- GitHub Actions: added yarn cache to improve CI/CD performance
+
+### Added
+
+- npm-publish-beta workflow for pre-release tags (_-beta_, _-alpha_, _-rc_)
 
 ## [1.4.0] - 2025-11-12
 

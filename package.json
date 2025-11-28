@@ -3,9 +3,11 @@
 	"version": "1.5.0",
 	"description": "",
 	"main": "dist/index.umd.js",
+	"module": "dist/index.esm.js",
 	"exports": {
 		".": {
-			"import": "dist/index.esm.js"
+			"import": "./dist/index.esm.js",
+			"require": "./dist/index.umd.js"
 		}
 	},
 	"private": false,
@@ -32,10 +34,16 @@
 		"url": "https://github.com/janis-commerce/ui-web/issues"
 	},
 	"homepage": "https://github.com/janis-commerce/ui-web#readme",
+	"engines": {
+		"node": ">=14.0.0",
+		"yarn": ">=1.22.0"
+	},
 	"devDependencies": {
 		"@babel/core": "^7.15.0",
 		"@babel/eslint-parser": "^7.14.3",
 		"@babel/eslint-plugin": "^7.13.16",
+		"@babel/plugin-transform-nullish-coalescing-operator": "^7.23.0",
+		"@babel/plugin-transform-optional-chaining": "^7.23.0",
 		"@babel/preset-env": "^7.15.0",
 		"@babel/preset-react": "^7.13.13",
 		"@rollup/plugin-babel": "^5.3.0",
@@ -66,7 +74,6 @@
 		"jest-styled-components": "^7.0.5",
 		"prettier": "^2.3.0",
 		"react": "17.x",
-		"react-collapsed": "^4.2.0",
 		"react-dom": "17.x",
 		"react-test-renderer": "^17.0.2",
 		"rollup": "^2.48.0",
@@ -109,9 +116,8 @@
 		"testEnvironment": "jsdom"
 	},
 	"peerDependencies": {
-		"react": ">= 17.x",
-		"react-dom": ">= 17.x",
-		"react-collapsed": "^4.2.0",
+		"react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+		"react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
 		"styled-components": ">= 5.3.0"
 	},
 	"babel": {
@@ -128,6 +134,7 @@
 		"@react-google-maps/api": "2.7.0",
 		"prop-types": "^15.7.2",
 		"qrcode.react": "^3.0.2",
+		"react-collapsed": "^4.2.0",
 		"react-colorful": "^5.5.1",
 		"react-frame-component": "^5.2.3",
 		"svgpath": "^2.5.0"
