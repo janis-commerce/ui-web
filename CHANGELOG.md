@@ -7,11 +7,36 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.6.0] - 2025-11-28
+
 ### Added
+
+- npm-publish-beta workflow for pre-release tags (_-beta_, _-alpha_, _-rc_)
+
+### Changed
+
+- Webpack 5 compatibility: added explicit `require` mapping in package.json exports field
+- Peer dependencies: updated React/React-DOM to support `^16.8.0 || ^17.0.0 || ^18.0.0`
+- package.json: added `module` field for better tree-shaking support
+- package.json exports: now provides both `import` (ESM) and `require` (CommonJS) mappings
+- rollup config: dist/package.json now includes `module` and `exports` fields for consistency
+- GitHub Actions workflows: updated Node.js versions from 12.x/14.x (EOL) to 18.x/20.x (LTS)
+- GitHub Actions: updated all action versions from v1/v2 to v4
+- GitHub Actions: added yarn cache to improve CI/CD performance
+- react-collapsed: now bundled within ui-web to prevent version conflicts with consuming projects
+- rollup config: excludes bundled dependencies from dist/package.json
+
+### Fixed
+
+- react-collapsed dependency: moved from peerDependencies to dependencies and bundled to avoid version conflicts
+- Package structure: removed duplicate package.json generation in dist folder to avoid conflicts when publishing
+- Error optional chain with plugins
+- Add mjs extension in plugins
 
 ## [1.5.0] - 2025-11-27
 
 - Added `chevron_down` and `chevron_up` icons as available options for Collapse component toggle icons
+
 ## [1.5.0-beta.8] - 2025-11-26
 
 ### Changed
