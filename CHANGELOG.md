@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.7.0-beta.2] - 2026-01-06
+
+### Added
+
+- ref to wrapper element in Collapse component, data-is-opened attribute to handle Collapse opening and closing
+
 ## [1.6.0-beta.1] - 2026-01-06
 
 ### Added
