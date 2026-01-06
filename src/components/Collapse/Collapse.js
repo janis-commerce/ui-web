@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useCollapse } from 'react-collapsed';
 import { isFunction } from 'utils';
@@ -21,13 +21,14 @@ const Collapse = ({
 	collapsingHandler = () => {},
 	collapseEndHandler = () => {}
 }) => {
+	const collapseRef = useRef(null);
 	const [isOpenState, setIsOpenState] = useState(isOpen);
-	const [isExpanding, setIsExpanding] = useState(isOpenState);
 
-	const collapseState = useMemo(
-		() => ({
+	const collapseState = useMemo(() => {
+		const collapseElement = collapseRef.current;
+		return {
 			expandStart: () => {
-				setIsExpanding(true);
+				collapseElement.setAttribute('data-is-opened', true);
 				expandStartHandler();
 			},
 			expanding: expandingHandler,
@@ -36,18 +37,17 @@ const Collapse = ({
 			collapsing: collapsingHandler,
 			collapseEnd: () => {
 				collapseEndHandler();
-				setIsExpanding(false);
+				collapseElement.setAttribute('data-is-opened', false);
 			}
-		}),
-		[
-			expandStartHandler,
-			expandingHandler,
-			expandEndHandler,
-			collapseStartHandler,
-			collapsingHandler,
-			collapseEndHandler
-		]
-	);
+		};
+	}, [
+		expandStartHandler,
+		expandingHandler,
+		expandEndHandler,
+		collapseStartHandler,
+		collapsingHandler,
+		collapseEndHandler
+	]);
 
 	const triggerHandler = (state) => collapseState[state]?.();
 
@@ -74,6 +74,7 @@ const Collapse = ({
 	};
 
 	useEffect(() => {
+		collapseRef.current.setAttribute('data-is-opened', isOpenState);
 		setIsOpenState(isOpen);
 	}, [isOpen]);
 
@@ -81,7 +82,7 @@ const Collapse = ({
 		return null;
 
 	return (
-		<styled.Wrapper className="collapse" data-is-expanding={isExpanding}>
+		<styled.Wrapper className="collapse" ref={collapseRef}>
 			<styled.HeaderWrapper
 				className="collapse__header"
 				{...getToggleProps(togglePropsParams)}
