@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.6.0-beta.1] - 2026-01-06
+
+### Added
+
+- isExpanding state, data-is-expanding attribute to Collapse component
+
 ## [1.6.0] - 2025-11-28
 
 ### Added
