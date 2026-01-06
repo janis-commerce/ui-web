@@ -22,15 +22,22 @@ const Collapse = ({
 	collapseEndHandler = () => {}
 }) => {
 	const [isOpenState, setIsOpenState] = useState(isOpen);
+	const [isExpanding, setIsExpanding] = useState(isOpenState);
 
 	const collapseState = useMemo(
 		() => ({
-			expandStart: expandStartHandler,
+			expandStart: () => {
+				setIsExpanding(true);
+				expandStartHandler();
+			},
 			expanding: expandingHandler,
 			expandEnd: expandEndHandler,
 			collapseStart: collapseStartHandler,
 			collapsing: collapsingHandler,
-			collapseEnd: collapseEndHandler
+			collapseEnd: () => {
+				collapseEndHandler();
+				setIsExpanding(false);
+			}
 		}),
 		[
 			expandStartHandler,
@@ -74,11 +81,10 @@ const Collapse = ({
 		return null;
 
 	return (
-		<styled.Wrapper className="collapse" isOpen={isOpenState}>
+		<styled.Wrapper className="collapse" data-is-expanding={isExpanding}>
 			<styled.HeaderWrapper
 				className="collapse__header"
 				{...getToggleProps(togglePropsParams)}
-				isOpen={isOpenState}
 				position={position}
 			>
 				<styled.CollapseButton {...buttonProps} />
