@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { useCollapse } from 'react-collapsed';
 import { isFunction } from 'utils';
@@ -21,16 +21,23 @@ const Collapse = ({
 	collapsingHandler = () => {},
 	collapseEndHandler = () => {}
 }) => {
+	const collapseRef = useRef(null);
 	const [isOpenState, setIsOpenState] = useState(isOpen);
 
 	const collapseState = useMemo(
 		() => ({
-			expandStart: expandStartHandler,
+			expandStart: () => {
+				collapseRef.current?.setAttribute('data-is-opened', true);
+				expandStartHandler();
+			},
 			expanding: expandingHandler,
 			expandEnd: expandEndHandler,
 			collapseStart: collapseStartHandler,
 			collapsing: collapsingHandler,
-			collapseEnd: collapseEndHandler
+			collapseEnd: () => {
+				collapseEndHandler();
+				collapseRef.current?.setAttribute('data-is-opened', false);
+			}
 		}),
 		[
 			expandStartHandler,
@@ -67,6 +74,7 @@ const Collapse = ({
 	};
 
 	useEffect(() => {
+		collapseRef.current?.setAttribute('data-is-opened', isOpen);
 		setIsOpenState(isOpen);
 	}, [isOpen]);
 
@@ -74,11 +82,10 @@ const Collapse = ({
 		return null;
 
 	return (
-		<styled.Wrapper className="collapse" isOpen={isOpenState}>
+		<styled.Wrapper className="collapse" ref={collapseRef}>
 			<styled.HeaderWrapper
 				className="collapse__header"
 				{...getToggleProps(togglePropsParams)}
-				isOpen={isOpenState}
 				position={position}
 			>
 				<styled.CollapseButton {...buttonProps} />
