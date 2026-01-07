@@ -24,11 +24,10 @@ const Collapse = ({
 	const collapseRef = useRef(null);
 	const [isOpenState, setIsOpenState] = useState(isOpen);
 
-	const collapseState = useMemo(() => {
-		const collapseElement = collapseRef.current;
-		return {
+	const collapseState = useMemo(
+		() => ({
 			expandStart: () => {
-				collapseElement.setAttribute('data-is-opened', true);
+				collapseRef.current?.setAttribute('data-is-opened', true);
 				expandStartHandler();
 			},
 			expanding: expandingHandler,
@@ -37,17 +36,18 @@ const Collapse = ({
 			collapsing: collapsingHandler,
 			collapseEnd: () => {
 				collapseEndHandler();
-				collapseElement.setAttribute('data-is-opened', false);
+				collapseRef.current?.setAttribute('data-is-opened', false);
 			}
-		};
-	}, [
-		expandStartHandler,
-		expandingHandler,
-		expandEndHandler,
-		collapseStartHandler,
-		collapsingHandler,
-		collapseEndHandler
-	]);
+		}),
+		[
+			expandStartHandler,
+			expandingHandler,
+			expandEndHandler,
+			collapseStartHandler,
+			collapsingHandler,
+			collapseEndHandler
+		]
+	);
 
 	const triggerHandler = (state) => collapseState[state]?.();
 
@@ -74,7 +74,7 @@ const Collapse = ({
 	};
 
 	useEffect(() => {
-		collapseRef.current.setAttribute('data-is-opened', isOpenState);
+		collapseRef.current?.setAttribute('data-is-opened', isOpen);
 		setIsOpenState(isOpen);
 	}, [isOpen]);
 
