@@ -27,7 +27,7 @@ const Collapse = ({
 	const collapseState = useMemo(
 		() => ({
 			expandStart: () => {
-				collapseRef.current?.setAttribute('data-is-opened', 'true');
+				collapseRef.current?.setAttribute('data-is-opened', String(true));
 				expandStartHandler();
 			},
 			expanding: expandingHandler,
@@ -36,7 +36,7 @@ const Collapse = ({
 			collapsing: collapsingHandler,
 			collapseEnd: () => {
 				collapseEndHandler();
-				collapseRef.current?.setAttribute('data-is-opened', 'false');
+				collapseRef.current?.setAttribute('data-is-opened', String(false));
 			}
 		}),
 		[
