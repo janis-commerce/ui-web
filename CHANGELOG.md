@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.7.0] - 2026-01-12
+
+### Added
+
+- ref to wrapper element in Collapse component
+- data-is-opened attribute to handle Collapse opening and closing states dynamically
+
+### Changed
+
+- Refactored collapseState useMemo to include data-is-opened attribute updates in expandStart and collapseEnd handlers
+- Removed isOpen prop from styled.Wrapper and styled.HeaderWrapper components in favor of data-is-opened attribute
+
 ## [1.6.0] - 2025-11-28
 
 ### Added
