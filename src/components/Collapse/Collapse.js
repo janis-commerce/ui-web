@@ -74,7 +74,7 @@ const Collapse = ({
 	};
 
 	useEffect(() => {
-		collapseRef.current?.setAttribute('data-is-opened', String(isOpen));
+		if (collapseRef.current) collapseRef.current?.setAttribute('data-is-opened', String(isOpen));
 		setIsOpenState(isOpen);
 	}, [isOpen]);
 
