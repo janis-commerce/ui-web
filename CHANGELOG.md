@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.8.0] - 2026-02-03
+
+### Added:
+
+- brush icon
+
 ## [1.7.0] - 2026-01-12
 
 ### Added
