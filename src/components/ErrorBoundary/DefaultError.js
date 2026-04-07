@@ -5,14 +5,12 @@ import styled from './styles';
 const DefaultError = ({ message }) => (
 	<styled.Wrapper>
 		<styled.Icon name="exclamation_circle" color="statusRed" />
-		<p color="statusRed" fontSize="baseSmall">
-			{message}
-		</p>
+		<styled.Message>{message}</styled.Message>
 	</styled.Wrapper>
 );
 
 DefaultError.defaultProps = {
-	message: 'something went wrong error'
+	message: 'Something went wrong'
 };
 
 DefaultError.propTypes = {

@@ -2,13 +2,14 @@ import React from 'react';
 import { element, string, arrayOf, oneOfType } from 'prop-types';
 import DefaultError from './DefaultError';
 
+/** Class boundary: React has no hook equivalent to componentDidCatch / getDerivedStateFromError; a functional wrapper may be evaluated later (JMV-4037). */
 export default class ErrorBoundary extends React.Component {
 	static propTypes = {
 		/** The content to be displayed */
 		children: oneOfType([element, arrayOf(element)]),
 		/** Custom content to show in case there is an error */
 		errorContent: element,
-		/** Text to display in a simple error message */
+		/** Final user-visible error string (opaque). The package does not translate or resolve i18n keys — pass already-resolved text or use errorContent. */
 		message: string
 	};
 
