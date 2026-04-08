@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.9.0-beta.1] - 2026-04-08
+
+### Added
+
+- ErrorBoundary component story
+
+### Changed
+
+- ErrorBoundary component to consolidate it and use it from outside
+
 ## [1.8.0] - 2026-02-03
 
 ### Added:
