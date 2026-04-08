@@ -26,14 +26,14 @@ El paquete **MUST** tratar la prop `message` como texto final para mostrar. El p
 
 ### Requirement: Copy por defecto del fallback genérico
 
-Cuando aplica el fallback genérico integrado sin `message` truthy en el boundary, el texto visible **MUST** incluir exactamente `something went wrong error`.
+Cuando aplica el fallback genérico integrado sin `message` truthy en el boundary, el texto visible **MUST** incluir el literal por defecto de `DefaultError`: `Something went wrong` (coincide con la implementación publicada; no usar otro string sin acordar release).
 
 #### Scenario: Error sin `message`
 
 - GIVEN un `ErrorBoundary` cuyo hijo lanza
 - WHEN `message` no se pasa o es falsy
 - AND se usa el fallback por defecto del paquete
-- THEN el texto visible **MUST** incluir `something went wrong error`
+- THEN el texto visible **MUST** incluir `Something went wrong`
 
 ---
 

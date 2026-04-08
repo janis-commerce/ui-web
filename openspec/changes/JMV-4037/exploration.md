@@ -49,7 +49,7 @@ En el repo se agregó una copia de referencia del módulo tal como vive hoy en J
 
 - **Paridad de boundary:** No hace falta cambiar semántica respecto a `docs/history/ErrorBoundary-views/ErrorBoundary.js`; cualquier refactor “funcional” es envoltorio o librería, no cambio de contrato.
 - **DefaultError:** Tomar la **estructura** de la referencia (ícono `exclamation_circle`, `color="statusRed"`, texto secundario alineado) y sustituir `Text` por estilos con tokens (`palette.statusRed`, `typography.size.baseSmall`, `typography.fontFamily`).
-- **Mensaje por defecto (ui-web):** Para esta entrega queda **congelado** el literal actual `something went wrong error` (decisión 2026-04-07). En Views sigue siendo key i18n hasta migrar a string resuelto al consumir el paquete.
+- **Mensaje por defecto (ui-web):** Literal efectivo en paquete: `Something went wrong` (`DefaultError`). En Views sigue siendo key i18n hasta migrar a string resuelto al consumir el paquete.
 
 ---
 

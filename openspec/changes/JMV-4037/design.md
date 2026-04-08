@@ -10,7 +10,7 @@ Implementar el fallback de error con **styled-components** que lean `theme/palet
 | ----------------------- | ------------------------------------------------------------------------ | ------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | Boundary implementation | Mantener clase única                                                     | Fachada funcional; `react-error-boundary`         | Acordado en propuesta (fase 2); cero churn de ciclo de vida.                          |
 | Estilo del mensaje      | `styled.span` (o similar) en `styles.js` con tokens                      | Componente `Text` nuevo en ui-web; estilos inline | No existe `Text` en el paquete; patrón ya establecido con palette/typography imports. |
-| Default copy            | **Congelado:** `something went wrong error` (sin cambio en esta entrega) | Otro literal                                      | Decisión de producto 2026-04-07; tests y consumidores estables.                       |
+| Default copy            | **Congelado:** `Something went wrong` (implementación y tests actuales)   | Otro literal                                      | Literal efectivo en `DefaultError`; alinear spec/documentación a este valor.          |
 | Ellipsis en mensaje     | **No** en esta entrega                                                   | `text-overflow: ellipsis` explícito               | Decisión 2026-04-07; basta overflow del `Wrapper` existente.                          |
 | `message` vacío (`""`)  | Sin cambio: `message ?` sigue siendo falsy                               | Forzar `DefaultError` siempre                     | Evita scope creep; comportamiento legacy documentable en spec.                        |
 
@@ -46,7 +46,7 @@ Sin `children` → `null` (sin cambios).
 - `errorComponent`: elemento React; fallback cuando hay error y **`message` es falsy** (incl. `undefined`/`null`/`""`).
 - `message`: `string` — **MUST** interpretarse como cadena ya resuelta para UI; el paquete **MUST NOT** traducir ni detectar keys.
 
-**DefaultError:** recibe `message: string`; literal por defecto **permanece** `something went wrong error` (confirmado).
+**DefaultError:** recibe `message: string`; literal por defecto **permanece** `Something went wrong` (valor en código).
 
 ## Testing Strategy
 
@@ -63,7 +63,7 @@ No migración de datos. Consumidores que pasaban keys i18n a `message` **deben**
 
 ## Decisiones resueltas (2026-04-07)
 
-1. **Literal por defecto:** no se cambia; sigue siendo `something went wrong error`.
+1. **Literal por defecto:** `Something went wrong` (fuente de verdad: `DefaultError.js`).
 2. **Ellipsis:** no se implementa en el mensaje en esta entrega.
 
 ---

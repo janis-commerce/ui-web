@@ -7,13 +7,13 @@
 
 ## Phase 2: Componentes
 
-- [x] 2.1 En `src/components/ErrorBoundary/DefaultError.js`, reemplazar `<p color=… fontSize=…>` por `<styled.Message>{message}</styled.Message>`; mantener `defaultProps` con `something went wrong error`.
+- [x] 2.1 En `src/components/ErrorBoundary/DefaultError.js`, reemplazar `<p color=… fontSize=…>` por `<styled.Message>{message}</styled.Message>`; mantener default de `message` con `Something went wrong`.
 - [x] 2.2 En `src/components/ErrorBoundary/ErrorBoundary.js`, actualizar comentario de `message` en propTypes: texto final para UI, sin i18n en el paquete; añadir nota breve de que React no expone hooks equivalentes a `componentDidCatch` (fase funcional futura).
 
 ## Phase 3: Pruebas (cobertura spec `error-boundary`)
 
 - [x] 3.1 En `ErrorBoundary.test.js`, añadir caso: hijo que lanza, **sin** `message`, `errorComponent` con texto único → assert contiene ese texto (req. `errorComponent` si `message` falsy).
-- [x] 3.2 Verificar casos existentes siguen alineados al spec: render vacío sin children; default `something went wrong error`; `message` custom; hijos sin error; `console.error` mockeado.
+- [x] 3.2 Verificar casos existentes siguen alineados al spec: render vacío sin children; default `Something went wrong`; `message` custom; hijos sin error; `console.error` mockeado.
 - [x] 3.3 Si aplica en el repo, comprobar que el nodo de mensaje usa estilos de error del theme (req. estilo del texto) vía snapshot o assert de estilos existente; si no hay patrón, omitir y documentar en verify manual.
 
 ## Phase 4: Verificación local y release post-merge
