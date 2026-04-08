@@ -8,11 +8,11 @@
 
 ## Completeness
 
-| Métrica | Valor |
-|---------|-------|
-| Tasks total | 10 |
-| Tasks complete `[x]` | 8 |
-| Tasks incomplete `[ ]` | 2 |
+| Métrica                | Valor |
+| ---------------------- | ----- |
+| Tasks total            | 10    |
+| Tasks complete `[x]`   | 8     |
+| Tasks incomplete `[ ]` | 2     |
 
 **Pendientes (post-merge):** 4.1 `CHANGELOG.md`, 4.2 bump `package.json`.
 
@@ -31,8 +31,8 @@
 
 **Fallo:**
 
-| Suite | Test | Error |
-|-------|------|--------|
+| Suite                   | Test                                                                        | Error                                                                       |
+| ----------------------- | --------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | `ErrorBoundary.test.js` | `should render an error message if there's an error in its child component` | `toMatch('something went wrong error')` — recibido `"Something went wrong"` |
 
 **Causa observada:** `DefaultError.defaultProps.message` en `src/components/ErrorBoundary/DefaultError.js` es **`'Something went wrong'`**, mientras el spec, tareas y test esperan el literal **`something went wrong error`** (decisión de producto documentada).
@@ -43,16 +43,16 @@
 
 ## Spec compliance matrix
 
-| Requisito | Escenario | Test | Resultado |
-|-----------|-----------|------|-----------|
-| Semántica opaca `message` | Mensaje personalizado tras error | should render an custom error message… | ✅ COMPLIANT (pasó) |
-| Semántica opaca `message` | Cadena tipo key sin resolución | (sin test dedicado) | ⚠️ PARTIAL |
-| Copy por defecto | Error sin `message` | should render an error message… | ❌ **FAILING** (assert vs default actual) |
-| `errorContent` si `message` falsy | Fallback custom | should render custom errorContent… | ✅ COMPLIANT |
-| Sin hijos | Mount sin children | should not render if no child… | ✅ COMPLIANT |
-| Sin error | Árbol estable | should render the provided children… | ✅ COMPLIANT |
-| Estilo del texto (theme) | Mensaje por defecto estilizado | DefaultError message uses package theme… | ✅ COMPLIANT (pasó) |
-| Sin ellipsis | Sin ellipsis requerida | estático + sin `ellipsis` en `Message` | ⚠️ PARTIAL (sin aserción automática) |
+| Requisito                           | Escenario                        | Test                                     | Resultado                                 |
+| ----------------------------------- | -------------------------------- | ---------------------------------------- | ----------------------------------------- |
+| Semántica opaca `message`           | Mensaje personalizado tras error | should render an custom error message…   | ✅ COMPLIANT (pasó)                       |
+| Semántica opaca `message`           | Cadena tipo key sin resolución   | (sin test dedicado)                      | ⚠️ PARTIAL                                |
+| Copy por defecto                    | Error sin `message`              | should render an error message…          | ❌ **FAILING** (assert vs default actual) |
+| `errorComponent` si `message` falsy | Fallback custom                  | should render custom errorComponent…     | ✅ COMPLIANT                              |
+| Sin hijos                           | Mount sin children               | should not render if no child…           | ✅ COMPLIANT                              |
+| Sin error                           | Árbol estable                    | should render the provided children…     | ✅ COMPLIANT                              |
+| Estilo del texto (theme)            | Mensaje por defecto estilizado   | DefaultError message uses package theme… | ✅ COMPLIANT (pasó)                       |
+| Sin ellipsis                        | Sin ellipsis requerida           | estático + sin `ellipsis` en `Message`   | ⚠️ PARTIAL (sin aserción automática)      |
 
 **Resumen:** 1 escenario con evidencia de test **en rojo**; 5 ✅; 2 ⚠️ parciales.
 
@@ -60,20 +60,20 @@
 
 ## Correctness (estático)
 
-| Tema | Estado | Notas |
-|------|--------|--------|
-| Tokens en `Message` | ✅ | `palette` + `typography` en `styles.js` |
-| Contrato `message` en propTypes | ✅ | Comentario opaco / sin i18n |
-| Literal default vs spec | ❌ | Desalineación: código ≠ spec/tests |
+| Tema                            | Estado | Notas                                   |
+| ------------------------------- | ------ | --------------------------------------- |
+| Tokens en `Message`             | ✅     | `palette` + `typography` en `styles.js` |
+| Contrato `message` en propTypes | ✅     | Comentario opaco / sin i18n             |
+| Literal default vs spec         | ❌     | Desalineación: código ≠ spec/tests      |
 
 ---
 
 ## Coherence (design)
 
-| Decisión | ¿Seguida? | Notas |
-|----------|-----------|--------|
-| Copy default congelado `something went wrong error` | ⚠️ **No** | En código figura `Something went wrong` |
-| Resto del diseño | ✅ | Clase, tokens, sin ellipsis en `Message` |
+| Decisión                                            | ¿Seguida? | Notas                                    |
+| --------------------------------------------------- | --------- | ---------------------------------------- |
+| Copy default congelado `something went wrong error` | ⚠️ **No** | En código figura `Something went wrong`  |
+| Resto del diseño                                    | ✅        | Clase, tokens, sin ellipsis en `Message` |
 
 ---
 

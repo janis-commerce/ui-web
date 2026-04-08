@@ -37,13 +37,13 @@ Cuando aplica el fallback genérico integrado sin `message` truthy en el boundar
 
 ---
 
-### Requirement: `errorContent` si `message` es falsy
+### Requirement: `errorComponent` si `message` es falsy
 
-Si el hijo lanza y `message` es falsy, el paquete **MUST** renderizar el `errorContent` suministrado por el consumidor según el contrato del boundary.
+Si el hijo lanza y `message` es falsy, el paquete **MUST** renderizar el `errorComponent` suministrado por el consumidor según el contrato del boundary.
 
 #### Scenario: Fallback custom
 
-- GIVEN `errorContent` con un texto único reconocible
+- GIVEN `errorComponent` con un texto único reconocible
 - AND no hay `message` truthy
 - WHEN el hijo lanza
 - THEN el resultado **MUST** contener ese texto único
@@ -98,7 +98,7 @@ El contrato del fallback compacto por defecto **MUST NOT** incluir, en esta entr
 
 ---
 
-| Métrica | Valor |
-|---------|-------|
-| Requisitos | 7 |
-| Escenarios | 9 |
+| Métrica    | Valor |
+| ---------- | ----- |
+| Requisitos | 7     |
+| Escenarios | 9     |

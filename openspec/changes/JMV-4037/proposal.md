@@ -10,7 +10,7 @@ Alinear `@janiscommerce/ui-web` con [JMV-4037](https://janiscommerce.atlassian.n
 
 - `DefaultError`: texto con `theme/palette` + `theme/typography` (layout como `docs/history/ErrorBoundary-views/`), sin `<p>` con props inválidas.
 - `ErrorBoundary.js`: clase sin refactor estructural; propTypes/comentarios: `message` lista para mostrar; nota breve (React sin hooks para `componentDidCatch`).
-- Tests: añadir `errorContent` custom; `console.error` muteado donde ya aplica.
+- Tests: añadir `errorComponent` custom; `console.error` muteado donde ya aplica.
 - CHANGELOG y bump de `package.json` **después** de merge del PR a `master` (no en la rama de feature).
 
 ### Out of Scope
@@ -25,20 +25,20 @@ Sin dependencias nuevas: corregir presentación y contrato documentado; semánti
 
 ## Affected Areas
 
-| Area | Impact | Description |
-|------|--------|-------------|
-| `ErrorBoundary/DefaultError.js` | Modified | Tokens theme. |
-| `ErrorBoundary/styles.js` | Modified | Estilo del mensaje si hace falta. |
-| `ErrorBoundary/ErrorBoundary.js` | Modified | Docs propTypes + nota fase 2. |
-| `ErrorBoundary/ErrorBoundary.test.js` | Modified | Caso `errorContent`. |
-| `CHANGELOG.md`, `package.json` | Modified (post-merge `master`) | Entrada y semver tras PR aprobado. |
+| Area                                  | Impact                         | Description                        |
+| ------------------------------------- | ------------------------------ | ---------------------------------- |
+| `ErrorBoundary/DefaultError.js`       | Modified                       | Tokens theme.                      |
+| `ErrorBoundary/styles.js`             | Modified                       | Estilo del mensaje si hace falta.  |
+| `ErrorBoundary/ErrorBoundary.js`      | Modified                       | Docs propTypes + nota fase 2.      |
+| `ErrorBoundary/ErrorBoundary.test.js` | Modified                       | Caso `errorComponent`.             |
+| `CHANGELOG.md`, `package.json`        | Modified (post-merge `master`) | Entrada y semver tras PR aprobado. |
 
 ## Risks
 
-| Risk | L | Mitigation |
-|------|---|------------|
+| Risk                             | L    | Mitigation                                                       |
+| -------------------------------- | ---- | ---------------------------------------------------------------- |
 | Copy default cambia expectativas | Baja | Literal congelado; solo riesgo si alguien lo cambia sin acuerdo. |
-| Apps pasan keys a `message` | M | Doc contrato; migración Views aparte. |
+| Apps pasan keys a `message`      | M    | Doc contrato; migración Views aparte.                            |
 
 ## Rollback Plan
 
@@ -52,6 +52,6 @@ Publicar ui-web antes de bump/import en Janis Views.
 
 - [ ] `DefaultError` con theme; sin props HTML inválidas en el texto.
 - [ ] `message` documentada como string opaca; boundary en clase con nota sobre futuro funcional.
-- [ ] Tests: sin children; error default; `message` custom; **`errorContent`**; OK sin error; `console.error` acotado.
+- [ ] Tests: sin children; error default; `message` custom; **`errorComponent`**; OK sin error; `console.error` acotado.
 - [ ] `yarn test` + `yarn build` OK en la rama del PR.
 - [ ] Tras merge a `master`: `CHANGELOG.md` + versión en `package.json` actualizados y publicación npm según flujo del equipo.

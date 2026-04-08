@@ -2,22 +2,22 @@
 
 ### Fuente Jira
 
-| Campo | Valor |
-|--------|--------|
-| **Issue** | [JMV-4037](https://janiscommerce.atlassian.net/browse/JMV-4037) |
-| **Título** | Consolidar ErrorBoundary en ui-web |
-| **Proyecto** | JMV (Janis Views) |
-| **Épica** | [JMV-3949](https://janiscommerce.atlassian.net/browse/JMV-3949) — Deuda Técnica |
-| **Tipo** | Historia |
+| Campo        | Valor                                                                           |
+| ------------ | ------------------------------------------------------------------------------- |
+| **Issue**    | [JMV-4037](https://janiscommerce.atlassian.net/browse/JMV-4037)                 |
+| **Título**   | Consolidar ErrorBoundary en ui-web                                              |
+| **Proyecto** | JMV (Janis Views)                                                               |
+| **Épica**    | [JMV-3949](https://janiscommerce.atlassian.net/browse/JMV-3949) — Deuda Técnica |
+| **Tipo**     | Historia                                                                        |
 
-**Objetivo (ticket):** El ErrorBoundary oficial vive en `@janiscommerce/ui-web`, con contrato genérico: `message` como string opaca (lista para mostrar), `errorContent` para UI custom, `DefaultError` corregido con tipografía del theme del paquete, y refactor hacia enfoque funcional/legible respetando las limitaciones de los error boundaries en React.
+**Objetivo (ticket):** El ErrorBoundary oficial vive en `@janiscommerce/ui-web`, con contrato genérico: `message` como string opaca (lista para mostrar), `errorComponent` para UI custom, `DefaultError` corregido con tipografía del theme del paquete, y refactor hacia enfoque funcional/legible respetando las limitaciones de los error boundaries en React.
 
 **Criterios de aceptación (ticket):**
 
-- Comparación Views vs ui-web documentada en la descripción del issue; contrato genérico: sin `translationHOC` en el paquete; Views traduce o usa `errorContent`.
+- Comparación Views vs ui-web documentada en la descripción del issue; contrato genérico: sin `translationHOC` en el paquete; Views traduce o usa `errorComponent`.
 - `DefaultError` en ui-web usa componentes/tokens de tipografía del paquete (sin `<p>` con props HTML inválidas); mensaje default acordado (literal o prop documentada).
-- `ErrorBoundary` refactorizado a enfoque funcional legible: `react-error-boundary` **o** fachada funcional + clase interna mínima; misma semántica que hoy (`children`, `errorContent`, `message`).
-- Tests en ui-web: sin `children`; error con fallback por defecto; error con `message` custom; error con `errorContent`; sin error muestra `children`; spy/mute `console.error` donde aplique.
+- `ErrorBoundary` refactorizado a enfoque funcional legible: `react-error-boundary` **o** fachada funcional + clase interna mínima; misma semántica que hoy (`children`, `errorComponent`, `message`).
+- Tests en ui-web: sin `children`; error con fallback por defecto; error con `message` custom; error con `errorComponent`; sin error muestra `children`; spy/mute `console.error` donde aplique.
 - Janis Views migra imports a `@janiscommerce/ui-web`; ajusta usos que pasaban keys en `message`; `SectionError`/`NotFoundError` permanecen en app si no se deciden mover.
 - CHANGELOG + semver en ui-web; bump dependencia en Views; CI verde en ambos repos.
 
@@ -27,7 +27,7 @@
 
 **Opciones explícitas en ticket para “clase → legible”:** (1) `react-error-boundary` si el equipo aprueba; (2) fachada funcional exportada + subcomponente de clase mínimo; (3) mantener clase sin dependencias nuevas, documentando el motivo.
 
-**Fuera de alcance del paquete:** `SectionError`, `NotFoundError`, assets estáticos, mapas de status, etc. — siguen en Views vía `errorContent` o imports locales.
+**Fuera de alcance del paquete:** `SectionError`, `NotFoundError`, assets estáticos, mapas de status, etc. — siguen en Views vía `errorComponent` o imports locales.
 
 ---
 
@@ -35,15 +35,15 @@
 
 En el repo se agregó una copia de referencia del módulo tal como vive hoy en Janis Views. Sirve para comparar línea a línea con `src/components/ErrorBoundary/` **sin** acoplar ui-web a imports de Views (`hocs`, `utils/string`, `components/Text`, `devices`, etc.).
 
-| Archivo (referencia) | Contenido | ¿Aplica a ui-web? |
-|----------------------|-----------|-------------------|
-| `ErrorBoundary.js` | Misma lógica que ui-web: `propTypes`, estado `hasError`, `getDerivedStateFromError`, `componentDidCatch`, `render` (null sin children; error → `message` ? `DefaultError` : `errorContent`). | **Sí — ya equivalente.** Solo difieren comentarios/idioma de propTypes: en Views `message` se documenta como texto *o key* de traducción; en ui-web debe documentarse solo **string opaca** (consumidor traduce). |
-| `DefaultError.js` | `translationHOC`, `isTranslationKey`, `t()`, componente `Text` con `color`/`fontSize` del design system de Views. Default `views.error.loadingError`. | **Reimplementar en ui-web:** mismo layout visual (Wrapper + Icon + texto) que en referencia, pero **sin** HOC ni detección de keys; texto = `message` tal cual. Tipografía vía **theme del paquete** (p. ej. `theme/palette` + `theme/typography` en un `styled` element, patrón como en `Input/styles.js`). |
-| `styles.js` | `export default`: `Wrapper` + `Icon` — **igual en intención** al `styles.js` actual de ui-web. `export const SectionError`: estilos grandes para pantallas de sección. | ui-web: **mantener solo** el objeto default (Wrapper/Icon). **No** portar `SectionError` al paquete. |
-| `SectionError.js` | Layout de error de sección + imagen + `translationHOC`. | **No** — permanece en Janis Views; puede seguir importando estilos propios o pasarse como `errorContent` al boundary del paquete. |
-| `NotFoundError.js` | 404, `map`, assets `/static/`, `translationHOC`. | **No** — solo app. |
-| `index.js` | `export { default } from './ErrorBoundary'` | Mismo patrón que ui-web. |
-| `ErrorBoundary.test.js` | Casos básicos; fallback default espera copy i18n (`Loading error` vía mock de traducción). | **No copiar tal cual** a ui-web: ui-web ya tiene tests más completos (`message` custom, etc.); tras consolidación, Views deberá testear contra el paquete y mocks de i18n donde corresponda. |
+| Archivo (referencia)    | Contenido                                                                                                                                                                                      | ¿Aplica a ui-web?                                                                                                                                                                                                                                                                                            |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ErrorBoundary.js`      | Misma lógica que ui-web: `propTypes`, estado `hasError`, `getDerivedStateFromError`, `componentDidCatch`, `render` (null sin children; error → `message` ? `DefaultError` : `errorComponent`). | **Sí — ya equivalente.** Solo difieren comentarios/idioma de propTypes: en Views `message` se documenta como texto _o key_ de traducción; en ui-web debe documentarse solo **string opaca** (consumidor traduce).                                                                                            |
+| `DefaultError.js`       | `translationHOC`, `isTranslationKey`, `t()`, componente `Text` con `color`/`fontSize` del design system de Views. Default `views.error.loadingError`.                                          | **Reimplementar en ui-web:** mismo layout visual (Wrapper + Icon + texto) que en referencia, pero **sin** HOC ni detección de keys; texto = `message` tal cual. Tipografía vía **theme del paquete** (p. ej. `theme/palette` + `theme/typography` en un `styled` element, patrón como en `Input/styles.js`). |
+| `styles.js`             | `export default`: `Wrapper` + `Icon` — **igual en intención** al `styles.js` actual de ui-web. `export const SectionError`: estilos grandes para pantallas de sección.                         | ui-web: **mantener solo** el objeto default (Wrapper/Icon). **No** portar `SectionError` al paquete.                                                                                                                                                                                                         |
+| `SectionError.js`       | Layout de error de sección + imagen + `translationHOC`.                                                                                                                                        | **No** — permanece en Janis Views; puede seguir importando estilos propios o pasarse como `errorComponent` al boundary del paquete.                                                                                                                                                                          |
+| `NotFoundError.js`      | 404, `map`, assets `/static/`, `translationHOC`.                                                                                                                                               | **No** — solo app.                                                                                                                                                                                                                                                                                           |
+| `index.js`              | `export { default } from './ErrorBoundary'`                                                                                                                                                    | Mismo patrón que ui-web.                                                                                                                                                                                                                                                                                     |
+| `ErrorBoundary.test.js` | Casos básicos; fallback default espera copy i18n (`Loading error` vía mock de traducción).                                                                                                     | **No copiar tal cual** a ui-web: ui-web ya tiene tests más completos (`message` custom, etc.); tras consolidación, Views deberá testear contra el paquete y mocks de i18n donde corresponda.                                                                                                                 |
 
 **Implementación práctica en ui-web (derivado de la referencia):**
 
@@ -59,7 +59,7 @@ En el repo se agregó una copia de referencia del módulo tal como vive hoy en J
 - `DefaultError` (`DefaultError.js` + `styles.js`): mismo layout compacto que la referencia (Wrapper + Icon), pero el texto usa `<p color="..." fontSize="...">` (inválido en HTML); la referencia evita eso usando `Text` de Views.
 - Uso interno: `src/components/HTML/HTML.js` envuelve `Frame` y pasa `errorMessage` → `message`.
 - Export público: `src/components/index.js`.
-- Tests: `ErrorBoundary.test.js` ya cubre más que la referencia de Views; falta caso explícito con `errorContent` custom según AC del ticket.
+- Tests: `ErrorBoundary.test.js` ya cubre más que la referencia de Views; falta caso explícito con `errorComponent` custom según AC del ticket.
 
 ---
 
@@ -68,7 +68,7 @@ En el repo se agregó una copia de referencia del módulo tal como vive hoy en J
 - `src/components/ErrorBoundary/ErrorBoundary.js` — núcleo; posible wrapper o `react-error-boundary`.
 - `src/components/ErrorBoundary/DefaultError.js` — alinear con estructura de referencia + tokens de theme (sin HOC).
 - `src/components/ErrorBoundary/styles.js` — solo rama default tipo referencia; no añadir `SectionError`.
-- `src/components/ErrorBoundary/ErrorBoundary.test.js` — ampliar según AC (p. ej. `errorContent`).
+- `src/components/ErrorBoundary/ErrorBoundary.test.js` — ampliar según AC (p. ej. `errorComponent`).
 - `docs/history/ErrorBoundary-views/` — **solo documentación de referencia**; no forma parte del bundle publicado.
 - `package.json` — si se adopta `react-error-boundary`.
 - `src/components/HTML/HTML.js` — `message` como string final.
@@ -79,12 +79,14 @@ En el repo se agregó una copia de referencia del módulo tal como vive hoy en J
 
 ### Approaches
 
-1. **`react-error-boundary`** — Mapear API a `errorContent` + `message` + `DefaultError`; `DefaultError` sigue el layout de la referencia con tokens ui-web.
+1. **`react-error-boundary`** — Mapear API a `errorComponent` + `message` + `DefaultError`; `DefaultError` sigue el layout de la referencia con tokens ui-web.
+
    - Pros: Alineado al ticket si se aprueba la dependencia.
    - Cons: Nueva dependencia y coordinación de versión.
    - Effort: **Medium**
 
 2. **Fachada funcional + clase interna mínima** — Misma semántica que `ErrorBoundary.js` de la referencia; capa externa legible.
+
    - Pros: Sin deps; contrato idéntico al snapshot Views.
    - Cons: Mantener clase interna documentada.
    - Effort: **Low–Medium**

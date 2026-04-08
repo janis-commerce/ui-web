@@ -12,7 +12,7 @@
 
 ## Phase 3: Pruebas (cobertura spec `error-boundary`)
 
-- [x] 3.1 En `ErrorBoundary.test.js`, añadir caso: hijo que lanza, **sin** `message`, `errorContent` con texto único → assert contiene ese texto (req. `errorContent` si `message` falsy).
+- [x] 3.1 En `ErrorBoundary.test.js`, añadir caso: hijo que lanza, **sin** `message`, `errorComponent` con texto único → assert contiene ese texto (req. `errorComponent` si `message` falsy).
 - [x] 3.2 Verificar casos existentes siguen alineados al spec: render vacío sin children; default `something went wrong error`; `message` custom; hijos sin error; `console.error` mockeado.
 - [x] 3.3 Si aplica en el repo, comprobar que el nodo de mensaje usa estilos de error del theme (req. estilo del texto) vía snapshot o assert de estilos existente; si no hay patrón, omitir y documentar en verify manual.
 
@@ -26,13 +26,13 @@
 
 ## Tasks Created (resumen)
 
-| Phase | Tasks | Focus |
-|-------|-------|--------|
-| 1 | 2 | Estilos `Message` + sin ellipsis |
-| 2 | 2 | `DefaultError` + docs `ErrorBoundary` |
-| 3 | 3 | Tests vs spec |
-| 4 | 1 hecha / 2 post-merge | Tests+build en rama; CHANGELOG y versión solo en `master` |
-| **Total** | **8 completadas + 2 pendientes post-merge** | |
+| Phase     | Tasks                                       | Focus                                                     |
+| --------- | ------------------------------------------- | --------------------------------------------------------- |
+| 1         | 2                                           | Estilos `Message` + sin ellipsis                          |
+| 2         | 2                                           | `DefaultError` + docs `ErrorBoundary`                     |
+| 3         | 3                                           | Tests vs spec                                             |
+| 4         | 1 hecha / 2 post-merge                      | Tests+build en rama; CHANGELOG y versión solo en `master` |
+| **Total** | **8 completadas + 2 pendientes post-merge** |                                                           |
 
 **Orden:** 1 → 2 → 3 → 4 (estilos antes de componentes que los consumen; tests tras implementación; TDD desactivado en `openspec/config.yaml`).
 
