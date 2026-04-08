@@ -27,33 +27,33 @@ export default {
 			description: 'throwing: child throws on render; healthy: no error'
 		},
 		message: { control: 'text' },
-		errorContentVariant: {
+		errorComponentVariant: {
 			control: 'select',
 			options: ['none', 'custom'],
 			description:
-				'When child throws and message is empty: none uses DefaultError; custom uses errorContent prop'
+				'When child throws and message is empty: none uses DefaultError; custom uses errorComponent prop'
 		}
 	}
 };
 
 const Template = (args) => {
 	const message = args.message && String(args.message).trim() !== '' ? args.message : undefined;
-	const errorContent =
-		args.errorContentVariant === 'custom' ? (
+	const errorComponent =
+		args.errorComponentVariant === 'custom' ? (
 			<strong style={{ color: palette.fizzGreen }}>Custom error content</strong>
 		) : undefined;
 	const child =
 		args.childVariant === 'throwing' ? (
 			<Bomb />
 		) : (
-			<Link href="https://app.janisdev.in/" target="_blank" icon="box">
+			<Link href="https://app.janisdev.in/" target="_blank" icon="link">
 				Janis
 			</Link>
 		);
 
 	return (
 		<div style={frame}>
-			<ErrorBoundary message={message} errorContent={errorContent}>
+			<ErrorBoundary message={message} errorComponent={errorComponent}>
 				{child}
 			</ErrorBoundary>
 		</div>
@@ -63,12 +63,12 @@ const Template = (args) => {
 const baseArgs = {
 	childVariant: 'throwing',
 	message: '',
-	errorContentVariant: 'none'
+	errorComponentVariant: 'none'
 };
 
 export const DefaultFallback = Template.bind({});
 export const CustomMessage = Template.bind({});
-export const CustomErrorContent = Template.bind({});
+export const CustomErrorComponent = Template.bind({});
 export const HealthyChild = Template.bind({});
 
 DefaultFallback.args = {
@@ -80,14 +80,14 @@ CustomMessage.args = {
 	message: 'Visible custom message'
 };
 
-CustomErrorContent.args = {
+CustomErrorComponent.args = {
 	...baseArgs,
-	errorContentVariant: 'custom'
+	errorComponentVariant: 'custom'
 };
 
 HealthyChild.args = {
 	...baseArgs,
 	childVariant: 'healthy',
 	message: '',
-	errorContentVariant: 'none'
+	errorComponentVariant: 'none'
 };
