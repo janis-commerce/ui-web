@@ -60,13 +60,13 @@ describe('ErrorBoundary component', () => {
 		expect(wrapper.children().getDOMNode().textContent).toMatch('Some Error');
 	});
 
-	test('should render custom errorContent when there is an error and no message', () => {
+	test('should render custom errorComponent when there is an error and no message', () => {
 		const Bomb = () => {
 			throw new Error('Kaboom');
 		};
 
 		const wrapper = mount(
-			<ErrorBoundary errorContent={<span data-testid="custom-fallback">Custom fallback</span>}>
+			<ErrorBoundary errorComponent={<span data-testid="custom-fallback">Custom fallback</span>}>
 				<Bomb />
 			</ErrorBoundary>
 		);
