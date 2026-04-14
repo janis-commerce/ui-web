@@ -7,17 +7,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.9.0-beta.2] - 2026-04-08
-
-### Changed
-
-- errorContent prop renamed to errorComponent
-
-### Removed
-
-- default value using prop types in DefaultError component
-
-## [1.9.0-beta.1] - 2026-04-08
+## [1.9.0] - 2026-04-14
 
 ### Added
 
@@ -26,6 +16,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ### Changed
 
 - ErrorBoundary component to consolidate it and use it from outside
+- errorContent prop renamed to errorComponent
+
+### Removed
+
+- default value using prop types in DefaultError component
 
 ## [1.8.0] - 2026-02-03
 
