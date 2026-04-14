@@ -1,11 +1,11 @@
 import React from 'react';
-import { element, string, arrayOf, oneOfType } from 'prop-types';
+import { node, element, string } from 'prop-types';
 import DefaultError from './DefaultError';
 
 export default class ErrorBoundary extends React.PureComponent {
 	static propTypes = {
 		/** The content to be displayed */
-		children: oneOfType([element, arrayOf(element)]),
+		children: node,
 		/** Custom content to show in case there is an error */
 		errorComponent: element,
 		/** Final user-visible error string (opaque). The package does not translate or resolve i18n keys — pass already-resolved text or use errorComponent. */

@@ -53,7 +53,7 @@ const Template = (args) => {
 
 	return (
 		<div style={frame}>
-			<ErrorBoundary message={message} errorComponent={errorComponent}>
+			<ErrorBoundary key={JSON.stringify(args)} message={message} errorComponent={errorComponent}>
 				{child}
 			</ErrorBoundary>
 		</div>
