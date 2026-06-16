@@ -75,7 +75,6 @@ const DiagramCanvas = forwardRef(
 
 		const handleEdgesChange = useCallback(
 			(edgeChanges) => {
-				console.log(edgeChanges);
 				if (!edgeChanges.length) return;
 				const { edges: edgeDelta } = formatOutput([], edgeChanges);
 				if (edgeDelta.length) onEdgesChange?.(edgeDelta);
