@@ -124,6 +124,10 @@
 		"presets": [
 			"@babel/preset-env",
 			"@babel/preset-react"
+		],
+		"plugins": [
+			"@babel/plugin-transform-optional-chaining",
+			"@babel/plugin-transform-nullish-coalescing-operator"
 		]
 	},
 	"files": [
@@ -132,6 +136,7 @@
 	"dependencies": {
 		"@mapbox/polyline": "^1.1.1",
 		"@react-google-maps/api": "2.7.0",
+		"@xyflow/react": "^12.11.0",
 		"prop-types": "^15.7.2",
 		"qrcode.react": "^3.0.2",
 		"react-collapsed": "^4.2.0",

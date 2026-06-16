@@ -1,3 +1,4 @@
+import DiagramCanvas from './DiagramCanvas';
 import Avatar from './Avatar';
 import AvatarGroup from './AvatarGroup';
 import Button from './Button';
@@ -26,6 +27,7 @@ import palette from 'theme/palette';
 import icons from './Icon/icons.json';
 
 export {
+	DiagramCanvas,
 	Avatar,
 	AvatarGroup,
 	Button,

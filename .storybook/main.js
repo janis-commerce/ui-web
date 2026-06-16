@@ -19,7 +19,7 @@ module.exports = {
 		const babelRule = config.module.rules.find(
 			(rule) => rule.test && rule.test.toString().includes('jsx')
 		);
-		if (babelRule) babelRule.exclude = /node_modules\/(?!react-collapsed)/;
+		if (babelRule) babelRule.exclude = /node_modules\/(?!(react-collapsed|@xyflow))/;
 		config.resolve.extensions.push('.mjs');
 
 		return config;

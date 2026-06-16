@@ -6,7 +6,7 @@ A package for use generic components from Janis
 
 `npm install @janiscommerce/ui-web`
 
-> **Important:** When developing or contributing to this library, please make sure to use `yarn` to install dependencies. Do **not** use `npm` as it might cause issues. 
+> **Important:** When developing or contributing to this library, please make sure to use `yarn` to install dependencies. Do **not** use `npm` as it might cause issues.
 
 To install dependencies while developing the library:
 
@@ -27,7 +27,9 @@ const MyComponent = () => {
 
 	return (
 		<div>
-			<Button onClick={handleClick} variant="contained">Click</Button>
+			<Button onClick={handleClick} variant="contained">
+				Click
+			</Button>
 			<Icon name="box" color="primary" />
 		</div>
 	);
@@ -38,4 +40,4 @@ export default MyComponent;
 
 ### Important
 
-All the components that can be used and other documentation can be found at ***[https://janis-commerce.github.io/ui-web](https://janis-commerce.github.io/ui-web)***
+All the components that can be used and other documentation can be found at **_[https://janis-commerce.github.io/ui-web](https://janis-commerce.github.io/ui-web)_**
