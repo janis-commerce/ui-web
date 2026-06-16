@@ -167,35 +167,35 @@ const baseNodes = [
 		id: 'wh-cordoba',
 		type: 'cd',
 		position: { x: 340, y: 170 },
-		handleColor: PRIMARY,
+		handleConfig: { color: PRIMARY },
 		data: { label: 'Córdoba', priority: 1 }
 	},
 	{
 		id: 'wh-escobar',
 		type: 'cd',
 		position: { x: 540, y: 230 },
-		handleColor: PRIMARY,
+		handleConfig: { color: PRIMARY },
 		data: { label: 'Escobar', priority: 1 }
 	},
 	{
 		id: 'wh-mendoza',
 		type: 'cd',
 		position: { x: 120, y: 200 },
-		handleColor: PRIMARY,
+		handleConfig: { color: PRIMARY },
 		data: { label: 'Mendoza', priority: 2 }
 	},
 	{
 		id: 'gt-cba',
 		type: 'grupoTiendas',
 		position: { x: 540, y: 60 },
-		handleColor: SECONDARY_DEEP,
+		handleConfig: { color: SECONDARY_DEEP },
 		data: { label: 'Zona Córdoba L-M', tiendas: ['st-cba-1', 'st-cba-2'] }
 	},
 	{
 		id: 'gt-norte',
 		type: 'grupoTiendas',
 		position: { x: 760, y: 170 },
-		handleColor: SECONDARY_DEEP,
+		handleConfig: { color: SECONDARY_DEEP },
 		data: { label: 'BsAs Norte M-V', tiendas: ['st-esc-1', 'st-esc-2'] }
 	}
 ];
@@ -204,21 +204,51 @@ const edgeCdCd = {
 	lineType: 'step',
 	animated: true,
 	style: { stroke: PRIMARY, strokeWidth: 2, strokeDasharray: '6 3' },
+	selectedStyle: { stroke: PRIMARY, strokeWidth: 3, strokeDasharray: 'none' },
 	arrowEnd: { type: 'outlined', color: PRIMARY }
 };
 const edgeCdGrupo = {
 	lineType: 'step',
 	animated: true,
 	style: { stroke: SECONDARY_DEEP, strokeWidth: 2, strokeDasharray: '6 3' },
+	selectedStyle: { stroke: SECONDARY_DEEP, strokeWidth: 3, strokeDasharray: 'none' },
 	arrowStart: { type: 'outlined', color: SECONDARY_DEEP },
 	arrowEnd: { type: 'outlined', color: SECONDARY_DEEP }
 };
 
 const baseEdges = [
-	{ id: 'e-1', source: 'wh-mendoza', target: 'wh-cordoba', ...edgeCdCd },
-	{ id: 'e-2', source: 'wh-cordoba', target: 'wh-escobar', ...edgeCdCd },
-	{ id: 'e-3', source: 'wh-cordoba', target: 'gt-cba', ...edgeCdGrupo },
-	{ id: 'e-4', source: 'wh-escobar', target: 'gt-norte', ...edgeCdGrupo }
+	{
+		id: 'e-1',
+		source: 'wh-mendoza',
+		target: 'wh-cordoba',
+		...edgeCdCd,
+		label: 'Ruta principal',
+		data: { priority: 1 }
+	},
+	{
+		id: 'e-2',
+		source: 'wh-cordoba',
+		target: 'wh-escobar',
+		...edgeCdCd,
+		label: 'Ruta secundaria',
+		data: { priority: 2 }
+	},
+	{
+		id: 'e-3',
+		source: 'wh-cordoba',
+		target: 'gt-cba',
+		...edgeCdGrupo,
+		label: 'CD → Grupo Cba',
+		data: { type: 'abastecimiento' }
+	},
+	{
+		id: 'e-4',
+		source: 'wh-escobar',
+		target: 'gt-norte',
+		...edgeCdGrupo,
+		label: 'CD → Grupo Norte',
+		data: { type: 'abastecimiento' }
+	}
 ];
 
 export default {
@@ -236,8 +266,10 @@ export default {
   id: 'node-1',
   type: 'cd',
   position: { x: 0, y: 0 },
-  handleColor: '#2979ff',
-  handles: ['top', 'right', 'bottom', 'left'], // opcional, default 4 lados
+  handleConfig: {
+    color: '#2979ff',
+    positions: ['top', 'right', 'bottom', 'left'] // opcional, default 4 lados; [] oculta los handles
+  },
   data: { label: 'Córdoba', priority: 1 }
 }]
 \`\`\``
@@ -254,6 +286,7 @@ export default {
   lineType: 'step',   // 'step' | 'curved' | 'straight'
   animated: true,
   style: { stroke: '#2979ff', strokeWidth: 2 },
+  selectedStyle: { stroke: '#2979ff', strokeWidth: 3 }, // estilo al seleccionar
   arrowEnd: { type: 'outlined', color: '#2979ff' }  // 'outlined' | 'contained'
 }]
 \`\`\``
@@ -274,12 +307,10 @@ export default {
 			description: `El usuario conectó dos nodos. Debe retornar el edge completo a agregar.
 
 \`\`\`js
-onConnect={({ source, target, sourceHandle, targetHandle }) => ({
+onConnect={({ source, target }) => ({
   id: \`e-\${source}-\${target}\`,
   source,
   target,
-  sourceHandle,
-  targetHandle,
   lineType: 'step',
   arrowEnd: { type: 'outlined', color: '#2979ff' }
 })}
@@ -334,12 +365,32 @@ export const ViewMode = () => (
 	</div>
 );
 
+const eventCardStyle = {
+	marginTop: 12,
+	padding: '10px 14px',
+	background: '#f8f9fc',
+	border: '1px solid #e0e6f0',
+	borderRadius: 8,
+	fontSize: 12,
+	fontFamily: 'monospace',
+	color: '#001233'
+};
+
+const eventLabelStyle = {
+	fontWeight: 700,
+	marginBottom: 4,
+	color: '#7588a3',
+	fontSize: 11,
+	textTransform: 'uppercase',
+	letterSpacing: 1
+};
+
 export const EditMode = () => {
 	const [nodes, setNodes] = useState(baseNodes);
 	const [edges, setEdges] = useState(baseEdges);
+	const [lastEvent, setLastEvent] = useState(null);
 
 	const handleNodesChange = (changes) => {
-		console.log('node', changes);
 		setNodes((prev) =>
 			prev
 				.filter((n) => !changes.some((c) => c.type === 'remove' && c.id === n.id))
@@ -348,45 +399,56 @@ export const EditMode = () => {
 					return change ? { ...n, position: change.position } : n;
 				})
 		);
+		setLastEvent({ type: 'onNodesChange', payload: changes });
 	};
 
 	const handleEdgesChange = (changes) => {
-		console.log('edge', changes);
 		setEdges((prev) =>
 			prev.filter((e) => !changes.some((c) => c.type === 'remove' && c.id === e.id))
 		);
+		setLastEvent({ type: 'onEdgesChange', payload: changes });
 	};
 
-	const handleConnect = ({ source, target, sourceHandle, targetHandle }) => {
+	const handleConnect = ({ source, target }) => {
 		const sourceNode = nodes.find((n) => n.id === source);
 		const targetNode = nodes.find((n) => n.id === target);
 		const isCdToCd = sourceNode?.type === 'cd' && targetNode?.type === 'cd';
 		const style = isCdToCd ? edgeCdCd : edgeCdGrupo;
-		const edge = {
-			id: `e-${source}-${sourceHandle}-${target}-${targetHandle}`,
-			source,
-			target,
-			sourceHandle,
-			targetHandle,
-			...style
-		};
+		const edge = { id: `e-${source}-${target}`, source, target, ...style };
 		setEdges((prev) => [...prev, edge]);
+		setLastEvent({ type: 'onConnect', payload: { source, target } });
 		return edge;
 	};
 
+	const handleReconnect = (id, { source, target }) => {
+		setEdges((prev) => prev.map((e) => (e.id === id ? { ...e, source, target } : e)));
+		setLastEvent({ type: 'onReconnect', payload: { id, source, target } });
+	};
+
 	return (
-		<div style={{ width: '100%', height: 400 }}>
-			<DiagramCanvas
-				nodes={nodes}
-				edges={edges}
-				nodeComponents={nodeComponents}
-				config={{ readOnly: false }}
-				onNodesChange={handleNodesChange}
-				onEdgesChange={handleEdgesChange}
-				onConnect={handleConnect}
-				onNodeClick={(id, data) => console.log('onNodeClick', { id, data })}
-				onEdgeClick={(id, data) => console.log('onEdgeClick', { id, data })}
-			/>
+		<div style={{ width: '100%' }}>
+			<div style={{ height: 400 }}>
+				<DiagramCanvas
+					nodes={nodes}
+					edges={edges}
+					nodeComponents={nodeComponents}
+					config={{ readOnly: false }}
+					onNodesChange={handleNodesChange}
+					onEdgesChange={handleEdgesChange}
+					onConnect={handleConnect}
+					onReconnect={handleReconnect}
+					onNodeClick={(id, data) => setLastEvent({ type: 'onNodeClick', payload: { id, data } })}
+					onEdgeClick={(id, data) => setLastEvent({ type: 'onEdgeClick', payload: { id, data } })}
+				/>
+			</div>
+			{lastEvent && (
+				<div style={eventCardStyle}>
+					<div style={eventLabelStyle}>{lastEvent.type}</div>
+					<pre style={{ margin: 0, whiteSpace: 'pre-wrap' }}>
+						{JSON.stringify(lastEvent.payload, null, 2)}
+					</pre>
+				</div>
+			)}
 		</div>
 	);
 };

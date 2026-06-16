@@ -20,7 +20,8 @@ const translateMarker = (marker) => {
 const formatInput = (nodes, edges) => ({
 	nodes: nodes.map((node) => ({
 		...node,
-		data: { ...node.data, _handleColor: node.handleColor, _handles: node.handles }
+		className: ['dc-node', `dc-node--${node.type}`, node.className].filter(Boolean).join(' '),
+		data: { ...node.data, _handleColor: node.handleConfig?.color, _handles: node.handleConfig?.positions }
 	})),
 	edges: edges.map(
 		({
@@ -30,11 +31,14 @@ const formatInput = (nodes, edges) => ({
 			sourceHandle,
 			targetHandle,
 			animated,
+			label,
 			style,
 			data,
 			lineType,
 			arrowStart,
-			arrowEnd
+			arrowEnd,
+			selectedStyle,
+			className
 		}) => ({
 			id,
 			source,
@@ -42,9 +46,11 @@ const formatInput = (nodes, edges) => ({
 			sourceHandle,
 			targetHandle,
 			animated,
+			label,
 			style,
-			data,
-			type: LINE_TYPE_MAP[lineType] || 'default',
+			className: ['dc-edge', lineType && `dc-edge--${lineType}`, className].filter(Boolean).join(' '),
+			data: { ...data, _selectedStyle: selectedStyle },
+			type: LINE_TYPE_MAP[lineType] || 'bezier',
 			markerStart: translateMarker(arrowStart),
 			markerEnd: translateMarker(arrowEnd)
 		})
@@ -70,11 +76,6 @@ const formatOutput = (rfNodesChanges, rfEdgesChanges) => ({
 	edges: rfEdgesChanges.map(translateEdgeChange).filter(Boolean)
 });
 
-const formatConnection = ({ source, target, sourceHandle, targetHandle }) => ({
-	source,
-	target,
-	sourceHandle,
-	targetHandle
-});
+const formatConnection = ({ source, target }) => ({ source, target });
 
 export default { formatInput, formatOutput, formatConnection, Component };

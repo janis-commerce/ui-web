@@ -6,55 +6,16 @@ import {
 	Background,
 	Controls,
 	MiniMap,
-	Handle,
-	Position,
 	useNodesState,
 	useEdgesState,
-	useReactFlow
+	useReactFlow,
+	reconnectEdge
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
+import withHandles from './Node';
+import { EDGE_TYPES } from './Edge';
 
-const POSITION_MAP = {
-	top: Position.Top,
-	right: Position.Right,
-	bottom: Position.Bottom,
-	left: Position.Left
-};
-
-const DEFAULT_HANDLES = ['top', 'right', 'bottom', 'left'];
-
-const withHandles = (NodeComponent) => {
-	const WrappedNode = (props) => {
-		const handleColor = props.data?._handleColor || '#b1b1b7';
-		const handles = props.data?._handles || DEFAULT_HANDLES;
-		return (
-			<>
-				{handles.map((id) => (
-					<Handle
-						key={id}
-						id={id}
-						type="source"
-						position={POSITION_MAP[id] || Position.Top}
-						style={{ background: handleColor, width: 10, height: 10, border: '2px solid #fff' }}
-					/>
-				))}
-				<NodeComponent {...props} />
-			</>
-		);
-	};
-	WrappedNode.displayName = `WithHandles(${
-		NodeComponent.displayName || NodeComponent.name || 'Component'
-	})`;
-	WrappedNode.propTypes = {
-		data: PropTypes.shape({
-			_handleColor: PropTypes.string,
-			_handles: PropTypes.arrayOf(PropTypes.string)
-		})
-	};
-	return WrappedNode;
-};
-
-const FlowInner = forwardRef(
+const Canvas = forwardRef(
 	(
 		{
 			nodes,
@@ -64,6 +25,7 @@ const FlowInner = forwardRef(
 			onNodesChange,
 			onEdgesChange,
 			onConnect,
+			onReconnect,
 			onNodeClick,
 			onEdgeClick
 		},
@@ -108,29 +70,38 @@ const FlowInner = forwardRef(
 				nodes={rfNodes}
 				edges={rfEdges}
 				nodeTypes={nodeTypes}
+				edgeTypes={EDGE_TYPES}
 				proOptions={{ hideAttribution: true }}
 				nodesDraggable={!readOnly}
 				nodesConnectable={!readOnly}
 				elementsSelectable={!readOnly}
 				connectionMode="loose"
-				onNodesChange={(changes) => {
-					handleNodesChange(changes);
-					onNodesChange?.(changes);
+				onNodesChange={(nodeChanges) => {
+					handleNodesChange(nodeChanges);
+					onNodesChange?.(nodeChanges);
 				}}
-				onEdgesChange={(changes) => {
-					handleEdgesChange(changes);
-					onEdgesChange?.(changes);
+				onEdgesChange={(edgeChanges) => {
+					handleEdgesChange(edgeChanges);
+					onEdgesChange?.(edgeChanges);
 				}}
 				onConnect={(connection) => {
 					const edge = onConnect?.(connection);
 					if (edge) setRfEdges((eds) => [...eds, edge]);
+				}}
+				onReconnect={(oldEdge, newConnection) => {
+					setRfEdges((eds) => reconnectEdge(oldEdge, newConnection, eds));
+					onReconnect?.(oldEdge, newConnection);
 				}}
 				onNodeClick={(_event, node) => {
 					// eslint-disable-next-line no-unused-vars
 					const { _handleColor, _handles, ...data } = node.data || {};
 					onNodeClick?.(node.id, data);
 				}}
-				onEdgeClick={(_event, edge) => onEdgeClick?.(edge.id, edge.data)}
+				onEdgeClick={(_event, edge) => {
+					// eslint-disable-next-line no-unused-vars
+					const { _selectedStyle, ...data } = edge.data || {};
+					onEdgeClick?.(edge.id, data);
+				}}
 			>
 				<Background />
 				{showControls && <Controls />}
@@ -140,9 +111,9 @@ const FlowInner = forwardRef(
 	}
 );
 
-FlowInner.displayName = 'FlowInner';
+Canvas.displayName = 'Canvas';
 
-FlowInner.propTypes = {
+Canvas.propTypes = {
 	nodes: PropTypes.array.isRequired,
 	edges: PropTypes.array.isRequired,
 	nodeComponents: PropTypes.objectOf(PropTypes.elementType).isRequired,
@@ -154,16 +125,17 @@ FlowInner.propTypes = {
 	onNodesChange: PropTypes.func,
 	onEdgesChange: PropTypes.func,
 	onConnect: PropTypes.func,
+	onReconnect: PropTypes.func,
 	onNodeClick: PropTypes.func,
 	onEdgeClick: PropTypes.func
 };
 
-const ReactFlowComponent = forwardRef((props, ref) => (
+const ReactFlowCanvas = forwardRef((props, ref) => (
 	<ReactFlowProvider>
-		<FlowInner ref={ref} {...props} />
+		<Canvas ref={ref} {...props} />
 	</ReactFlowProvider>
 ));
 
-ReactFlowComponent.displayName = 'ReactFlowComponent';
+ReactFlowCanvas.displayName = 'ReactFlowCanvas';
 
-export default ReactFlowComponent;
+export default ReactFlowCanvas;

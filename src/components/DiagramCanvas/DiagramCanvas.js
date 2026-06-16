@@ -32,6 +32,7 @@ const DiagramCanvas = forwardRef(
 			onNodesChange = () => {},
 			onEdgesChange = () => {},
 			onConnect = () => {},
+			onReconnect,
 			onNodeClick = () => {},
 			onEdgeClick = () => {},
 			className
@@ -64,33 +65,42 @@ const DiagramCanvas = forwardRef(
 		);
 
 		const handleNodesChange = useCallback(
-			(changes) => {
-				if (!changes.length) return;
-				const { nodes: nodeDelta } = formatOutput(changes, []);
+			(nodeChanges) => {
+				if (!nodeChanges.length) return;
+				const { nodes: nodeDelta } = formatOutput(nodeChanges, []);
 				if (nodeDelta.length) onNodesChange?.(nodeDelta);
 			},
 			[formatOutput, onNodesChange]
 		);
 
 		const handleEdgesChange = useCallback(
-			(changes) => {
-				if (!changes.length) return;
-				const { edges: edgeDelta } = formatOutput([], changes);
+			(edgeChanges) => {
+				console.log(edgeChanges);
+				if (!edgeChanges.length) return;
+				const { edges: edgeDelta } = formatOutput([], edgeChanges);
 				if (edgeDelta.length) onEdgesChange?.(edgeDelta);
 			},
 			[formatOutput, onEdgesChange]
 		);
 
 		const handleConnect = useCallback(
-			(rfConnection) => {
-				const edge = onConnect?.(formatConnection(rfConnection));
+			(connection) => {
+				const edge = onConnect?.(formatConnection(connection));
 				if (!edge) return undefined;
 				const {
-					edges: [rfEdge]
+					edges: [formattedEdge]
 				} = formatInput([], [edge]);
-				return rfEdge;
+				return formattedEdge;
 			},
 			[onConnect, formatInput, formatConnection]
+		);
+
+		const handleReconnect = useCallback(
+			(oldEdge, connection) => {
+				const { source, target } = formatConnection(connection);
+				onReconnect?.(oldEdge.id, { source, target });
+			},
+			[onReconnect, formatConnection]
 		);
 
 		return (
@@ -104,6 +114,7 @@ const DiagramCanvas = forwardRef(
 					onNodesChange={handleNodesChange}
 					onEdgesChange={handleEdgesChange}
 					onConnect={handleConnect}
+					onReconnect={handleReconnect}
 					onNodeClick={onNodeClick}
 					onEdgeClick={onEdgeClick}
 				/>
@@ -121,8 +132,10 @@ const DiagramNodeShape = PropTypes.shape({
 		x: PropTypes.number.isRequired,
 		y: PropTypes.number.isRequired
 	}).isRequired,
-	handleColor: PropTypes.string,
-	handles: PropTypes.arrayOf(PropTypes.oneOf(['top', 'right', 'bottom', 'left'])),
+	handleConfig: PropTypes.shape({
+		color: PropTypes.string,
+		positions: PropTypes.arrayOf(PropTypes.oneOf(['top', 'right', 'bottom', 'left']))
+	}),
 	data: PropTypes.object
 });
 
@@ -137,7 +150,9 @@ const DiagramEdgeShape = PropTypes.shape({
 	target: PropTypes.string.isRequired,
 	lineType: PropTypes.oneOf(['step', 'curved', 'straight']),
 	animated: PropTypes.bool,
+	label: PropTypes.string,
 	style: PropTypes.object,
+	selectedStyle: PropTypes.object,
 	arrowStart: ArrowShape,
 	arrowEnd: ArrowShape,
 	data: PropTypes.object
@@ -161,8 +176,10 @@ DiagramCanvas.propTypes = {
 	onNodesChange: PropTypes.func,
 	/** Eliminación de edges (`{ type: 'remove', id }`). */
 	onEdgesChange: PropTypes.func,
-	/** El usuario conectó dos nodos. Recibe `{ source, target, sourceHandle, targetHandle }` y debe retornar el edge completo a agregar. */
+	/** El usuario conectó dos nodos. Recibe `{ source, target }` y debe retornar el edge completo a agregar. */
 	onConnect: PropTypes.func,
+	/** El usuario reconectó un edge a otro nodo. Recibe `(id, { source, target })`. */
+	onReconnect: PropTypes.func,
 	/** El usuario hizo click en un nodo. Recibe `(id, data)`. */
 	onNodeClick: PropTypes.func,
 	/** El usuario hizo click en un edge. Recibe `(id, data)`. */
