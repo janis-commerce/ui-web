@@ -1,4 +1,5 @@
 import React, { forwardRef, useEffect, useImperativeHandle, useMemo } from 'react';
+import styles from '../../styles';
 import PropTypes from 'prop-types';
 import {
 	ReactFlow,
@@ -103,8 +104,24 @@ const Canvas = forwardRef(
 					onEdgeClick?.(edge.id, data);
 				}}
 			>
+				<styles.ControlsGlobalStyle />
 				<Background />
-				{showControls && <Controls />}
+				{showControls && (
+						<Controls
+							style={{
+								background: '#ffffff',
+								borderRadius: '8px',
+								overflow: 'hidden',
+								boxShadow:
+									'0px 20px 25px -5px rgba(0,0,0,0.1), 0px 8px 10px -6px rgba(0,0,0,0.1)',
+								'--xy-controls-box-shadow': 'none',
+								'--xy-controls-button-background-color': '#ffffff',
+								'--xy-controls-button-background-color-hover': '#f4f4f4',
+								'--xy-controls-button-border-color': 'transparent',
+								'--xy-controls-button-color': '#333333'
+							}}
+						/>
+					)}
 				{showMiniMap && <MiniMap />}
 			</ReactFlow>
 		);
