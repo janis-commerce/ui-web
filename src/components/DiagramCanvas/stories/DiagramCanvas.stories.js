@@ -259,7 +259,7 @@ export const EditMode = () => {
 					nodes={nodes}
 					edges={edges}
 					nodeComponents={nodeComponents}
-					config={{ readOnly: false }}
+					config={{ readOnly: false, resizableNodes: true }}
 					onNodesChange={handleNodesChange}
 					onEdgesChange={handleEdgesChange}
 					onConnect={handleConnect}
@@ -292,10 +292,12 @@ export const DeleteWithConfirm = () => {
 			...nodesToDelete.map((n) => `nodo "${n.id}"`),
 			...edgesToDelete.map((e) => `conexión "${e.id}"`)
 		].join(', ');
-		return window.confirm(`¿Eliminar ${names}?`);
+		const response = window.confirm(`¿Eliminar ${names}?`);
+		return response;
 	};
 
 	const handleNodesChange = (changes) => {
+		console.log('log changes >>>', changes);
 		setNodes((prev) =>
 			prev.filter((n) => !changes.some((c) => c.type === 'remove' && c.id === n.id))
 		);
@@ -306,7 +308,7 @@ export const DeleteWithConfirm = () => {
 			prev.filter((e) => !changes.some((c) => c.type === 'remove' && c.id === e.id))
 		);
 	};
-
+	console.log('log >>>', nodes);
 	return (
 		<div style={{ width: '100%', height: 400 }}>
 			<DiagramCanvas

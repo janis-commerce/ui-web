@@ -17,11 +17,12 @@ const translateMarker = (marker) => {
 };
 
 export const mapNodesToRf = (nodes) =>
-	nodes.map(({ width, height, ...node }) => ({
+	nodes.map(({ width, height, handleConfig, data, ...node }) => ({
 		...node,
 		...(width != null && { width }),
 		...(height != null && { height }),
-		className: `dc-node ${node.type}`
+		className: `dc-node ${node.type}`,
+		data: { ...data, handleConfig }
 	}));
 
 export const mapEdgesToRf = (edges) =>

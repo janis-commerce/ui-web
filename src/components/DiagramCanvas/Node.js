@@ -12,7 +12,8 @@ const POSITION_MAP = {
 const DEFAULT_HANDLES = ['top', 'right', 'bottom', 'left'];
 
 const withHandles = (NodeComponent, { resizable = false } = {}) => {
-	const WrappedNode = ({ width, height, selected, data, handleConfig }) => {
+	const WrappedNode = ({ width, height, selected, data }) => {
+		const { handleConfig, ...nodeData } = data || {};
 		const handleColor = handleConfig?.color || '#b1b1b7';
 		const handles = handleConfig?.positions ?? DEFAULT_HANDLES;
 		const sizeStyle =
@@ -29,7 +30,7 @@ const withHandles = (NodeComponent, { resizable = false } = {}) => {
 						style={{ background: handleColor, width: 10, height: 10, border: '2px solid #fff' }}
 					/>
 				))}
-				<NodeComponent data={data} selected={selected} style={sizeStyle} />
+				<NodeComponent data={nodeData} selected={selected} style={sizeStyle} />
 			</>
 		);
 	};
@@ -40,11 +41,7 @@ const withHandles = (NodeComponent, { resizable = false } = {}) => {
 		width: PropTypes.number,
 		height: PropTypes.number,
 		selected: PropTypes.bool,
-		data: PropTypes.object,
-		handleConfig: PropTypes.shape({
-			color: PropTypes.string,
-			positions: PropTypes.arrayOf(PropTypes.string)
-		})
+		data: PropTypes.object
 	};
 	return WrappedNode;
 };

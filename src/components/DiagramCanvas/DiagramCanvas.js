@@ -157,6 +157,15 @@ const Canvas = forwardRef(
 			[onReconnect]
 		);
 
+		const handleSelectionChange = useCallback(
+			({ nodes: n, edges: e }) =>
+				onSelectionChange?.({
+					nodes: n.map(({ id }) => ({ id })),
+					edges: e.map(({ id }) => ({ id }))
+				}),
+			[onSelectionChange]
+		);
+
 		return (
 			<styles.Container>
 				<ReactFlow
@@ -174,12 +183,7 @@ const Canvas = forwardRef(
 					onConnect={handleConnect}
 					onReconnect={handleReconnect}
 					onBeforeDelete={onBeforeDelete}
-					onSelectionChange={({ nodes: n, edges: e }) =>
-						onSelectionChange?.({
-							nodes: n.map(({ id }) => ({ id })),
-							edges: e.map(({ id }) => ({ id }))
-						})
-					}
+					onSelectionChange={handleSelectionChange}
 					onNodeClick={(_event, node) => onNodeClick?.(node.id, node.data)}
 					onEdgeClick={(_event, edge) => {
 						// eslint-disable-next-line no-unused-vars
