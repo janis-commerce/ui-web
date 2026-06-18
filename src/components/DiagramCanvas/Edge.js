@@ -5,7 +5,7 @@ import { SmoothStepEdge, BezierEdge, StraightEdge } from '@xyflow/react';
 const withSelected = (NativeEdge) => {
 	const WrappedEdge = ({ data, selected, style, className, ...props }) => {
 		const mergedStyle =
-			selected && data?._selectedStyle ? { ...style, ...data._selectedStyle } : style;
+			selected && data?.selectedStyle ? { ...style, ...data.selectedStyle } : style;
 		const mergedClassName = [className, selected && 'dc-edge--selected'].filter(Boolean).join(' ');
 		return <NativeEdge {...props} data={data} style={mergedStyle} className={mergedClassName} />;
 	};
@@ -14,7 +14,7 @@ const withSelected = (NativeEdge) => {
 		selected: PropTypes.bool,
 		style: PropTypes.object,
 		className: PropTypes.string,
-		data: PropTypes.shape({ _selectedStyle: PropTypes.object })
+		data: PropTypes.shape({ selectedStyle: PropTypes.object })
 	};
 	return WrappedEdge;
 };

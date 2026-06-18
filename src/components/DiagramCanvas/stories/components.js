@@ -35,7 +35,7 @@ const StoreIcon = () => (
 	</svg>
 );
 
-export const CdNode = ({ data, selected }) => (
+export const CdNode = ({ data, selected, style }) => (
 	<div
 		style={{
 			background: selected ? PRIMARY_SOFT : '#fff',
@@ -47,7 +47,9 @@ export const CdNode = ({ data, selected }) => (
 			alignItems: 'center',
 			gap: 8,
 			cursor: 'pointer',
-			minWidth: 110
+			minWidth: 110,
+			boxSizing: 'border-box',
+			...style
 		}}
 	>
 		<div
@@ -95,7 +97,7 @@ export const CdNode = ({ data, selected }) => (
 	</div>
 );
 
-export const GrupoTiendasNode = ({ data, selected }) => {
+export const GrupoTiendasNode = ({ data, selected, style }) => {
 	const count = (data.tiendas || []).length;
 	return (
 		<div
@@ -109,7 +111,9 @@ export const GrupoTiendasNode = ({ data, selected }) => {
 				alignItems: 'center',
 				gap: 8,
 				cursor: 'pointer',
-				minWidth: 110
+				minWidth: 110,
+				boxSizing: 'border-box',
+				...style
 			}}
 		>
 			<div
