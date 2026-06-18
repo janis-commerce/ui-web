@@ -47,7 +47,9 @@ const Canvas = forwardRef(
 			onConnect,
 			onReconnect,
 			onNodeClick,
-			onEdgeClick
+			onEdgeClick,
+			onBeforeDelete,
+			onSelectionChange
 		},
 		ref
 	) => {
@@ -114,7 +116,11 @@ const Canvas = forwardRef(
 
 		const handleNodesChangeCallback = useCallback(
 			(changes) => {
-				setInternalNodes((prev) => applyNodeChanges(changes, prev));
+				// El 'remove' no se aplica al interno: espera a que el consumidor
+				// lo devuelva por props. Así el consumidor puede rechazar/cancelar
+				// un borrado sin que la pantalla ya se haya adelantado.
+				const applied = changes.filter((c) => c.type !== 'remove');
+				setInternalNodes((prev) => applyNodeChanges(applied, prev));
 				const delta = readNodeChanges(changes);
 				if (delta.length) onNodesChange?.(delta);
 			},
@@ -123,9 +129,10 @@ const Canvas = forwardRef(
 
 		const handleEdgesChangeCallback = useCallback(
 			(changes) => {
-				const filtered = changes.filter((c) => c.type !== 'add');
-				setInternalEdges((prev) => applyEdgeChanges(filtered, prev));
-				const delta = readEdgeChanges(filtered);
+				// Idem: 'remove' y 'add' se excluyen del apply interno.
+				const visualChanges = changes.filter((c) => c.type !== 'add' && c.type !== 'remove');
+				if (visualChanges.length) setInternalEdges((prev) => applyEdgeChanges(visualChanges, prev));
+				const delta = readEdgeChanges(changes);
 				if (delta.length) onEdgesChange?.(delta);
 			},
 			[onEdgesChange]
@@ -166,6 +173,13 @@ const Canvas = forwardRef(
 					onEdgesChange={handleEdgesChangeCallback}
 					onConnect={handleConnect}
 					onReconnect={handleReconnect}
+					onBeforeDelete={onBeforeDelete}
+					onSelectionChange={({ nodes: n, edges: e }) =>
+						onSelectionChange?.({
+							nodes: n.map(({ id }) => ({ id })),
+							edges: e.map(({ id }) => ({ id }))
+						})
+					}
 					onNodeClick={(_event, node) => onNodeClick?.(node.id, node.data)}
 					onEdgeClick={(_event, edge) => {
 						// eslint-disable-next-line no-unused-vars
@@ -209,6 +223,8 @@ const DiagramEdgeShape = PropTypes.shape({
 	id: PropTypes.string.isRequired,
 	source: PropTypes.string.isRequired,
 	target: PropTypes.string.isRequired,
+	sourceHandle: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+	targetHandle: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
 	lineType: PropTypes.oneOf(['step', 'curved', 'straight']),
 	animated: PropTypes.bool,
 	label: PropTypes.string,
@@ -237,6 +253,8 @@ const DiagramCanvas = forwardRef((props, ref) => {
 				onReconnect={props.onReconnect}
 				onNodeClick={props.onNodeClick}
 				onEdgeClick={props.onEdgeClick}
+				onBeforeDelete={props.onBeforeDelete}
+				onSelectionChange={props.onSelectionChange}
 			/>
 		</ReactFlowProvider>
 	);
@@ -269,7 +287,11 @@ DiagramCanvas.propTypes = {
 	/** El usuario hizo click en un nodo. Recibe `(id, data)`. */
 	onNodeClick: PropTypes.func,
 	/** El usuario hizo click en un edge. Recibe `(id, data)`. */
-	onEdgeClick: PropTypes.func
+	onEdgeClick: PropTypes.func,
+	/** Intercepta el borrado antes de que ocurra. Async: retornar `false` cancela el borrado. Recibe `{ nodes, edges }` con los elementos a borrar. */
+	onBeforeDelete: PropTypes.func,
+	/** Se llama cuando cambia la selección. Recibe `{ nodes: [{id}], edges: [{id}] }` con los elementos seleccionados en ese momento. */
+	onSelectionChange: PropTypes.func
 };
 
 Canvas.propTypes = DiagramCanvas.propTypes;

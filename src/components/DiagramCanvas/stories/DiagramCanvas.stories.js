@@ -7,8 +7,8 @@ import { baseNodes, baseEdges, edgeCdCd, edgeCdGrupo, PRIMARY, SECONDARY_DEEP } 
 // ─── Shapes documentadas (se usan en argTypes.table.type.detail) ─────────────
 
 const NODE_SHAPE = `{
-  id:           string          // requerido — también usado como CSS id selector (#id)
-  type:         string          // requerido — clave en nodeComponents, también usado como CSS class (.type)
+  id:           string          // requerido
+  type:         string          // requerido — clave en nodeComponents
   position:     { x, y }        // requerido
   data?:        object          // props que recibe el componente
   width?:       number          // para resize persistido
@@ -32,7 +32,7 @@ const EDGE_SHAPE = `{
   selectedStyle?: object        // estilos CSS al estar seleccionado
   arrowStart?:   { type: 'outlined' | 'contained', color?: string }
   arrowEnd?:     { type: 'outlined' | 'contained', color?: string }
-  data?:         object         // datos que recibe onEdgeClick
+  data?:         object         // datos de negocio que recibe onEdgeClick
 }`;
 
 const NODE_CHANGE_SHAPE = `Array<
@@ -132,6 +132,28 @@ const nodeComponents = { myType: MyNode }
 		onEdgeClick: {
 			description: 'Click en un edge. `data` es el `edge.data` del consumidor sin `selectedStyle`.',
 			table: { type: { summary: '(id: string, data: object) => void' } }
+		},
+		onBeforeDelete: {
+			description:
+				'Intercepta el borrado antes de que ocurra (tecla Delete/Backspace). Async: retornar `false` cancela el borrado. Ver story DeleteWithConfirm.',
+			table: {
+				type: {
+					summary: '({ nodes, edges }) => Promise<boolean>',
+					detail: `async ({ nodes, edges }) => {
+  // nodes/edges: elementos que se van a borrar (formato de dominio)
+  return window.confirm('¿Eliminar?'); // false cancela
+}`
+				}
+			}
+		},
+		onSelectionChange: {
+			description: 'Se llama cuando cambia la selección. Ver story ExternalAction.',
+			table: {
+				type: {
+					summary: '({ nodes, edges }) => void',
+					detail: `({ nodes: [{ id }], edges: [{ id }] }) => void`
+				}
+			}
 		}
 	}
 };
@@ -222,7 +244,7 @@ export const EditMode = () => {
 			...style
 		};
 		setEdges((prev) => [...prev, edge]);
-		setLastEvent({ type: 'onConnect', payload: { source, target, sourceHandle, targetHandle } });
+		setLastEvent({ type: 'onConnect', payload: { source, target } });
 	};
 
 	const handleReconnect = (id, { source, target }) => {
@@ -254,6 +276,96 @@ export const EditMode = () => {
 					</pre>
 				</div>
 			)}
+		</div>
+	);
+};
+
+// Borrado con confirmación — demuestra onBeforeDelete: RF consulta al consumidor antes
+// de borrar. Retornar false cancela el borrado; el elemento nunca desaparece de la pantalla.
+// Seleccioná un nodo o edge y presioná Backspace/Delete para ver el confirm.
+export const DeleteWithConfirm = () => {
+	const [nodes, setNodes] = useState(baseNodes);
+	const [edges, setEdges] = useState(baseEdges);
+
+	const handleBeforeDelete = async ({ nodes: nodesToDelete, edges: edgesToDelete }) => {
+		const names = [
+			...nodesToDelete.map((n) => `nodo "${n.id}"`),
+			...edgesToDelete.map((e) => `conexión "${e.id}"`)
+		].join(', ');
+		return window.confirm(`¿Eliminar ${names}?`);
+	};
+
+	const handleNodesChange = (changes) => {
+		setNodes((prev) =>
+			prev.filter((n) => !changes.some((c) => c.type === 'remove' && c.id === n.id))
+		);
+	};
+
+	const handleEdgesChange = (changes) => {
+		setEdges((prev) =>
+			prev.filter((e) => !changes.some((c) => c.type === 'remove' && c.id === e.id))
+		);
+	};
+
+	return (
+		<div style={{ width: '100%', height: 400 }}>
+			<DiagramCanvas
+				nodes={nodes}
+				edges={edges}
+				nodeComponents={nodeComponents}
+				config={{ readOnly: false }}
+				onBeforeDelete={handleBeforeDelete}
+				onNodesChange={handleNodesChange}
+				onEdgesChange={handleEdgesChange}
+			/>
+		</div>
+	);
+};
+
+// Botón externo — acción sobre el nodo seleccionado desde fuera del canvas.
+// onSelectionChange entrega { nodes: [{id}], edges: [{id}] } con lo seleccionado.
+export const ExternalAction = () => {
+	const [nodes, setNodes] = useState(baseNodes);
+	const [edges, setEdges] = useState(baseEdges);
+	const [selectedNodes, setSelectedNodes] = useState([]);
+
+	const handleSelectionChange = ({ nodes: n }) => setSelectedNodes(n.map((x) => x.id));
+
+	const handleDelete = () => {
+		setNodes((prev) => prev.filter((n) => !selectedNodes.includes(n.id)));
+		setSelectedNodes([]);
+	};
+
+	return (
+		<div style={{ width: '100%' }}>
+			<div style={{ marginBottom: 8 }}>
+				<button
+					style={{ ...btnStyle, background: selectedNodes.length ? '#e53e3e' : '#ccc' }}
+					disabled={!selectedNodes.length}
+					onClick={handleDelete}
+				>
+					{selectedNodes.length ? `Eliminar "${selectedNodes.join(', ')}"` : 'Seleccioná un nodo'}
+				</button>
+			</div>
+			<div style={{ height: 400 }}>
+				<DiagramCanvas
+					nodes={nodes}
+					edges={edges}
+					nodeComponents={nodeComponents}
+					config={{ readOnly: false }}
+					onSelectionChange={handleSelectionChange}
+					onNodesChange={(changes) =>
+						setNodes((prev) =>
+							prev.filter((n) => !changes.some((c) => c.type === 'remove' && c.id === n.id))
+						)
+					}
+					onEdgesChange={(changes) =>
+						setEdges((prev) =>
+							prev.filter((e) => !changes.some((c) => c.type === 'remove' && c.id === e.id))
+						)
+					}
+				/>
+			</div>
 		</div>
 	);
 };
