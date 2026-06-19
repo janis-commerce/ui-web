@@ -11,7 +11,7 @@ const LINE_TYPE_MAP = {
 	straight: 'straight'
 };
 
-const translateMarker = (marker) => {
+const formatMarker = (marker) => {
 	if (!marker) return undefined;
 	return { type: MARKER_MAP[marker.type] || marker.type, color: marker.color };
 };
@@ -53,8 +53,8 @@ export const mapEdgesToRf = (edges) =>
 			className: ['dc-edge', lineType].filter(Boolean).join(' '),
 			data: { ...data, selectedStyle },
 			type: LINE_TYPE_MAP[lineType] || 'bezier',
-			markerStart: translateMarker(arrowStart),
-			markerEnd: translateMarker(arrowEnd)
+			markerStart: formatMarker(arrowStart),
+			markerEnd: formatMarker(arrowEnd)
 		})
 	);
 
