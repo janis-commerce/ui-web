@@ -6,6 +6,7 @@ import {
 	Background,
 	MiniMap,
 	useReactFlow,
+	useStoreApi,
 	applyNodeChanges,
 	applyEdgeChanges
 } from '@xyflow/react';
@@ -23,6 +24,9 @@ import styles from './styles';
  * @property {(opts?: { duration?: number, padding?: number }) => void} fitView - default: duration 400, padding 0.3
  * @property {(opts?: { duration?: number }) => void} zoomIn - default: duration 400
  * @property {(opts?: { duration?: number }) => void} zoomOut - default: duration 400
+ * @property {(ids?: string[]) => void} selectNodes - reemplaza la selección actual con esos nodos
+ * @property {(ids?: string[]) => void} selectEdges - reemplaza la selección actual con esos edges
+ * @property {() => void} clearSelection - limpia toda la selección
  */
 
 const defaultConfig = {
@@ -55,6 +59,7 @@ const Canvas = forwardRef(
 	) => {
 		const { readOnly, showControls, showMiniMap, resizableNodes } = config;
 		const rf = useReactFlow();
+		const store = useStoreApi();
 
 		const rfNodes = useMemo(() => mapNodesToRf(nodes), [nodes]);
 		const rfEdges = useMemo(() => mapEdgesToRf(edges), [edges]);
@@ -98,9 +103,20 @@ const Canvas = forwardRef(
 				},
 				fitView: (opts) => rf.fitView({ ...defaultViewportOpts, ...opts }),
 				zoomIn: (opts) => rf.zoomIn({ ...defaultZoomOpts, ...opts }),
-				zoomOut: (opts) => rf.zoomOut({ ...defaultZoomOpts, ...opts })
+				zoomOut: (opts) => rf.zoomOut({ ...defaultZoomOpts, ...opts }),
+				selectNodes: (ids = []) => {
+					const { unselectNodesAndEdges, addSelectedNodes } = store.getState();
+					unselectNodesAndEdges();
+					if (ids.length) addSelectedNodes(ids);
+				},
+				selectEdges: (ids = []) => {
+					const { unselectNodesAndEdges, addSelectedEdges } = store.getState();
+					unselectNodesAndEdges();
+					if (ids.length) addSelectedEdges(ids);
+				},
+				clearSelection: () => store.getState().unselectNodesAndEdges()
 			}),
-			[rf]
+			[rf, store]
 		);
 
 		const nodeTypes = useMemo(

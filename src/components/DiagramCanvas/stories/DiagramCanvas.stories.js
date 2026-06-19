@@ -207,17 +207,35 @@ export const EditMode = () => {
 	const [nodes, setNodes] = useState(baseNodes);
 	const [edges, setEdges] = useState(baseEdges);
 	const [lastEvent, setLastEvent] = useState(null);
+	const [selection, setSelection] = useState({ nodes: [], edges: [] });
+	const counterRef = React.useRef(0);
+
+	const getDropPosition = (currentNodes) => {
+		if (!currentNodes.length) return { x: 200, y: 200 };
+		const centerX =
+			currentNodes.reduce((sum, node) => sum + node.position.x, 0) / currentNodes.length;
+		const centerY =
+			currentNodes.reduce((sum, node) => sum + node.position.y, 0) / currentNodes.length;
+		const offset = (counterRef.current % 5) * 40 - 80;
+		return { x: centerX + offset, y: centerY + offset };
+	};
 
 	const handleNodesChange = (changes) => {
 		setNodes((prev) =>
 			prev
-				.filter((n) => !changes.some((c) => c.type === 'remove' && c.id === n.id))
-				.map((n) => {
-					const posChange = changes.find((c) => c.type === 'position' && c.id === n.id);
-					if (posChange) return { ...n, position: posChange.position };
-					const dimChange = changes.find((c) => c.type === 'dimensions' && c.id === n.id);
-					if (dimChange) return { ...n, width: dimChange.width, height: dimChange.height };
-					return n;
+				.filter(
+					(node) => !changes.some((change) => change.type === 'remove' && change.id === node.id)
+				)
+				.map((node) => {
+					const posChange = changes.find(
+						(change) => change.type === 'position' && change.id === node.id
+					);
+					if (posChange) return { ...node, position: posChange.position };
+					const dimChange = changes.find(
+						(change) => change.type === 'dimensions' && change.id === node.id
+					);
+					if (dimChange) return { ...node, width: dimChange.width, height: dimChange.height };
+					return node;
 				})
 		);
 		setLastEvent({ type: 'onNodesChange', payload: changes });
@@ -225,14 +243,16 @@ export const EditMode = () => {
 
 	const handleEdgesChange = (changes) => {
 		setEdges((prev) =>
-			prev.filter((e) => !changes.some((c) => c.type === 'remove' && c.id === e.id))
+			prev.filter(
+				(edge) => !changes.some((change) => change.type === 'remove' && change.id === edge.id)
+			)
 		);
 		setLastEvent({ type: 'onEdgesChange', payload: changes });
 	};
 
 	const handleConnect = ({ source, target, sourceHandle, targetHandle }) => {
-		const sourceNode = nodes.find((n) => n.id === source);
-		const targetNode = nodes.find((n) => n.id === target);
+		const sourceNode = nodes.find((node) => node.id === source);
+		const targetNode = nodes.find((node) => node.id === target);
 		const isCdToCd = sourceNode?.type === 'cd' && targetNode?.type === 'cd';
 		const style = isCdToCd ? edgeCdCd : edgeCdGrupo;
 		const edge = {
@@ -248,12 +268,73 @@ export const EditMode = () => {
 	};
 
 	const handleReconnect = (id, { source, target }) => {
-		setEdges((prev) => prev.map((e) => (e.id === id ? { ...e, source, target } : e)));
+		setEdges((prev) => prev.map((edge) => (edge.id === id ? { ...edge, source, target } : edge)));
 		setLastEvent({ type: 'onReconnect', payload: { id, source, target } });
+	};
+
+	const handleDelete = () => {
+		const selectedNodeIds = new Set(selection.nodes.map((node) => node.id));
+		const selectedEdgeIds = new Set(selection.edges.map((edge) => edge.id));
+		setNodes((prev) => prev.filter((node) => !selectedNodeIds.has(node.id)));
+		setEdges((prev) => prev.filter((edge) => !selectedEdgeIds.has(edge.id)));
+		setSelection({ nodes: [], edges: [] });
+	};
+
+	const addCd = () => {
+		const seq = ++counterRef.current;
+		setNodes((prev) => {
+			const position = getDropPosition(prev);
+			return [
+				...prev,
+				{
+					id: `wh-new-${seq}`,
+					type: 'cd',
+					position,
+					handleConfig: { color: PRIMARY },
+					data: { label: `CD ${seq}`, priority: 1 }
+				}
+			];
+		});
+	};
+
+	const addGrupoTiendas = () => {
+		const seq = ++counterRef.current;
+		setNodes((prev) => {
+			const position = getDropPosition(prev);
+			return [
+				...prev,
+				{
+					id: `gt-new-${seq}`,
+					type: 'grupoTiendas',
+					position,
+					handleConfig: { color: SECONDARY_DEEP },
+					data: { label: `Grupo ${seq}`, tiendas: [] }
+				}
+			];
+		});
 	};
 
 	return (
 		<div style={{ width: '100%' }}>
+			<div style={{ marginBottom: 8 }}>
+				<button style={btnStyle} onClick={addCd}>
+					agregar CD
+				</button>
+				<button style={btnStyle} onClick={addGrupoTiendas}>
+					agregar grupo tienda
+				</button>
+				<button
+					style={{
+						...btnStyle,
+						background: selection.nodes.length + selection.edges.length > 0 ? '#e53e3e' : '#ccc',
+						cursor: selection.nodes.length + selection.edges.length > 0 ? 'pointer' : 'not-allowed'
+					}}
+					onClick={handleDelete}
+					disabled={selection.nodes.length + selection.edges.length === 0}
+				>
+					eliminar
+				</button>
+			</div>
 			<div style={{ height: 400 }}>
 				<DiagramCanvas
 					nodes={nodes}
@@ -266,6 +347,7 @@ export const EditMode = () => {
 					onReconnect={handleReconnect}
 					onNodeClick={(id, data) => setLastEvent({ type: 'onNodeClick', payload: { id, data } })}
 					onEdgeClick={(id, data) => setLastEvent({ type: 'onEdgeClick', payload: { id, data } })}
+					onSelectionChange={setSelection}
 				/>
 			</div>
 			{lastEvent && (
@@ -297,7 +379,6 @@ export const DeleteWithConfirm = () => {
 	};
 
 	const handleNodesChange = (changes) => {
-		console.log('log changes >>>', changes);
 		setNodes((prev) =>
 			prev.filter((n) => !changes.some((c) => c.type === 'remove' && c.id === n.id))
 		);
@@ -308,7 +389,6 @@ export const DeleteWithConfirm = () => {
 			prev.filter((e) => !changes.some((c) => c.type === 'remove' && c.id === e.id))
 		);
 	};
-	console.log('log >>>', nodes);
 	return (
 		<div style={{ width: '100%', height: 400 }}>
 			<DiagramCanvas
@@ -519,6 +599,15 @@ export const RefAPI = () => {
 				</button>
 				<button style={btnStyle} onClick={() => canvasRef.current?.zoomOut()}>
 					zoomOut
+				</button>
+				<button style={btnStyle} onClick={() => canvasRef.current?.selectNodes(['wh-cordoba'])}>
+					selectNode
+				</button>
+				<button style={btnStyle} onClick={() => canvasRef.current?.selectEdges(['e-1'])}>
+					selectEdge
+				</button>
+				<button style={btnStyle} onClick={() => canvasRef.current?.clearSelection()}>
+					clearSelection
 				</button>
 			</div>
 			<div style={{ width: '100%', height: 400 }}>
