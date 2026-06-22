@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.11.0-beta.1] - 2026-06-22
+
+### Added
+
+- `DiagramCanvas` component: controlled model with custom nodes, configurable edges, edit mode, node resize, delete confirmation via `onBeforeDelete`, external selection actions via `onSelectionChange`, and imperative zoom/selection API [JMV-4083](https://janiscommerce.atlassian.net/browse/JMV-4083)
+
 ## [1.10.0] - 2026-06-05
 
 ### Added
