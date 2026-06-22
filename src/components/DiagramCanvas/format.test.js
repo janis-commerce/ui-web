@@ -75,7 +75,9 @@ describe('DiagramCanvas / format', () => {
 		});
 
 		test('translates arrowStart contained to markerStart', () => {
-			const result = mapEdgesToRf([{ ...baseEdge, arrowStart: { type: 'contained', color: 'blue' } }]);
+			const result = mapEdgesToRf([
+				{ ...baseEdge, arrowStart: { type: 'contained', color: 'blue' } }
+			]);
 			expect(result[0].markerStart).toEqual({ type: 'arrowclosed', color: 'blue' });
 		});
 
@@ -96,7 +98,9 @@ describe('DiagramCanvas / format', () => {
 	describe('readNodeChanges', () => {
 		test('returns position change when drag ended', () => {
 			const changes = [{ type: 'position', id: 'n1', position: { x: 10, y: 20 }, dragging: false }];
-			expect(readNodeChanges(changes)).toEqual([{ type: 'position', id: 'n1', position: { x: 10, y: 20 } }]);
+			expect(readNodeChanges(changes)).toEqual([
+				{ type: 'position', id: 'n1', position: { x: 10, y: 20 } }
+			]);
 		});
 
 		test('ignores position change while dragging', () => {
@@ -110,12 +114,18 @@ describe('DiagramCanvas / format', () => {
 		});
 
 		test('returns dimensions change when resize ended', () => {
-			const changes = [{ type: 'dimensions', id: 'n1', dimensions: { width: 200, height: 100 }, resizing: false }];
-			expect(readNodeChanges(changes)).toEqual([{ type: 'dimensions', id: 'n1', width: 200, height: 100 }]);
+			const changes = [
+				{ type: 'dimensions', id: 'n1', dimensions: { width: 200, height: 100 }, resizing: false }
+			];
+			expect(readNodeChanges(changes)).toEqual([
+				{ type: 'dimensions', id: 'n1', width: 200, height: 100 }
+			]);
 		});
 
 		test('ignores dimensions change while resizing', () => {
-			const changes = [{ type: 'dimensions', id: 'n1', dimensions: { width: 200, height: 100 }, resizing: true }];
+			const changes = [
+				{ type: 'dimensions', id: 'n1', dimensions: { width: 200, height: 100 }, resizing: true }
+			];
 			expect(readNodeChanges(changes)).toEqual([]);
 		});
 
