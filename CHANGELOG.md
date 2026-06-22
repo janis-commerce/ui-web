@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.11.0-beta.2] - 2026-06-22
+
+### Fixed
+
+- Add css build for rollup and custom plugin to include files for react-flow
+
 ## [1.11.0-beta.1] - 2026-06-22
 
 ### Added
