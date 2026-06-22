@@ -247,6 +247,24 @@ const Canvas = forwardRef(
 			[onSelectionChange]
 		);
 
+		const handleNodeClick = useCallback(
+			(_event, node) => {
+				// eslint-disable-next-line no-unused-vars
+				const { handleConfig, ...data } = node.data || {};
+				onNodeClick?.(node.id, data);
+			},
+			[onNodeClick]
+		);
+
+		const handleEdgeClick = useCallback(
+			(_event, edge) => {
+				// eslint-disable-next-line no-unused-vars
+				const { selectedStyle, ...data } = edge.data || {};
+				onEdgeClick?.(edge.id, data);
+			},
+			[onEdgeClick]
+		);
+
 		return (
 			<styles.Container>
 				<ReactFlow
@@ -265,16 +283,8 @@ const Canvas = forwardRef(
 					onReconnect={handleReconnect}
 					onBeforeDelete={onBeforeDelete}
 					onSelectionChange={handleSelectionChange}
-					onNodeClick={(_event, node) => {
-						// eslint-disable-next-line no-unused-vars
-						const { handleConfig, ...data } = node.data || {};
-						onNodeClick?.(node.id, data);
-					}}
-					onEdgeClick={(_event, edge) => {
-						// eslint-disable-next-line no-unused-vars
-						const { selectedStyle, ...data } = edge.data || {};
-						onEdgeClick?.(edge.id, data);
-					}}
+					onNodeClick={handleNodeClick}
+					onEdgeClick={handleEdgeClick}
 				>
 					<Background />
 					{showControls && <DiagramControls />}

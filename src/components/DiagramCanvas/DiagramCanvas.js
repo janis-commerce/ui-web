@@ -10,24 +10,17 @@ const defaultConfig = {
 	resizableNodes: false
 };
 
-const DiagramCanvas = forwardRef((props, ref) => {
-	const mergedConfig = useMemo(() => ({ ...defaultConfig, ...props.config }), [props.config]);
+const DiagramCanvas = forwardRef(({ nodes, edges, nodeComponents, config, ...rest }, ref) => {
+	const mergedConfig = useMemo(() => ({ ...defaultConfig, ...config }), [config]);
 	return (
 		<ReactFlowProvider>
 			<Canvas
 				ref={ref}
-				nodes={props.nodes ?? []}
-				edges={props.edges ?? []}
-				nodeComponents={props.nodeComponents ?? {}}
+				nodes={nodes ?? []}
+				edges={edges ?? []}
+				nodeComponents={nodeComponents ?? {}}
 				config={mergedConfig}
-				onNodesChange={props.onNodesChange}
-				onEdgesChange={props.onEdgesChange}
-				onConnect={props.onConnect}
-				onReconnect={props.onReconnect}
-				onNodeClick={props.onNodeClick}
-				onEdgeClick={props.onEdgeClick}
-				onBeforeDelete={props.onBeforeDelete}
-				onSelectionChange={props.onSelectionChange}
+				{...rest}
 			/>
 		</ReactFlowProvider>
 	);

@@ -1,8 +1,8 @@
+import { mapNodesToRf, mapEdgesToRf, readNodeChanges, readEdgeChanges } from './format';
+
 jest.mock('@xyflow/react', () => ({
 	MarkerType: { Arrow: 'arrow', ArrowClosed: 'arrowclosed' }
 }));
-
-const { mapNodesToRf, mapEdgesToRf, readNodeChanges, readEdgeChanges } = require('./format');
 
 describe('DiagramCanvas / format', () => {
 	describe('mapNodesToRf', () => {
