@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Fixed
+
+- Pin `node-releases` to `2.0.19` via `resolutions` to keep the build installable on Node 14 (newer `browserslist` pulled `node-releases@2.0.48`, which requires Node >= 18)
+
 ## [1.11.0-beta.2] - 2026-06-22
 
 ### Fixed

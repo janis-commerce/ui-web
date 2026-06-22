@@ -122,6 +122,9 @@
 		"react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
 		"styled-components": ">= 5.3.0"
 	},
+	"resolutions": {
+		"node-releases": "2.0.19"
+	},
 	"babel": {
 		"presets": [
 			"@babel/preset-env",
