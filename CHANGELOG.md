@@ -7,23 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.11.0-beta.3] - 2026-06-22
-
-### Fixed
-
-- Pin `node-releases` to `2.0.19` via `resolutions` to keep the build installable on Node 14 (newer `browserslist` pulled `node-releases@2.0.48`, which requires Node >= 18)
-
-## [1.11.0-beta.2] - 2026-06-22
-
-### Fixed
-
-- Add css build for rollup and custom plugin to include files for react-flow
-
-## [1.11.0-beta.1] - 2026-06-22
+## [1.11.0] - 2026-06-25
 
 ### Added
 
 - `DiagramCanvas` component: controlled model with custom nodes, configurable edges, edit mode, node resize, delete confirmation via `onBeforeDelete`, external selection actions via `onSelectionChange`, and imperative zoom/selection API [JMV-4083](https://janiscommerce.atlassian.net/browse/JMV-4083)
+
+### Fixed
+
+- Add css build for rollup and custom plugin to include files for react-flow
+- Pin `node-releases` to `2.0.19` via `resolutions` to keep the build installable on Node 14 (newer `browserslist` pulled `node-releases@2.0.48`, which requires Node >= 18)
 
 ## [1.10.0] - 2026-06-05
 
