@@ -27,7 +27,13 @@ const withHandles = (NodeComponent, { resizable = false } = {}) => {
 						id={id}
 						type="source"
 						position={POSITION_MAP[id] || Position.Top}
-						style={{ background: handleColor, width: 10, height: 10, border: '2px solid #fff' }}
+						style={{
+							background: handleColor,
+							width: 10,
+							height: 10,
+							border: '2px solid #fff',
+							zIndex: 1
+						}}
 					/>
 				))}
 				<NodeComponent data={nodeData} selected={selected} style={sizeStyle} />
