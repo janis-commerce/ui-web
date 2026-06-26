@@ -70,15 +70,35 @@ describe('DiagramCanvas / format', () => {
 		});
 
 		test('translates arrowEnd outlined to markerEnd', () => {
-			const result = mapEdgesToRf([{ ...baseEdge, arrowEnd: { type: 'outlined', color: 'red' } }]);
-			expect(result[0].markerEnd).toEqual({ type: 'arrow', color: 'red' });
+			const result = mapEdgesToRf([{ ...baseEdge, arrowEnd: { type: 'outlined' } }]);
+			expect(result[0].markerEnd).toMatchObject({ type: 'arrow' });
 		});
 
 		test('translates arrowStart contained to markerStart', () => {
+			const result = mapEdgesToRf([{ ...baseEdge, arrowStart: { type: 'contained' } }]);
+			expect(result[0].markerStart).toMatchObject({ type: 'arrowclosed' });
+		});
+
+		test('inherits marker color from style.stroke', () => {
 			const result = mapEdgesToRf([
-				{ ...baseEdge, arrowStart: { type: 'contained', color: 'blue' } }
+				{ ...baseEdge, arrowEnd: { type: 'outlined' }, style: { stroke: 'red' } }
 			]);
-			expect(result[0].markerStart).toEqual({ type: 'arrowclosed', color: 'blue' });
+			expect(result[0].markerEnd).toMatchObject({ color: 'red' });
+		});
+
+		test('leaves marker color undefined when style has no stroke', () => {
+			const result = mapEdgesToRf([{ ...baseEdge, arrowEnd: { type: 'outlined' } }]);
+			expect(result[0].markerEnd.color).toBeUndefined();
+		});
+
+		test('maps arrow size to marker width and height', () => {
+			const result = mapEdgesToRf([{ ...baseEdge, arrowEnd: { type: 'outlined', size: 24 } }]);
+			expect(result[0].markerEnd).toMatchObject({ width: 24, height: 24 });
+		});
+
+		test('defaults marker size to 20 when size not provided', () => {
+			const result = mapEdgesToRf([{ ...baseEdge, arrowEnd: { type: 'outlined' } }]);
+			expect(result[0].markerEnd).toMatchObject({ width: 20, height: 20 });
 		});
 
 		test('omits markerStart and markerEnd when arrows not provided', () => {

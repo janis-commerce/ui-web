@@ -24,3 +24,24 @@ export const EDGE_TYPES = {
 	bezier: withSelected(BezierEdge),
 	straight: withSelected(StraightEdge)
 };
+
+const ArrowShape = PropTypes.shape({
+	type: PropTypes.oneOf(['outlined', 'contained']),
+	size: PropTypes.number
+});
+
+export const DiagramEdgeShape = PropTypes.shape({
+	id: PropTypes.string.isRequired,
+	source: PropTypes.string.isRequired,
+	target: PropTypes.string.isRequired,
+	sourceHandle: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+	targetHandle: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
+	lineType: PropTypes.oneOf(['step', 'curved', 'straight']),
+	animated: PropTypes.bool,
+	label: PropTypes.string,
+	style: PropTypes.object,
+	selectedStyle: PropTypes.object,
+	arrowStart: ArrowShape,
+	arrowEnd: ArrowShape,
+	data: PropTypes.object
+});

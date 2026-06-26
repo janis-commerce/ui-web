@@ -35,35 +35,41 @@ const StoreIcon = () => (
 	</svg>
 );
 
+// Replica el patrón del consumidor: el ícono va en un círculo posicionado
+// `absolute` por fuera del label (arriba), y el Wrapper (solo el label) es la
+// caja que React Flow mide. Sirve para ver el solapamiento ícono/handle/flecha.
 export const CdNode = ({ data, selected, style }) => (
 	<div
 		style={{
+			position: 'relative',
 			background: selected ? PRIMARY_SOFT : '#fff',
 			border: `2px solid ${selected ? PRIMARY : '#c8d8f0'}`,
 			borderRadius: 10,
-			padding: '12px 12px 6px 8px',
+			padding: '6px 12px',
 			boxShadow: selected ? `0 4px 14px ${PRIMARY}3d` : '0 2px 6px rgba(0,17,51,0.06)',
-			display: 'flex',
-			alignItems: 'center',
-			gap: 8,
 			cursor: 'pointer',
 			minWidth: 110,
+			textAlign: 'center',
 			boxSizing: 'border-box',
 			...style
 		}}
 	>
 		<div
 			style={{
+				position: 'absolute',
+				top: '-100%',
+				left: '20%',
+				transform: 'translate(-50%, -50%)',
 				color: PRIMARY,
 				background: PRIMARY_SOFT,
-				borderRadius: 7,
-				width: 30,
-				height: 30,
-				flexShrink: 0,
+				borderRadius: '50%',
+				width: 38,
+				height: 38,
 				display: 'flex',
 				alignItems: 'center',
 				justifyContent: 'center',
-				position: 'relative'
+				border: '2px solid #fff',
+				boxShadow: '0 4px 6px rgba(0,0,0,0.3)'
 			}}
 		>
 			<WarehouseIcon />

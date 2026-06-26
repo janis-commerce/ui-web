@@ -7,7 +7,7 @@ export const edgeCdCd = {
 	animated: true,
 	style: { stroke: PRIMARY, strokeWidth: 2, strokeDasharray: '6 3' },
 	selectedStyle: { stroke: PRIMARY, strokeWidth: 3, strokeDasharray: 'none' },
-	arrowEnd: { type: 'outlined', color: PRIMARY }
+	arrowEnd: { type: 'outlined' }
 };
 
 export const edgeCdGrupo = {
@@ -15,8 +15,8 @@ export const edgeCdGrupo = {
 	animated: true,
 	style: { stroke: SECONDARY_DEEP, strokeWidth: 2, strokeDasharray: '6 3' },
 	selectedStyle: { stroke: SECONDARY_DEEP, strokeWidth: 3, strokeDasharray: 'none' },
-	arrowStart: { type: 'outlined', color: SECONDARY_DEEP },
-	arrowEnd: { type: 'outlined', color: SECONDARY_DEEP }
+	arrowStart: { type: 'outlined' },
+	arrowEnd: { type: 'outlined' }
 };
 
 export const baseNodes = [

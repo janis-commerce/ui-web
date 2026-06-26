@@ -21,6 +21,7 @@ const withHandles = (NodeComponent, { resizable = false } = {}) => {
 		return (
 			<>
 				{resizable && <NodeResizer minWidth={40} minHeight={40} isVisible={selected} />}
+				<NodeComponent data={nodeData} selected={selected} style={sizeStyle} />
 				{handles.map((id) => (
 					<Handle
 						key={id}
@@ -31,12 +32,10 @@ const withHandles = (NodeComponent, { resizable = false } = {}) => {
 							background: handleColor,
 							width: 10,
 							height: 10,
-							border: '2px solid #fff',
-							zIndex: 1
+							border: '2px solid #fff'
 						}}
 					/>
 				))}
-				<NodeComponent data={nodeData} selected={selected} style={sizeStyle} />
 			</>
 		);
 	};
@@ -51,5 +50,21 @@ const withHandles = (NodeComponent, { resizable = false } = {}) => {
 	};
 	return WrappedNode;
 };
+
+export const DiagramNodeShape = PropTypes.shape({
+	id: PropTypes.string.isRequired,
+	type: PropTypes.string.isRequired,
+	position: PropTypes.shape({
+		x: PropTypes.number.isRequired,
+		y: PropTypes.number.isRequired
+	}).isRequired,
+	width: PropTypes.number,
+	height: PropTypes.number,
+	handleConfig: PropTypes.shape({
+		color: PropTypes.string,
+		positions: PropTypes.arrayOf(PropTypes.oneOf(['top', 'right', 'bottom', 'left']))
+	}),
+	data: PropTypes.object
+});
 
 export default withHandles;

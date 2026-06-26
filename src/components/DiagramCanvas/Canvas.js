@@ -9,8 +9,8 @@ import {
 	applyNodeChanges,
 	applyEdgeChanges
 } from '@xyflow/react';
-import withHandles from './Node';
-import { EDGE_TYPES } from './Edge';
+import withHandles, { DiagramNodeShape } from './Node';
+import { EDGE_TYPES, DiagramEdgeShape } from './Edge';
 import { mapNodesToRf, mapEdgesToRf, readNodeChanges, readEdgeChanges } from './format';
 import DiagramControls from './Controls';
 import styles from './styles';
@@ -29,75 +29,6 @@ import styles from './styles';
 
 const defaultViewportOpts = { duration: 400, padding: 0.3 };
 const defaultZoomOpts = { duration: 400 };
-
-const ArrowShape = PropTypes.shape({
-	type: PropTypes.oneOf(['outlined', 'contained']),
-	color: PropTypes.string
-});
-
-export const DiagramNodeShape = PropTypes.shape({
-	id: PropTypes.string.isRequired,
-	type: PropTypes.string.isRequired,
-	position: PropTypes.shape({
-		x: PropTypes.number.isRequired,
-		y: PropTypes.number.isRequired
-	}).isRequired,
-	width: PropTypes.number,
-	height: PropTypes.number,
-	handleConfig: PropTypes.shape({
-		color: PropTypes.string,
-		positions: PropTypes.arrayOf(PropTypes.oneOf(['top', 'right', 'bottom', 'left']))
-	}),
-	data: PropTypes.object
-});
-
-export const DiagramEdgeShape = PropTypes.shape({
-	id: PropTypes.string.isRequired,
-	source: PropTypes.string.isRequired,
-	target: PropTypes.string.isRequired,
-	sourceHandle: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-	targetHandle: PropTypes.oneOf(['top', 'right', 'bottom', 'left']),
-	lineType: PropTypes.oneOf(['step', 'curved', 'straight']),
-	animated: PropTypes.bool,
-	label: PropTypes.string,
-	style: PropTypes.object,
-	selectedStyle: PropTypes.object,
-	arrowStart: ArrowShape,
-	arrowEnd: ArrowShape,
-	data: PropTypes.object
-});
-
-export const canvasPropTypes = {
-	/** Nodos a renderizar en el diagrama. */
-	nodes: PropTypes.arrayOf(DiagramNodeShape),
-	/** Edges a renderizar en el diagrama. */
-	edges: PropTypes.arrayOf(DiagramEdgeShape),
-	/** Map de tipo de nodo → componente React custom. */
-	nodeComponents: PropTypes.objectOf(PropTypes.elementType),
-	/** Configuración del canvas. `readOnly` deshabilita drag y conexiones. `showControls` muestra los controles de zoom. `showMiniMap` muestra el minimapa. `resizableNodes` habilita el redimensionado de nodos. */
-	config: PropTypes.shape({
-		readOnly: PropTypes.bool,
-		showControls: PropTypes.bool,
-		showMiniMap: PropTypes.bool,
-		resizableNodes: PropTypes.bool
-	}),
-	/** Cambios de posición (`{ type: 'position', id, position }`), dimensiones (`{ type: 'dimensions', id, width, height }`) o eliminación (`{ type: 'remove', id }`) de nodos. */
-	onNodesChange: PropTypes.func,
-	/** Eliminación de edges (`{ type: 'remove', id }`). */
-	onEdgesChange: PropTypes.func,
-	/** El usuario conectó dos nodos. Recibe `{ source, target, sourceHandle, targetHandle }`. */
-	onConnect: PropTypes.func,
-	/** El usuario reconectó un edge a otro nodo. Recibe `(id, { source, target })`. */
-	onReconnect: PropTypes.func,
-	/** El usuario hizo click en un nodo. Recibe `(id, data)`. */
-	onNodeClick: PropTypes.func,
-	/** El usuario hizo click en un edge. Recibe `(id, data)`. */
-	onEdgeClick: PropTypes.func,
-	/** Intercepta el borrado antes de que ocurra. Async: retornar `false` cancela el borrado. Recibe `{ nodes, edges }` con los elementos a borrar. */
-	onBeforeDelete: PropTypes.func,
-	/** Se llama cuando cambia la selección. Recibe `{ nodes: [{id}], edges: [{id}] }` con los elementos seleccionados en ese momento. */
-	onSelectionChange: PropTypes.func
-};
 
 const Canvas = forwardRef(
 	(
@@ -296,6 +227,39 @@ const Canvas = forwardRef(
 );
 
 Canvas.displayName = 'Canvas';
+
+export const canvasPropTypes = {
+	/** Nodos a renderizar en el diagrama. */
+	nodes: PropTypes.arrayOf(DiagramNodeShape),
+	/** Edges a renderizar en el diagrama. */
+	edges: PropTypes.arrayOf(DiagramEdgeShape),
+	/** Map de tipo de nodo → componente React custom. */
+	nodeComponents: PropTypes.objectOf(PropTypes.elementType),
+	/** Configuración del canvas. `readOnly` deshabilita drag y conexiones. `showControls` muestra los controles de zoom. `showMiniMap` muestra el minimapa. `resizableNodes` habilita el redimensionado de nodos. */
+	config: PropTypes.shape({
+		readOnly: PropTypes.bool,
+		showControls: PropTypes.bool,
+		showMiniMap: PropTypes.bool,
+		resizableNodes: PropTypes.bool
+	}),
+	/** Cambios de posición (`{ type: 'position', id, position }`), dimensiones (`{ type: 'dimensions', id, width, height }`) o eliminación (`{ type: 'remove', id }`) de nodos. */
+	onNodesChange: PropTypes.func,
+	/** Eliminación de edges (`{ type: 'remove', id }`). */
+	onEdgesChange: PropTypes.func,
+	/** El usuario conectó dos nodos. Recibe `{ source, target, sourceHandle, targetHandle }`. */
+	onConnect: PropTypes.func,
+	/** El usuario reconectó un edge a otro nodo. Recibe `(id, { source, target })`. */
+	onReconnect: PropTypes.func,
+	/** El usuario hizo click en un nodo. Recibe `(id, data)`. */
+	onNodeClick: PropTypes.func,
+	/** El usuario hizo click en un edge. Recibe `(id, data)`. */
+	onEdgeClick: PropTypes.func,
+	/** Intercepta el borrado antes de que ocurra. Async: retornar `false` cancela el borrado. Recibe `{ nodes, edges }` con los elementos a borrar. */
+	onBeforeDelete: PropTypes.func,
+	/** Se llama cuando cambia la selección. Recibe `{ nodes: [{id}], edges: [{id}] }` con los elementos seleccionados en ese momento. */
+	onSelectionChange: PropTypes.func
+};
+
 Canvas.propTypes = canvasPropTypes;
 
 export default Canvas;
