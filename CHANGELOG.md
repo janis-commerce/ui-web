@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.12.0] - 2026-06-26
+
+### Changed
+
+- `DiagramCanvas` edge arrows now inherit their color from the edge `style.stroke` (removed `color` from `arrowStart`/`arrowEnd`); added optional `size` (default 20)
+- Render node handles above the node content without `z-index` to prevent the connection arrow from being clipped
+- Moved shared PropTypes shapes to their own modules (`DiagramNodeShape` in `Node.js`, edge shapes in `Edge.js`)
+- Split `DiagramCanvas` stories into themed files (Overview, Interactions, Nodes, Edges, Ref API) with shared meta, shapes and styles
+
 ## [1.11.0] - 2026-06-25
 
 ### Added
