@@ -75,9 +75,16 @@ export const EditMode = () => {
 		setLastEvent({ type: 'onConnect', payload: { source, target } });
 	};
 
-	const handleReconnect = (id, { source, target }) => {
-		setEdges((prev) => prev.map((edge) => (edge.id === id ? { ...edge, source, target } : edge)));
-		setLastEvent({ type: 'onReconnect', payload: { id, source, target } });
+	const handleReconnect = ({ id, source, target, sourceHandle, targetHandle }) => {
+		setEdges((prev) =>
+			prev.map((edge) =>
+				edge.id === id ? { ...edge, source, target, sourceHandle, targetHandle } : edge
+			)
+		);
+		setLastEvent({
+			type: 'onReconnect',
+			payload: { id, source, target, sourceHandle, targetHandle }
+		});
 	};
 
 	const handleDelete = () => {
@@ -153,8 +160,12 @@ export const EditMode = () => {
 					onEdgesChange={handleEdgesChange}
 					onConnect={handleConnect}
 					onReconnect={handleReconnect}
-					onNodeClick={(id, data) => setLastEvent({ type: 'onNodeClick', payload: { id, data } })}
-					onEdgeClick={(id, data) => setLastEvent({ type: 'onEdgeClick', payload: { id, data } })}
+					onNodeClick={({ id, type, data }) =>
+						setLastEvent({ type: 'onNodeClick', payload: { id, type, data } })
+					}
+					onEdgeClick={({ id, data }) =>
+						setLastEvent({ type: 'onEdgeClick', payload: { id, data } })
+					}
 					onSelectionChange={setSelection}
 				/>
 			</div>
@@ -197,6 +208,46 @@ export const DeleteWithConfirm = () => {
 			prev.filter((e) => !changes.some((c) => c.type === 'remove' && c.id === e.id))
 		);
 	};
+	return (
+		<div style={{ width: '100%', height: 500 }}>
+			<DiagramCanvas
+				nodes={nodes}
+				edges={edges}
+				nodeComponents={nodeComponents}
+				config={{ readOnly: false }}
+				onBeforeDelete={handleBeforeDelete}
+				onNodesChange={handleNodesChange}
+				onEdgesChange={handleEdgesChange}
+			/>
+		</div>
+	);
+};
+
+// Borrado selectivo — onBeforeDelete puede devolver { nodes, edges } para borrar
+// solo un subconjunto (identificado por id). Acá se protegen los nodos de tipo
+// 'grupoTiendas': se dejan borrar los 'cd' y los edges, pero los grupos nunca.
+// Seleccioná varios elementos y presioná Backspace/Delete para verlo.
+export const DeleteSelective = () => {
+	const [nodes, setNodes] = useState(baseNodes);
+	const [edges, setEdges] = useState(baseEdges);
+
+	const handleBeforeDelete = ({ nodes: nodesToDelete, edges: edgesToDelete }) => ({
+		nodes: nodesToDelete.filter(({ type }) => type !== 'grupoTiendas'),
+		edges: edgesToDelete
+	});
+
+	const handleNodesChange = (changes) => {
+		setNodes((prev) =>
+			prev.filter((n) => !changes.some((c) => c.type === 'remove' && c.id === n.id))
+		);
+	};
+
+	const handleEdgesChange = (changes) => {
+		setEdges((prev) =>
+			prev.filter((e) => !changes.some((c) => c.type === 'remove' && c.id === e.id))
+		);
+	};
+
 	return (
 		<div style={{ width: '100%', height: 500 }}>
 			<DiagramCanvas

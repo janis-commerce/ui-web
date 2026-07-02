@@ -47,11 +47,12 @@ const nodeComponents = { myType: MyNode }
   showControls?:  boolean  // default true  — botones de zoom
   showMiniMap?:   boolean  // default true  — minimapa
   resizableNodes?: boolean // default false — habilita resize de nodos (ver story ResizableNodes)
+  fitViewOnMount?: boolean // default true  — encuadra todo el diagrama al montar
 }`
 				},
 				defaultValue: {
 					summary:
-						'{ readOnly: true, showControls: true, showMiniMap: true, resizableNodes: false }'
+						'{ readOnly: true, showControls: true, showMiniMap: true, resizableNodes: false, fitViewOnMount: true }'
 				}
 			}
 		},
@@ -80,25 +81,27 @@ const nodeComponents = { myType: MyNode }
 		},
 		onReconnect: {
 			description: 'El usuario arrastró un extremo de un edge existente a otro nodo.',
-			table: { type: { summary: '(id, { source, target }) => void' } }
+			table: { type: { summary: '({ id, source, target, sourceHandle, targetHandle }) => void' } }
 		},
 		onNodeClick: {
 			description: 'Click en un nodo.',
-			table: { type: { summary: '(id: string, data: object) => void' } }
+			table: { type: { summary: '({ id, type, data }) => void' } }
 		},
 		onEdgeClick: {
 			description: 'Click en un edge. `data` es el `edge.data` del consumidor sin `selectedStyle`.',
-			table: { type: { summary: '(id: string, data: object) => void' } }
+			table: { type: { summary: '({ id, data }) => void' } }
 		},
 		onBeforeDelete: {
 			description:
-				'Intercepta el borrado antes de que ocurra (tecla Delete/Backspace). Async: retornar `false` cancela el borrado. Ver story DeleteWithConfirm.',
+				'Intercepta el borrado antes de que ocurra (tecla Delete/Backspace). Async. Ver story DeleteWithConfirm.',
 			table: {
 				type: {
-					summary: '({ nodes, edges }) => Promise<boolean>',
+					summary: '({ nodes, edges }) => Promise<boolean | { nodes, edges }>',
 					detail: `async ({ nodes, edges }) => {
-  // nodes/edges: elementos que se van a borrar (formato de dominio)
-  return window.confirm('¿Eliminar?'); // false cancela
+  // nodes: [{ id, type, data }]  edges: [{ id, data }]  — lo que se va a borrar
+  return false;                        // cancela todo
+  // return true;                      // borra todo
+  // return { nodes, edges: [] };      // borra solo ese subconjunto (por id)
 }`
 				}
 			}

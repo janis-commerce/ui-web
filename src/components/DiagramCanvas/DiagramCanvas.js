@@ -7,7 +7,8 @@ const defaultConfig = {
 	readOnly: true,
 	showControls: true,
 	showMiniMap: true,
-	resizableNodes: false
+	resizableNodes: false,
+	fitViewOnMount: true
 };
 
 const DiagramCanvas = forwardRef(({ nodes, edges, nodeComponents, config, ...rest }, ref) => {

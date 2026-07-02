@@ -48,7 +48,7 @@ const Canvas = forwardRef(
 		},
 		ref
 	) => {
-		const { readOnly, showControls, showMiniMap, resizableNodes } = config;
+		const { readOnly, showControls, showMiniMap, resizableNodes, fitViewOnMount } = config;
 		const rf = useReactFlow();
 		const store = useStoreApi();
 
@@ -164,16 +164,55 @@ const Canvas = forwardRef(
 
 		const handleReconnect = useCallback(
 			(oldEdge, newConnection) => {
-				onReconnect?.(oldEdge.id, { source: newConnection.source, target: newConnection.target });
+				onReconnect?.({
+					id: oldEdge.id,
+					source: newConnection.source,
+					target: newConnection.target,
+					sourceHandle: newConnection.sourceHandle,
+					targetHandle: newConnection.targetHandle
+				});
 			},
 			[onReconnect]
 		);
 
+		const handleBeforeDelete = useCallback(
+			async ({ nodes: nodesToDelete, edges: edgesToDelete }) => {
+				if (!onBeforeDelete) return true;
+
+				const result = await onBeforeDelete({
+					nodes: nodesToDelete.map((node) => {
+						// eslint-disable-next-line no-unused-vars
+						const { handleConfig, ...data } = node.data || {};
+						return { id: node.id, type: node.type, data };
+					}),
+					edges: edgesToDelete.map((edge) => {
+						// eslint-disable-next-line no-unused-vars
+						const { selectedStyle, ...data } = edge.data || {};
+						return { id: edge.id, data };
+					})
+				});
+
+				// bool/undefined → confirmar (true) o cancelar (false) todo el borrado.
+				if (typeof result !== 'object' || result === null) return result !== false;
+
+				// { nodes, edges } → borrado selectivo: filtrar los objetos RF originales
+				// por los ids que el consumidor devolvió (RF hace el match por id).
+				const idsToDelete = (elements) => new Set((elements || []).map(({ id }) => id));
+				const nodeIds = idsToDelete(result.nodes);
+				const edgeIds = idsToDelete(result.edges);
+				return {
+					nodes: nodesToDelete.filter((node) => nodeIds.has(node.id)),
+					edges: edgesToDelete.filter((edge) => edgeIds.has(edge.id))
+				};
+			},
+			[onBeforeDelete]
+		);
+
 		const handleSelectionChange = useCallback(
-			({ nodes: n, edges: e }) =>
+			({ nodes: selectedNodes, edges: selectedEdges }) =>
 				onSelectionChange?.({
-					nodes: n.map(({ id }) => ({ id })),
-					edges: e.map(({ id }) => ({ id }))
+					nodes: selectedNodes.map(({ id }) => ({ id })),
+					edges: selectedEdges.map(({ id }) => ({ id }))
 				}),
 			[onSelectionChange]
 		);
@@ -182,7 +221,7 @@ const Canvas = forwardRef(
 			(_event, node) => {
 				// eslint-disable-next-line no-unused-vars
 				const { handleConfig, ...data } = node.data || {};
-				onNodeClick?.(node.id, data);
+				onNodeClick?.({ id: node.id, type: node.type, data });
 			},
 			[onNodeClick]
 		);
@@ -191,7 +230,7 @@ const Canvas = forwardRef(
 			(_event, edge) => {
 				// eslint-disable-next-line no-unused-vars
 				const { selectedStyle, ...data } = edge.data || {};
-				onEdgeClick?.(edge.id, data);
+				onEdgeClick?.({ id: edge.id, data });
 			},
 			[onEdgeClick]
 		);
@@ -204,6 +243,7 @@ const Canvas = forwardRef(
 					nodeTypes={nodeTypes}
 					edgeTypes={EDGE_TYPES}
 					proOptions={{ hideAttribution: true }}
+					fitView={fitViewOnMount}
 					nodesDraggable={!readOnly}
 					nodesConnectable={!readOnly}
 					elementsSelectable={!readOnly}
@@ -212,7 +252,7 @@ const Canvas = forwardRef(
 					onEdgesChange={handleEdgesChangeCallback}
 					onConnect={handleConnect}
 					onReconnect={handleReconnect}
-					onBeforeDelete={onBeforeDelete}
+					onBeforeDelete={handleBeforeDelete}
 					onSelectionChange={handleSelectionChange}
 					onNodeClick={handleNodeClick}
 					onEdgeClick={handleEdgeClick}
@@ -235,12 +275,13 @@ export const canvasPropTypes = {
 	edges: PropTypes.arrayOf(DiagramEdgeShape),
 	/** Map de tipo de nodo → componente React custom. */
 	nodeComponents: PropTypes.objectOf(PropTypes.elementType),
-	/** Configuración del canvas. `readOnly` deshabilita drag y conexiones. `showControls` muestra los controles de zoom. `showMiniMap` muestra el minimapa. `resizableNodes` habilita el redimensionado de nodos. */
+	/** Configuración del canvas. `readOnly` deshabilita drag y conexiones. `showControls` muestra los controles de zoom. `showMiniMap` muestra el minimapa. `resizableNodes` habilita el redimensionado de nodos. `fitViewOnMount` encuadra todo el diagrama al montar (default true). */
 	config: PropTypes.shape({
 		readOnly: PropTypes.bool,
 		showControls: PropTypes.bool,
 		showMiniMap: PropTypes.bool,
-		resizableNodes: PropTypes.bool
+		resizableNodes: PropTypes.bool,
+		fitViewOnMount: PropTypes.bool
 	}),
 	/** Cambios de posición (`{ type: 'position', id, position }`), dimensiones (`{ type: 'dimensions', id, width, height }`) o eliminación (`{ type: 'remove', id }`) de nodos. */
 	onNodesChange: PropTypes.func,
@@ -248,13 +289,13 @@ export const canvasPropTypes = {
 	onEdgesChange: PropTypes.func,
 	/** El usuario conectó dos nodos. Recibe `{ source, target, sourceHandle, targetHandle }`. */
 	onConnect: PropTypes.func,
-	/** El usuario reconectó un edge a otro nodo. Recibe `(id, { source, target })`. */
+	/** El usuario reconectó un edge a otro nodo. Recibe `{ id, source, target, sourceHandle, targetHandle }`. */
 	onReconnect: PropTypes.func,
-	/** El usuario hizo click en un nodo. Recibe `(id, data)`. */
+	/** El usuario hizo click en un nodo. Recibe `{ id, type, data }`. */
 	onNodeClick: PropTypes.func,
-	/** El usuario hizo click en un edge. Recibe `(id, data)`. */
+	/** El usuario hizo click en un edge. Recibe `{ id, data }`. */
 	onEdgeClick: PropTypes.func,
-	/** Intercepta el borrado antes de que ocurra. Async: retornar `false` cancela el borrado. Recibe `{ nodes, edges }` con los elementos a borrar. */
+	/** Intercepta el borrado antes de que ocurra. Recibe `{ nodes: [{ id, type, data }], edges: [{ id, data }] }` con los elementos a borrar. Async. Retornar `false` cancela; `true` borra todo; un objeto `{ nodes, edges }` borra solo ese subconjunto (borrado selectivo, identificado por `id`). */
 	onBeforeDelete: PropTypes.func,
 	/** Se llama cuando cambia la selección. Recibe `{ nodes: [{id}], edges: [{id}] }` con los elementos seleccionados en ese momento. */
 	onSelectionChange: PropTypes.func
