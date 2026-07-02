@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.0.0] - 2026-07-02
+
+### Changed
+
+- **BREAKING** `DiagramCanvas` `onNodeClick` now receives `{ id, type, data }` (was `(id, data)`) and `onEdgeClick` now receives `{ id, data }` (was `(id, data)`)
+- **BREAKING** `DiagramCanvas` `onReconnect` now receives `{ id, source, target, sourceHandle, targetHandle }` (was `(id, { source, target })`), preserving the connection handles
+- `DiagramCanvas` `onBeforeDelete` now receives sanitized domain objects `{ nodes: [{ id, type, data }], edges: [{ id, data }] }` instead of raw React Flow objects
+
+### Added
+
+- `DiagramCanvas` `onBeforeDelete` can now return `{ nodes, edges }` to delete only a subset of the selection (selective deletion), in addition to `true`/`false`
+- `DiagramCanvas` `config.fitViewOnMount` (default `true`) to fit the whole diagram into view on mount without animation
+
 ## [1.12.0] - 2026-06-26
 
 ### Changed
