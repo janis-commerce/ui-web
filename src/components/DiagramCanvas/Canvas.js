@@ -25,6 +25,7 @@ import styles from './styles';
  * @property {(ids?: string[]) => void} selectNodes - reemplaza la selección actual con esos nodos
  * @property {(ids?: string[]) => void} selectEdges - reemplaza la selección actual con esos edges
  * @property {() => void} clearSelection - limpia toda la selección
+ * @property {(ids?: { nodes?: string[], edges?: string[] }) => Promise<void>} deleteElements - borra los elementos vía React Flow (pasa por onBeforeDelete y onNodesChange/onEdgesChange)
  */
 
 const defaultViewportOpts = { duration: 400, padding: 0.3 };
@@ -110,7 +111,12 @@ const Canvas = forwardRef(
 					unselectNodesAndEdges();
 					if (ids.length) addSelectedEdges(ids);
 				},
-				clearSelection: () => store.getState().unselectNodesAndEdges()
+				clearSelection: () => store.getState().unselectNodesAndEdges(),
+				deleteElements: ({ nodes: nodeIds = [], edges: edgeIds = [] } = {}) =>
+					rf.deleteElements({
+						nodes: nodeIds.map((id) => ({ id })),
+						edges: edgeIds.map((id) => ({ id }))
+					})
 			}),
 			[rf, store]
 		);

@@ -9,6 +9,8 @@ import meta from './meta';
 export default { ...meta, title: 'Components/DiagramCanvas/Interactions' };
 
 // Modo edición completo — drag, conectar, reconectar, eliminar.
+// El botón "eliminar" borra vía ref (deleteElements), por lo que pasa por
+// onBeforeDelete y pide confirmación, igual que borrar con el teclado.
 // El panel inferior muestra el último evento recibido para que el consumidor
 // pueda verificar la forma exacta de cada callback.
 export const EditMode = () => {
@@ -17,6 +19,7 @@ export const EditMode = () => {
 	const [lastEvent, setLastEvent] = useState(null);
 	const [selection, setSelection] = useState({ nodes: [], edges: [] });
 	const counterRef = React.useRef(0);
+	const canvasRef = React.useRef();
 
 	const getDropPosition = (currentNodes) => {
 		if (!currentNodes.length) return { x: 200, y: 200 };
@@ -87,12 +90,23 @@ export const EditMode = () => {
 		});
 	};
 
+	// Borra vía el ref: pasa por RF, dispara onBeforeDelete y emite los 'remove'
+	// por onNodesChange/onEdgesChange (mismo pipeline que borrar con el teclado).
 	const handleDelete = () => {
-		const selectedNodeIds = new Set(selection.nodes.map((node) => node.id));
-		const selectedEdgeIds = new Set(selection.edges.map((edge) => edge.id));
-		setNodes((prev) => prev.filter((node) => !selectedNodeIds.has(node.id)));
-		setEdges((prev) => prev.filter((edge) => !selectedEdgeIds.has(edge.id)));
-		setSelection({ nodes: [], edges: [] });
+		canvasRef.current?.deleteElements({
+			nodes: selection.nodes.map((node) => node.id),
+			edges: selection.edges.map((edge) => edge.id)
+		});
+	};
+
+	// Como el botón borra vía deleteElements, pasa por onBeforeDelete igual que el
+	// teclado: acá se pide confirmación antes de borrar.
+	const handleBeforeDelete = ({ nodes: nodesToDelete, edges: edgesToDelete }) => {
+		const names = [
+			...nodesToDelete.map((node) => `nodo "${node.id}"`),
+			...edgesToDelete.map((edge) => `conexión "${edge.id}"`)
+		].join(', ');
+		return window.confirm(`¿Eliminar ${names}?`);
 	};
 
 	const addCd = () => {
@@ -152,10 +166,12 @@ export const EditMode = () => {
 			</div>
 			<div style={{ height: 500 }}>
 				<DiagramCanvas
+					ref={canvasRef}
 					nodes={nodes}
 					edges={edges}
 					nodeComponents={nodeComponents}
 					config={{ readOnly: false, resizableNodes: true }}
+					onBeforeDelete={handleBeforeDelete}
 					onNodesChange={handleNodesChange}
 					onEdgesChange={handleEdgesChange}
 					onConnect={handleConnect}
