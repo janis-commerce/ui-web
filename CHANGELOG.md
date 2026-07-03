@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.1.0] - 2026-07-03
+
+### Added
+
+- `DiagramCanvas` imperative ref method `deleteElements({ nodes, edges })` so consumers can delete elements from their own controls through React Flow — deletion goes through `onBeforeDelete` and emits removes via `onNodesChange`/`onEdgesChange`, same as keyboard delete
+
 ## [2.0.0] - 2026-07-02
 
 ### Changed
