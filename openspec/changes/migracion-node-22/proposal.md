@@ -62,6 +62,15 @@ por causas ajenas a Node. Se elimina en vez de arreglarse. Evidencia:
 queda vacía → se elimina) y el entry `"build:icons"` de `package.json`. Todo queda en el historial
 de git por si alguna vez se retoma el flujo IcoMoon.
 
+**`chalk` (devDependency huérfana):** `build-icons.js` era su único consumidor en el repo. Al
+borrarlo, `chalk@^5.0.0` queda sin uso → se elimina también de `devDependencies` y del `yarn.lock`,
+por coherencia con esta limpieza.
+
+**Nota sobre `deploy-storybook`:** el script `deploy-storybook` (`gh-pages -d stories`) **no** lleva
+el flag `--openssl-legacy-provider` y no lo necesita: solo **publica** el directorio `stories/` ya
+existente (no dispara build de webpack, no toca OpenSSL), y además ningún workflow lo invoca — el
+único build de Storybook en CI usa `yarn storybook-web-docs`, que ya tiene el flag.
+
 ## Affected Areas
 
 | Area                                     | Impact   | Description                                      |
