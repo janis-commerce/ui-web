@@ -13,7 +13,7 @@ resuelve **ejecutando** cada script en Node 22, no editando config.
 
 | Decision                       | Choice                                                                | Alternatives                              | Rationale                                                                                                                                                                          |
 | ------------------------------ | --------------------------------------------------------------------- | ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Piso de Node                   | `>=22.0.0`                                                            | `>=20` (margen), `>=18`                   | El pedido es Node 22 LTS explícito; `>=22` documenta la intención. Downstream (Views) ya corre Node moderno.                                                                       |
+| Piso de Node (`engines`)       | `>=18.0.0`                                                            | `>=22` (forzar), `>=20`                   | Desacoplar desarrollo de consumo: ui-web se desarrolla/testea en Node 22 (`.nvmrc` + CI), pero el bundle publicado es de browser y no exige Node 22 para consumirse. `>=18` es el piso real; forzar `>=22` rompería consumidores en Node 18/20 (LTS vivos) sin beneficio y volvería la migración breaking. |
 | Storybook 6                    | **Mantener + flag OpenSSL**                                           | Upgrade a SB8                             | Decidido en proposal: SB8 exige reescribir `webpackFinal`, migrar `@storybook/addons` y resolver `storybook-dark-mode` (pide SB10). Fuera de scope.                                |
 | Ubicación del flag OpenSSL     | **Scripts de `package.json`**                                         | En los YAML de los workflows              | Un solo lugar hereda los 3 puntos de invocación (local, `publish-storybook.yml`, job de release en `npm-publish.yml`). En YAML habría que duplicarlo y es fácil que se escape uno. |
 | Forma del flag                 | `--openssl-legacy-provider` (con plan B si `NODE_OPTIONS` lo rechaza) | Solo `NODE_OPTIONS=...`                   | Node 17+ rechaza ese flag dentro de `NODE_OPTIONS` en varios casos. Plan B: pasarlo como flag CLI directo a la herramienta. A confirmar en el runner.                              |
@@ -26,7 +26,7 @@ resuelve **ejecutando** cada script en Node 22, no editando config.
 ```
 Node pin 14 → 22
     ├─ .nvmrc                         v14 → 22
-    ├─ package.json engines.node      >=14 → >=22
+    ├─ package.json engines.node      >=14 → >=18   (piso de consumo; dev en 22 vía .nvmrc)
     └─ .github/workflows/ (9 líneas)
          ├─ build-status.yml:13
          ├─ coverage-status.yml:13
@@ -56,7 +56,7 @@ Código muerto
 | File                                          | Action | Description                               |
 | --------------------------------------------- | ------ | ----------------------------------------- |
 | `.nvmrc`                                      | Modify | `v14` → `22`.                             |
-| `package.json` → `engines.node`               | Modify | `>=14.0.0` → `>=22.0.0`.                  |
+| `package.json` → `engines.node`               | Modify | `>=14.0.0` → `>=18.0.0`.                  |
 | `package.json` → `resolutions`                | Modify | Eliminar `node-releases`.                 |
 | `package.json` → `scripts.storybook`          | Modify | Agregar flag `--openssl-legacy-provider`. |
 | `package.json` → `scripts.storybook-web-docs` | Modify | Agregar flag `--openssl-legacy-provider`. |

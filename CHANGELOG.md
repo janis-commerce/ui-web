@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.3.0-beta.1] - 2026-07-21
+
+### Changed
+
+- Migrate development and CI toolchain from Node 14 to Node 22; minimum supported Node for consumers raised to `>=18.0.0`
+- Storybook now runs on Node 22 via `--openssl-legacy-provider` in the `storybook` scripts
+
+### Removed
+
+- Dead `build:icons` script and its IcoMoon source (`scripts/`), unused since the `src/` reorganization
+- `node-releases` resolution, only needed to keep the old Node 14 CI working
+
 ## [2.2.0] - 2026-07-21
 
 ### Added

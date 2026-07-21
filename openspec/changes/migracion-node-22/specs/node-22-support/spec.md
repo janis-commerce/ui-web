@@ -10,15 +10,18 @@ corriendo en Node 22, no cómo se implementa. No cubre la API pública del paque
 
 ### Requirement: Piso de Node declarado
 
-El paquete **MUST** declarar Node 22 como piso soportado en su configuración local y de engines.
-El paquete **MUST NOT** dejar pines a Node 14 en `.nvmrc`, `engines.node` ni en los workflows de CI.
+El paquete **MUST** desarrollarse y testearse en Node 22 (`.nvmrc` y CI). El `engines.node`
+**MUST** declarar el piso de **consumo** en `>=18.0.0` (el bundle es de browser y no exige Node 22
+para consumirse). El paquete **MUST NOT** dejar pines a Node 14 en `.nvmrc`, `engines.node` ni en
+los workflows de CI.
 
 #### Scenario: Configuración de versión coherente
 
 - GIVEN el repositorio migrado
 - WHEN se inspeccionan `.nvmrc`, `package.json` → `engines.node` y los 5 workflows de `.github/workflows/`
 - THEN `.nvmrc` **MUST** ser `22`
-- AND `engines.node` **MUST** ser `>=22.0.0`
+- AND `engines.node` **MUST** ser `>=18.0.0`
+- AND los workflows de CI **MUST** correr en Node 22
 - AND ninguna ocurrencia de `node-version` en los workflows **MUST** referenciar `14`
 
 ---

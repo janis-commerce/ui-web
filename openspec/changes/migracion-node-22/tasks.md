@@ -16,7 +16,8 @@
 ## Phase 2: Bump de Node — configuración local
 
 - [x] 2.1 `.nvmrc`: `v14` → `22`.
-- [x] 2.2 `package.json` → `engines.node`: `>=14.0.0` → `>=22.0.0` (mantener `engines.yarn` igual).
+- [x] 2.2 `package.json` → `engines.node`: `>=14.0.0` → `>=18.0.0` (piso de consumo; el desarrollo
+      se hace en Node 22 vía `.nvmrc`. Mantener `engines.yarn` igual).
 
 ## Phase 3: Bump de Node — CI (9 ocurrencias en 5 workflows)
 

@@ -12,7 +12,8 @@ toolchain: los upgrades de Enzyme, Jest y Storybook quedan como trabajo posterio
 ### In Scope
 
 - `.nvmrc`: `v14` → `22`.
-- `package.json` → `engines.node`: `>=14.0.0` → `>=22.0.0`.
+- `package.json` → `engines.node`: `>=14.0.0` → `>=18.0.0` (piso de **consumo**; el desarrollo
+  se hace en Node 22 vía `.nvmrc`).
 - Los 5 workflows de `.github/workflows/` (`build-status`, `coverage-status`, `npm-publish`,
   `npm-publish-beta`, `publish-storybook`): `node-version` `14` → `22`. **Son 9 ocurrencias**,
   no 5 (`npm-publish.yml` tiene 3, `npm-publish-beta.yml` tiene 2), incluido el job
@@ -66,7 +67,7 @@ de git por si alguna vez se retoma el flujo IcoMoon.
 | Area                                     | Impact   | Description                                      |
 | ---------------------------------------- | -------- | ------------------------------------------------ |
 | `.nvmrc`                                 | Modified | `v14` → `22`.                                    |
-| `package.json` → `engines`               | Modified | `node: >=22.0.0`.                                |
+| `package.json` → `engines`               | Modified | `node: >=18.0.0` (dev en 22 vía `.nvmrc`).       |
 | `package.json` → `resolutions`           | Modified | Eliminar `node-releases`.                        |
 | `package.json` → `scripts` (storybook)   | Modified | Flag `--openssl-legacy-provider` en los scripts. |
 | `package.json` → `scripts` (build:icons) | Removed  | Script muerto (ver Limpieza de código muerto).   |
