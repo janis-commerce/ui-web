@@ -18,10 +18,9 @@
 		"test": "jest",
 		"test-ci": "JEST_JUNIT_OUTPUT_DIR=test-reports jest --coverage --silent --ci --reporters=jest-junit",
 		"coverage": "jest --coverage --silent",
-		"storybook": "start-storybook -p 6006 -s public",
-		"storybook-web-docs": "build-storybook --config-dir ./.storybook --output-dir ./docs",
+		"storybook": "NODE_OPTIONS=--openssl-legacy-provider start-storybook -p 6006 -s public",
+		"storybook-web-docs": "NODE_OPTIONS=--openssl-legacy-provider build-storybook --config-dir ./.storybook --output-dir ./docs",
 		"deploy-storybook": "gh-pages -d stories",
-		"build:icons": "node scripts/build-icons",
 		"postpublish": "bash ./.postpublish.sh"
 	},
 	"repository": {
@@ -35,7 +34,7 @@
 	},
 	"homepage": "https://github.com/janis-commerce/ui-web#readme",
 	"engines": {
-		"node": ">=14.0.0",
+		"node": ">=22.0.0",
 		"yarn": ">=1.22.0"
 	},
 	"devDependencies": {
@@ -121,9 +120,6 @@
 		"react": "^16.8.0 || ^17.0.0 || ^18.0.0",
 		"react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
 		"styled-components": ">= 5.3.0"
-	},
-	"resolutions": {
-		"node-releases": "2.0.19"
 	},
 	"babel": {
 		"presets": [
