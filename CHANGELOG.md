@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.2.0] - 2026-07-21
+
+### Added
+
+- New icons: arrow_long_double, arrow_long_left, arrow_long_right [JMV-4087](https://janiscommerce.atlassian.net/browse/JMV-4087)
+
 ## [2.1.0] - 2026-07-03
 
 ### Added
