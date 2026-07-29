@@ -57,13 +57,14 @@
       `NODE_OPTIONS` (`not allowed in NODE_OPTIONS`), aplicar plan B (flag CLI directo) y re-verificar.
 - [x] 6.4 `yarn storybook-web-docs` buildea el estático en `docs/` sin error.
 - [ ] 6.5 Verificar que la action `bitovi/github-actions-storybook-to-github-pages@v1.0.3` respeta
-      el flag del script y qué Node usa internamente (revisar en el primer run de CI que buildee Storybook).
+      el flag del script y qué Node usa internamente. **Diferido:** solo se ejercita en el release
+      final (`npm-publish.yml` en un tag `2.3.0`), no en push ni en beta. Se valida al cortar el release.
 
 ## Phase 7: CI y cierre
 
-- [ ] 7.1 Push de la rama: confirmar `build-status` y `coverage-status` en verde con Node 22.
-- [ ] 7.2 Validar (en un tag de prueba beta si aplica) que `npm-publish-beta` y el deploy de
-      Storybook corren en Node 22.
+- [x] 7.1 Push de la rama: confirmar `build-status` y `coverage-status` en verde con Node 22.
+- [x] 7.2 Validar que `npm-publish-beta` corre en Node 22: beta `2.3.0-beta.1` publicada en npm
+      (dist-tag `beta`, `latest` intacto en 2.2.0). El deploy de Storybook no aplica en beta (job solo en release final → ver 6.5).
 - [x] 7.3 Con todo en verde, eliminar `MIGRACION.md` del root (documento de entendimiento ya
       absorbido por este change).
 
