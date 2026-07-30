@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.4.0] - 2026-07-30
+
+### Added
+
+- Add `connection` icon [JMV-4087](https://janiscommerce.atlassian.net/browse/JMV-4087)
+- Add `warehouse_cdock` icon [JMV-4087](https://janiscommerce.atlassian.net/browse/JMV-4087)
+
 ## [2.3.0] - 2026-07-29
 
 ### Changed
