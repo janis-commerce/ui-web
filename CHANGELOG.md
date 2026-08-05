@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.5.0] - 2026-08-05
+
 ### Changed
 
 - Update `connection` icon path [JMV-4087](https://janiscommerce.atlassian.net/browse/JMV-4087)
