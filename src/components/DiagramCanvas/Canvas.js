@@ -40,6 +40,14 @@ import styles from './styles';
 const defaultViewportOpts = { duration: 400, padding: 0.3 };
 const defaultZoomOpts = { duration: 400 };
 
+// Defaults de React Flow para minZoom/maxZoom cuando no se declaran. Se usan acá
+// para validar el rango contra los valores EFECTIVOS (declarado o default), no
+// contra los crudos de config: declarar un solo extremo (ej. minZoom: 3 sin
+// maxZoom) puede invertirse contra el default del otro (maxZoom: 2) sin que un
+// chequeo que solo mire minZoom/maxZoom de config lo detecte.
+const DEFAULT_MIN_ZOOM = 0.5;
+const DEFAULT_MAX_ZOOM = 2;
+
 /**
  * Valida `minZoom`/`maxZoom` antes de pasarlos a React Flow: ninguno de los dos
  * validators internos (React Flow, d3-zoom) chequea signo ni orden, así que un
@@ -49,10 +57,10 @@ const defaultZoomOpts = { duration: 400 };
  */
 const getEffectiveZoomBounds = (minZoom, maxZoom) => {
 	const isInvalidBound = (value) => value != null && (!Number.isFinite(value) || value <= 0);
+	const resolvedMin = minZoom ?? DEFAULT_MIN_ZOOM;
+	const resolvedMax = maxZoom ?? DEFAULT_MAX_ZOOM;
 	const hasInvalidRange =
-		minZoom != null &&
-		maxZoom != null &&
-		(!Number.isFinite(minZoom) || !Number.isFinite(maxZoom) || maxZoom <= minZoom);
+		!Number.isFinite(resolvedMin) || !Number.isFinite(resolvedMax) || resolvedMax <= resolvedMin;
 
 	if (isInvalidBound(minZoom) || isInvalidBound(maxZoom) || hasInvalidRange) {
 		if (process.env.NODE_ENV !== 'production') {
