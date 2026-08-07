@@ -72,7 +72,7 @@ const getEffectiveZoomBounds = (minZoom, maxZoom) => {
 		return { minZoom: undefined, maxZoom: undefined };
 	}
 
-	return { minZoom, maxZoom };
+	return { minZoom: resolvedMin, maxZoom: resolvedMax };
 };
 
 const Canvas = forwardRef(
