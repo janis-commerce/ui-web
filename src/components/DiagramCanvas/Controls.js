@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useReactFlow, useStore, useStoreApi } from '@xyflow/react';
 import Icon from '../Icon';
@@ -18,25 +18,28 @@ const DiagramControls = ({ additionalControls = [] }) => {
 	const minZoomReached = useStore(minZoomReachedSelector);
 	const maxZoomReached = useStore(maxZoomReachedSelector);
 
-	const CONTROLS = {
-		zoomIn: {
-			icon: 'plus_big_light',
-			label: 'Zoom in',
-			isDisabled: maxZoomReached,
-			handler: () => zoomIn()
-		},
-		zoomOut: {
-			icon: 'minus_big_light',
-			label: 'Zoom out',
-			isDisabled: minZoomReached,
-			handler: () => zoomOut()
-		},
-		fitView: {
-			icon: 'expand',
-			label: 'Fit view',
-			handler: () => fitView()
-		}
-	};
+	const CONTROLS = useMemo(
+		() => ({
+			zoomIn: {
+				icon: 'plus_big_light',
+				label: 'Zoom in',
+				isDisabled: maxZoomReached,
+				handler: () => zoomIn()
+			},
+			zoomOut: {
+				icon: 'minus_big_light',
+				label: 'Zoom out',
+				isDisabled: minZoomReached,
+				handler: () => zoomOut()
+			},
+			fitView: {
+				icon: 'expand',
+				label: 'Fit view',
+				handler: () => fitView()
+			}
+		}),
+		[maxZoomReached, minZoomReached, zoomIn, zoomOut, fitView]
+	);
 
 	const toggleInteractivity = useCallback(() => {
 		store.setState({
@@ -51,8 +54,12 @@ const DiagramControls = ({ additionalControls = [] }) => {
 			{!!additionalControls.length && (
 				<styled.Group className="controls__group">
 					{additionalControls.map((control, index) => (
-						// eslint-disable-next-line react/no-array-index-key
-						<React.Fragment key={index}>{control}</React.Fragment>
+						<React.Fragment
+							// eslint-disable-next-line react/no-array-index-key
+							key={React.isValidElement(control) && control.key != null ? control.key : index}
+						>
+							{control}
+						</React.Fragment>
 					))}
 				</styled.Group>
 			)}
