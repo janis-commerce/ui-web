@@ -114,6 +114,21 @@ const nodeComponents = { myType: MyNode }
 					detail: `({ nodes: [{ id }], edges: [{ id }] }) => void`
 				}
 			}
+		},
+		additionalControls: {
+			description:
+				'Nodos React arbitrarios del consumidor (botones, un `Switch`, un `Checkbox`, cualquier componente ya armado), renderizados tal cual en un grupo aparte dentro de la barra de controles, visualmente separado de los nativos (zoom/fit/lock). `ui-web` no desarma ninguna forma: estilo, accesibilidad y comportamiento de cada nodo son responsabilidad de quien lo define. Sin efecto si `config.showControls` es `false`. Ver story CustomControls.',
+			table: {
+				type: {
+					summary: 'React.ReactNode[]',
+					detail: `// Cualquier elemento React ya armado por el consumidor:
+[
+  <button onClick={...} aria-label="...">...</button>,
+  <Switch checked={...} onChange={...} />
+]`
+				},
+				defaultValue: { summary: '[]' }
+			}
 		}
 	}
 };

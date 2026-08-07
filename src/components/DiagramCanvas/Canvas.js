@@ -45,7 +45,8 @@ const Canvas = forwardRef(
 			onNodeClick,
 			onEdgeClick,
 			onBeforeDelete,
-			onSelectionChange
+			onSelectionChange,
+			additionalControls
 		},
 		ref
 	) => {
@@ -264,7 +265,7 @@ const Canvas = forwardRef(
 					onEdgeClick={handleEdgeClick}
 				>
 					<Background />
-					{showControls && <DiagramControls />}
+					{showControls && <DiagramControls additionalControls={additionalControls} />}
 					{showMiniMap && <MiniMap />}
 				</ReactFlow>
 			</styles.Container>
@@ -304,7 +305,9 @@ export const canvasPropTypes = {
 	/** Intercepta el borrado antes de que ocurra. Recibe `{ nodes: [{ id, type, data }], edges: [{ id, data }] }` con los elementos a borrar. Async. Retornar `false` cancela; `true` borra todo; un objeto `{ nodes, edges }` borra solo ese subconjunto (borrado selectivo, identificado por `id`). */
 	onBeforeDelete: PropTypes.func,
 	/** Se llama cuando cambia la selección. Recibe `{ nodes: [{id}], edges: [{id}] }` con los elementos seleccionados en ese momento. */
-	onSelectionChange: PropTypes.func
+	onSelectionChange: PropTypes.func,
+	/** Nodos React arbitrarios (botones, switches, checkboxes, cualquier componente) renderizados en un grupo separado de los nativos (zoom/fit/lock) dentro de la barra de controles. Sin efecto si `config.showControls` es `false`. El estilo, la accesibilidad y el comportamiento de cada nodo son responsabilidad de quien lo define — `ui-web` no impone ninguna forma. */
+	additionalControls: PropTypes.arrayOf(PropTypes.node)
 };
 
 Canvas.propTypes = canvasPropTypes;

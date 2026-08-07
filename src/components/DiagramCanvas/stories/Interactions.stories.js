@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
+import Button from 'components/Button';
+import Switch from 'components/Switch';
 import DiagramCanvas from '../DiagramCanvas';
 import { nodeComponents } from './components';
 import { baseNodes, baseEdges, edgeCdCd, edgeCdGrupo, PRIMARY, SECONDARY_DEEP } from './mock';
@@ -275,6 +277,77 @@ export const DeleteSelective = () => {
 				onNodesChange={handleNodesChange}
 				onEdgesChange={handleEdgesChange}
 			/>
+		</div>
+	);
+};
+
+// Controles adicionales — el consumidor arma sus propios nodos React (no un objeto de
+// config con icon/onClick/ariaLabel) y `ui-web` los renderiza tal cual, sin desarmarlos,
+// en un grupo separado de los nativos (zoom/fit/lock). Acá se muestran dos tipos de
+// control distintos para demostrar que entra cualquier componente, no solo botones:
+// un botón simple y un `Switch` real con su propio estado.
+export const CustomControls = () => {
+	const [nodes, setNodes] = useState(baseNodes);
+	const [edges, setEdges] = useState(baseEdges);
+	const [lastEvent, setLastEvent] = useState(null);
+	const [autosave, setAutosave] = useState(false);
+
+	const additionalControls = [
+		<Button
+			key="manual"
+			icon="file"
+			iconColor="black"
+			hideLabel
+			variant="cleaned"
+			aria-label="Ver manual"
+			onClick={() => setLastEvent({ type: 'additionalControls', payload: 'Ver manual' })}
+		/>,
+		<Switch
+			key="autosave"
+			checked={autosave}
+			onChange={(checked) => {
+				setAutosave(checked);
+				setLastEvent({
+					type: 'additionalControls',
+					payload: `Autosave ${checked ? 'on' : 'off'}`
+				});
+			}}
+		/>
+	];
+
+	const handleNodesChange = (changes) => {
+		setNodes((prev) =>
+			prev.filter((n) => !changes.some((c) => c.type === 'remove' && c.id === n.id))
+		);
+	};
+
+	const handleEdgesChange = (changes) => {
+		setEdges((prev) =>
+			prev.filter((e) => !changes.some((c) => c.type === 'remove' && c.id === e.id))
+		);
+	};
+
+	return (
+		<div style={{ width: '100%' }}>
+			<div style={{ height: 500 }}>
+				<DiagramCanvas
+					nodes={nodes}
+					edges={edges}
+					nodeComponents={nodeComponents}
+					config={{ readOnly: false }}
+					additionalControls={additionalControls}
+					onNodesChange={handleNodesChange}
+					onEdgesChange={handleEdgesChange}
+				/>
+			</div>
+			{lastEvent && (
+				<div style={eventCardStyle}>
+					<div style={eventLabelStyle}>{lastEvent.type}</div>
+					<pre style={{ margin: 0, whiteSpace: 'pre-wrap' }}>
+						{JSON.stringify(lastEvent.payload, null, 2)}
+					</pre>
+				</div>
+			)}
 		</div>
 	);
 };
