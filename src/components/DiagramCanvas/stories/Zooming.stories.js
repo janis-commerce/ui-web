@@ -75,8 +75,10 @@ export const InvertedZoomRange = () => (
 	</div>
 );
 
-// Diagrama sin nodos + initialZoom: no debe lanzar ningún error (el guard de
-// bounds vacío corta el efecto antes de llamar setCenter).
+// Diagrama sin nodos + initialZoom: no debe lanzar ningún error. Con nodes: [],
+// useNodesInitialized() nunca pasa a `true` (requiere al menos un nodo), así que
+// el efecto no llega a ejecutarse en absoluto — no es el guard de bounds vacío
+// el que protege este caso.
 export const EmptyDiagram = () => (
 	<div style={{ width: '100%', height: 500 }}>
 		<DiagramCanvas

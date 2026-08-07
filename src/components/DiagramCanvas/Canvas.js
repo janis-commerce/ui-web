@@ -296,8 +296,8 @@ const Canvas = forwardRef(
 			const bounds = rf.getNodesBounds(rf.getNodes());
 			if (!bounds.width && !bounds.height) return; // sin nodos: no-op
 
-			const { minZoom, maxZoom } = store.getState();
-			const clampedZoom = Math.min(Math.max(initialZoom, minZoom), maxZoom);
+			const { minZoom: storeMinZoom, maxZoom: storeMaxZoom } = store.getState();
+			const clampedZoom = Math.min(Math.max(initialZoom, storeMinZoom), storeMaxZoom);
 
 			rf.setCenter(bounds.x + bounds.width / 2, bounds.y + bounds.height / 2, {
 				zoom: clampedZoom
