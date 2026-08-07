@@ -104,6 +104,9 @@ const Canvas = forwardRef(
 			() => getEffectiveZoomBounds(minZoom, maxZoom),
 			[minZoom, maxZoom]
 		);
+		// Única fuente de verdad de "initialZoom es un valor usable": si es NaN,
+		// no debe ni aplicar setCenter ni desactivar fitViewOnMount (ver JSX y efecto).
+		const hasValidInitialZoom = initialZoom != null && Number.isFinite(initialZoom);
 
 		const rfNodes = useMemo(() => mapNodesToRf(nodes), [nodes]);
 		const rfEdges = useMemo(() => mapEdgesToRf(edges), [edges]);
@@ -294,13 +297,7 @@ const Canvas = forwardRef(
 		);
 
 		useEffect(() => {
-			if (
-				initialZoom == null ||
-				!Number.isFinite(initialZoom) ||
-				didSetInitialZoomRef.current ||
-				!nodesInitialized
-			)
-				return;
+			if (!hasValidInitialZoom || didSetInitialZoomRef.current || !nodesInitialized) return;
 
 			const bounds = rf.getNodesBounds(rf.getNodes());
 			if (!bounds.width && !bounds.height) return; // sin nodos: no-op
@@ -312,7 +309,7 @@ const Canvas = forwardRef(
 				zoom: clampedZoom
 			});
 			didSetInitialZoomRef.current = true;
-		}, [nodesInitialized, initialZoom, rf, store]);
+		}, [nodesInitialized, initialZoom, hasValidInitialZoom, rf, store]);
 
 		return (
 			<styles.Container>
@@ -322,7 +319,7 @@ const Canvas = forwardRef(
 					nodeTypes={nodeTypes}
 					edgeTypes={EDGE_TYPES}
 					proOptions={{ hideAttribution: true }}
-					fitView={initialZoom != null ? false : fitViewOnMount}
+					fitView={hasValidInitialZoom ? false : fitViewOnMount}
 					minZoom={effectiveMinZoom}
 					maxZoom={effectiveMaxZoom}
 					nodesDraggable={!readOnly}
