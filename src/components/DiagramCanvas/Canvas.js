@@ -48,8 +48,11 @@ const defaultZoomOpts = { duration: 400 };
  * defaults de React Flow (0.5/2).
  */
 const getEffectiveZoomBounds = (minZoom, maxZoom) => {
-	const isInvalidBound = (value) => value != null && value <= 0;
-	const hasInvalidRange = minZoom != null && maxZoom != null && maxZoom <= minZoom;
+	const isInvalidBound = (value) => value != null && (!Number.isFinite(value) || value <= 0);
+	const hasInvalidRange =
+		minZoom != null &&
+		maxZoom != null &&
+		(!Number.isFinite(minZoom) || !Number.isFinite(maxZoom) || maxZoom <= minZoom);
 
 	if (isInvalidBound(minZoom) || isInvalidBound(maxZoom) || hasInvalidRange) {
 		if (process.env.NODE_ENV !== 'production') {
@@ -291,7 +294,13 @@ const Canvas = forwardRef(
 		);
 
 		useEffect(() => {
-			if (initialZoom == null || didSetInitialZoomRef.current || !nodesInitialized) return;
+			if (
+				initialZoom == null ||
+				!Number.isFinite(initialZoom) ||
+				didSetInitialZoomRef.current ||
+				!nodesInitialized
+			)
+				return;
 
 			const bounds = rf.getNodesBounds(rf.getNodes());
 			if (!bounds.width && !bounds.height) return; // sin nodos: no-op
