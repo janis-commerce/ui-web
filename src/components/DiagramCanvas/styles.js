@@ -48,6 +48,7 @@ const Button = styled(ControlButton)`
 		height: 100%;
 		border: none;
 		border-radius: 4px;
+		background: transparent;
 
 		&:hover {
 			background: ${getColor('greyHoverLight')};
@@ -62,6 +63,7 @@ const Button = styled(ControlButton)`
 	&& svg {
 		max-width: none;
 		max-height: none;
+		fill: ${getColor('black')};
 	}
 `;
 

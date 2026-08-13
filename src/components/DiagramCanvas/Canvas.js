@@ -265,7 +265,9 @@ const Canvas = forwardRef(
 					onEdgeClick={handleEdgeClick}
 				>
 					<Background />
-					{showControls && <DiagramControls additionalControls={additionalControls} />}
+					{showControls && (
+						<DiagramControls readOnly={readOnly} additionalControls={additionalControls} />
+					)}
 					{showMiniMap && <MiniMap />}
 				</ReactFlow>
 			</styles.Container>
@@ -306,8 +308,8 @@ export const canvasPropTypes = {
 	onBeforeDelete: PropTypes.func,
 	/** Se llama cuando cambia la selección. Recibe `{ nodes: [{id}], edges: [{id}] }` con los elementos seleccionados en ese momento. */
 	onSelectionChange: PropTypes.func,
-	/** Nodos React arbitrarios (botones, switches, checkboxes, cualquier componente) renderizados en un grupo separado de los nativos (zoom/fit/lock) dentro de la barra de controles. Sin efecto si `config.showControls` es `false`. El estilo, la accesibilidad y el comportamiento de cada nodo son responsabilidad de quien lo define — `ui-web` no impone ninguna forma. */
-	additionalControls: PropTypes.arrayOf(PropTypes.node)
+	/** Nodo(s) React arbitrarios (un elemento suelto, un array, o arrays anidados: botones, switches, checkboxes, cualquier componente) renderizados en un grupo separado de los nativos (zoom/fit/lock) dentro de la barra de controles. Sin efecto si `config.showControls` es `false`. El estilo, la accesibilidad y el comportamiento de cada nodo son responsabilidad de quien lo define — `ui-web` no impone ninguna forma. */
+	additionalControls: PropTypes.node
 };
 
 Canvas.propTypes = canvasPropTypes;

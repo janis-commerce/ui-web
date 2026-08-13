@@ -7,11 +7,11 @@
 
 ## Phase 2: Core Implementation (Controls.js)
 
-- [x] 2.1 Reescribir `Controls.js`: `Panel` + dos `Group` (nativo / `additionalControls`) con `useReactFlow`/`useStore`/`useStoreApi`.
-- [x] 2.2 Definir `controlBarActions` (`zoomIn`/`zoomOut`/`fitView`/`toggleInteractivity`) con `icon(state)`/`label`/`isDisabled?(state)` (Interfaces/Contracts).
+- [x] 2.1 Reescribir `Controls.js`: `Panel` + hasta 3 `Group` (`additionalControls` / nativo / toggle) con `useReactFlow`/`useStore`/`useStoreApi`. **REVISADA (code review, comentario #9)**: eran 2 `Group` en el texto original de esta tarea, pero la implementación real siempre tuvo 3 (el toggle nunca compartió `Group` con los nativos) — texto corregido para reflejarlo; ver design.md.
+- [x] 2.2 Definir `CONTROLS` (`zoomIn`/`zoomOut`/`fitView`) con `icon(state)`/`label`/`isDisabled?(state)` (Interfaces/Contracts). **REVISADA (code review, comentario #9)**: `toggleInteractivity` NO es una key de este objeto — se renderiza aparte, en su propio `Group`, con el mismo helper `renderControlButton` (ver design.md).
 - [x] 2.3 Handlers `zoomIn`/`zoomOut`/`fitView` vía `useReactFlow()`; `toggleInteractivity` invierte `nodesDraggable`/`nodesConnectable`/`elementsSelectable` (Interactivity Toggle Behavior).
 - [x] 2.4 Selectores `useStore` para `minZoomReached`/`maxZoomReached`/`isInteractive`, devolviendo primitivos (sin `shallow`).
-- [x] 2.5 Prop `additionalControls` (`React.ReactNode[]`, default `[]`): array de nodos React ya armados por el consumidor, renderizados tal cual (sin desarmar forma) envueltos en `React.Fragment key={index}`; su `Group` solo si `length > 0` (Additional Controls Group). **REVISADA**: shape cambiado de `{icon, onClick, ariaLabel}[]` a array de nodos para soportar cualquier tipo de control, no solo botones (ver design.md).
+- [x] 2.5 Prop `additionalControls` (`React.ReactNode`): nodo(s) React ya armados por el consumidor, normalizados con `React.Children.toArray` y renderizados tal cual (sin desarmar forma); su `Group` solo si hay al menos uno (Additional Controls Group). **REVISADA**: shape cambiado de `{icon, onClick, ariaLabel}[]` a nodos React para soportar cualquier tipo de control, no solo botones (ver design.md). **REVISADA (code review)**: de `PropTypes.arrayOf(PropTypes.node)` + `.map` con key manual a `PropTypes.node` + `React.Children.toArray` — acepta nodo suelto sin omitir el grupo en silencio, y evita colisión de keys (ver design.md).
 - [x] 2.7 `propTypes`/`defaultProps` de `Controls.js` (Interfaces/Contracts).
 
 ## Phase 3: Integración
@@ -21,17 +21,22 @@
 
 ## Phase 4: Testing (`Controls.test.js`, nuevo)
 
-- [ ] 4.1 Test: 4 botones nativos con su icono ("All native controls render with their icons").
-- [ ] 4.2 Test: icono toggle `unlock` si interactivo, `lock` si no ("Toggle icon reflects current interactivity state").
-- [ ] 4.3 Test: zoom in disabled con zoom === `maxZoom` ("Zoom in disabled at max zoom").
-- [ ] 4.4 Test: zoom out disabled en `minZoom`, ambos enabled entre límites ("Zoom out disabled at min zoom, enabled between limits").
-- [ ] 4.5 Test: click en toggle sobre diagrama interactivo pone los 3 flags en `false` ("Locking an interactive diagram").
-- [ ] 4.6 Test: click en toggle sobre diagrama no interactivo pone los 3 flags en `true` ("Unlocking a locked diagram").
-- [ ] 4.7 Test: `additionalControls` con N nodos React (p.ej. un `<button>` y un `<Switch>`) se renderizan tal cual, sin desarmar forma, dentro de un `Group` separado ("Additional controls render as a separate group").
-- [ ] 4.8 Test: `additionalControls` vacío/ausente no renderiza grupo extra ("Empty additionalControls renders no extra group").
-- [ ] 4.11 Test: cada botón nativo tiene su `aria-label` fijo en inglés, no configurable ("Native buttons always have a fixed aria-label").
-- [ ] 4.12 Test `jest-styled-components` (`toHaveStyleRule`): `Panel`/`Group`/`Button` sin `!important` (Testing Strategy).
-- [ ] 4.13 Correr `yarn test`; `Controls.test.js` en verde sin romper suites de `DiagramCanvas`.
+**REVISADA (code review)**: esta lista original (4.1-4.13, numeración con huecos en 4.9/4.10 heredados de un recorte previo de la prop `labels`) quedó desactualizada por los fixes de los comentarios #1, #4, #5, #6 y #9 — le faltaban 3 scenarios completos de `spec.md` y varios tests existentes quedaron incompletos. Renumerada 4.1-4.14, mapeada 1:1 contra los 11 scenarios actuales de `spec.md` (más estilos y la corrida de test/build), en el mismo orden.
+
+- [x] 4.1 Test: con `readOnly` `false` (default propio de `DiagramControls`, sin pasar la prop), los 4 botones nativos son visibles con su icono ("All native controls render with their icons"). Montar `DiagramControls` directamente, NO `DiagramCanvas` (cuyo `defaultConfig.readOnly` es `true` y solo mostraría 3).
+- [x] 4.2 Test: icono toggle `unlock` si interactivo, `lock` si no ("Toggle icon reflects current interactivity state").
+- [x] 4.3 Test: con `readOnly` `true`, el botón toggle NO se renderiza, y zoom in/zoom out/fit view siguen renderizando agrupados ("Toggle button is hidden in read-only mode") — comentario #1.
+- [x] 4.4 Test: con `readOnly` `false`, el botón toggle se renderiza en su propio `Group`, separado de zoom/fit por un divisor visual (asserar que son dos `Group` DOM distintos, no el mismo) ("Toggle button renders in its own group, separated by a divider") — comentario #9.
+- [x] 4.5 Test: zoom in disabled con zoom === `maxZoom` ("Zoom in disabled at max zoom").
+- [x] 4.6 Test: zoom out disabled en `minZoom`, ambos enabled entre límites ("Zoom out disabled at min zoom, enabled between limits").
+- [x] 4.7 Test: click en toggle sobre diagrama interactivo pone los 3 flags en `false` ("Locking an interactive diagram").
+- [x] 4.8 Test: click en toggle sobre diagrama no interactivo pone los 3 flags en `true` ("Unlocking a locked diagram").
+- [x] 4.9 Test: `additionalControls` con un **nodo suelto** (p.ej. un solo `<button>`, sin envolver en array) Y con un array de N nodos (p.ej. un `<button>` y un `<Switch>`) se renderizan tal cual, sin desarmar forma, dentro de un `Group` separado ("Additional controls render as a separate group") — el caso de nodo suelto es el que arregló el comentario #4 (antes se omitía en silencio).
+- [x] 4.10 Test: `additionalControls` ausente, `null`/`undefined`, o array vacío no renderiza grupo extra ("Empty additionalControls renders no extra group").
+- [x] 4.11 Test: cada botón nativo (incluido el toggle cuando se renderiza) tiene su `aria-label` Y su `title` fijos en inglés, con el mismo texto, no configurables ("Native buttons always have a fixed aria-label and title") — el `title` lo agregó el comentario #5.
+- [x] 4.12 Test: el `Panel` contenedor tiene `aria-label="Diagram controls"` ("Control bar container has a fixed aria-label") — comentario #5.
+- [x] 4.13 Test de estilos: `background: transparent` en reposo del `Button` (comentario #6) y `fill` del `&& svg` (comentario #2). **REVISADA**: no se pudo usar `jest-styled-components` (`toHaveStyleRule`) como preveía Testing Strategy — confirmado empíricamente que el matcher no resuelve declaraciones anidadas dentro del bloque `&&{...}` (falla con "No style rules found" incluso en un componente mínimo reproducido ad-hoc con el mismo patrón), aunque las reglas SÍ están presentes en el CSS inyectado. Se verifica contra el CSS crudo (`document.head.innerHTML`) por clase dinámica en su lugar; ver comentario en el test y nota en design.md.
+- [x] 4.14 Correr `yarn test`; `Controls.test.js` en verde sin romper suites de `DiagramCanvas`. **Ampliada**: corrida `yarn test` completa (178/178 verde) y `yarn build` (sin errores, solo warnings preexistentes de `@xyflow/react`/`d3-selection` no relacionados).
 
 ## Phase 5: Cleanup / Documentación
 
