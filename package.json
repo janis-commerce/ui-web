@@ -75,6 +75,7 @@
 		"react": "17.x",
 		"react-dom": "17.x",
 		"react-test-renderer": "^17.0.2",
+		"regenerator-runtime": "^0.13.9",
 		"rollup": "^2.79",
 		"rollup-plugin-copy": "^3.4.0",
 		"rollup-plugin-generate-package-json": "^3.2.0",
