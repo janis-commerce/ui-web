@@ -53,7 +53,7 @@ const DEFAULT_MAX_ZOOM = 2;
  * validators internos (React Flow, d3-zoom) chequea signo ni orden, así que un
  * rango inválido (<= 0, o invertido) se propaga en silencio y puede degenerar
  * el clamp de `initialZoom`. Si son inválidos, se ignoran ambos y se cae a los
- * defaults de React Flow (0.5/2).
+ * defaults del componente (0.5/2).
  */
 const getEffectiveZoomBounds = (minZoom, maxZoom) => {
 	const isInvalidBound = (value) => value != null && (!Number.isFinite(value) || value <= 0);
@@ -66,10 +66,10 @@ const getEffectiveZoomBounds = (minZoom, maxZoom) => {
 		if (process.env.NODE_ENV !== 'production') {
 			// eslint-disable-next-line no-console
 			console.warn(
-				'[DiagramCanvas] Invalid config.minZoom/maxZoom (both must be > 0 and maxZoom must be greater than minZoom). Both values are ignored and React Flow defaults (0.5/2) are used instead.'
+				`[DiagramCanvas] Invalid config.minZoom/maxZoom (minZoom=${minZoom}, maxZoom=${maxZoom}). Both must be > 0 and maxZoom must be greater than minZoom. Both values are ignored and defaults (${DEFAULT_MIN_ZOOM}/${DEFAULT_MAX_ZOOM}) are used instead.`
 			);
 		}
-		return { minZoom: undefined, maxZoom: undefined };
+		return { minZoom: DEFAULT_MIN_ZOOM, maxZoom: DEFAULT_MAX_ZOOM };
 	}
 
 	return { minZoom: resolvedMin, maxZoom: resolvedMax };
@@ -361,7 +361,7 @@ export const canvasPropTypes = {
 	edges: PropTypes.arrayOf(DiagramEdgeShape),
 	/** Map de tipo de nodo → componente React custom. */
 	nodeComponents: PropTypes.objectOf(PropTypes.elementType),
-	/** Configuración del canvas. `readOnly` deshabilita drag y conexiones. `showControls` muestra los controles de zoom. `showMiniMap` muestra el minimapa. `resizableNodes` habilita el redimensionado de nodos. `fitViewOnMount` encuadra todo el diagrama al montar (default true); se ignora automáticamente si `initialZoom` está definido. `initialZoom` centra el diagrama sobre sus nodos con ese zoom exacto al montar (clampeado contra `minZoom`/`maxZoom` efectivos). `minZoom`/`maxZoom` son pass-through a React Flow; sin declarar, se usan los defaults de la librería (`0.5`/`2`). Si son inválidos (`<= 0`, o `maxZoom <= minZoom`) se ignoran ambos, se cae a esos defaults y se emite un warning en desarrollo. */
+	/** Configuración del canvas. `readOnly` deshabilita drag y conexiones. `showControls` muestra los controles de zoom. `showMiniMap` muestra el minimapa. `resizableNodes` habilita el redimensionado de nodos. `fitViewOnMount` encuadra todo el diagrama al montar (default true); se ignora automáticamente si `initialZoom` está definido. `initialZoom` centra el diagrama sobre sus nodos con ese zoom exacto al montar (clampeado contra `minZoom`/`maxZoom` efectivos). `minZoom`/`maxZoom` son pass-through a React Flow; sin declarar, se usan los defaults del componente (`0.5`/`2`). Si son inválidos (`<= 0`, o `maxZoom <= minZoom`) se ignoran ambos, se cae a esos defaults y se emite un warning en desarrollo. */
 	config: PropTypes.shape({
 		readOnly: PropTypes.bool,
 		showControls: PropTypes.bool,
