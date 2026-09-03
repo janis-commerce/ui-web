@@ -1,3 +1,4 @@
+import 'regenerator-runtime/runtime';
 import Adapter from '@wojtekmaj/enzyme-adapter-react-17';
 import Enzyme, { shallow, render, mount } from 'enzyme';
 
@@ -8,3 +9,13 @@ global.Enzyme = Enzyme;
 global.shallow = shallow;
 global.render = render;
 global.mount = mount;
+
+// jsdom no implementa ResizeObserver. `@xyflow/react` lo usa sin guard para
+// medir su contenedor (useResizeHandler) al montar cualquier <ReactFlow>.
+global.ResizeObserver = class ResizeObserver {
+	observe() {}
+
+	unobserve() {}
+
+	disconnect() {}
+};
