@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+
+- A diagram can now mount centered on its nodes at an exact zoom level via `config.initialZoom`, instead of only the auto-calculated framing of `fitViewOnMount`, so a consumer can open every diagram at the same reading scale regardless of how many nodes it has [JMV-4098](https://janiscommerce.atlassian.net/browse/JMV-4098)
+- The zoom range a user can reach by scroll, pinch or the zoom buttons is now configurable through `config.minZoom`/`config.maxZoom`, defaulting to `0.5`/`2`; an invalid range (either bound `<= 0`, or `maxZoom` not greater than `minZoom` once resolved against the defaults) falls back to those defaults and warns in development instead of leaving the diagram at an unusable zoom [JMV-4098](https://janiscommerce.atlassian.net/browse/JMV-4098)
+
 ## [2.5.0] - 2026-08-05
 
 ### Changed
