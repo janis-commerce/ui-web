@@ -56,7 +56,6 @@ const Button = styled(ControlButton)`
 
 		&:disabled {
 			opacity: 0.4;
-			cursor: not-allowed;
 		}
 	}
 
@@ -64,6 +63,13 @@ const Button = styled(ControlButton)`
 		max-width: none;
 		max-height: none;
 		fill: ${getColor('black')};
+	}
+
+	/* La nativa .react-flow__controls-button:disabled svg (0,2,1) empata con && svg,
+	   así que hace falta 0,3,1 para neutralizar su fill-opacity: 0.4 — que si no se
+	   multiplica con el opacity del botón y deja el ícono al 16%. */
+	&&:disabled svg {
+		fill-opacity: 1;
 	}
 `;
 
