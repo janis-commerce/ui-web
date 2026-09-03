@@ -19,7 +19,6 @@ const Panel = styled(XyPanel)`
 		border: 1px solid ${getColor('greyHover')};
 		border-radius: 8px;
 		padding: 8px 0;
-		overflow: hidden;
 		box-shadow: 0px 8px 10px -6px #0000001a;
 	}
 `;
