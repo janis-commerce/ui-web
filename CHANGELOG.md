@@ -7,10 +7,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.6.0] - 2026-09-03
+
 ### Added
 
 - A diagram can now mount centered on its nodes at an exact zoom level via `config.initialZoom`, instead of only the auto-calculated framing of `fitViewOnMount`, so a consumer can open every diagram at the same reading scale regardless of how many nodes it has [JMV-4098](https://janiscommerce.atlassian.net/browse/JMV-4098)
 - The zoom range a user can reach by scroll, pinch or the zoom buttons is now configurable through `config.minZoom`/`config.maxZoom`, defaulting to `0.5`/`2`; an invalid range (either bound `<= 0`, or `maxZoom` not greater than `minZoom` once resolved against the defaults) falls back to those defaults and warns in development instead of leaving the diagram at an unusable zoom [JMV-4098](https://janiscommerce.atlassian.net/browse/JMV-4098)
+- A consumer can now place its own controls inside the `DiagramCanvas` control bar through `additionalControls`, passing any already-built React node — a button, a `Switch`, a `Checkbox` — rendered untouched in a group visually separated from the native zoom, fit and lock controls, so an action that belongs to the diagram no longer has to live in a separate toolbar outside the canvas [JMV-4097](https://janiscommerce.atlassian.net/browse/JMV-4097)
+
+### Changed
+
+- The `DiagramCanvas` control bar now uses `ui-web`'s own icons and styles instead of React Flow's defaults, and every button carries a fixed English `aria-label` and `title`, so the controls read as part of the design system and are reachable by screen reader and on hover [JMV-4097](https://janiscommerce.atlassian.net/browse/JMV-4097)
+
+### Fixed
+
+- A diagram mounted as read-only no longer offers the lock toggle that let the user turn dragging, connecting and selection back on, so `config.readOnly` can no longer be undone from the control bar [JMV-4097](https://janiscommerce.atlassian.net/browse/JMV-4097)
 
 ## [2.5.0] - 2026-08-05
 
