@@ -15,7 +15,7 @@ const Panel = styled(XyPanel)`
 	&& {
 		display: flex;
 		flex-direction: column;
-		background: #ffffff;
+		background: ${getColor('white')};
 		border: 1px solid ${getColor('greyHover')};
 		border-radius: 8px;
 		padding: 8px 0;
