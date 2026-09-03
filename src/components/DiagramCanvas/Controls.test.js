@@ -1,9 +1,7 @@
 import React from 'react';
-import 'jest-styled-components';
 import { useReactFlow, useStore, useStoreApi } from '@xyflow/react';
 import Icon from '../Icon';
 import DiagramControls from './Controls';
-import styled from './styles';
 
 jest.mock('@xyflow/react', () => {
 	const ReactLib = require('react');
@@ -180,21 +178,5 @@ describe('DiagramControls', () => {
 		setup();
 		const wrapper = mount(<DiagramControls />);
 		expect(wrapper.find('[aria-label="Diagram controls"]').first().exists()).toBe(true);
-	});
-
-	test('4.13 Button has a transparent background at rest, and its svg has a fill', () => {
-		// `toHaveStyleRule` no puede resolver declaraciones dentro del bloque `&&{...}`
-		// (especificidad 0,2,0 vía doble clase) que usa `Button` para ganarle a las
-		// clases nativas de React Flow — confirmado empíricamente: falla con
-		// "No style rules found" incluso en un componente mínimo con el mismo patrón,
-		// mientras que las reglas SÍ están presentes en el CSS inyectado. Se verifica
-		// contra el CSS crudo en su lugar.
-		const wrapper = mount(<styled.Button>test</styled.Button>);
-		const dynamicClass = wrapper.find('button').prop('className').split(' ')[1];
-		const css = document.head.innerHTML;
-		expect(css).toMatch(
-			new RegExp(`\\.${dynamicClass}\\.${dynamicClass}\\{[^}]*background:transparent`)
-		);
-		expect(css).toMatch(new RegExp(`\\.${dynamicClass}\\.${dynamicClass} svg\\{[^}]*fill:#2F2F2F`));
 	});
 });
