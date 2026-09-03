@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useReactFlow, useStore, useStoreApi } from '@xyflow/react';
 import Icon from '../Icon';
@@ -38,13 +38,13 @@ const DiagramControls = ({ readOnly = false, additionalControls }) => {
 		}
 	};
 
-	const toggleInteractivity = useCallback(() => {
+	const toggleInteractivity = () => {
 		store.setState({
 			nodesDraggable: !isInteractive,
 			nodesConnectable: !isInteractive,
 			elementsSelectable: !isInteractive
 		});
-	}, [isInteractive, store]);
+	};
 
 	const controls = React.Children.toArray(additionalControls);
 
