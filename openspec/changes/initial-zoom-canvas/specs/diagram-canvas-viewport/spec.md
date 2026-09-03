@@ -40,11 +40,11 @@ Cuando `config.initialZoom` es un número, el sistema MUST centrar el viewport s
 
 El sistema MUST aceptar `config.minZoom` y `config.maxZoom` opcionales. Si no se declaran, SHALL usarse los valores por default de React Flow.
 
-#### Scenario: minZoom/maxZoom sin declarar usan los defaults de React Flow
+#### Scenario: minZoom/maxZoom sin declarar usan los defaults del componente
 
 - GIVEN un `DiagramCanvas` sin `config.minZoom` ni `config.maxZoom`
 - WHEN el componente monta
-- THEN los límites de zoom efectivos del diagrama son los defaults de React Flow (`0.5` y `2`)
+- THEN los límites de zoom efectivos del diagrama son los defaults del componente (`0.5` y `2`)
 
 #### Scenario: minZoom/maxZoom declarados se respetan como límites reales
 
@@ -82,7 +82,7 @@ Cuando `config.initialZoom` cae fuera del rango `[minZoom, maxZoom]` efectivo (d
 
 ### Requirement: Validación de minZoom/maxZoom inválidos
 
-Ni React Flow ni d3-zoom validan signo ni orden de `minZoom`/`maxZoom` (`scaleExtent` los aplica tal cual). El sistema MUST validar `config.minZoom`/`config.maxZoom` antes de pasarlos a React Flow: si alguno es `<= 0`, o si el rango está invertido (`maxZoom <= minZoom`), MUST ignorar **ambos** valores y usar los defaults de React Flow (`0.5`/`2`) en su lugar. El sistema SHOULD emitir un warning en desarrollo (`NODE_ENV !== 'production'`) cuando esto ocurre.
+Ni React Flow ni d3-zoom validan signo ni orden de `minZoom`/`maxZoom` (`scaleExtent` los aplica tal cual). El sistema MUST validar `config.minZoom`/`config.maxZoom` antes de pasarlos a React Flow: si alguno es `<= 0`, o si el rango está invertido (`maxZoom <= minZoom`), MUST ignorar **ambos** valores y usar los defaults del componente (`0.5`/`2`) en su lugar. El sistema SHOULD emitir un warning en desarrollo (`NODE_ENV !== 'production'`) cuando esto ocurre.
 
 #### Scenario: minZoom o maxZoom con valor <= 0
 

@@ -51,7 +51,7 @@ export const ClampedInitialZoom = () => (
 );
 
 // minZoom/maxZoom inválidos: ninguno de los dos casos debe romper el diagrama,
-// ambos caen a los defaults de React Flow (0.5/2) y loguean un warning —
+// ambos caen a los defaults del componente (0.5/2) y loguean un warning —
 // abrir la consola del browser para verlo.
 export const NegativeZoomBound = () => (
 	<div style={{ width: '100%', height: 500 }}>

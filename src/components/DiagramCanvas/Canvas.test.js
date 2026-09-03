@@ -41,7 +41,7 @@ describe('Canvas / initialZoom clamping and minZoom/maxZoom validation', () => {
 		expect(getZoom(wrapper)).toBe(0.5);
 	});
 
-	test('3.13 minZoom o maxZoom con valor <= 0 ignora ambos y usa los defaults de React Flow', () => {
+	test('3.13 minZoom o maxZoom con valor <= 0 ignora ambos y usa los defaults del componente', () => {
 		const warnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
 		let wrapper = renderCanvas({ minZoom: -1, initialZoom: 5 });

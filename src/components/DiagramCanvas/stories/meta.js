@@ -49,9 +49,9 @@ const nodeComponents = { myType: MyNode }
   resizableNodes?: boolean // default false — habilita resize de nodos (ver story ResizableNodes)
   fitViewOnMount?: boolean // default true  — encuadra todo el diagrama al montar; se ignora si initialZoom está definido
   initialZoom?:   number   // sin default   — centra sobre los nodos con este zoom exacto al montar (clampeado a minZoom/maxZoom efectivos, ver story Zooming)
-  minZoom?:       number   // default 0.5 (de React Flow) — límite inferior de zoom
-  maxZoom?:       number   // default 2 (de React Flow)   — límite superior de zoom
-                           // inválidos (<= 0, o maxZoom <= minZoom) → se ignoran ambos + warning en dev, caen a los defaults de React Flow
+  minZoom?:       number   // default 0.5              — límite inferior de zoom
+  maxZoom?:       number   // default 2                — límite superior de zoom
+                           // inválidos (<= 0, o maxZoom <= minZoom) → se ignoran ambos + warning en dev, caen a los defaults del componente
 }`
 				},
 				defaultValue: {
