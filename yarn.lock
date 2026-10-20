@@ -2081,13 +2081,6 @@
     ts-dedent "^2.0.0"
     unplugin "^2.3.5"
 
-"@storybook/addon-links@^10.6.0":
-  version "10.6.0"
-  resolved "https://registry.yarnpkg.com/@storybook/addon-links/-/addon-links-10.6.0.tgz#a57f5f532f2b994863e21bc6f913092ea2845d1c"
-  integrity sha512-kbGLPiA0yJ0pb/YM/K8O4N4aI7iQmCOoaOdpjLFJgCA2lVXKVIdZA49DaaNifWWr1dniwAw5eJdyLkVaqJO0Ag==
-  dependencies:
-    "@storybook/global" "^5.0.0"
-
 "@storybook/addon-webpack5-compiler-babel@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@storybook/addon-webpack5-compiler-babel/-/addon-webpack5-compiler-babel-4.0.1.tgz#6306df1b09cd913a998ff49900c89dfbd66cfb2d"
