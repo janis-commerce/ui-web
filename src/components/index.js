@@ -2,6 +2,7 @@ import DiagramCanvas from './DiagramCanvas';
 import Avatar from './Avatar';
 import AvatarGroup from './AvatarGroup';
 import Button from './Button';
+import Callout from './Callout';
 import Checkbox from './Checkbox';
 import Chip from './Chip';
 import Color from './Color';
@@ -31,6 +32,7 @@ export {
 	Avatar,
 	AvatarGroup,
 	Button,
+	Callout,
 	Checkbox,
 	Chip,
 	ClickAwayListener,
