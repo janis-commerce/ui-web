@@ -39,6 +39,7 @@ const palette = {
 	redHover: '#F3628C',
 	redPressed: '#EB2450',
 	redUnavailable: '#FFD9D9',
+	secondaryBluePressed: '#D2DFF5',
 	skyBlue: '#02BFFB',
 	skyBluePressed: '#00A6FA',
 	statusRed: '#FF4343',
