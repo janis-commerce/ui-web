@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.7.0] - 2026-10-22
+
+### Added
+
+- A `Callout` component to show info, warning or error notices, with an optional close button [JMV-4149](https://janiscommerce.atlassian.net/browse/JMV-4149)
+- The `secondaryBluePressed` color (`#D2DFF5`) is now available in the palette [JMV-4149](https://janiscommerce.atlassian.net/browse/JMV-4149)
+
 ## [2.6.0] - 2026-09-03
 
 ### Added
