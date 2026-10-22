@@ -3,6 +3,7 @@ import React, {
 	useCallback,
 	useEffect,
 	useImperativeHandle,
+	useLayoutEffect,
 	useMemo,
 	useRef,
 	useState
@@ -282,7 +283,9 @@ const Canvas = forwardRef(
 		// Si el consumidor pasa una función inline que setea estado, eso genera un loop
 		// infinito; con la ref el handler queda estable sin exigir useCallback afuera.
 		const onSelectionChangeRef = useRef(onSelectionChange);
-		onSelectionChangeRef.current = onSelectionChange;
+		useLayoutEffect(() => {
+			onSelectionChangeRef.current = onSelectionChange;
+		});
 
 		const handleSelectionChange = useCallback(
 			({ nodes: selectedNodes, edges: selectedEdges }) =>
