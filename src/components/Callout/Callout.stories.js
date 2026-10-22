@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import typography from 'theme/typography';
 import Callout from './Callout';
 
@@ -34,7 +34,13 @@ const baseArgs = {
 export const Info = Template.bind({});
 export const Warning = Template.bind({});
 export const ErrorType = Template.bind({});
-export const Closable = Template.bind({});
+
+// Callout has no internal visibility state; the story owns it to show the close flow.
+export const Closable = (args) => {
+	const [visible, setVisible] = useState(true);
+
+	return visible ? <Template {...args} onClose={() => setVisible(false)} /> : null;
+};
 
 Info.args = {
 	...baseArgs,
@@ -53,6 +59,5 @@ ErrorType.args = {
 
 Closable.args = {
 	...baseArgs,
-	closable: true,
 	closeLabel: 'Cerrar'
 };

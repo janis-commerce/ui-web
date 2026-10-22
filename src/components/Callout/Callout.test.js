@@ -1,7 +1,7 @@
 import React from 'react';
 import Callout from 'components/Callout';
 import Icon from 'components/Icon';
-import { create, act } from 'react-test-renderer';
+import { create } from 'react-test-renderer';
 
 describe('Callout component', () => {
 	test('Should render info type by default and when type is invalid', () => {
@@ -38,7 +38,7 @@ describe('Callout component', () => {
 	});
 
 	test('Should expose class names for consumer styling', () => {
-		const wrapper = mount(<Callout closable>Text</Callout>);
+		const wrapper = mount(<Callout onClose={() => {}}>Text</Callout>);
 
 		['callout', 'callout__icon', 'callout__content', 'callout__close'].forEach((className) =>
 			expect(wrapper.find(`.${className}`).hostNodes()).toHaveLength(1)
@@ -57,41 +57,30 @@ describe('Callout component', () => {
 
 	test('Should set closeLabel as the close button aria-label', () => {
 		const wrapper = create(
-			<Callout closable closeLabel="Close">
+			<Callout onClose={() => {}} closeLabel="Cerrar">
 				Text
 			</Callout>
 		);
+		expect(wrapper.root.findByType('button').props['aria-label']).toBe('Cerrar');
+	});
+
+	test('Should default the close button aria-label to "Close"', () => {
+		const wrapper = create(<Callout onClose={() => {}}>Text</Callout>);
 		expect(wrapper.root.findByType('button').props['aria-label']).toBe('Close');
 	});
 
-	test('Should hide when closed without onClose', () => {
-		const wrapper = create(<Callout closable>Text</Callout>);
-
-		act(() => {
-			wrapper.root.findByType('button').props.onClick();
-		});
-
-		expect(wrapper.toJSON()).toBeNull();
-	});
-
-	test('Should not render close button when closable is false', () => {
+	test('Should not render close button without onClose', () => {
 		const wrapper = create(<Callout>Text</Callout>);
 		expect(wrapper.root.findAllByType('button')).toHaveLength(0);
 	});
 
-	test('Should hide and call onClose when close button is clicked', () => {
+	test('Should call onClose and stay rendered when close button is clicked', () => {
 		const onClose = jest.fn();
-		const wrapper = create(
-			<Callout closable onClose={onClose}>
-				Text
-			</Callout>
-		);
+		const wrapper = create(<Callout onClose={onClose}>Text</Callout>);
 
-		act(() => {
-			wrapper.root.findByType('button').props.onClick();
-		});
+		wrapper.root.findByType('button').props.onClick();
 
 		expect(onClose).toHaveBeenCalledTimes(1);
-		expect(wrapper.toJSON()).toBeNull();
+		expect(wrapper.toJSON()).not.toBeNull();
 	});
 });
