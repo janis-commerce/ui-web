@@ -22,12 +22,20 @@ const types = {
 	}
 };
 
-const Callout = ({ type: typeProp, children, onClose, closeLabel = DEFAULT_CLOSE_LABEL }) => {
+const Callout = ({
+	type: typeProp,
+	children,
+	onClose,
+	closeLabel = DEFAULT_CLOSE_LABEL,
+	className,
+	...props
+}) => {
 	const type = types[typeProp] ? typeProp : 'info';
 	const { icon, color, background } = types[type];
+	const classNames = ['callout', `callout--${type}`, className].filter(Boolean).join(' ');
 
 	return (
-		<styled.Callout className={`callout callout--${type}`} role="status" $background={background}>
+		<styled.Callout role="status" {...props} className={classNames} $background={background}>
 			<Icon className="callout__icon" name={icon} color={color} size={ICON_SIZE} />
 			<styled.Content className="callout__content">{children}</styled.Content>
 			{onClose && (
@@ -52,7 +60,9 @@ Callout.propTypes = {
 	/** If provided, shows a close button. The consumer decides whether to keep rendering the callout */
 	onClose: PropTypes.func,
 	/** Accessible label for the close button. Defaults to "Close"; pass it to translate */
-	closeLabel: PropTypes.string
+	closeLabel: PropTypes.string,
+	/** Extra class names, so the callout can be extended with styled-components */
+	className: PropTypes.string
 };
 
 export default Callout;

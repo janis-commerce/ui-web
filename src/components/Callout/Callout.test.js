@@ -55,6 +55,18 @@ describe('Callout component', () => {
 		);
 	});
 
+	test('Should keep its class names when receiving a className', () => {
+		const { className } = create(<Callout className="custom">Text</Callout>).toJSON().props;
+		expect(className.split(' ')).toEqual(
+			expect.arrayContaining(['callout', 'callout--info', 'custom'])
+		);
+	});
+
+	test('Should forward extra props to the container', () => {
+		const { props } = create(<Callout data-testid="notice">Text</Callout>).toJSON();
+		expect(props['data-testid']).toBe('notice');
+	});
+
 	test('Should set closeLabel as the close button aria-label', () => {
 		const wrapper = create(
 			<Callout onClose={() => {}} closeLabel="Cerrar">
