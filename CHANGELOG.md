@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.8.0] - 2026-10-23
+
+### Changed
+
+- `Callout` now accepts a `className` and forwards extra props to its container, so it can be extended with styled-components without losing its own class names
+
 ## [2.7.0] - 2026-10-22
 
 ### Added
