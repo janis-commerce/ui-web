@@ -64,3 +64,23 @@ describe('Canvas / initialZoom clamping and minZoom/maxZoom validation', () => {
 		expect(warnSpy).toHaveBeenCalled();
 	});
 });
+
+describe('Canvas / onSelectionChange', () => {
+	test('un handler inline nuevo en cada render no vuelve a notificar la selección', () => {
+		const onSelection = jest.fn();
+		const wrapper = mount(
+			<DiagramCanvas
+				nodes={nodes}
+				nodeComponents={nodeComponents}
+				config={{}}
+				onSelectionChange={(selection) => onSelection(selection)}
+			/>
+		);
+		const callsAfterMount = onSelection.mock.calls.length;
+
+		wrapper.setProps({ onSelectionChange: (selection) => onSelection(selection) });
+		wrapper.setProps({ onSelectionChange: (selection) => onSelection(selection) });
+
+		expect(onSelection).toHaveBeenCalledTimes(callsAfterMount);
+	});
+});
