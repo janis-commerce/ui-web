@@ -3,6 +3,7 @@ import React, {
 	useCallback,
 	useEffect,
 	useImperativeHandle,
+	useLayoutEffect,
 	useMemo,
 	useRef,
 	useState
@@ -278,13 +279,21 @@ const Canvas = forwardRef(
 			[onBeforeDelete]
 		);
 
+		// xyflow re-dispara onSelectionChange cada vez que cambia la referencia del handler.
+		// Si el consumidor pasa una función inline que setea estado, eso genera un loop
+		// infinito; con la ref el handler queda estable sin exigir useCallback afuera.
+		const onSelectionChangeRef = useRef(onSelectionChange);
+		useLayoutEffect(() => {
+			onSelectionChangeRef.current = onSelectionChange;
+		});
+
 		const handleSelectionChange = useCallback(
 			({ nodes: selectedNodes, edges: selectedEdges }) =>
-				onSelectionChange?.({
+				onSelectionChangeRef.current?.({
 					nodes: selectedNodes.map(({ id }) => ({ id })),
 					edges: selectedEdges.map(({ id }) => ({ id }))
 				}),
-			[onSelectionChange]
+			[]
 		);
 
 		const handleNodeClick = useCallback(

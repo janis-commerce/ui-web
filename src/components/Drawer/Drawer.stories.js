@@ -1,5 +1,5 @@
 import React from 'react';
-import { useArgs } from '@storybook/addons';
+import { useArgs } from 'storybook/preview-api';
 import Button from '../Button';
 import Drawer from './Drawer';
 
