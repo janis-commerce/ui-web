@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [2.9.0] - 2026-10-26
+
+### Changed
+
+- **Internal** Upgraded Storybook from 6.4 to 10, so `yarn storybook` and `yarn storybook-web-docs` run on Node 22 without the `--openssl-legacy-provider` workaround
+- **Internal** The Storybook preview now loads `regenerator-runtime` itself, since Storybook 10 no longer provides it and stories of components using `async` code (DiagramCanvas, Map) failed to render without it
+
 ## [2.8.0] - 2026-10-23
 
 ### Changed
